@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OrionStar Lucki - Sales Presentation | Performance Supply Depot</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0A1A2F;
+            color: white;
+            line-height: 1.6;
+        }
+        
+        .slide {
+            min-height: 100vh;
+            padding: 4rem 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .slide:nth-child(odd) { background: linear-gradient(135deg, #0A1A2F 0%, #1a365d 100%); }
+        .slide:nth-child(even) { background: linear-gradient(135deg, #0f2744 0%, #0A1A2F 100%); }
+        
+        .slide-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+        
+        h1 span { color: #FF7A00; }
+        
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: #FF7A00;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #00E0FF;
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            color: #a0aec0;
+            margin-bottom: 3rem;
+        }
+        
+        .logo {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .logo span { color: #FF7A00; }
+        
+        .contact-bar {
+            position: absolute;
+            bottom: 2rem;
+            left: 2rem;
+            right: 2rem;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: #718096;
+        }
+        
+        .contact-bar a { color: #FF7A00; text-decoration: none; }
+        
+        /* Slide 1: Title */
+        .title-slide {
+            text-align: center;
+        }
+        
+        .title-slide h1 {
+            font-size: 5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .robot-icon {
+            font-size: 10rem;
+            margin-bottom: 2rem;
+        }
+        
+        .tagline {
+            font-size: 1.75rem;
+            color: #00E0FF;
+            font-weight: 500;
+        }
+        
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .stat-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,122,0,0.3);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #FF7A00;
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #a0aec0;
+            margin-top: 0.5rem;
+        }
+        
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .feature-card {
+            background: rgba(255,255,255,0.03);
+            border-radius: 12px;
+            padding: 2rem;
+            border-left: 4px solid #FF7A00;
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .feature-desc {
+            color: #a0aec0;
+            font-size: 0.95rem;
+        }
+        
+        /* Pricing */
+        .pricing-box {
+            background: rgba(255,122,0,0.1);
+            border: 2px solid #FF7A00;
+            border-radius: 16px;
+            padding: 3rem;
+            text-align: center;
+            max-width: 600px;
+            margin: 2rem auto;
+        }
+        
+        .price-main {
+            font-size: 4rem;
+            font-weight: 800;
+            color: #FF7A00;
+        }
+        
+        .price-note {
+            color: #a0aec0;
+            margin: 1rem 0;
+        }
+        
+        /* ROI Section */
+        .roi-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .roi-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .roi-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #00E0FF;
+        }
+        
+        .roi-label {
+            color: #a0aec0;
+            margin-top: 0.5rem;
+        }
+        
+        /* Use Cases */
+        .use-case-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .use-case {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .use-case-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .use-case-name {
+            font-weight: 600;
+        }
+        
+        /* Services */
+        .services-list {
+            list-style: none;
+            margin: 2rem 0;
+        }
+        
+        .services-list li {
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .services-list li:last-child { border-bottom: none; }
+        
+        .service-price {
+            margin-left: auto;
+            color: #FF7A00;
+            font-weight: 600;
+        }
+        
+        /* CTA */
+        .cta-section {
+            text-align: center;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: #FF7A00;
+            color: white;
+            padding: 1.5rem 3rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 2rem 0;
+        }
+        
+        .contact-info {
+            margin-top: 3rem;
+            font-size: 1.25rem;
+        }
+        
+        .contact-info a {
+            color: #FF7A00;
+            text-decoration: none;
+        }
+        
+        @media print {
+            .slide { page-break-after: always; }
+            .contact-bar { position: fixed; bottom: 0; }
+        }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .stats-grid, .roi-grid, .use-case-grid { grid-template-columns: repeat(2, 1fr); }
+            .features-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Slide 1: Title -->
+    <section class="slide title-slide">
+        <div class="logo">Performance<span>Supply</span>Depot</div>
+        <div class="slide-content">
+            <div class="robot-icon">🤖</div>
+            <h1>Meet <span>Lucki</span></h1>
+            <p class="tagline">The AI Delivery Robot Transforming Hospitality</p>
+            <p class="subtitle">Autonomous service for restaurants, hotels, and beyond</p>
+        </div>
+        <div class="contact-bar">
+            <span>Authorized OrionStar Partner</span>
+            <span>psdepot.com/robotics</span>
+            <span>(888) 881-6834</span>
+        </div>
+    </section>
+
+    <!-- Slide 2: The Problem -->
+    <section class="slide">
+        <div class="logo">Performance<span>Supply</span>Depot</div>
+        <div class="slide-content">
+            <h2>The Challenge</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⏰</div>
+                    <div class="feature-title">Labor Shortages</div>
+                    <div class="feature-desc">Hospitality struggles to find and retain reliable staff for repetitive tasks</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <div class="feature-title">Rising Costs</div>
+                    <div class="feature-desc">Wages increasing while margins shrink. Every efficiency gain matters.</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">😰</div>
+                    <div class="feature-title">Service Inconsistency</div>
+                    <div class="feature-desc">Staff turnover leads to inconsistent customer experiences</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📉</div>
+                    <div class="feature-title">Peak Hour Strain</div>
+                    <div class="feature-desc">Rush periods overwhelm staff, reducing service quality when it matters most</div>
+                </div>
+            </div>
+        </div>
+        <div class="contact-bar">
+            <span>Authorized OrionStar Partner</span>
+            <span>psdepot.com/robotics</span>
+            <span>(888) 881-6834</span>
+        </div>
+    </section>
+
+    <!-- Slide 3: The Solution -->
+    <section class="slide">
+        <div class="logo">Performance<span>Supply</span>Depot</div>
+        <div class="slide-content">
+            <h2>Meet the Solution</h2>
+            <h3>OrionStar Lucki AI Delivery Robot</h3>
+            <p class="subtitle">Model OS-R-DR01 • In Stock: 14 Units</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-value">12-15h</span>
+                    <div class="stat-label">Battery Life<br>Full Double Shift</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value">88 lb</span>
+                    <div class="stat-label">Load Capacity<br>4-Tray System</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value">31</span>
+                    <div class="stat-label">Languages<br>Voice Support</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value">LiDAR</span>
+                    <div class="stat-label">Navigation<br>3D SLAM Tech</div>
+                </div>
+            </div>
+            
+            <p style="text-align: center; margin-top: 2rem; font-size: 1.25rem;">
+                Lucki works 24/7 without breaks, delivering consistent service while your team focuses on hospitality.
+            </p>
+        </div>
+        <div class="contact-bar">
+            <span>Authorized OrionStar Partner</span>
+            <span>psdepot.com/robotics</span>
+            <span>(888) 881-6834</span>
+        </div>
+    </section>
+
+    <!-- Slide 4: Key Features -->
+    <section class="slide">
+        <div class="logo">Performance<span>Supply</span>Depot</div>
+        <div class="slide-content">
+            <h2>Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <div class="feature-title">10.1" 1080P Touch Display</div>
+                    <div class="feature-desc">Interactive customer interface for orders, feedback, and engagement</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🧭</div>
+                    <div class="feature-title">Advanced Navigation</div>
+                    <div class="feature-desc">LiDAR + Visual Positioning + 3D SLAM for precise obstacle avoidance</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔋</div>
+                    <div class="feature-title">Extended Battery Life</div>
+                    <div class="feature-desc">12-15 hours operation, 4-hour quick charge. Covers lunch through late night.</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📡</div>
+                    <div class="feature-title">Always Connected</div>
+                    <div class="feature-desc">WiFi 2.4G/5G + 4G LTE backup. Works even when connectivity is spotty.</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🗣️</div>
+                    <div class="feature-title">Multi-Language Support</div>
+                    <div class="feature-desc">31 languages with 360° voice positioning. Serves diverse customer bases.</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <div class="feature-title">Food-Safe Construction</div>
+                    <div class="feature-desc">Aviation aluminum + food-grade PC+ABS. Meets commercial safety standards.</div>
+                </div>
+            </div>
+        </div>
+        <div class="contact-bar">
+            <span>Authorized OrionStar Partner</span>
+            <span>psdepot.com/robotics</span>
+            <span>(888) 881-6834</span>
+        </div>
+    </section>
+
+    <!-- Slide 5: Use Cases -->
+    <section class="slide">
+        <div class="logo">Performance<span>Supply</span>Depot</div>
+        <div class="slide-content">
+            <h2>Perfect For</h2>
+            <div class="use-case-grid">
+                <div class="use-case">
+                    <div class="use-case-icon">🍽️</div>
+                    <div class="use-case-name">Restaurants</div>
+                </div>
+                <div class="use-case">
+                    <div class="use-case-icon">☕</div>
+                    <div class="use-case-name">Cafes</div>
+                </div>
+                <div class="use-case">
+                    <div class="use-case-icon">🏨</div>
+                    <div class="use-case-name">Hotels</div>
+                </div>
+                <div class="use-case">
+                    <div class="use-case-icon">🏥</div>
+                    <div class="use-case-name">Hospitals</div>
+                </div>
+                <div class="use-case">
+                    <div class="use-case-icon">✈️</div>
+                    <div class="use-case-name">Airports</div>
+                </div>
+                <div class="use-case">
+                    <div class="use-case-icon">🛒</div>
+                    <div class="use-case-name">Supermarkets</div>
+                </div>
+                <div class="use-case">
+                    <div class="use-case-icon">🏬</div>
+                    <div class="use-case-name">Malls</div>
+                </div>
+                <div class="use-case">
+                    <div class="use-case-icon">🎉</div>
+                    <div class="use-case-name">Events</div>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 2rem; color: #00E0FF;">
+                From busy dim sum parlors to trendy hotel lobbies, Lucki adapts to your environment.
+            </p>
+        </div>
+        <div class="contact-bar">
+            <span>Authorized OrionStar Partner</span>
+            <span>psdepot.com/robotics</span>
+            <span>(888) 881-6834</span>
+        </div>
+    </section>
+
+    <!-- Slide 6: ROI -->
+    <section class="slide">
+        <div class="logo">Performance<span>Supply</span>Depot</div>
+        <div class="slide-content">
+            <h2>The ROI Story</h2>
+            <div class="roi-grid">
+                <div class="roi-card">
+                    <div class="roi-number">24/7</div>
+                    <div class="roi-label">Availability<br>Never calls in sick</div>
+                </div>
+                <div class="roi-card">
+                    <div class="roi-number">3-6 mo</div>
+                    <div class="roi-label">Payback Period<br>Typical ROI timeline</div>
+                </div>
+                <div class="roi-card">
+                    <div class="roi-number">40%+</div>
+                    <div class="roi-label">Labor Cost Reduction<br>Per delivery task</div>
+                </div>
+            </div>
+            
+            <div class="features-grid" style="margin-top: 3rem;">
+                <div class="feature-card">
+                    <div class="feature-icon">📸</div>
+                    <div class="feature-title">Social Media Buzz</div>
+                    <div class="feature-desc">Customers share photos of Lucki, generating free marketing and word-of-mouth</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <div class="feature-title">Peak Performance</div>
+                    <div class="feature-desc">Handle rush hours without breaking a sweat. Scale instantly by adding units.</div>
+                </div>
+            </div>
+        </div>
+        <div class="contact-bar">
+            <span>Authorized OrionStar Partner</span>
+            <span>psdepot.com/robotics</span>
+            <span>(888) 881-6834</span>
+        </div>
+    </section>
+
+    <!-- Slide 7: Pricing -->
+    <section class="slide">
+        <div class="logo">Performance<span>Supply</span>Depot</div>
+        <div class="slide-content">
+            <h2>Investment</h2>
+            
+            <div class="pricing-box">
+                <div class="price-main">$3,330</div>
+                <p class="price-note">per unit • SKU: OS-R-DR01<br>In Stock: 14 units available</p>
+                <p style="margin-top: 1.5rem;">
+                    ✅ Free Shipping<br>
+                    ✅ Net 30 for qualified businesses<br>
+                    ✅ 1-year manufacturer warranty
+                </p>
+            </div>
+            
+            <h3 style="text-align: center; margin-top: 3rem;">Complete Package</h3>
+            <ul class="services-list" style="max-width: 700px; margin: 2rem auto;">
+                <li>
+                    <span>🤖</span>
+                    <span><strong>OrionStar Lucki Robot</strong> - OS-R-DR01</span>
+                </li>
+                <li>
+                    <span>📦</span>
+                    <span><strong>White Glove Delivery</strong> - Unboxing, assembly, placement</span>
+                </li>
+                <li>
+                    <span>🗺️</span>
+                    <span><strong>Space Mapping</strong> - LiDAR configuration for your floor plan</span>
+                </li>
+                <li>
+                    <span>👥</span>
+                    <span><strong>Staff Training</strong> - 2-hour hands-on session</span>
+                </li>
+                <li>
+                    <span>🛠️</span>
+                    <span><strong>90-Day Extended Support</strong> - Phone, email, remote diagnostics</span>
+                    <span class="service-price">Complete Package: $599</span>
+                </li>
+            </ul>
+        </div>
+        <div class="contact-bar">
+            <span>Authorized OrionStar Partner</span>
+            <span>psdepot.com/robotics</span>
+            <span>(888) 881-6834</span>
+        </div>
+    </section>
+
+    <!-- Slide 8: CTA -->
+    <section class="slide cta-section">
+        <div class="logo">Performance<span>Supply</span>Depot</div>
+        <div class="slide-content">
+            <h1>Ready to <span>Transform</span><br>Your Service?</h1>
+            <p class="subtitle" style="margin-bottom: 3rem;">Schedule a demo at your location. We'll bring Lucki to you.</p>
+            
+            <a href="tel:888-881-6834" class="cta-button">📞 Call (888) 881-6834</a>
+            
+            <div class="contact-info">
+                <p>✉️ <a href="mailto:info@psdepot.com">info@psdepot.com</a></p>
+                <p style="margin-top: 0.5rem;">🌐 <a href="https://psdepot.com/robotics-automation.html">psdepot.com/robotics</a></p>
+            </div>
+            
+            <p style="margin-top: 3rem; font-size: 0.9rem; color: #718096;">
+                Authorized OrionStar Partner • Serving hospitality since 2005<br>
+                English • 中文 • Español
+            </p>
+        </div>
+    </section>
+
+</body>
+</html>

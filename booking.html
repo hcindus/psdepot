@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Consultation - Performance Supply Depot</title>
+    <meta name="description" content="Schedule a free consultation with our POS experts. Find the right solutions for your business.">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .booking-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .booking-info {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        
+        .booking-info h2 {
+            color: #1a365d;
+            margin-bottom: 15px;
+        }
+        
+        .booking-info p {
+            color: #4a5568;
+            margin-bottom: 20px;
+        }
+        
+        .benefits {
+            list-style: none;
+        }
+        
+        .benefits li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            color: #2d3748;
+        }
+        
+        .benefits li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #48bb78;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .cal-embed {
+            background: white;
+            border-radius: 12px;
+            padding: 0;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+            min-height: 600px;
+        }
+        
+        .cal-embed iframe {
+            width: 100%;
+            height: 700px;
+            border: none;
+        }
+        
+        .api-status {
+            background: white;
+            border-radius: 12px;
+            padding: 20px 30px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #cbd5e0;
+        }
+        
+        .status-dot.online {
+            background: #48bb78;
+            animation: pulse 2s infinite;
+        }
+        
+        .status-dot.offline {
+            background: #f56565;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .alternative-booking {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .alternative-booking h3 {
+            color: #1a365d;
+            margin-bottom: 15px;
+        }
+        
+        .contact-options {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        
+        .contact-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #2c5282;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .contact-option:hover {
+            color: #1a365d;
+        }
+        
+        footer {
+            text-align: center;
+            color: white;
+            padding: 40px;
+            opacity: 0.8;
+        }
+        
+        footer a {
+            color: #90cdf4;
+        }
+        
+        @media (max-width: 900px) {
+            .booking-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .cal-embed iframe {
+                height: 500px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📅 Book Your Free Consultation</h1>
+            <p>Schedule a call with our POS experts to find the right solutions for your business</p>
+        </header>
+        
+        <div class="api-status">
+            <div class="status-indicator">
+                <div class="status-dot" id="status-dot"></div>
+                <span id="status-text">Checking booking system...</span>
+            </div>
+            <div>
+                <strong>Performance Supply Depot LLC</strong> | 
+                <a href="/">← Back to Home</a>
+            </div>
+        </div>
+        
+        <div class="booking-container">
+            <div class="booking-info">
+                <h2>What to Expect</h2>
+                <p>Our 30-minute consultation will help you:</p>
+                
+                <ul class="benefits">
+                    <li>Assess your current POS setup</li>
+                    <li>Identify cost-saving opportunities</li>
+                    <li>Get product recommendations</li>
+                    <li>Learn about bulk pricing</li>
+                    <li>Discuss repair services</li>
+                    <li>Receive a custom quote</li>
+                </ul>
+                
+                <p style="margin-top: 30px; padding: 15px; background: #ebf8ff; border-radius: 8px; color: #2c5282;">
+                    <strong>💡 Tip:</strong> Have your current equipment list ready for the most accurate recommendations.
+                </p>
+            </div>
+            
+            <div class="cal-embed" id="cal-embed">
+                <!-- Cal.com embed will be loaded here -->
+                <div style="padding: 40px; text-align: center; color: #718096;">
+                    <p>Loading calendar...⏳</p>
+                    <!-- Cal inline embed code begins -->
+                    <div style="width: 100%; height: 100%;" 
+                         data-cal-link="psdepot/consultation" 
+                         data-cal-config='{"layout":"month_view"}'></div>
+                    <script type="text/javascript">
+                        (function (C, A, L) { 
+                            let p = function (a, ar) { a.q.push(ar); }; 
+                            let d = C.document; 
+                            C.Cal = C.Cal || function () { 
+                                let cal = C.Cal; 
+                                let ar = arguments; 
+                                if (!cal.loaded) { 
+                                    cal.ns = {}; 
+                                    cal.q = cal.q || []; 
+                                    d.head.appendChild(d.createElement("script")).src = A; 
+                                    cal.loaded = true; 
+                                } 
+                                if (ar[0] === L) { 
+                                    const api = function () { p(api, arguments); }; 
+                                    const namespace = ar[1]; 
+                                    api.q = api.q || []; 
+                                    typeof namespace === "string" ? (cal.ns[namespace] = api) && p(api, ar) : p(cal, ar); 
+                                    return api; 
+                                } else { 
+                                    p(cal, ar); 
+                                } 
+                            }; 
+                        })(window, "https://app.cal.com/embed/embed.js", "init");
+                        Cal("init", {origin:"https://cal.com"});
+                        
+                        // Inline embed
+                        Cal("inline", {
+                            elementOrSelector: "#cal-embed",
+                            calLink: "psdepot/consultation",
+                            config: {
+                                layout: "month_view"
+                            }
+                        });
+                    </script>
+                    <!-- Cal inline embed code ends -->
+                </div>
+            </div>
+        </div>
+        
+        <div class="alternative-booking">
+            <h3>Prefer to connect another way?</h3>
+            <p>Our team is ready to help through any channel:</p>
+            
+            <div class="contact-options">
+                <a href="tel:888-881-6834" class="contact-option">
+                    <span>📞</span> 888-881-6834
+                </a>
+                <a href="mailto:info@psdepot.com" class="contact-option">
+                    <span>✉️</span> info@psdepot.com
+                </a>
+                <a href="https://t.me/Hcindus" class="contact-option" target="_blank">
+                    <span>💬</span> Telegram
+                </a>
+            </div>
+        </div>
+        
+        
+        <footer>
+            <p>© 2025 Performance Supply Depot LLC | <a href="/">Home</a> | <a href="/privacy">Privacy</a></p>
+        </footer>
+    </div>
+    
+    <script>
+        // Check Cal.com API status
+        async function checkCalStatus() {
+            const dot = document.getElementById('status-dot');
+            const text = document.getElementById('status-text');
+            
+            try {
+                // Check if we can reach our local booking API
+                const res = await fetch('/api/cal/health', { method: 'GET' });
+                if (res.ok) {
+                    dot.className = 'status-dot online';
+                    text.textContent = 'Booking system online';
+                } else {
+                    throw new Error('API not responding');
+                }
+            } catch (err) {
+                // Cal.com embed mode (no local API)
+                dot.className = 'status-dot online';
+                text.textContent = 'Connected to Cal.com';
+            }
+        }
+        
+        checkCalStatus();
+    </script>
+    
+    <!-- Chat Widget -->
+    <script src="/widget/chat-widget.js"></script>
+    <script>
+        PSDepotChat.init({
+            apiUrl: 'http://localhost:8080',
+            position: 'bottom-right',
+            voiceEnabled: true
+        });
+    </script>
+</body>
+</html>

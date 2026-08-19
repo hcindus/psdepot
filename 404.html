@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="canonical" href="https://psdepot.com/404.html">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found — Performance Supply Depot LLC</title>
+    <meta name="description" content="The page you are looking for cannot be found. Browse our premium POS supplies, thermal paper, and hardware.">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #1a365d;
+            --primary-light: #2c5282;
+            --accent: #c53030;
+            --accent-hover: #9b2c2c;
+            --bg: #f7fafc;
+            --card: #ffffff;
+            --text: #2d3748;
+            --text-muted: #718096;
+            --border: #e2e8f0;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        header {
+            background: var(--primary);
+            color: white;
+            padding: 16px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: white;
+            text-decoration: none;
+        }
+        .logo span { color: #63b3ed; }
+        .header-nav a {
+            color: #bee3f8;
+            text-decoration: none;
+            font-weight: 500;
+            margin-left: 24px;
+            transition: color 0.2s;
+        }
+        .header-nav a:hover { color: white; }
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 48px 24px;
+        }
+        .error-container {
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+        .error-code {
+            font-size: 8rem;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1;
+            margin-bottom: 16px;
+            opacity: 0.2;
+        }
+        .error-icon {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 32px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 24px rgba(197, 48, 48, 0.3);
+        }
+        .error-icon svg {
+            width: 60px;
+            height: 60px;
+            fill: white;
+        }
+        .error-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+        .error-message {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            line-height: 1.8;
+        }
+        .error-card {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border: 1px solid var(--border);
+        }
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
+            color: white;
+            padding: 16px 40px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+            box-shadow: 0 4px 12px rgba(197, 48, 48, 0.3);
+        }
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(197, 48, 48, 0.4);
+        }
+        .secondary-links {
+            margin-top: 24px;
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .secondary-links a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        .secondary-links a:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 32px 24px;
+            text-align: center;
+        }
+        .footer-content { max-width: 1200px; margin: 0 auto; }
+        .footer-contact { margin-bottom: 16px; }
+        .footer-contact a {
+            color: #bee3f8;
+            text-decoration: none;
+            margin: 0 12px;
+            transition: color 0.2s;
+        }
+        .footer-contact a:hover { color: white; }
+        .footer-copyright { font-size: 0.875rem; color: #a0aec0; }
+        @media (max-width: 768px) {
+            .error-code { font-size: 6rem; }
+            .error-title { font-size: 1.5rem; }
+            .error-icon { width: 100px; height: 100px; }
+            .error-icon svg { width: 50px; height: 50px; }
+            .error-card { padding: 24px; }
+            .header-content { flex-direction: column; gap: 16px; }
+            .header-nav a { margin: 0 12px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="/" class="logo">Performance<span>Supply</span>Depot</a>
+            <nav class="header-nav">
+                <a href="/">Home</a>
+                <a href="/#products">Products</a>
+                <a href="/contact.html">Contact</a>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <div class="error-container">
+            <div class="error-code">404</div>
+            <div class="error-icon">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+            </div>
+            <h1 class="error-title">Page Not Found</h1>
+            <div class="error-card">
+                <p class="error-message">
+                    Sorry, the page you are looking for cannot be found. It may have been moved, deleted, or never existed.
+                </p>
+                <a href="/" class="cta-button">Back to Homepage</a>
+                <div class="secondary-links">
+                    <a href="/#products">Browse Products</a>
+                    <a href="/contact.html">Contact Support</a>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-contact">
+                <a href="tel:888-881-6834">📞 (888) 881-6834</a>
+                <a href="tel:415-571-9724">📞 (415) 571-9724</a>
+                <a href="mailto:info@psdepot.com">✉️ info@psdepot.com</a>
+            </div>
+            <p class="footer-copyright">© 2026 Performance Supply Depot LLC. Serving California since 2005.</p>
+        </div>
+    </footer>
+</body>
+</html>

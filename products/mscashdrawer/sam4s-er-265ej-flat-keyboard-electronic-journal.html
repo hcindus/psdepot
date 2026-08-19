@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAM4s ER-265EJ Flat Keyboard Electronic Journal | Performance Supply Depot LLC</title>
+    <meta name="description" content="Open line flat keyboard ECR with electronic journal. 2 Serial & 1 USB port. Black color.">
+    <link rel="canonical" href="https://psdepot.com/products/mscashdrawer/sam4s-er-265ej-flat-keyboard-electronic-journal.html">
+    <meta property="og:image" content="https://psdepot.com/assets/images/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://psdepot.com/assets/images/og-image.png">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    
+    <style>
+        :root {
+            --primary: #0A1A2F;
+            --primary-dark: #0f2744;
+            --accent: #d69e2e;
+            --accent-hover: #b7791f;
+            --bg: #F8F9FA;
+            --card: #ffffff;
+            --text: #111111;
+            --text-muted: #718096;
+            --border: #e2e8f0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo { font-size: 1.5rem; font-weight: 700; text-decoration: none; color: white; }
+        .logo span { color: var(--accent); }
+
+        .contact-info {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: opacity 0.2s;
+        }
+
+        .contact-info a:hover { opacity: 0.8; }
+
+        .cart-icon {
+            background: #c53030;
+            color: white !important;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .cart-icon:hover {
+            background: #9b2c2c;
+            transform: translateY(-1px);
+        }
+
+        .breadcrumb {
+            max-width: 1200px;
+            margin: 1rem auto;
+            padding: 0 2rem;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+        .breadcrumb a { color: var(--primary); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        
+        .product-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+        
+        /* Mobile optimizations */
+        
+        .product-image-section {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .product-image {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            display: block;
+        }
+        
+        .image-placeholder {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e0 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            opacity: 0.3;
+        }
+        
+        .image-caption {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+        
+        .product-info { display: flex; flex-direction: column; gap: 1.5rem; }
+        
+        .sku-badge {
+            display: inline-block;
+            background: #edf2f7;
+            color: var(--text-muted);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .product-title { font-size: 2rem; font-weight: 700; color: var(--primary); line-height: 1.2; }
+        .product-subtitle { font-size: 1.125rem; color: var(--text-muted); }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        /* Mobile optimizations */
+        
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            background: #f7fafc;
+            border-radius: 8px;
+        }
+        
+        .feature-icon {
+            width: 24px;
+            height: 24px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.75rem;
+            flex-shrink: 0;
+        }
+        
+        .feature-text { font-size: 0.9rem; }
+        
+        .price-section {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .price { font-size: 2.5rem; font-weight: 700; color: var(--primary); }
+        .price-note { font-size: 0.875rem; color: var(--text-muted); margin-top: 0.25rem; }
+        
+        .stock-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            color: #38a169;
+            font-weight: 500;
+        }
+        
+        .stock-dot {
+            width: 8px;
+            height: 8px;
+            background: #38a169;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: #f7fafc;
+            border-radius: 8px;
+        }
+
+        .quantity-label { font-weight: 500; color: var(--text); }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .quantity-btn {
+            width: 36px;
+            height: 36px;
+            border: none;
+            background: white;
+            cursor: pointer;
+            font-size: 1.25rem;
+            color: var(--text);
+            transition: background 0.2s;
+        }
+
+        .quantity-btn:hover { background: #edf2f7; }
+
+        .quantity-input {
+            width: 50px;
+            height: 36px;
+            border: none;
+            text-align: center;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .cta-buttons { display: flex; gap: 1rem; margin-top: 1.5rem; }
+        
+        .btn-primary {
+            flex: 1;
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-primary:hover { background: #9b2c2c; transform: translateY(-1px); }
+        
+        .btn-secondary {
+            flex: 1;
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--border);
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            text-align: center;
+        }
+        .btn-secondary:hover { border-color: var(--primary); background: rgba(26, 54, 93, 0.05); }
+        
+        .tabs-section { max-width: 1200px; margin: 2rem auto; padding: 0 2rem; }
+        
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 1.5rem;
+        }
+        
+        .tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+        }
+        .tab.active { color: var(--primary); border-bottom-color: var(--accent); }
+        
+        .tab-content {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .specs-table tr { border-bottom: 1px solid var(--border); }
+        .specs-table tr:last-child { border-bottom: none; }
+        .specs-table td { padding: 1rem; }
+        .specs-table td:first-child { font-weight: 600; color: var(--text-muted); width: 40%; }
+        
+        .description-content { line-height: 1.8; }
+        .description-content h3 { color: var(--primary); margin: 1.5rem 0 0.75rem; font-size: 1.25rem; }
+        .description-content p { margin-bottom: 1rem; }
+        .description-content ul { margin-left: 1.5rem; margin-bottom: 1rem; }
+        .description-content li { margin-bottom: 0.5rem; }
+        
+        .footer-cta {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 2rem;
+            background: var(--primary);
+            color: white;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .footer-cta h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .footer-cta p { opacity: 0.9; margin-bottom: 1.5rem; }
+        .footer-cta .phone {
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-decoration: none;
+            display: inline-block;
+            animation: patrioticBlink 1.5s infinite;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        @keyframes patrioticBlink {
+            0%, 33% { color: #ff0000; text-shadow: 0 0 20px rgba(255,0,0,0.8), 2px 2px 4px rgba(0,0,0,0.3); }
+            34%, 66% { color: #ffffff; text-shadow: 0 0 20px rgba(255,255,255,0.8), 2px 2px 4px rgba(0,0,0,0.3); }
+            67%, 100% { color: #0000ff; text-shadow: 0 0 20px rgba(0,0,255,0.8), 2px 2px 4px rgba(0,0,0,0.3); }
+        }
+
+        .footer-cta .phone:hover { animation-duration: 0.5s; }
+        
+        .footer {
+            background: var(--primary-dark);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            font-size: 0.875rem;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="logo">Performance<span>Supply</span>Depot</a>
+            <div class="contact-info">
+                <a href="tel:888-881-6834">888-881-6834</a>
+                <a href="/checkout.html" class="cart-icon">🛒 Cart (<span id="cart-count">0</span>)</a>
+            </div>
+        </div>
+    </header>
+    
+    <nav class="breadcrumb">
+        <a href="/">Home</a> / 
+        <a href="/products">Products</a> / 
+        <a href="/categories/crs-sam4s-cash-registers">CRS SAM4s Cash Registers</a> / 
+        <span>SAM4s ER-265EJ Flat Keyboard Electronic Journal</span>
+    </nav>
+    
+    <main class="product-container">
+        <div class="product-image-section">
+            <div class="image-placeholder">📦</div>
+            <p class="image-caption">SAM4s - CRS SAM4s Cash Registers</p>
+        </div>
+        
+        <div class="product-info">
+            <div>
+                <span class="sku-badge">SKU: PSD-CRS-ER-265EJ | MPN: CRS-ER-265EJ</span>
+                <h1 class="product-title">SAM4s ER-265EJ Flat Keyboard Electronic Journal</h1>
+                <p class="product-subtitle">SAM4s CRS SAM4s Cash Registers</p>
+            </div>
+            
+            <div class="features-grid">
+
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <span class="feature-text">Electronic journal</span>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <span class="feature-text">Flat keyboard</span>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <span class="feature-text">USB connectivity</span>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <span class="feature-text">Open line</span>
+                </div>
+            </div>
+            
+            <div class="price-section">
+                <div class="price">$581.67</div>
+                <div class="price-note">MSRP: $725.00 — You save $143.33</div>
+                <div class="stock-status">
+                    <span class="stock-dot" style="background: #c53030;"></span>Out of Stock
+                </div>
+
+                <div class="quantity-selector">
+                    <span class="quantity-label">Quantity:</span>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn" onclick="updateQuantity(-1)">−</button>
+                        <input type="number" class="quantity-input" id="quantity" value="1" min="1" max="99" readonly>
+                        <button class="quantity-btn" onclick="updateQuantity(1)">+</button>
+                    </div>
+                </div>
+
+                <div class="cta-buttons">
+                    <button class="btn-primary" onclick="addToCartFromPage()" id="addToCartBtn">Add to Cart</button>
+                    <a href="/contact.html" class="btn-secondary">Request Quote</a>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <section class="tabs-section">
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('description')">Description</button>
+            <button class="tab" onclick="showTab('specs')">Specifications</button>
+            <button class="tab" onclick="showTab('support')">Support</button>
+        </div>
+        
+        <div id="description" class="tab-content">
+            <div class="description-content">
+                <h3>Product Overview</h3>
+                <p>Open line flat keyboard ECR with electronic journal. 2 Serial & 1 USB port. Black color.</p>
+                
+                <h3>Key Features</h3>
+                <ul>
+                    <li>Electronic journal</li>
+                    <li>Flat keyboard</li>
+                    <li>USB connectivity</li>
+                    <li>Open line</li>
+                </ul>
+                
+                <h3>Ideal For</h3>
+                <ul>
+                    <li>Retail stores and restaurants</li>
+                    <li>Small to medium businesses</li>
+                    <li>Businesses needing reliable POS hardware</li>
+                    <li>Commercial grade applications</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div id="specs" class="tab-content" style="display: none;">
+            <table class="specs-table">
+                <tr><td>Keyboard</td><td>Flat keyboard</td></tr>
+                <tr><td>Journal</td><td>Electronic journal</td></tr>
+                <tr><td>Ports</td><td>2 Serial, 1 USB</td></tr>
+                <tr><td>Color</td><td>Black</td></tr>
+                <tr><td>Warranty</td><td>1 year</td></tr>
+            </table>
+        </div>
+        
+        <div id="support" class="tab-content" style="display: none;">
+            <div class="description-content">
+                <h3>What's Included</h3>
+                <ul>
+                    <li>SAM4s ER-265EJ Flat Keyboard Electronic Journal</li>
+                    <li>Power adapter and cables</li>
+                    <li>Setup guide and documentation</li>
+                    <li>1 year manufacturer warranty</li>
+                </ul>
+                
+                <h3>Service & Support</h3>
+                <p>Performance Supply Depot provides:</p>
+                <ul>
+                    <li>Pre-sales consultation</li>
+                    <li>Free phone support</li>
+                    <li>Remote troubleshooting</li>
+                    <li>Repair services and spare parts</li>
+                    <li>Authorized dealer for SAM4s</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    
+    <section class="footer-cta">
+        <h3>Questions About This Product?</h3>
+        <p>Our team can help you choose the right solution. Call for a free consultation.</p>
+        <a href="tel:8888816834" class="phone">(888) 881-6834</a>
+    </section>
+    
+    <footer class="footer">
+        <p>&copy; 2026 Performance Supply Depot LLC. Serving California since 2005.</p>
+    </footer>
+    
+    <script>
+        // Cart Management - Matches main psdepot.com
+        function getCart() {
+            return JSON.parse(localStorage.getItem('psdepot_cart') || '[]');
+        }
+
+        function saveCart(cart) {
+            localStorage.setItem('psdepot_cart', JSON.stringify(cart));
+            updateCartCount();
+        }
+
+        function updateCartCount() {
+            const cart = getCart();
+            const count = cart.reduce((sum, item) => sum + (parseInt(item.quantity) || 0), 0);
+            const cartCountEl = document.getElementById('cart-count');
+            if (cartCountEl) cartCountEl.textContent = count;
+        }
+
+        function addToCartFromPage() {
+            const sku = 'PSD-CRS-ER-265EJ';
+            const name = 'SAM4s ER-265EJ Flat Keyboard Electronic Journal';
+            const price = 581.67;
+            const qty = parseInt(document.getElementById('quantity').value) || 1;
+            
+            let cart = getCart();
+            const existing = cart.find(item => item.sku === sku);
+            
+            if (existing) {
+                existing.quantity += qty;
+            } else {
+                cart.push({ sku: sku, name: name, price: price, quantity: qty });
+            }
+            
+            saveCart(cart);
+            
+            // Visual feedback
+            const btn = document.getElementById('addToCartBtn');
+            const originalText = btn.textContent;
+            btn.textContent = '✓ Added!';
+            btn.style.background = '#48bb78';
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.style.background = '';
+            }, 1500);
+        }
+
+        function updateQuantity(change) {
+            const input = document.getElementById('quantity');
+            let value = parseInt(input.value) + change;
+            if (value < 1) value = 1;
+            if (value > 99) value = 99;
+            input.value = value;
+        }
+
+        function showTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.style.display = 'none';
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName).style.display = 'block';
+            event.target.classList.add('active');
+        }
+
+        // Initialize cart count on load
+        document.addEventListener('DOMContentLoaded', updateCartCount);
+    </script>
+</body>
+</html>

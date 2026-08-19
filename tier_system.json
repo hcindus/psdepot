@@ -1,0 +1,90 @@
+{
+  "tiers": [
+    {
+      "id": "stone",
+      "name": "Stone",
+      "level": 1,
+      "color": "#8B7355",
+      "gradient": ["#A0826D", "#8B7355"],
+      "description": "New customers or supply-only accounts",
+      "min_spend": 0,
+      "max_spend": 4999,
+      "priority": "low",
+      "contact_frequency_days": 90
+    },
+    {
+      "id": "bronze",
+      "name": "Bronze",
+      "level": 2,
+      "color": "#CD7F32",
+      "gradient": ["#E69138", "#CD7F32"],
+      "description": "PPCL - Price Conscious Customers",
+      "min_spend": 5000,
+      "max_spend": 9999,
+      "priority": "medium",
+      "contact_frequency_days": 60
+    },
+    {
+      "id": "silver",
+      "name": "Silver",
+      "level": 3,
+      "color": "#C0C0C0",
+      "gradient": ["#E8E8E8", "#C0C0C0"],
+      "description": "Prime - Standard tier customers",
+      "min_spend": 10000,
+      "max_spend": 24999,
+      "priority": "medium-high",
+      "contact_frequency_days": 45
+    },
+    {
+      "id": "gold",
+      "name": "Gold",
+      "level": 4,
+      "color": "#FFD700",
+      "gradient": ["#FFD700", "#FFAA00"],
+      "description": "Spot On Target - High potential accounts",
+      "min_spend": 25000,
+      "max_spend": 49999,
+      "priority": "high",
+      "contact_frequency_days": 30
+    },
+    {
+      "id": "platinum",
+      "name": "Platinum",
+      "level": 5,
+      "color": "#E5E4E2",
+      "gradient": ["#F5F5F5", "#E5E4E2"],
+      "description": "Top 165 - Priority accounts",
+      "min_spend": 50000,
+      "max_spend": 99999,
+      "priority": "very-high",
+      "contact_frequency_days": 14
+    },
+    {
+      "id": "diamond",
+      "name": "Diamond",
+      "level": 6,
+      "color": "#B9F2FF",
+      "gradient": ["#E0FFFF", "#B9F2FF"],
+      "description": "VIP Elite - Highest value accounts",
+      "min_spend": 100000,
+      "max_spend": null,
+      "priority": "critical",
+      "contact_frequency_days": 7
+    }
+  ],
+  "category_mapping": {
+    "PPCL": "bronze",
+    "Prime": "silver",
+    "Spot On Target": "gold",
+    "Top 165": "platinum"
+  },
+  "benefits": {
+    "stone": ["Email support", "Standard pricing"],
+    "bronze": ["Email support", "Standard pricing", "Quarterly reviews"],
+    "silver": ["Priority email support", "Volume discounts", "Bi-annual reviews", "Early access to promotions"],
+    "gold": ["Phone support", "Negotiated pricing", "Quarterly business reviews", "Dedicated account manager", "Priority fulfillment"],
+    "platinum": ["24/7 phone support", "Best pricing", "Monthly reviews", "Dedicated account team", "Priority fulfillment", "Custom solutions", "Training sessions"],
+    "diamond": ["White glove service", "Custom contracts", "Weekly check-ins", "Executive sponsorship", "Same-day fulfillment", "Free consulting", "Exclusive events", "Early product access"]
+  }
+}

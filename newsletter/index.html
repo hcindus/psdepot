@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PSDEPOT - Newsletter</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 0; background: linear-gradient(135deg, #003366, #0066cc); min-height: 100vh; }
+        .container { max-width: 600px; margin: 40px auto; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+        
+        .header { background: #003366; color: white; padding: 40px; text-align: center; }
+        .header h1 { margin: 0; font-size: 36px; }
+        .header p { margin: 10px 0 0 0; color: #ffd700; font-size: 18px; }
+        
+        .content { padding: 40px; text-align: center; }
+        .content h2 { color: #003366; margin: 0 0 20px 0; font-size: 28px; }
+        .content p { color: #666; line-height: 1.6; margin: 0 0 30px 0; }
+        
+        .benefits { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px; text-align: left; }
+        .benefit { background: #f5f5f5; padding: 20px; border-radius: 10px; }
+        .benefit span { color: #ff6600; font-size: 24px; margin-right: 10px; }
+        
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; color: #333; font-weight: bold; text-align: left; }
+        .form-group input { width: 100%; padding: 15px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; box-sizing: border-box; }
+        .form-group input:focus { border-color: #003366; outline: none; }
+        
+        .submit-btn { background: #ff6600; color: white; padding: 18px 40px; border: none; font-size: 18px; font-weight: bold; cursor: pointer; width: 100%; border-radius: 8px; transition: background 0.3s; }
+        .submit-btn:hover { background: #e55a00; }
+        
+        .privacy { font-size: 12px; color: #999; margin-top: 15px; }
+        .privacy a { color: #003366; }
+        
+        .contact { background: #003366; color: white; padding: 30px; text-align: center; }
+        .phone-blink { font-size: 24px; font-weight: bold; animation: blink 1.5s infinite; display: inline-block; padding: 10px 20px; background: white; border-radius: 10px; }
+        @keyframes blink { 0%, 100% { color: #ff0000; } 33% { color: #ffffff; } 66% { color: #0000ff; } }
+        
+        @media (max-width: 500px) {
+            .benefits { grid-template-columns: 1fr; }
+            .container { margin: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Performance Supply Depot</h1>
+            <p>Newsletter</p>
+        </div>
+        
+        <div class="content">
+            <h2>Stay Updated</h2>
+            <p>Get the latest deals, new products, and industry news delivered to your inbox.</p>
+            
+            <div class="benefits">
+                <div class="benefit">
+                    <span>&#128293;</span>
+                    <strong>Exclusive Deals</strong>
+                    <p style="margin: 5px 0 0 0; font-size: 14px; color: #666;">Special offers for subscribers only</p>
+                </div>
+                <div class="benefit">
+                    <span>&#128640;</span>
+                    <strong>New Products</strong>
+                    <p style="margin: 5px 0 0 0; font-size: 14px; color: #666;">Be first to know about arrivals</p>
+                </div>
+                <div class="benefit">
+                    <span>&#128200;</span>
+                    <strong>Industry News</strong>
+                    <p style="margin: 5px 0 0 0; font-size: 14px; color: #666;">Tips and trends for your business</p>
+                </div>
+                <div class="benefit">
+                    <span>&#128231;</span>
+                    <strong>Weekly Updates</strong>
+                    <p style="margin: 5px 0 0 0; font-size: 14px; color: #666;">No spam, just useful info</p>
+                </div>
+            </div>
+            
+            <form action="https://formspree.io/f/yourformid" method="POST">
+                <input type="hidden" name="_subject" value="PSDEPOT Newsletter Signup">
+                
+                <div class="form-group">
+                    <label>First Name</label>
+                    <input type="text" name="first_name" placeholder="John" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Last Name</label>
+                    <input type="text" name="last_name" placeholder="Smith" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" name="email" placeholder="john@company.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Company</label>
+                    <input type="text" name="company" placeholder="Your Business Name">
+                </div>
+                
+                <button type="submit" class="submit-btn">Subscribe</button>
+                
+                <p class="privacy">By subscribing, you agree to receive marketing emails. Unsubscribe anytime. <a href="#">Privacy Policy</a></p>
+            </form>
+        </div>
+        
+        <div class="contact">
+            <p><span class="phone-blink">888-881-6834</span></p>
+            <p><a href="mailto:info@psdepot.com" style="color: white;">info@psdepot.com</a></p>
+        </div>
+    </div>
+</body>
+</html>

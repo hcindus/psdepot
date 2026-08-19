@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - AGI Company</title>
+    <meta name="description" content="Browse our AI agent workforce - Secretarial Pool, Technical Team, and APEX C-Suite">
+    <style>
+        :root {
+            --bg-dark: #0a0a1a;
+            --bg-card: rgba(255, 255, 255, 0.05);
+            --header-bg: rgba(26, 54, 93, 0.95);
+            --text: #e5e5e5;
+            --text-muted: #a0a0a0;
+            --accent: #ed8936;
+            --accent-hover: #dd6b20;
+            --border: rgba(237, 137, 54, 0.3);
+            --success: #48bb78;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            background: var(--header-bg);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            z-index: 1000;
+        }
+
+        .logo { font-size: 26px; font-weight: 800; color: var(--text); text-decoration: none; }
+        .logo span { color: var(--accent); }
+
+        .header-nav { display: flex; align-items: center; gap: 30px; }
+        .header-nav a {
+            color: var(--text); text-decoration: none; font-weight: 600; font-size: 15px; transition: color 0.3s;
+        }
+        .header-nav a:hover, .header-nav a.active { color: var(--accent); }
+        .cart-icon { position: relative; cursor: pointer; font-size: 20px; }
+        .cart-badge {
+            position: absolute; top: -8px; right: -8px; background: var(--accent); color: white;
+            font-size: 11px; padding: 2px 6px; border-radius: 10px; font-weight: 700; display: none;
+        }
+
+        .layout { display: flex; min-height: 100vh; padding-top: 70px; padding-bottom: 60px; }
+
+        .sidebar {
+            width: 260px; background: rgba(26, 54, 93, 0.9); border-right: 1px solid var(--border);
+            padding: 30px 20px; position: fixed; left: 0; top: 70px; bottom: 60px; overflow-y: auto;
+        }
+
+        .sidebar-section { margin-bottom: 35px; }
+        .sidebar-title {
+            font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--accent);
+            margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid var(--border); font-weight: 700;
+        }
+        .sidebar-menu { list-style: none; }
+        .sidebar-menu li { margin-bottom: 8px; }
+        .sidebar-menu a {
+            display: flex; align-items: center; padding: 12px 15px; color: var(--text-muted);
+            text-decoration: none; border-radius: 8px; transition: all 0.3s; font-size: 14px;
+        }
+        .sidebar-menu a:hover, .sidebar-menu a.active { background: rgba(237, 137, 54, 0.15); color: var(--accent); }
+        .sidebar-menu .icon { margin-right: 12px; font-size: 18px; width: 24px; text-align: center; }
+
+        .main-content { flex: 1; margin-left: 260px; padding: 40px 60px; }
+
+        .page-header { margin-bottom: 40px; }
+        .page-header h1 { font-size: 42px; margin-bottom: 10px; }
+        .page-header p { color: var(--text-muted); font-size: 18px; }
+
+        .category-tabs {
+            display: flex; gap: 15px; margin-bottom: 40px; border-bottom: 1px solid var(--border);
+            padding-bottom: 20px;
+        }
+        .category-tab {
+            padding: 12px 30px; background: transparent; border: 1px solid var(--border);
+            color: var(--text); border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.3s;
+        }
+        .category-tab:hover, .category-tab.active {
+            background: var(--accent); border-color: var(--accent); color: white;
+        }
+
+        .products-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px;
+        }
+
+        .product-card {
+            background: var(--bg-card); border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px; overflow: hidden; transition: transform 0.3s, border-color 0.3s;
+        }
+        .product-card:hover { transform: translateY(-5px); border-color: var(--accent); }
+
+        .product-image {
+            height: 180px; background: linear-gradient(135deg, rgba(26, 54, 93, 0.8), rgba(237, 137, 54, 0.2));
+            display: flex; align-items: center; justify-content: center; font-size: 64px;
+        }
+
+        .product-info { padding: 25px; }
+        .product-name { font-size: 22px; font-weight: 700; margin-bottom: 8px; }
+        .product-desc { color: var(--text-muted); font-size: 14px; margin-bottom: 15px; line-height: 1.5; }
+        .product-features { list-style: none; margin-bottom: 20px; }
+        .product-features li {
+            padding: 5px 0; color: var(--text-muted); font-size: 13px;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .product-features li::before { content: "✓"; color: var(--success); font-weight: bold; }
+
+        .product-footer {
+            display: flex; align-items: center; justify-content: space-between;
+            padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .product-price { font-size: 28px; font-weight: 800; color: var(--accent); }
+        .product-price span { font-size: 14px; color: var(--text-muted); font-weight: 400; }
+
+        .btn {
+            display: inline-block; padding: 12px 28px; background: var(--accent); color: white;
+            text-decoration: none; border-radius: 8px; font-weight: 600; border: none; cursor: pointer;
+            font-size: 15px; transition: all 0.3s;
+        }
+        .btn:hover { background: #9b2c2c; transform: translateY(-2px); }
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1); color: var(--text); border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .btn-secondary:hover { background: rgba(255, 255, 255, 0.2); }
+
+        .footer {
+            position: fixed; bottom: 0; left: 0; right: 0; height: 60px;
+            background: var(--header-bg); backdrop-filter: blur(10px); border-top: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: space-between; padding: 0 30px; z-index: 1000;
+        }
+        .footer-left { color: var(--text); font-size: 14px; }
+        .footer-right { display: flex; gap: 25px; }
+        .footer-right a { color: var(--text-muted); text-decoration: none; font-size: 14px; }
+        .footer-right a:hover { color: var(--accent); }
+
+        @media (max-width: 768px) {
+            .sidebar { display: none; }
+            .main-content { margin-left: 0; padding: 20px; }
+            .category-tabs { flex-wrap: wrap; }
+            .products-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="logo">AGI<span>Company</span></a>
+        <nav class="header-nav">
+            <a href="index.html">Home</a>
+            <a href="products.html" class="active">Products</a>
+            <a href="agents.html">🤖 Agents</a>
+            <a href="cart.html">
+                Cart <span class="cart-icon">🛒<span class="cart-badge" id="cart-count">0</span></span>
+            </a>
+            <a href="login.html">Login</a>
+        </nav>
+    </header>
+
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-title">Main Menu</div>
+                <ul class="sidebar-menu">
+                    <li><a href="index.html"><span class="icon">🏠</span> Home</a></li>
+                    <li><a href="products.html" class="active"><span class="icon">🛍️</span> Products</a></li>
+                    <li><a href="agents.html"><span class="icon">🤖</span> Agents</a></li>
+                    <li><a href="cart.html"><span class="icon">🛒</span> Cart</a></li>
+                    <li><a href="orders.html"><span class="icon">📦</span> Orders</a></li>
+                </ul>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-title">Categories</div>
+                <ul class="sidebar-menu">
+                    <li><a href="#secretarial"><span class="icon">📋</span> Secretarial Pool</a></li>
+                    <li><a href="#technical"><span class="icon">🔧</span> Technical Team</a></li>
+                    <li><a href="#apex"><span class="icon">👔</span> APEX C-Suite</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="page-header">
+                <h1>Our Products</h1>
+                <p>Choose from our autonomous AI agent workforce. Each agent is ready to deploy instantly.</p>
+            </div>
+
+            <div class="category-tabs">
+                <button class="category-tab active" onclick="filterCategory('all')">All Agents</button>
+                <button class="category-tab" onclick="filterCategory('secretarial')">📋 Secretarial</button>
+                <button class="category-tab" onclick="filterCategory('technical')">🔧 Technical</button>
+                <button class="category-tab" onclick="filterCategory('apex')">👔 APEX C-Suite</button>
+            </div>
+
+            <div class="products-grid" id="products-grid">
+                <!-- Secretarial Pool -->
+                <div class="product-card" data-category="secretarial">
+                    <div class="product-image">📞</div>
+                    <div class="product-info">
+                        <h3 class="product-name">Receptionist Agent</h3>
+                        <p class="product-desc">Answers calls, schedules appointments, and manages front desk operations 24/7.</p>
+                        <ul class="product-features">
+                            <li>Voice synthesis natural speech</li>
+                            <li>Multi-line call handling</li>
+                            <li>Calendar integration</li>
+                            <li>Visitor check-in management</li>
+                        </ul>
+                        <div class="product-footer">
+                            <div class="product-price">$99<span>/mo</span></div>
+                            <button class="btn" onclick="addToCart('receptionist', 'Receptionist Agent', 99)">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="secretarial">
+                    <div class="product-image">📅</div>
+                    <div class="product-info">
+                        <h3 class="product-name">Executive Assistant</h3>
+                        <p class="product-desc">Manages schedules, drafts correspondence, and coordinates meetings for executives.</p>
+                        <ul class="product-features">
+                            <li>Inbox management & prioritization</li>
+                            <li>Meeting scheduling & reminders</li>
+                            <li>Travel coordination</li>
+                            <li>Document preparation</li>
+                        </ul>
+                        <div class="product-footer">
+                            <div class="product-price">$149<span>/mo</span></div>
+                            <button class="btn" onclick="addToCart('executive-assistant', 'Executive Assistant', 149)">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="secretarial">
+                    <div class="product-image">💬</div>
+                    <div class="product-info">
+                        <h3 class="product-name">Customer Support Agent</h3>
+                        <p class="product-desc">Handles customer inquiries via chat, email, and social media around the clock.</p>
+                        <ul class="product-features">
+                            <li>Multi-channel support</li>
+                            <li>Ticket management</li>
+                            <li>Knowledge base integration</li>
+                            <li>Escalation protocols</li>
+                        </ul>
+                        <div class="product-footer">
+                            <div class="product-price">$79<span>/mo</span></div>
+                            <button class="btn" onclick="addToCart('support-agent', 'Customer Support Agent', 79)">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Technical Team -->
+                <div class="product-card" data-category="technical">
+                    <div class="product-image">💻</div>
+                    <div class="product-info">
+                        <h3 class="product-name">Code Review Agent</h3>
+                        <p class="product-desc">Reviews pull requests, identifies bugs, and suggests optimizations automatically.</p>
+                        <ul class="product-features">
+                            <li>Multi-language support</li>
+                            <li>Security vulnerability detection</li>
+                            <li>Performance analysis</li>
+                            <li>Style guide enforcement</li>
+                        </ul>
+                        <div class="product-footer">
+                            <div class="product-price">$199<span>/mo</span></div>
+                            <button class="btn" onclick="addToCart('code-review', 'Code Review Agent', 199)">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="technical">
+                    <div class="product-image">🐛</div>
+                    <div class="product-info">
+                        <h3 class="product-name">Debug Assistant</h3>
+                        <p class="product-desc">Traces errors, analyzes logs, and provides root cause analysis for production issues.</p>
+                        <ul class="product-features">
+                            <li>Log analysis & correlation</li>
+                            <li>Stack trace interpretation</li>
+                            <li>Performance profiling</li>
+                            <li>Incident report generation</li>
+                        </ul>
+                        <div class="product-footer">
+                            <div class="product-price">$249<span>/mo</span></div>
+                            <button class="btn" onclick="addToCart('debug-assistant', 'Debug Assistant', 249)">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="technical">
+                    <div class="product-image">☁️</div>
+                    <div class="product-info">
+                        <h3 class="product-name">DevOps Agent</h3>
+                        <p class="product-desc">Manages infrastructure, monitors deployments, and maintains CI/CD pipelines.</p>
+                        <ul class="product-features">
+                            <li>Infrastructure monitoring</li>
+                            <li>Auto-scaling management</li>
+                            <li>Deployment automation</li>
+                            <li>Cost optimization</li>
+                        </ul>
+                        <div class="product-footer">
+                            <div class="product-price">$299<span>/mo</span></div>
+                            <button class="btn" onclick="addToCart('devops', 'DevOps Agent', 299)">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- APEX C-Suite -->
+                <div class="product-card" data-category="apex">
+                    <div class="product-image">🎯</div>
+                    <div class="product-info">
+                        <h3 class="product-name">Chief Vision Officer</h3>
+                        <p class="product-desc">Develops strategic vision, market analysis, and long-term planning.</p>
+                        <ul class="product-features">
+                            <li>Market trend analysis</li>
+                            <li>Competitive intelligence</li>
+                            <li>Strategic roadmap creation</li>
+                            <li>Scenario modeling</li>
+                        </ul>
+                        <div class="product-footer">
+                            <div class="product-price">$599<span>/mo</span></div>
+                            <button class="btn" onclick="addToCart('cvo', 'Chief Vision Officer', 599)">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="apex">
+                    <div class="product-image">💰</div>
+                    <div class="product-info">
+                        <h3 class="product-name">Chief Financial Officer</h3>
+                        <p class="product-desc">Manages financial planning, forecasting, and budget optimization.</p>
+                        <ul class="product-features">
+                            <li>Financial modeling</li>
+                            <li>Budget variance analysis</li>
+                            <li>Cash flow forecasting</li>
+                            <li>ROI optimization</li>
+                        </ul>
+                        <div class="product-footer">
+                            <div class="product-price">$499<span>/mo</span></div>
+                            <button class="btn" onclick="addToCart('cfo', 'Chief Financial Officer', 499)">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="apex">
+                    <div class="product-image">🔐</div>
+                    <div class="product-info">
+                        <h3 class="product-name">Chief Security Officer</h3>
+                        <p class="product-desc">Oversees cybersecurity, threat detection, and compliance management.</p>
+                        <ul class="product-features">
+                            <li>Threat intelligence</li>
+                            <li>Compliance monitoring</li>
+                            <li>Incident response</li>
+                            <li>Security audit automation</li>
+                        </ul>
+                        <div class="product-footer">
+                            <div class="product-price">$549<span>/mo</span></div>
+                            <button class="btn" onclick="addToCart('cso', 'Chief Security Officer', 549)">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-left">© 2026 AGI Company. All rights reserved.</div>
+        <div class="footer-right">
+            <a href="privacy.html">Privacy</a>
+            <a href="terms.html">Terms</a>
+            <a href="support.html">Support</a>
+        </div>
+    </footer>
+
+    <script src="cart.js"></script>
+    <script>
+        function filterCategory(category) {
+            const cards = document.querySelectorAll('.product-card');
+            const tabs = document.querySelectorAll('.category-tab');
+            
+            tabs.forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

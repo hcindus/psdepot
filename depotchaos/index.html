@@ -1,0 +1,2485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DepotChaos CRM</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; }
+        .header { background: linear-gradient(135deg, #1e293b 0%, #334155 100%); padding: 20px 30px; border-bottom: 1px solid #475569; display: flex; justify-content: space-between; align-items: center; }
+        .header h1 { font-size: 24px; font-weight: 700; display: flex; align-items: center; gap: 12px; }
+        .logo { width: 36px; height: 36px; background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: white; }
+        .status-dot { width: 10px; height: 10px; border-radius: 50%; background: #22c55e; animation: pulse 2s infinite; }
+        .status-dot.error { background: #ef4444; animation: none; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        .main { padding: 30px; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .stat-card { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 24px; transition: transform 0.2s, box-shadow 0.2s; }
+        .stat-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(99, 102, 241, 0.15); }
+        .stat-label { color: #94a3b8; font-size: 14px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .stat-value { font-size: 36px; font-weight: 700; color: #6366f1; margin-bottom: 4px; }
+        .stat-change { color: #22c55e; font-size: 14px; }
+        .section-title { font-size: 20px; font-weight: 600; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        .nav { background: #1e293b; padding: 0 30px; border-bottom: 1px solid #334155; display: flex; gap: 0; flex-wrap: wrap; }
+        .nav-item { padding: 16px 24px; cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.2s; font-weight: 500; color: #94a3b8; }
+        .nav-item:hover { background: #334155; color: #e2e8f0; }
+        .nav-item.active { color: #6366f1; border-bottom-color: #6366f1; }
+        .section { display: none; }
+        .section.active { display: block; }
+        table { width: 100%; border-collapse: collapse; background: #1e293b; border-radius: 8px; overflow: hidden; font-size: 13px; }
+        th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid #334155; }
+        th { color: #94a3b8; font-weight: 500; background: #252f42; cursor: pointer; user-select: none; position: relative; }
+        th:hover { background: #2d3a4f; }
+        th.sort-asc::after { content: ' ↑'; color: #6366f1; }
+        th.sort-desc::after { content: ' ↓'; color: #6366f1; }
+        tr:hover { background: #252f42; }
+        .badge { padding: 4px 12px; border-radius: 12px; font-size: 11px; font-weight: 500; }
+        .badge-new { background: rgba(34, 197, 94, 0.2); color: #22c55e; }
+        .badge-contacted { background: rgba(234, 179, 8, 0.2); color: #eab308; }
+        .badge-qualified { background: rgba(59, 130, 246, 0.2); color: #3b82f6; }
+        .badge-unqualified { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
+        .badge-tier-1 { background: rgba(139, 92, 246, 0.2); color: #8b5cf6; }
+        .badge-tier-2 { background: rgba(59, 130, 246, 0.2); color: #3b82f6; }
+        .badge-tier-3 { background: rgba(100, 116, 139, 0.2); color: #64748b; }
+        .badge-tier-a { background: rgba(34, 197, 94, 0.2); color: #22c55e; font-weight: 600; }
+        .badge-tier-b { background: rgba(234, 179, 8, 0.2); color: #eab308; }
+        .badge-tier-c { background: rgba(168, 162, 158, 0.2); color: #a8a29e; }
+        .filters { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; align-items: center; }
+        .filter-input, .filter-select { padding: 10px 16px; background: #1e293b; border: 1px solid #334155; border-radius: 8px; color: #e2e8f0; font-size: 14px; }
+        .btn { padding: 8px 16px; background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 500; font-size: 13px; }
+        .btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4); }
+        .btn-sm { padding: 4px 12px; font-size: 12px; }
+        .btn-secondary { background: #334155; }
+        .btn-success { background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); }
+        .btn-danger { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
+        .btn-purple { background: linear-gradient(135deg, #9333ea 0%, #7c3aed 100%); }
+        .pagination { display: flex; justify-content: center; gap: 8px; padding: 20px; }
+        .page-btn { padding: 8px 16px; background: #334155; border: none; border-radius: 6px; color: #e2e8f0; cursor: pointer; }
+        .page-btn:hover { background: #475569; }
+        .page-btn.active { background: #6366f1; }
+        .page-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        #loading { text-align: center; padding: 40px; color: #94a3b8; }
+        .error-msg { background: rgba(239, 68, 68, 0.1); border: 1px solid #ef4444; color: #ef4444; padding: 16px; border-radius: 8px; margin: 20px 0; }
+        .success-msg { background: rgba(34, 197, 94, 0.1); border: 1px solid #22c55e; color: #22c55e; padding: 16px; border-radius: 8px; margin: 20px 0; }
+        .hidden { display: none !important; }
+        .count-badge { background: #6366f1; color: white; padding: 2px 8px; border-radius: 12px; font-size: 11px; margin-left: 6px; }
+        
+        /* Modal for editing */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: none; align-items: center; justify-content: center; z-index: 1000; }
+        .modal-overlay.active { display: flex; }
+        .modal { background: #1e293b; border: 1px solid #334155; border-radius: 12px; width: 90%; max-width: 700px; max-height: 90vh; overflow-y: auto; }
+        .modal-header { padding: 20px; border-bottom: 1px solid #334155; display: flex; justify-content: space-between; align-items: center; }
+        .modal-body { padding: 20px; }
+        .modal-footer { padding: 20px; border-top: 1px solid #334155; display: flex; gap: 10px; justify-content: flex-end; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+        @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
+        .form-group { margin-bottom: 16px; }
+        .form-row .form-group { margin-bottom: 0; }
+        .form-group label { display: block; margin-bottom: 6px; color: #94a3b8; font-size: 13px; text-transform: uppercase; font-weight: 500; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px; background: #0f172a; border: 1px solid #334155; border-radius: 6px; color: #e2e8f0; font-size: 14px; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: #6366f1; }
+        .form-group input:read-only { background: #252f42; color: #64748b; }
+        .form-group textarea { min-height: 80px; resize: vertical; }
+        .close-btn { background: none; border: none; color: #94a3b8; font-size: 24px; cursor: pointer; }
+        .close-btn:hover { color: #e2e8f0; }
+        
+        /* Activity list */
+        .activity-item { padding: 12px 16px; border-bottom: 1px solid #334155; display: flex; align-items: center; gap: 12px; }
+        .activity-icon { width: 36px; height: 36px; background: #334155; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .activity-content { flex: 1; }
+        .activity-time { color: #64748b; font-size: 12px; }
+        
+        /* Checkbox styling */
+        .checkbox-wrapper { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+        .checkbox-wrapper input[type="checkbox"] { width: 18px; height: 18px; accent-color: #6366f1; }
+        
+        /* Tabs within sections */
+        .sub-tabs { display: flex; gap: 8px; margin-bottom: 20px; border-bottom: 1px solid #334155; }
+        .sub-tab { padding: 10px 20px; cursor: pointer; border-radius: 6px 6px 0 0; font-size: 14px; color: #94a3b8; }
+        .sub-tab:hover { background: #334155; color: #e2e8f0; }
+        .sub-tab.active { background: #6366f1; color: white; }
+        
+        /* State filter chips */
+        .state-chips { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+        .state-chip { padding: 6px 14px; background: #334155; border-radius: 16px; cursor: pointer; font-size: 13px; transition: all 0.2s; }
+        .state-chip:hover { background: #475569; }
+        .state-chip.active { background: #6366f1; color: white; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1><div class="logo">DC</div>DepotChaos CRM</h1>
+        <div style="display: flex; align-items: center; gap: 12px;">
+            <button class="btn" onclick="refreshAll()">🔄 Refresh</button>
+            <span id="db-status-dot" class="status-dot"></span>
+            <span id="db-status-text" style="color: #94a3b8; font-size: 14px;">Connecting...</span>
+        </div>
+    </header>
+
+    <nav class="nav">
+        <div class="nav-item active" data-tab="dashboard">📊 Dashboard</div>
+        <div class="nav-item" data-tab="leads">👥 Leads<span id="leads-badge" class="count-badge hidden"></span></div>
+        <div class="nav-item" data-tab="intelligence">🧠 Intelligence<span id="intel-badge" class="count-badge hidden"></span></div>
+        <div class="nav-item" data-tab="queue">📧 Queue<span id="queue-badge" class="count-badge hidden"></span></div>
+        <div class="nav-item" data-tab="calendar">📅 Calendar<span id="calendar-badge" class="count-badge hidden"></span></div>
+    </nav>
+
+    <main class="main">
+        <div id="message-container"></div>
+
+        <!-- Dashboard -->
+        <section id="dashboard" class="section active">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">Total Leads</div>
+                    <div class="stat-value" id="stat-total">-</div>
+                    <div class="stat-change">↗ <span id="stat-new-today">-</span> today</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">DataDepot</div>
+                    <div class="stat-value" id="stat-datadepot">-</div>
+                    <div style="color: #94a3b8; font-size: 14px;">POS Intelligence leads</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Contacted</div>
+                    <div class="stat-value" id="stat-contacted">-</div>
+                    <div style="color: #94a3b8; font-size: 14px;"><span id="stat-contacted-pct">-</span>% of total</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">CA ABC Intel</div>
+                    <div class="stat-value" id="stat-intel">-</div>
+                    <div style="color: #94a3b8; font-size: 14px;">California records</div>
+                </div>
+            </div>
+
+            <h2 class="section-title">📈 Recent Activity</h2>
+            <div id="activity-list">
+                <div id="loading">Loading activities...</div>
+            </div>
+        </section>
+
+        <!-- Leads -->
+        <section id="leads" class="section">
+            <h2 class="section-title">👥 Lead Management</h2>
+            <div class="filters">
+                <input type="text" id="search-leads" class="filter-input" placeholder="🔍 Search companies..." style="flex: 1; min-width: 200px;">
+                <select id="state-filter" class="filter-select" onchange="filterLeads()">
+                    <option value="">All States</option>
+                </select>
+                <select id="status-filter" class="filter-select" onchange="filterLeads()">
+                    <option value="">All Statuses</option>
+                </select>
+                <select id="tier-filter" class="filter-select" onchange="filterLeads()">
+                    <option value="">All Tiers</option>
+                </select>
+                <button class="btn btn-secondary" onclick="exportLeads()">📥 Export</button>
+            </div>
+            <div id="leads-container">
+                <div id="loading">Loading leads...</div>
+            </div>
+            <div id="leads-pagination" class="pagination"></div>
+        </section>
+
+        <!-- Intelligence -->
+        <section id="intelligence" class="section">
+            <h2 class="section-title">🧠 Intelligence Records</h2>
+            <div class="sub-tabs">
+                <div class="sub-tab active" data-subtab="ca-abc">📍 CA ABC</div>
+                <div class="sub-tab" data-subtab="enrichment">🔍 Enrichment</div>
+            </div>
+            <!-- CA ABC Intelligence -->
+            <div id="ca-abc-panel" class="intel-panel active">
+                <div class="filters">
+                    <input type="text" id="search-intel" class="filter-input" placeholder="🔍 Search CA ABC businesses..." style="flex: 1; min-width: 200px;">
+                    <select id="city-filter" class="filter-select" onchange="filterIntelligence()">
+                        <option value="">All Cities</option>
+                    </select>
+                    <select id="pos-filter" class="filter-select" onchange="filterIntelligence()">
+                        <option value="">All POS Systems</option>
+                        <option value="Square">Square</option>
+                        <option value="Toast">Toast</option>
+                        <option value="Clover">Clover</option>
+                        <option value="Aloha">Aloha</option>
+                        <option value="Micros">Micros</option>
+                        <option value="Revel">Revel</option>
+                        <option value="Unknown">Unknown</option>
+                    </select>
+                    <button class="btn btn-secondary" onclick="exportIntelligence()">📥 Export</button>
+                </div>
+                <div id="intelligence-container">
+                    <div id="loading">Loading CA ABC intelligence data...</div>
+                </div>
+                <div id="intel-pagination" class="pagination"></div>
+            </div>
+            <!-- Enrichment Panel -->
+            <div id="enrichment-panel" class="intel-panel hidden">
+                <div class="filters">
+                    <input type="text" id="search-enrich" class="filter-input" placeholder="🔍 Search by name, city, phone..." style="flex: 1; min-width: 200px;">
+                    <select id="enrich-city-filter" class="filter-select" onchange="filterEnrichment()">
+                        <option value="">All Cities</option>
+                    </select>
+                    <select id="enrich-state-filter" class="filter-select" onchange="filterEnrichment()">
+                        <option value="">All States</option>
+                    </select>
+                    <select id="enrich-status-filter" class="filter-select" onchange="filterEnrichment()">
+                        <option value="">All Status</option>
+                    </select>
+                    <button class="btn btn-secondary" onclick="exportEnrichment()">📥 Export</button>
+                    <button class="btn btn-success" onclick="runYelpEnrichment()">🚀 Run Yelp Enrichment</button>
+                </div>
+                <div id="enrichment-stats" style="margin-bottom: 15px; color: #94a3b8; font-size: 14px;"></div>
+                <div id="enrichment-container">
+                    <div id="loading">Loading enrichment data...</div>
+                </div>
+                <div id="enrichment-pagination" class="pagination"></div>
+            </div>
+        </section>
+
+        <!-- Queue -->
+        <section id="queue" class="section">
+            <h2 class="section-title">📧 Email Queue</h2>
+            <div id="queue-stats" style="margin-bottom: 20px;"></div>
+            <div id="queue-container">
+                <div id="loading">Loading queue...</div>
+            </div>
+        </section>
+
+        <!-- Calendar -->
+        <section id="calendar" class="section">
+            <h2 class="section-title">📅 Callback Calendar</h2>
+            <div class="calendar-controls" style="display: flex; gap: 15px; margin-bottom: 20px; flex-wrap: wrap;">
+                <div style="display: flex; gap: 10px;">
+                    <button class="btn btn-secondary" onclick="changeCalendarMonth(-1)">◀ Prev</button>
+                    <h3 id="calendar-month" style="margin: 0; padding: 8px 0;"></h3>
+                    <button class="btn btn-secondary" onclick="changeCalendarMonth(1)">Next ▶</button>
+                </div>
+                <div style="margin-left: auto;">
+                    <button class="btn" onclick="loadCalendar()">🔄 Refresh</button>
+                </div>
+            </div>
+            <div class="calendar-stats" id="calendar-stats" style="margin-bottom: 20px;"></div>
+            <div id="calendar-container" style="background: #1e293b; border-radius: 12px; padding: 20px;">
+                <div id="calendar-loading">Loading calendar...</div>
+            </div>
+            
+            <!-- Callbacks List -->
+            <div style="margin-top: 30px;">
+                <h3 id="callbacks-list-title">📋 Upcoming Callbacks</h3>
+                <div id="callbacks-list-container">
+                    <div id="callbacks-loading">Loading callbacks...</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Edit Lead Modal -->
+    <div id="edit-lead-modal" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>✏️ Edit Lead</h3>
+                <button class="close-btn" onclick="closeLeadModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="edit-lead-id">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Company Name</label>
+                        <input type="text" id="edit-lead-company" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Entity Number</label>
+                        <input type="text" id="edit-lead-entity" readonly>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>County / State</label>
+                        <input type="text" id="edit-lead-county" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Source Type</label>
+                        <input type="text" id="edit-lead-source" readonly>
+                    </div>
+                </div>
+                <hr style="border-color: #334155; margin: 20px 0;">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Contact Name</label>
+                        <input type="text" id="edit-lead-contact" placeholder="Primary contact name">
+                    </div>
+                    <div class="form-group">
+                        <label>Contact Title</label>
+                        <input type="text" id="edit-lead-title" placeholder="e.g., Owner, Manager">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" id="edit-lead-phone" placeholder="(555) 123-4567">
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" id="edit-lead-email" placeholder="contact@company.com">
+                    </div>
+                </div>
+                <hr style="border-color: #334155; margin: 20px 0;">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Status *</label>
+                        <select id="edit-lead-status">
+                            <option value="new">New</option>
+                            <option value="contacted">Contacted</option>
+                            <option value="qualified">Qualified</option>
+                            <option value="unqualified">Unqualified</option>
+                            <option value="converted">Converted</option>
+                            <option value="lost">Lost</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Tier</label>
+                        <select id="edit-lead-tier">
+                            <option value="Tier 1">Tier 1 (High Value)</option>
+                            <option value="Tier 2">Tier 2 (Standard)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Assigned Agent</label>
+                        <input type="text" id="edit-lead-agent" placeholder="Agent name or ID">
+                    </div>
+                    <div class="form-group">
+                        <label>Assigned Department</label>
+                        <select id="edit-lead-dept">
+                            <option value="">None</option>
+                            <option value="sales">Sales</option>
+                            <option value="support">Support</option>
+                            <option value="retention">Retention</option>
+                        </select>
+                    </div>
+                </div>
+                <hr style="border-color: #334155; margin: 20px 0;">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>POS System</label>
+                        <input type="text" id="edit-lead-pos" placeholder="e.g., Square, Toast, Clover">
+                    </div>
+                    <div class="form-group">
+                        <label>POS Confidence (%)</label>
+                        <input type="number" id="edit-lead-pos-confidence" min="0" max="100" placeholder="0-100">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Equipment Age</label>
+                        <select id="edit-lead-equipment-age">
+                            <option value="">Unknown</option>
+                            <option value="0-1 years">0-1 years</option>
+                            <option value="1-2 years">1-2 years</option>
+                            <option value="2-5 years">2-5 years</option>
+                            <option value="5-10 years">5-10 years</option>
+                            <option value="10+ years">10+ years</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Replacement Score</label>
+                        <input type="number" id="edit-lead-score" min="0" max="100" placeholder="0-100">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Review Sentiment</label>
+                        <input type="text" id="edit-lead-sentiment" placeholder="e.g., Positive, Mixed, Negative">
+                    </div>
+                    <div class="form-group">
+                        <label>POS Mentions</label>
+                        <input type="number" id="edit-lead-mentions" min="0" placeholder="Number of mentions">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group checkbox-wrapper">
+                        <input type="checkbox" id="edit-lead-emailed">
+                        <label for="edit-lead-emailed" style="margin: 0;">📧 Email Sent</label>
+                    </div>
+                    <div class="form-group checkbox-wrapper">
+                        <input type="checkbox" id="edit-lead-opened">
+                        <label for="edit-lead-opened" style="margin: 0;">👁️ Email Opened</label>
+                    </div>
+                    <div class="form-group checkbox-wrapper">
+                        <input type="checkbox" id="edit-lead-clicked">
+                        <label for="edit-lead-clicked" style="margin: 0;">🖱️ Link Clicked</label>
+                    </div>
+                    <div class="form-group checkbox-wrapper">
+                        <input type="checkbox" id="edit-lead-demo">
+                        <label for="edit-lead-demo" style="margin: 0;">📅 Demo Scheduled</label>
+                    </div>
+                </div>
+                <hr style="border-color: #334155; margin: 20px 0;">
+                <h4 style="color: #94a3b8; margin: 0 0 15px 0;">📞 Callback Schedule</h4>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Callback Date & Time</label>
+                        <input type="datetime-local" id="edit-lead-callback-date">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Callback Notes</label>
+                    <textarea id="edit-lead-callback-notes" placeholder="Notes about the scheduled callback..."></textarea>
+                </div>
+                <hr style="border-color: #334155; margin: 20px 0;">
+                <div class="form-group">
+                    <label>Enrichment Data (JSON)</label>
+                    <textarea id="edit-lead-enrichment" placeholder="Additional enrichment data in JSON format"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeLeadModal()">Cancel</button>
+                <button class="btn btn-success" onclick="saveLead()">💾 Save Changes</button>
+                <button class="btn btn-danger" id="lead-delete-btn" onclick="deleteLeadFromModal()" style="margin-left: auto;">🗑️ Delete Lead</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Intelligence Modal -->
+    <div id="edit-intel-modal" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>✏️ Edit CA ABC Record</h3>
+                <button class="close-btn" onclick="closeIntelModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="edit-intel-id">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Business Name</label>
+                        <input type="text" id="edit-intel-business" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>License Number</label>
+                        <input type="text" id="edit-intel-license" readonly>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>City</label>
+                        <input type="text" id="edit-intel-city" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>County</label>
+                        <input type="text" id="edit-intel-county" readonly>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>License Type</label>
+                        <input type="text" id="edit-intel-license-type" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Status *</label>
+                        <select id="edit-intel-status">
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                            <option value="pending">Pending</option>
+                            <option value="suspended">Suspended</option>
+                        </select>
+                    </div>
+                </div>
+                <hr style="border-color: #334155; margin: 20px 0;">
+                <h4 style="color: #94a3b8; margin: 0 0 15px 0;">👤 Contact Information</h4>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Contact Name</label>
+                        <input type="text" id="edit-intel-contact" placeholder="Primary contact person">
+                    </div>
+                    <div class="form-group">
+                        <label>Contact Title</label>
+                        <input type="text" id="edit-intel-title" placeholder="e.g., Owner, Manager">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" id="edit-intel-phone" placeholder="(555) 123-4567">
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" id="edit-intel-email" placeholder="contact@business.com">
+                    </div>
+                </div>
+                <hr style="border-color: #334155; margin: 20px 0;">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>POS System</label>
+                        <select id="edit-intel-pos">
+                            <option value="Unknown">Unknown</option>
+                            <option value="Square">Square</option>
+                            <option value="Toast">Toast</option>
+                            <option value="Clover">Clover>Clover>
+                            <option value="Aloha">Aloha</option>
+                            <option value="Micros">Micros</option>
+                            <option value="Revel">Revel</option>
+                            <option value="Lightspeed">Lightspeed</option>
+                            <option value="Shopify">Shopify</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>POS Confidence (%)</label>
+                        <input type="number" id="edit-intel-pos-confidence" min="0" max="100" placeholder="0-100">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Equipment Age</label>
+                        <select id="edit-intel-equipment-age">
+                            <option value="">Unknown</option>
+                            <option value="0-1 years">0-1 years</option>
+                            <option value="1-2 years">1-2 years</option>
+                            <option value="2-5 years">2-5 years</option>
+                            <option value="5-10 years">5-10 years</option>
+                            <option value="10+ years">10+ years</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Replacement Score</label>
+                        <input type="number" id="edit-intel-score" min="0" max="100" placeholder="0-100">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Issue Date</label>
+                        <input type="date" id="edit-intel-issue-date">
+                    </div>
+                    <div class="form-group">
+                        <label>Expiration Date</label>
+                        <input type="date" id="edit-intel-expiration">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Notes</label>
+                    <textarea id="edit-intel-notes" placeholder="Add notes about this business..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeIntelModal()">Cancel</button>
+                <button class="btn btn-success" onclick="saveIntelligence()">💾 Save Changes</button>
+                <button class="btn btn-purple" onclick="createLeadFromIntel()">➕ Create Lead</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Email Preview Modal -->
+    <div id="email-preview-modal" class="modal-overlay">
+        <div class="modal" style="max-width: 900px;">
+            <div class="modal-header">
+                <h3>👁️ Email Preview</h3>
+                <button class="close-btn" onclick="closeEmailPreviewModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <div id="email-preview-loading" style="text-align: center; padding: 40px;">
+                    <p>Loading email preview...</p>
+                </div>
+                <div id="email-preview-content" style="display: none;">
+                    <div class="form-row" style="background: #252f42; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label style="margin-bottom: 4px; color: #64748b;">To</label>
+                            <div id="preview-to" style="font-weight: 500;"></div>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label style="margin-bottom: 4px; color: #64748b;">From</label>
+                            <div id="preview-from" style="color: #94a3b8;"></div>
+                        </div>
+                    </div>
+                    <div style="background: #252f42; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                        <label style="color: #64748b; font-size: 12px; text-transform: uppercase;">Subject</label>
+                        <div id="preview-subject" style="font-size: 18px; font-weight: 600; margin-top: 8px;"></div>
+                    </div>
+                    <div style="background: #fff; color: #1a1a2e; padding: 30px; border-radius: 8px; min-height: 300px;">
+                        <div id="preview-body" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6;"></div>
+                    </div>
+                    <div id="preview-meta" style="margin-top: 20px; padding: 15px; background: rgba(99, 102, 241, 0.1); border-radius: 8px; border-left: 4px solid #6366f1;">
+                        <div style="display: flex; gap: 30px; flex-wrap: wrap;">
+                            <div>
+                                <label style="color: #64748b; font-size: 12px;">Template</label>
+                                <div id="preview-template" style="font-weight: 500;"></div>
+                            </div>
+                            <div>
+                                <label style="color: #64748b; font-size: 12px;">Company</label>
+                                <div id="preview-company"></div>
+                            </div>
+                            <div>
+                                <label style="color: #64748b; font-size: 12px;">Campaign</label>
+                                <div id="preview-campaign"></div>
+                            </div>
+                            <div>
+                                <label style="color: #64748b; font-size: 12px;">Status</label>
+                                <div id="preview-status"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="email-preview-error" class="error-msg" style="display: none;"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeEmailPreviewModal()">Close</button>
+                <button class="btn btn-success" id="preview-send-btn" onclick="sendPreviewedEmail()">📤 Send Now</button>
+                <button class="btn btn-danger" id="preview-cancel-btn" onclick="cancelPreviewedEmail()">❌ Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============ CONFIG ============
+        const API_BASE = '/depotchaos/api';
+        
+        // ============ STATE ============
+        let currentLeadsPage = 1;
+        let currentIntelPage = 1;
+        let leadsData = [];
+        let intelData = [];
+        let editingLead = null;
+        let editingIntel = null;
+        let leadsSort = { field: 'business_name', dir: 'asc' };
+        let intelSort = { field: 'business_name', dir: 'asc' };
+
+        // ============ UTILITY ============
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        function showMessage(msg, isError = false) {
+            const container = document.getElementById('message-container');
+            container.innerHTML = `<div class="${isError ? 'error-msg' : 'success-msg'}" onclick="this.remove()">${msg}</div>`;
+            setTimeout(() => container.innerHTML = '', 5000);
+        }
+
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text.toString();
+            return div.innerHTML;
+        }
+
+        function extractStateFromCounty(county) {
+            if (!county) return '';
+            const stateMap = {
+                'Alabama': 'AL', 'Alaska': 'AK', 'Arizona': 'AZ', 'Arkansas': 'AR', 'California': 'CA',
+                'Colorado': 'CO', 'Connecticut': 'CT', 'Delaware': 'DE', 'Florida': 'FL', 'Georgia': 'GA',
+                'Hawaii': 'HI', 'Idaho': 'ID', 'Illinois': 'IL', 'Indiana': 'IN', 'Iowa': 'IA',
+                'Kansas': 'KS', 'Kentucky': 'KY', 'Louisiana': 'LA', 'Maine': 'ME', 'Maryland': 'MD',
+                'Massachusetts': 'MA', 'Michigan': 'MI', 'Minnesota': 'MN', 'Mississippi': 'MS', 'Missouri': 'MO',
+                'Montana': 'MT', 'Nebraska': 'NE', 'Nevada': 'NV', 'New Hampshire': 'NH', 'New Jersey': 'NJ',
+                'New Mexico': 'NM', 'New York': 'NY', 'North Carolina': 'NC', 'North Dakota': 'ND', 'Ohio': 'OH',
+                'Oklahoma': 'OK', 'Oregon': 'OR', 'Pennsylvania': 'PA', 'Rhode Island': 'RI', 'South Carolina': 'SC',
+                'South Dakota': 'SD', 'Tennessee': 'TN', 'Texas': 'TX', 'Utah': 'UT', 'Vermont': 'VT',
+                'Virginia': 'VA', 'Washington': 'WA', 'West Virginia': 'WV', 'Wisconsin': 'WI', 'Wyoming': 'WY'
+            };
+            const clean = county.replace(' County', '').trim();
+            return stateMap[clean] || '';
+        }
+
+        // ============ API ============
+        async function fetchAPI(endpoint, options = {}) {
+            try {
+                const response = await fetch(API_BASE + endpoint, {
+                    headers: { 'Content-Type': 'application/json' },
+                    ...options
+                });
+                if (!response.ok) {
+                    const err = await response.text();
+                    throw new Error(`HTTP ${response.status}: ${err}`);
+                }
+                return await response.json();
+            } catch (e) {
+                console.error('API Error:', e);
+                throw e;
+            }
+        }
+
+        async function putAPI(endpoint, data) {
+            return fetchAPI(endpoint, {
+                method: 'PUT',
+                body: JSON.stringify(data)
+            });
+        }
+
+        async function postAPI(endpoint, data) {
+            return fetchAPI(endpoint, {
+                method: 'POST',
+                body: JSON.stringify(data)
+            });
+        }
+
+        // ============ NAVIGATION ============
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const tab = item.dataset.tab;
+                switchTab(tab);
+            });
+        });
+
+        // Sub-tabs for Intelligence
+        document.querySelectorAll('.sub-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.sub-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                const subtab = tab.dataset.subtab;
+                document.querySelectorAll('.intel-panel').forEach(p => p.classList.add('hidden'));
+                document.getElementById(subtab + '-panel').classList.remove('hidden');
+                
+                // Load enrichment data when enrichment tab is clicked
+                if (subtab === 'enrichment') {
+                    loadEnrichment(1);
+                    loadEnrichmentFilters();
+                }
+            });
+        });
+
+        function switchTab(tab) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            document.getElementById(tab).classList.add('active');
+            document.querySelector(`[data-tab="${tab}"]`).classList.add('active');
+            
+            if (tab === 'leads') {
+                if (leadsData.length === 0) loadLeads();
+                loadLeadsFilters();
+            }
+            if (tab === 'intelligence') {
+                if (intelData.length === 0) loadIntelligence();
+                loadIntelligenceCities();
+                loadIntelligenceFilters();
+            }
+            if (tab === 'queue') loadQueue();
+            if (tab === 'enrichment') {
+                loadEnrichmentFilters();
+            }
+        }
+
+        // ============ DASHBOARD ============
+        async function loadStats() {
+            try {
+                const data = await fetchAPI('/stats');
+                
+                document.getElementById('stat-total').textContent = data.total_leads?.toLocaleString() || 0;
+                document.getElementById('stat-datadepot').textContent = data.datadepot_leads?.toLocaleString() || 0;
+                document.getElementById('stat-intel').textContent = data.intelligence_records?.toLocaleString() || 0;
+                document.getElementById('stat-new-today').textContent = data.new_today?.toLocaleString() || 0;
+                document.getElementById('stat-contacted').textContent = data.by_status?.contacted || 0;
+                
+                const total = data.total_leads || 1;
+                const contacted = data.by_status?.contacted || 0;
+                document.getElementById('stat-contacted-pct').textContent = Math.round(contacted / total * 100);
+                
+                // Update badges
+                if (data.total_leads > 0) {
+                    document.getElementById('leads-badge').textContent = data.total_leads.toLocaleString();
+                    document.getElementById('leads-badge').classList.remove('hidden');
+                }
+                if (data.intelligence_records > 0) {
+                    document.getElementById('intel-badge').textContent = data.intelligence_records.toLocaleString();
+                    document.getElementById('intel-badge').classList.remove('hidden');
+                }
+                
+                document.getElementById('db-status-dot').classList.remove('error');
+                document.getElementById('db-status-text').textContent = 'Connected';
+            } catch (e) {
+                document.getElementById('db-status-dot').classList.add('error');
+                document.getElementById('db-status-text').textContent = 'Disconnected';
+                showMessage('Failed to load stats: ' + e.message, true);
+            }
+        }
+
+        async function loadActivities() {
+            try {
+                const data = await fetchAPI('/activities');
+                const container = document.getElementById('activity-list');
+                
+                if (!data || data.length === 0) {
+                    container.innerHTML = '<p style="color: #94a3b8; padding: 20px;">No recent activities</p>';
+                    return;
+                }
+                
+                const icons = { 
+                    email_sent: '📧', email_opened: '👁️', email_clicked: '🖱️', 
+                    lead_created: '➕', lead_updated: '✏️', status_changed: '🔄', 
+                    intel_updated: '🧠', demo_scheduled: '📅', default: '📝' 
+                };
+                
+                container.innerHTML = data.slice(0, 20).map(a => `
+                    <div class="activity-item">
+                        <div class="activity-icon">${icons[a.type] || icons.default}</div>
+                        <div class="activity-content">
+                            <div>${escapeHtml(a.description)}</div>
+                            <div class="activity-time">${new Date(a.timestamp).toLocaleString()} · ${a.campaign || 'System'}</div>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (e) {
+                document.getElementById('activity-list').innerHTML = `<div class="error-msg">Failed to load activities</div>`;
+            }
+        }
+
+        // ============ LEADS ============
+        async function loadLeads(page = 1) {
+            currentLeadsPage = page;
+            const container = document.getElementById('leads-container');
+            container.innerHTML = '<div id="loading">Loading leads...</div>';
+            
+            try {
+                const search = document.getElementById('search-leads')?.value || '';
+                const status = document.getElementById('status-filter')?.value || '';
+                const tier = document.getElementById('tier-filter')?.value || '';
+                const state = document.getElementById('state-filter')?.value || '';
+                
+                let url = `/leads?page=${page}&per_page=25`;
+                if (search) url += `&search=${encodeURIComponent(search)}`;
+                if (status) url += `&status=${status}`;
+                if (tier) url += `&tier=${encodeURIComponent(tier)}`;
+                if (state) url += `&state=${state}`;
+                // Add sort params - backend sorting
+                if (leadsSort.field) url += `&sort_by=${leadsSort.field}&sort_dir=${leadsSort.dir}`;
+                
+                const data = await fetchAPI(url);
+                leadsData = data.leads || [];
+                // Note: Sorting now happens server-side for proper results across pages
+                
+                if (leadsData.length === 0) {
+                    container.innerHTML = '<p style="color: #94a3b8; padding: 40px; text-align: center;">No leads found</p>';
+                    document.getElementById('leads-pagination').innerHTML = '';
+                    return;
+                }
+                
+                renderLeadsTable(leadsData);
+                renderPagination('leads-pagination', page, Math.ceil(data.total / data.per_page), loadLeads);
+            } catch (e) {
+                container.innerHTML = `<div class="error-msg">Failed to load leads: ${escapeHtml(e.message)}</div>`;
+            }
+        }
+
+        // Fetch leads filters (states, statuses, tiers, POS systems)
+        async function loadLeadsFilters() {
+            try {
+                const data = await fetchAPI('/filters/leads');
+                
+                // Populate state filter
+                const stateSelect = document.getElementById('state-filter');
+                if (stateSelect && data.states) {
+                    const currentValue = stateSelect.value;
+                    stateSelect.innerHTML = '<option value="">All States</option>';
+                    data.states.forEach(state => {
+                        const opt = document.createElement('option');
+                        opt.value = state;
+                        opt.textContent = state;
+                        stateSelect.appendChild(opt);
+                    });
+                    if (currentValue) stateSelect.value = currentValue;
+                }
+                
+                // Populate status filter
+                const statusSelect = document.getElementById('status-filter');
+                if (statusSelect && data.statuses) {
+                    const currentValue = statusSelect.value;
+                    statusSelect.innerHTML = '<option value="">All Statuses</option>';
+                    data.statuses.forEach(status => {
+                        const opt = document.createElement('option');
+                        opt.value = status;
+                        opt.textContent = status.charAt(0).toUpperCase() + status.slice(1);
+                        statusSelect.appendChild(opt);
+                    });
+                    if (currentValue) statusSelect.value = currentValue;
+                }
+                
+                // Populate tier filter
+                const tierSelect = document.getElementById('tier-filter');
+                if (tierSelect && data.tiers) {
+                    const currentValue = tierSelect.value;
+                    tierSelect.innerHTML = '<option value="">All Tiers</option>';
+                    data.tiers.forEach(tier => {
+                        const opt = document.createElement('option');
+                        opt.value = tier;
+                        opt.textContent = tier;
+                        tierSelect.appendChild(opt);
+                    });
+                    if (currentValue) tierSelect.value = currentValue;
+                }
+            } catch (e) {
+                console.error('Failed to load leads filters:', e);
+            }
+        }
+
+        function sortLeads(field) {
+            if (leadsSort.field === field) {
+                leadsSort.dir = leadsSort.dir === 'asc' ? 'desc' : 'asc';
+            } else {
+                leadsSort.field = field;
+                leadsSort.dir = 'asc';
+            }
+            
+            // Reload with new sort params (server-side sorting)
+            loadLeads(currentLeadsPage);
+        }
+
+        function parseEnrichment(data) {
+            if (!data) return {};
+            try {
+                return typeof data === 'string' ? JSON.parse(data) : data;
+            } catch (e) {
+                return {};
+            }
+        }
+
+        function formatPhone(phone) {
+            if (!phone) return null;
+            const cleaned = phone.toString().replace(/\D/g, '');
+            if (cleaned.length === 10) {
+                return `(${cleaned.slice(0, 3)}) ${cleaned.slice(3, 6)}-${cleaned.slice(6)}`;
+            } else if (cleaned.length === 11 && cleaned[0] === '1') {
+                return `+1 (${cleaned.slice(1, 4)}) ${cleaned.slice(4, 7)}-${cleaned.slice(7)}`;
+            }
+            return phone; // Return original if doesn't match expected format
+        }
+
+        function renderLeadsTable(leads) {
+            // Server-side sorting is already applied by the backend
+            // We just render the data as-is from the API
+
+            const container = document.getElementById('leads-container');
+            const sortIndicator = (field) => leadsSort.field === field ? (leadsSort.dir === 'asc' ? ' ↑' : ' ↓') : '';
+            container.innerHTML = `
+                <table id="leads-table">
+                    <thead>
+                        <tr>
+                            <th onclick="sortLeads('business_name')" style="cursor: pointer;">Business / Contact${sortIndicator('business_name')}</th>
+                            <th onclick="sortLeads('county')" style="cursor: pointer;">City / State${sortIndicator('county')}</th>
+                            <th onclick="sortLeads('status')" style="cursor: pointer;">Status${sortIndicator('status')}</th>
+                            <th onclick="sortLeads('tier')" style="cursor: pointer;">Tier${sortIndicator('tier')}</th>
+                            <th>Phone / Email</th>
+                            <th>POS System</th>
+                            <th onclick="sortLeads('replacement_score')" style="cursor: pointer;">Score${sortIndicator('replacement_score')}</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${leads.map(l => {
+                            const stateFromCounty = extractStateFromCounty(l.county);
+                            const state = stateFromCounty || l.state || '';
+                            const tierClass = getTierBadgeClass(l.tier);
+                            const enrichment = parseEnrichment(l.enrichment_data || l.enrichment);
+                            // Prioritize direct contact_name field, then enrichment data
+                            const contactName = l.contact_name || enrichment.contact_name || enrichment.first_name || '-';
+                            const rawPhone = l.phone || enrichment.phone;
+                            const phone = rawPhone ? formatPhone(rawPhone) : '-';
+                            const email = l.email || enrichment.email || '-';
+                            const contactTitle = l.contact_title || enrichment.contact_title || enrichment.title || '';
+                            const businessName = l.business_name || l.company_name || 'Unnamed Business';
+                            const locationLabel = l.city ? `${escapeHtml(l.city)}, ${escapeHtml(state || 'Unknown')}` : (l.county || (state || 'Unknown'));
+                            return `
+                            <tr>
+                                <td>
+                                    <strong>${escapeHtml(businessName)}</strong>
+                                    ${contactName !== '-' ? `<br><span style="color: #94a3b8; font-size: 12px;">👤 ${escapeHtml(contactName)}${contactTitle ? ' (' + escapeHtml(contactTitle) + ')' : ''}</span>` : ''}
+                                    ${l.pos_mentions ? `<br><span style="color: #64748b; font-size: 11px;">${l.pos_mentions} POS mentions</span>` : ''}
+                                </td>
+                                <td>
+                                    ${state ? `<span class="badge" style="background: rgba(99, 102, 241, 0.2); color: #6366f1;">${state}</span>` : ''}
+                                    <div style="color: #64748b; font-size: 11px; margin-top: 2px;">${escapeHtml(l.city || '')}</div>
+                                </td>
+                                <td><span class="badge badge-${l.status || 'new'}">${l.status || 'New'}</span></td>
+                                <td><span class="badge ${tierClass}">${l.tier || 'Tier 2'}</span></td>
+                                <td>
+                                    ${phone !== '-' ? `<div style="color: #e2e8f0; font-size: 13px;">📞 ${escapeHtml(phone)}</div>` : '<span style="color: #64748b;">-</span>'}
+                                    ${email !== '-' ? `<div style="color: #94a3b8; font-size: 11px; margin-top: 2px;">✉️ ${escapeHtml(email)}</div>` : ''}
+                                </td>
+                                <td>${l.pos_system || 'Unknown'} ${l.pos_confidence ? `<span style="color: #64748b;">(${l.pos_confidence}%)</span>` : ''}</td>
+                                <td>${l.replacement_score || '-'}/100</td>
+                                <td>
+                                    <button class="btn btn-sm" onclick='openLeadEditModal(${JSON.stringify(l).replace(/'/g, "\\'")})'>✏️ Edit</button>
+                                    <button class="btn btn-sm btn-danger" onclick='deleteLead("${l.id}", "${escapeHtml(l.business_name || l.company_name || 'this record').replace(/'/g, "\\'")}")'>🗑️ Delete</button>
+                                </td>
+                            </tr>`;
+                        }).join('')}
+                    </tbody>
+                </table>
+            `;
+        }
+
+        function getTierBadgeClass(tier) {
+            if (!tier) return 'badge-tier-2';
+            const t = tier.toLowerCase().replace(' ', '-');
+            switch(t) {
+                case 'tier-1': return 'badge-tier-1';
+                case 'tier-2': return 'badge-tier-2';
+                case 'tier-3': return 'badge-tier-3';
+                case 'tier-a': return 'badge-tier-a';
+                case 'tier-b': return 'badge-tier-b';
+                case 'tier-c': return 'badge-tier-c';
+                default: return 'badge-tier-2';
+            }
+        }
+
+        function filterLeads() {
+            loadLeads(1);
+        }
+
+        // ============ INTELLIGENCE ============
+        async function loadIntelligence(page = 1) {
+            currentIntelPage = page;
+            const container = document.getElementById('intelligence-container');
+            container.innerHTML = '<div id="loading">Loading CA ABC intelligence data...</div>';
+            
+            try {
+                const search = document.getElementById('search-intel')?.value || '';
+                const city = document.getElementById('city-filter')?.value || '';
+                const pos = document.getElementById('pos-filter')?.value || '';
+                
+                let url = `/intelligence?page=${page}&per_page=25`;
+                if (search) url += `&search=${encodeURIComponent(search)}`;
+                if (city) url += `&city=${encodeURIComponent(city)}`;
+                if (pos) url += `&pos_system=${encodeURIComponent(pos)}`;
+                
+                const data = await fetchAPI(url);
+                intelData = data.records || [];
+                
+                // Apply current sort
+                intelData.sort((a, b) => {
+                    let valA = a[intelSort.field] || '';
+                    let valB = b[intelSort.field] || '';
+                    if (typeof valA === 'string') valA = valA.toLowerCase();
+                    if (typeof valB === 'string') valB = valB.toLowerCase();
+                    if (valA < valB) return intelSort.dir === 'asc' ? -1 : 1;
+                    if (valA > valB) return intelSort.dir === 'asc' ? 1 : -1;
+                    return 0;
+                });
+                
+                if (intelData.length === 0) {
+                    container.innerHTML = '<p style="color: #94a3b8; padding: 40px; text-align: center;">No intelligence records found</p>';
+                    document.getElementById('intel-pagination').innerHTML = '';
+                    return;
+                }
+                
+                renderIntelligenceTable(intelData);
+                renderPagination('intel-pagination', page, Math.ceil(data.total / data.per_page), loadIntelligence);
+            } catch (e) {
+                container.innerHTML = `<div class="error-msg">Failed to load intelligence: ${escapeHtml(e.message)}</div>`;
+            }
+        }
+
+        function sortIntelligence(field) {
+            if (intelSort.field === field) {
+                intelSort.dir = intelSort.dir === 'asc' ? 'desc' : 'asc';
+            } else {
+                intelSort.field = field;
+                intelSort.dir = 'asc';
+            }
+            renderIntelligenceTable(intelData);
+        }
+
+        function renderIntelligenceTable(records) {
+            // Apply current sort
+            records.sort((a, b) => {
+                let valA = a[intelSort.field] || '';
+                let valB = b[intelSort.field] || '';
+                if (typeof valA === 'string') valA = valA.toLowerCase();
+                if (typeof valB === 'string') valB = valB.toLowerCase();
+                if (valA < valB) return intelSort.dir === 'asc' ? -1 : 1;
+                if (valA > valB) return intelSort.dir === 'asc' ? 1 : -1;
+                return 0;
+            });
+
+            const container = document.getElementById('intelligence-container');
+            container.innerHTML = `
+                <table id="intel-table">
+                    <thead>
+                        <tr>
+                            <th onclick="sortIntelligence('business_name')" style="cursor: pointer;">Business ${intelSort.field === 'business_name' ? (intelSort.dir === 'asc' ? '↑' : '↓') : ''}</th>
+                            <th>License</th>
+                            <th onclick="sortIntelligence('city')" style="cursor: pointer;">City ${intelSort.field === 'city' ? (intelSort.dir === 'asc' ? '↑' : '↓') : ''}</th>
+                            <th>Type</th>
+                            <th>POS System</th>
+                            <th onclick="sortIntelligence('replacement_score')" style="cursor: pointer;">Score ${intelSort.field === 'replacement_score' ? (intelSort.dir === 'asc' ? '↑' : '↓') : ''}</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${records.map(r => `
+                            <tr>
+                                <td>
+                                    <strong>${escapeHtml(r.business_name || 'N/A')}</strong>
+                                </td>
+                                <td>${r.license_number || '-'}</td>
+                                <td>${r.city || '-'}</td>
+                                <td><span class="badge badge-new">${r.license_type_name || r.license_type || '-'}</span></td>
+                                <td>
+                                    ${r.pos_system ? `<span class="badge" style="background: rgba(139, 92, 246, 0.2); color: #8b5cf6;">${r.pos_system}</span>` : '<span style="color: #64748b;">Unknown</span>'}
+                                    ${r.pos_confidence ? `<span style="color: #64748b; font-size: 11px;"> ${r.pos_confidence}%</span>` : ''}
+                                </td>
+                                <td>${r.replacement_score || '-'}/100</td>
+                                <td>
+                                    <button class="btn btn-sm" onclick='openIntelEditModal(${JSON.stringify(r).replace(/'/g, "\\'")})'>✏️ Edit</button>
+                                    <button class="btn btn-sm btn-danger" onclick='deleteIntel("${r.id}", "${escapeHtml(r.business_name || 'this record').replace(/'/g, "\\'")}")'>🗑️ Delete</button>
+                                </td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+        }
+
+        function filterIntelligence() {
+            loadIntelligence(1);
+        }
+        
+        // Fetch all available cities for CA ABC intelligence
+        async function loadIntelligenceCities() {
+            try {
+                const data = await fetchAPI('/cities/intelligence');
+                if (data.cities && data.cities.length > 0) {
+                    const citySelect = document.getElementById('city-filter');
+                    if (citySelect) {
+                        const currentValue = citySelect.value;
+                        citySelect.innerHTML = '<option value="">All Cities</option>';
+                        data.cities.forEach(city => {
+                            const opt = document.createElement('option');
+                            opt.value = city;
+                            opt.textContent = city;
+                            citySelect.appendChild(opt);
+                        });
+                        // Restore selection if still valid
+                        if (currentValue && data.cities.includes(currentValue)) {
+                            citySelect.value = currentValue;
+                        }
+                    }
+                }
+            } catch (e) {
+                console.error('Failed to load intelligence cities:', e);
+            }
+        }
+        
+        // Fetch intelligence filters (POS systems, license types)
+        async function loadIntelligenceFilters() {
+            try {
+                const data = await fetchAPI('/filters/intelligence');
+                
+                // Populate POS filter
+                const posSelect = document.getElementById('pos-filter');
+                if (posSelect && data.pos_systems) {
+                    const currentValue = posSelect.value;
+                    posSelect.innerHTML = '<option value="">All POS Systems</option>';
+                    data.pos_systems.forEach(pos => {
+                        const opt = document.createElement('option');
+                        opt.value = pos;
+                        opt.textContent = pos;
+                        posSelect.appendChild(opt);
+                    });
+                    // Add Unknown option if not present
+                    if (!data.pos_systems.includes('Unknown')) {
+                        const opt = document.createElement('option');
+                        opt.value = 'Unknown';
+                        opt.textContent = 'Unknown';
+                        posSelect.appendChild(opt);
+                    }
+                    if (currentValue) posSelect.value = currentValue;
+                }
+            } catch (e) {
+                console.error('Failed to load intelligence filters:', e);
+            }
+        }
+
+        // ============ ENRICHMENT ============
+        let enrichmentData = [];
+        let currentEnrichPage = 1;
+        let enrichSort = { field: 'name', dir: 'asc' };
+
+        async function loadEnrichment(page = 1) {
+            currentEnrichPage = page;
+            const container = document.getElementById('enrichment-container');
+            const statsEl = document.getElementById('enrichment-stats');
+            container.innerHTML = '<div id="loading">Loading enrichment data...</div>';
+            
+            try {
+                const search = document.getElementById('search-enrich')?.value || '';
+                const city = document.getElementById('enrich-city-filter')?.value || '';
+                const state = document.getElementById('enrich-state-filter')?.value || '';
+                const status = document.getElementById('enrich-status-filter')?.value || '';
+                
+                let url = `/enrichment?page=${page}&per_page=25`;
+                if (search) url += `&search=${encodeURIComponent(search)}`;
+                if (city) url += `&city=${encodeURIComponent(city)}`;
+                if (state) url += `&state=${encodeURIComponent(state)}`;
+                if (status) url += `&status=${encodeURIComponent(status)}`;
+                
+                const data = await fetchAPI(url);
+                enrichmentData = data.vendors || [];
+                
+                // Update stats
+                statsEl.innerHTML = `
+                    Showing ${enrichmentData.length} of ${data.total} vendors | 
+                    Enriched: ${data.enriched_count || 0} | 
+                    With Phone: ${data.with_phone || 0}
+                `;
+                
+                // Populate city filter - always refresh to ensure data is current
+                const citySelect = document.getElementById('enrich-city-filter');
+                if (citySelect && data.cities) {
+                    const currentValue = citySelect.value;
+                    // Clear existing options except "All Cities"
+                    citySelect.innerHTML = '<option value="">All Cities</option>';
+                    data.cities.forEach(c => {
+                        if (c && c.trim()) {
+                            const opt = document.createElement('option');
+                            opt.value = c;
+                            opt.textContent = c;
+                            citySelect.appendChild(opt);
+                        }
+                    });
+                    // Restore selection if still valid
+                    if (currentValue && data.cities.includes(currentValue)) {
+                        citySelect.value = currentValue;
+                    }
+                }
+                
+                if (enrichmentData.length === 0) {
+                    container.innerHTML = '<p style="color: #94a3b8; padding: 40px; text-align: center;">No vendors found</p>';
+                    document.getElementById('enrichment-pagination').innerHTML = '';
+                    return;
+                }
+                
+                renderEnrichmentTable(enrichmentData);
+                renderPagination('enrichment-pagination', page, Math.ceil(data.total / data.per_page), loadEnrichment);
+            } catch (e) {
+                container.innerHTML = `<div class="error-msg">Failed to load enrichment data: ${escapeHtml(e.message)}</div>`;
+            }
+        }
+
+        function renderEnrichmentTable(vendors) {
+            // Apply sort
+            vendors.sort((a, b) => {
+                let valA = a[enrichSort.field] || '';
+                let valB = b[enrichSort.field] || '';
+                if (typeof valA === 'string') valA = valA.toLowerCase();
+                if (typeof valB === 'string') valB = valB.toLowerCase();
+                if (valA < valB) return enrichSort.dir === 'asc' ? -1 : 1;
+                if (valA > valB) return enrichSort.dir === 'asc' ? 1 : -1;
+                return 0;
+            });
+
+            const container = document.getElementById('enrichment-container');
+            container.innerHTML = `
+                <table id="enrich-table">
+                    <thead>
+                        <tr>
+                            <th onclick="sortEnrichment('name')" style="cursor: pointer;">Business ${enrichSort.field === 'name' ? (enrichSort.dir === 'asc' ? '↑' : '↓') : ''}</th>
+                            <th>DBA</th>
+                            <th onclick="sortEnrichment('city')" style="cursor: pointer;">Location ${enrichSort.field === 'city' ? (enrichSort.dir === 'asc' ? '↑' : '↓') : ''}</th>
+                            <th>Contact</th>
+                            <th>Phone</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${vendors.map(v => {
+                            const isEnriched = v.notes && v.notes.includes('Yelp Enriched');
+                            const phoneFormatted = v.phone ? formatPhone(v.phone) : '-';
+                            return `
+                            <tr>
+                                <td>
+                                    <strong>${escapeHtml(v.name || 'N/A')}</strong>
+                                    ${v.vendor_type ? `<br><span style="color: #64748b; font-size: 11px;">${escapeHtml(v.vendor_type)}</span>` : ''}
+                                </td>
+                                <td>${escapeHtml(v.dba_name || '-')}</td>
+                                <td>
+                                    ${escapeHtml(v.city || '-')}, ${escapeHtml(v.state || '-')}
+                                    ${v.zip ? `<br><span style="color: #64748b; font-size: 11px;">${v.zip}</span>` : ''}
+                                </td>
+                                <td>
+                                    ${v.contact_name ? escapeHtml(v.contact_name) : '-'}
+                                    ${v.email ? `<br><span style="color: #64748b; font-size: 11px;">✉️ ${escapeHtml(v.email)}</span>` : ''}
+                                </td>
+                                <td>
+                                    ${v.phone ? `<a href="tel:${v.phone}" style="color: #22c55e; text-decoration: none;">📞 ${phoneFormatted}</a>` : '<span style="color: #64748b;">-</span>'}
+                                </td>
+                                <td>
+                                    ${isEnriched ? '<span class="badge badge-qualified">✓ Enriched</span>' : '<span class="badge badge-new">Pending</span>'}
+                                    ${v.last_contact_at ? `<br><span style="color: #64748b; font-size: 11px;">${new Date(v.last_contact_at).toLocaleDateString()}</span>` : ''}
+                                </td>
+                                <td>
+                                    <button class="btn btn-sm" onclick='openEnrichEditModal(${JSON.stringify(v).replace(/'/g, "\\'")})'>✏️ Edit</button>
+                                    <button class="btn btn-sm btn-purple" onclick='enrichSingle("${v.id}", "${escapeHtml(v.name).replace(/'/g, "\\'")}")'>🔍 Yelp</button>
+                                    <button class="btn btn-sm btn-success" onclick='promoteToLead(${JSON.stringify(v).replace(/'/g, "\\'")})'>➕ Create Lead</button>
+                                    <button class="btn btn-sm btn-danger" onclick='deleteVendor("${v.id}", "${escapeHtml(v.name).replace(/'/g, "\\'")}")'>🗑️ Delete</button>
+                                </td>
+                            </tr>`;
+                        }).join('')}
+                    </tbody>
+                </table>
+            `;
+        }
+
+        function sortEnrichment(field) {
+            if (enrichSort.field === field) {
+                enrichSort.dir = enrichSort.dir === 'asc' ? 'desc' : 'asc';
+            } else {
+                enrichSort.field = field;
+                enrichSort.dir = 'asc';
+            }
+            renderEnrichmentTable(enrichmentData);
+        }
+
+        // Fetch enrichment filters (states, statuses)
+        async function loadEnrichmentFilters() {
+            try {
+                console.log('Loading enrichment filters...');
+                const data = await fetchAPI('/filters/enrichment?_=' + Date.now());
+                console.log('Enrichment filters response:', data);
+                console.log('Statuses received:', data.statuses);
+                
+                // Populate state filter
+                const stateSelect = document.getElementById('enrich-state-filter');
+                if (stateSelect && data.states) {
+                    const currentValue = stateSelect.value;
+                    stateSelect.innerHTML = '<option value="">All States</option>';
+                    data.states.forEach(state => {
+                        const opt = document.createElement('option');
+                        opt.value = state;
+                        opt.textContent = state;
+                        stateSelect.appendChild(opt);
+                    });
+                    if (currentValue) stateSelect.value = currentValue;
+                }
+                
+                // Populate status filter
+                const statusSelect = document.getElementById('enrich-status-filter');
+                if (statusSelect && data.statuses) {
+                    const currentValue = statusSelect.value;
+                    statusSelect.innerHTML = '<option value="">All Status</option>';
+                    data.statuses.forEach(status => {
+                        const opt = document.createElement('option');
+                        opt.value = status;
+                        opt.textContent = status.charAt(0).toUpperCase() + status.slice(1);
+                        statusSelect.appendChild(opt);
+                        console.log('Added status option:', status);
+                    });
+                    if (currentValue) statusSelect.value = currentValue;
+                    console.log('Status filter populated with', data.statuses.length, 'options');
+                } else {
+                    console.log('Status filter not populated - statusSelect:', statusSelect, 'data.statuses:', data.statuses);
+                }
+            } catch (e) {
+                console.error('Failed to load enrichment filters:', e);
+            }
+        }
+
+        function filterEnrichment() {
+            loadEnrichment(1);
+        }
+
+        async function enrichSingle(id, name) {
+            if (!confirm(`Run Yelp enrichment for "${name}"?`)) return;
+            try {
+                showMessage(`🔍 Enriching ${name}...`);
+                const result = await fetchAPI(`/enrichment/${id}/run`, { method: 'POST' });
+                if (result.success) {
+                    showMessage(`✅ ${result.message || 'Enrichment complete'}`);
+                } else {
+                    showMessage(`⚠️ ${result.message || 'Not found on Yelp'}`, true);
+                }
+                loadEnrichment(currentEnrichPage);
+            } catch (e) {
+                showMessage('❌ Enrichment failed: ' + e.message, true);
+            }
+        }
+
+        async function runYelpEnrichment() {
+            if (!confirm('Run Yelp enrichment on all pending vendors?\n\nThis may take several minutes.')) return;
+            try {
+                showMessage('🚀 Starting Yelp enrichment batch...');
+                const result = await fetchAPI('/enrichment/run', { method: 'POST' });
+                showMessage(`✅ Enrichment complete: ${result.enriched || 0} enriched, ${result.not_found || 0} not found`);
+                loadEnrichment(1);
+            } catch (e) {
+                showMessage('❌ Enrichment failed: ' + e.message, true);
+            }
+        }
+
+        function openEnrichEditModal(vendor) {
+            // Reuse the lead edit modal with vendor data
+            const mapped = {
+                id: vendor.id,
+                company_name: vendor.name,
+                contact_name: vendor.contact_name,
+                phone: vendor.phone,
+                email: vendor.email,
+                county: vendor.city,
+                city: vendor.city,
+                state: vendor.state,
+                status: vendor.status || 'new',
+                tier: 'Tier 2',
+                source_type: vendor.source_file || 'DepotChaos',
+                enrichment_data: { dba: vendor.dba_name, address: vendor.address, notes: vendor.notes }
+            };
+            openLeadEditModal(mapped);
+        }
+
+        async function promoteToLead(vendor) {
+            if (!confirm(`Create a lead from "${vendor.name}"?\n\nThis will add the vendor to the main leads database and remove it from the enrichment list.`)) return;
+            
+            try {
+                // Single API call that handles both promoting vendor AND creating/updating lead
+                const result = await fetchAPI(`/enrichment/${vendor.id}/promote`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ promoted: true })
+                });
+                
+                const actionMsg = result.action === 'updated' ? 'updated with enriched data' : 'created';
+                showMessage(`✅ Lead "${vendor.name}" ${actionMsg} successfully (ID: ${result.lead_id})`);
+                
+                // Refresh enrichment list to remove the promoted vendor
+                loadEnrichment(currentEnrichPage);
+                
+                // Switch to leads tab to see the lead
+                switchTab('leads');
+            } catch (e) {
+                // Vendor was NOT marked as promoted if the call failed, so it stays in enrichment list
+                showMessage('❌ Failed to create lead: ' + e.message, true);
+            }
+        }
+
+        async function deleteVendor(id, name) {
+            if (!confirm(`Delete "${name}" from enrichment?\n\nThis cannot be undone.`)) return;
+            
+            try {
+                await fetchAPI(`/enrichment/${id}`, { method: 'DELETE' });
+                showMessage(`🗑️ "${name}" deleted from enrichment`);
+                loadEnrichment(currentEnrichPage);
+            } catch (e) {
+                showMessage('❌ Failed to delete: ' + e.message, true);
+            }
+        }
+
+        function exportEnrichment() {
+            if (enrichmentData.length === 0) {
+                showMessage('No data to export', true);
+                return;
+            }
+            const headers = ['ID', 'Name', 'DBA', 'Contact', 'Phone', 'Email', 'Address', 'City', 'State', 'ZIP', 'Type', 'Status', 'Notes'];
+            const rows = enrichmentData.map(v => [
+                v.id, v.name, v.dba_name, v.contact_name, v.phone, v.email,
+                v.address, v.city, v.state, v.zip, v.vendor_type, v.status, v.notes
+            ]);
+            const csv = [headers.join(','), ...rows.map(r => r.map(v => `"${(v || '').toString().replace(/"/g, '\\"')}"`).join(','))].join('\n');
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `depotchaos-enrichment-${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+            URL.revokeObjectURL(url);
+            showMessage('✅ Exported to CSV');
+        }
+
+        // ============ QUEUE ============
+        async function loadQueue() {
+            const container = document.getElementById('queue-container');
+            const statsEl = document.getElementById('queue-stats');
+            container.innerHTML = '<div id="loading">Loading queue...</div>';
+            
+            try {
+                const data = await fetchAPI('/queue');
+                
+                // Update badge
+                if (data.total > 0) {
+                    document.getElementById('queue-badge').textContent = data.total.toLocaleString();
+                    document.getElementById('queue-badge').classList.remove('hidden');
+                }
+                
+                statsEl.innerHTML = `
+                    <div class="stats-grid" style="grid-template-columns: repeat(4, 1fr);">
+                        <div class="stat-card">
+                            <div class="stat-label">Total Pending</div>
+                            <div class="stat-value">${data.total || 0}</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Ready to Send</div>
+                            <div class="stat-value" style="color: #22c55e;">${data.ready_to_send || 0}</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Scheduled</div>
+                            <div class="stat-value" style="color: #eab308;">${data.scheduled || 0}</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Sent Today</div>
+                            <div class="stat-value" style="color: #22c55e;">${data.sent_today || 0}</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Failed Today</div>
+                            <div class="stat-value" style="color: #ef4444;">${data.failed_today || 0}</div>
+                        </div>
+                    </div>
+                `;
+                
+                if (!data.queue || data.queue.length === 0) {
+                    container.innerHTML = '<p style="color: #94a3b8; padding: 40px; text-align: center;">No emails in queue</p>';
+                    return;
+                }
+                
+                container.innerHTML = `
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Recipient</th>
+                                <th>Company</th>
+                                <th>Template</th>
+                                <th>Status</th>
+                                <th>Scheduled</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${data.queue.slice(0, 50).map(q => `
+                                <tr>
+                                    <td>${escapeHtml(q.to_email)}</td>
+                                    <td>${escapeHtml(q.company_name || '-')}</td>
+                                    <td><span class="badge badge-new">${q.template}</span></td>
+                                    <td>${q.status}</td>
+                                    <td>${q.scheduled_time ? new Date(q.scheduled_time).toLocaleString() : 'Now'}</td>
+                                    <td>
+                                        <button class="btn btn-sm" style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);" onclick="previewEmail('${q.id}')">👁️ Preview</button>
+                                        <button class="btn btn-sm btn-secondary" ${q.status !== 'pending' ? 'disabled' : ''} onclick="cancelEmail('${q.id}')">❌ Cancel</button>
+                                        <button class="btn btn-sm btn-success" ${q.status !== 'pending' ? 'disabled' : ''} onclick="sendNow('${q.id}')">📤 Send Now</button>
+                                    </td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                `;
+            } catch (e) {
+                container.innerHTML = `<div class="error-msg">Failed to load queue: ${escapeHtml(e.message)}</div>`;
+            }
+        }
+
+        async function cancelEmail(id) {
+            if (!confirm('Cancel this email?')) return;
+            try {
+                await fetchAPI(`/queue/${id}/cancel`, { method: 'POST' });
+                showMessage('✅ Email cancelled');
+                loadQueue();
+            } catch (e) {
+                showMessage('❌ Failed to cancel: ' + e.message, true);
+            }
+        }
+
+        // Track sending state for button updates
+        const sendingEmails = new Set();
+        const sentEmails = new Set();
+
+        async function sendNow(id) {
+            if (!confirm('Send this email immediately?')) return;
+            
+            // Update button to show sending state
+            sendingEmails.add(id);
+            updateSendButton(id, 'sending');
+            
+            try {
+                const response = await fetch(API_BASE + `/queue/${id}/send`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                
+                if (!response.ok) {
+                    const data = await response.json().catch(() => ({}));
+                    
+                    // Handle rate limit (429)
+                    if (response.status === 429 && data.retry_after) {
+                        const minutes = Math.ceil(data.retry_after / 60);
+                        throw new Error(`Rate limit: Please wait ${minutes} minute${minutes > 1 ? 's' : ''} before sending another email.`);
+                    }
+                    
+                    throw new Error(data.error || `HTTP ${response.status}`);
+                }
+                
+                const data = await response.json();
+                sendingEmails.delete(id);
+                sentEmails.add(id);
+                updateSendButton(id, 'sent');
+                showMessage(`✅ ${data.message || 'Email sent'}`);
+                // Refresh queue after 2 seconds to get fresh state
+                setTimeout(loadQueue, 2000);
+            } catch (e) {
+                sendingEmails.delete(id);
+                updateSendButton(id, 'error');
+                showMessage('❌ ' + e.message, true);
+            }
+        }
+
+        function updateSendButton(id, state) {
+            // Escape the ID for use in CSS selector (handles special characters)
+            const escapedId = id.replace(/(["'\\])/g, '\\$1');
+            const buttons = document.querySelectorAll(`button[onclick*="sendNow('${escapedId}')"]`);
+            buttons.forEach(btn => {
+                if (state === 'sending') {
+                    btn.textContent = '⏳ Sending...';
+                    btn.disabled = true;
+                    btn.style.background = 'linear-gradient(135deg, #eab308 0%, #ca8a04 100%)';
+                } else if (state === 'sent') {
+                    btn.textContent = '✓ Sent';
+                    btn.disabled = true;
+                    btn.style.background = 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)';
+                } else if (state === 'error') {
+                    btn.textContent = '📤 Send Now';
+                    btn.disabled = false;
+                    btn.style.background = 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)';
+                }
+            });
+        }
+
+        // ============ EMAIL PREVIEW ============
+        let previewingEmailId = null;
+
+        async function previewEmail(id) {
+            previewingEmailId = id;
+            document.getElementById('email-preview-modal').classList.add('active');
+            document.getElementById('email-preview-loading').style.display = 'block';
+            document.getElementById('email-preview-content').style.display = 'none';
+            document.getElementById('email-preview-error').style.display = 'none';
+            
+            try {
+                const data = await fetchAPI(`/queue/${id}/preview`);
+                
+                if (data.success && data.email) {
+                    const email = data.email;
+                    
+                    // Populate preview fields
+                    document.getElementById('preview-to').textContent = `${email.to_name || ''} <${email.to_email}>`;
+                    document.getElementById('preview-from').textContent = email.from;
+                    document.getElementById('preview-subject').textContent = email.subject;
+                    // Use html_body if available, otherwise fall back to text_body with line breaks converted
+                    const bodyContent = email.html_body || (email.text_body ? email.text_body.replace(/\n/g, '<br>') : '<em style="color: #64748b;">(No content)</em>');
+                    document.getElementById('preview-body').innerHTML = bodyContent;
+                    document.getElementById('preview-template').textContent = email.template;
+                    document.getElementById('preview-company').textContent = email.company_name || '-';
+                    document.getElementById('preview-campaign').textContent = email.campaign_id || '-';
+                    
+                    const statusEl = document.getElementById('preview-status');
+                    statusEl.textContent = email.status;
+                    statusEl.className = email.status === 'pending' ? 'badge badge-new' : 
+                                        email.status === 'sent' ? 'badge badge-contacted' : 'badge badge-unqualified';
+                    
+                    // Update button states based on status
+                    const sendBtn = document.getElementById('preview-send-btn');
+                    const cancelBtn = document.getElementById('preview-cancel-btn');
+                    
+                    if (email.status !== 'pending') {
+                        sendBtn.disabled = true;
+                        sendBtn.style.opacity = '0.5';
+                        cancelBtn.disabled = true;
+                        cancelBtn.style.opacity = '0.5';
+                    } else {
+                        sendBtn.disabled = false;
+                        sendBtn.style.opacity = '1';
+                        cancelBtn.disabled = false;
+                        cancelBtn.style.opacity = '1';
+                    }
+                    
+                    document.getElementById('email-preview-loading').style.display = 'none';
+                    document.getElementById('email-preview-content').style.display = 'block';
+                } else {
+                    throw new Error('Invalid preview data');
+                }
+            } catch (e) {
+                document.getElementById('email-preview-loading').style.display = 'none';
+                document.getElementById('email-preview-error').style.display = 'block';
+                const isNotFound = e.message.includes('404') || e.message.includes('not found');
+                if (isNotFound) {
+                    document.getElementById('email-preview-error').innerHTML = `
+                        <strong>Email not found</strong><br>
+                        The queue may have been updated. <button class="btn btn-sm" onclick="loadQueue(); closeEmailPreviewModal();" style="margin-top: 10px;">🔄 Refresh Queue</button>
+                    `;
+                } else {
+                    document.getElementById('email-preview-error').textContent = `Failed to load preview: ${e.message}`;
+                }
+            }
+        }
+
+        function closeEmailPreviewModal() {
+            document.getElementById('email-preview-modal').classList.remove('active');
+            previewingEmailId = null;
+        }
+
+        async function sendPreviewedEmail() {
+            if (!previewingEmailId) return;
+            
+            if (!confirm('Send this email immediately?')) return;
+            
+            const sendBtn = document.getElementById('preview-send-btn');
+            sendBtn.textContent = '⏳ Sending...';
+            sendBtn.disabled = true;
+            
+            try {
+                await fetchAPI(`/queue/${previewingEmailId}/send`, { method: 'POST' });
+                showMessage('✅ Email sent successfully');
+                closeEmailPreviewModal();
+                loadQueue();
+                loadActivities(); // Refresh dashboard activity
+            } catch (e) {
+                showMessage('❌ Failed to send: ' + e.message, true);
+                sendBtn.textContent = '📤 Send Now';
+                sendBtn.disabled = false;
+            }
+        }
+
+        async function cancelPreviewedEmail() {
+            if (!previewingEmailId) return;
+            
+            if (!confirm('Cancel this email?')) return;
+            
+            try {
+                await fetchAPI(`/queue/${previewingEmailId}/cancel`, { method: 'POST' });
+                showMessage('✅ Email cancelled');
+                closeEmailPreviewModal();
+                loadQueue();
+                loadActivities(); // Refresh dashboard activity
+            } catch (e) {
+                showMessage('❌ Failed to cancel: ' + e.message, true);
+            }
+        }
+
+        // ============ EDIT LEAD MODAL ============
+        function openLeadEditModal(lead) {
+            editingLead = lead;
+            document.getElementById('edit-lead-id').value = lead.id;
+            // Use business_name (primary) or fall back to company_name for backward compatibility
+            document.getElementById('edit-lead-company').value = lead.business_name || lead.company_name || '';
+            document.getElementById('edit-lead-entity').value = lead.entity_number || '';
+            document.getElementById('edit-lead-county').value = lead.county || lead.city || '';
+            document.getElementById('edit-lead-source').value = lead.source_type || lead.source || 'DataDepot';
+            // Contact info from enrichment or direct fields
+            const enrichment = lead.enrichment || lead.enrichment_data || {};
+            document.getElementById('edit-lead-contact').value = lead.contact_name || enrichment.contact_name || '';
+            document.getElementById('edit-lead-title').value = lead.contact_title || enrichment.contact_title || '';
+            document.getElementById('edit-lead-phone').value = lead.phone || enrichment.phone || '';
+            document.getElementById('edit-lead-email').value = lead.email || enrichment.email || '';
+            document.getElementById('edit-lead-status').value = lead.status || 'new';
+            document.getElementById('edit-lead-tier').value = lead.tier || 'Tier 2';
+            document.getElementById('edit-lead-agent').value = lead.assigned_agent || '';
+            document.getElementById('edit-lead-dept').value = lead.assigned_dept || '';
+            document.getElementById('edit-lead-pos').value = lead.pos_system || '';
+            document.getElementById('edit-lead-pos-confidence').value = lead.pos_confidence || '';
+            document.getElementById('edit-lead-equipment-age').value = lead.equipment_age || '';
+            document.getElementById('edit-lead-score').value = lead.replacement_score || '';
+            document.getElementById('edit-lead-sentiment').value = lead.review_sentiment || '';
+            document.getElementById('edit-lead-mentions').value = lead.pos_mentions || '';
+            document.getElementById('edit-lead-emailed').checked = lead.email_sent || false;
+            document.getElementById('edit-lead-opened').checked = lead.email_opened || false;
+            document.getElementById('edit-lead-clicked').checked = lead.email_clicked || false;
+            document.getElementById('edit-lead-demo').checked = lead.demo_scheduled || false;
+            // Callback fields
+            document.getElementById('edit-lead-callback-date').value = lead.callback_date ? formatDateTimeLocal(lead.callback_date) : '';
+            document.getElementById('edit-lead-callback-notes').value = lead.callback_notes || '';
+            document.getElementById('edit-lead-enrichment').value = lead.enrichment_data ? JSON.stringify(lead.enrichment_data, null, 2) : '';
+            
+            document.getElementById('edit-lead-modal').classList.add('active');
+        }
+
+        // Helper to format date for datetime-local input
+        function formatDateTimeLocal(dateString) {
+            const date = new Date(dateString);
+            return date.toISOString().slice(0, 16);
+        }
+
+        function closeLeadModal() {
+            document.getElementById('edit-lead-modal').classList.remove('active');
+            editingLead = null;
+        }
+
+        async function saveLead() {
+            if (!editingLead) return;
+            
+            let enrichment = null;
+            try {
+                const enrichmentText = document.getElementById('edit-lead-enrichment').value.trim();
+                if (enrichmentText) enrichment = JSON.parse(enrichmentText);
+            } catch (e) {
+                showMessage('Invalid JSON in enrichment field', true);
+                return;
+            }
+            
+            const updates = {
+                status: document.getElementById('edit-lead-status').value,
+                tier: document.getElementById('edit-lead-tier').value,
+                assigned_agent: document.getElementById('edit-lead-agent').value,
+                assigned_dept: document.getElementById('edit-lead-dept').value,
+                contact_name: document.getElementById('edit-lead-contact').value,
+                contact_title: document.getElementById('edit-lead-title').value,
+                phone: document.getElementById('edit-lead-phone').value,
+                email: document.getElementById('edit-lead-email').value,
+                pos_system: document.getElementById('edit-lead-pos').value,
+                pos_confidence: parseInt(document.getElementById('edit-lead-pos-confidence').value) || null,
+                equipment_age: document.getElementById('edit-lead-equipment-age').value,
+                replacement_score: parseInt(document.getElementById('edit-lead-score').value) || null,
+                review_sentiment: document.getElementById('edit-lead-sentiment').value,
+                pos_mentions: parseInt(document.getElementById('edit-lead-mentions').value) || null,
+                email_sent: document.getElementById('edit-lead-emailed').checked,
+                email_opened: document.getElementById('edit-lead-opened').checked,
+                email_clicked: document.getElementById('edit-lead-clicked').checked,
+                demo_scheduled: document.getElementById('edit-lead-demo').checked,
+                callback_date: document.getElementById('edit-lead-callback-date').value || null,
+                callback_notes: document.getElementById('edit-lead-callback-notes').value,
+                enrichment_data: enrichment
+            };
+            
+            try {
+                await putAPI(`/leads/${editingLead.id}`, updates);
+                showMessage('✅ Lead updated successfully');
+                closeLeadModal();
+                loadLeads(currentLeadsPage);
+                loadStats();
+                loadActivities();
+            } catch (e) {
+                showMessage('❌ Failed to save lead: ' + e.message, true);
+            }
+        }
+
+        // ============ DELETE FUNCTIONS ============
+        async function deleteLead(leadId, companyName) {
+            if (!confirm(`🗑️ Are you sure you want to delete "${companyName}"?\n\nThis will soft-delete the record (recoverable).`)) return;
+            
+            try {
+                await fetchAPI(`/leads/${leadId}`, { method: 'DELETE' });
+                showMessage(`✅ "${companyName}" deleted successfully`);
+                loadLeads(currentLeadsPage);
+                loadStats();
+            } catch (e) {
+                showMessage('❌ Failed to delete: ' + e.message, true);
+            }
+        }
+
+        async function deleteLeadFromModal() {
+            if (!editingLead) return;
+            const companyName = editingLead.company_name || 'this lead';
+            
+            if (!confirm(`🗑️ Delete "${companyName}"?\n\nThis will soft-delete the record.`)) return;
+            
+            try {
+                await fetchAPI(`/leads/${editingLead.id}`, { method: 'DELETE' });
+                showMessage(`✅ "${companyName}" deleted`);
+                closeLeadModal();
+                loadLeads(currentLeadsPage);
+                loadStats();
+            } catch (e) {
+                showMessage('❌ Failed to delete: ' + e.message, true);
+            }
+        }
+
+        async function deleteIntel(intelId, businessName) {
+            if (!confirm(`🗑️ Are you sure you want to delete "${businessName}" from intelligence?`)) return;
+            
+            try {
+                await fetchAPI(`/intelligence/${intelId}`, { method: 'DELETE' });
+                showMessage(`✅ "${businessName}" deleted from intelligence`);
+                loadIntelligence(currentIntelPage);
+                loadStats();
+            } catch (e) {
+                showMessage('❌ Failed to delete: ' + e.message, true);
+            }
+        }
+
+        // ============ EDIT INTELLIGENCE MODAL ============
+        function openIntelEditModal(record) {
+            editingIntel = record;
+            document.getElementById('edit-intel-id').value = record.id;
+            document.getElementById('edit-intel-business').value = record.business_name || record.dba || '';
+            document.getElementById('edit-intel-license').value = record.license_number || '';
+            document.getElementById('edit-intel-city').value = record.city || '';
+            document.getElementById('edit-intel-county').value = record.county || '';
+            document.getElementById('edit-intel-license-type').value = record.license_type || '';
+            document.getElementById('edit-intel-status').value = record.status || 'active';
+            document.getElementById('edit-intel-pos').value = record.pos_system || 'Unknown';
+            document.getElementById('edit-intel-pos-confidence').value = record.pos_confidence || '';
+            document.getElementById('edit-intel-equipment-age').value = record.equipment_age || '';
+            document.getElementById('edit-intel-score').value = record.replacement_score || '';
+            document.getElementById('edit-intel-issue-date').value = record.issue_date || '';
+            document.getElementById('edit-intel-expiration').value = record.expiration || '';
+            document.getElementById('edit-intel-notes').value = record.notes || '';
+            // Contact fields
+            document.getElementById('edit-intel-contact').value = record.contact_name || '';
+            document.getElementById('edit-intel-title').value = record.contact_title || '';
+            document.getElementById('edit-intel-phone').value = record.phone || '';
+            document.getElementById('edit-intel-email').value = record.email || '';
+            
+            document.getElementById('edit-intel-modal').classList.add('active');
+        }
+
+        function closeIntelModal() {
+            document.getElementById('edit-intel-modal').classList.remove('active');
+            editingIntel = null;
+        }
+
+        async function saveIntelligence() {
+            if (!editingIntel) return;
+            
+            const updates = {
+                status: document.getElementById('edit-intel-status').value,
+                contact_name: document.getElementById('edit-intel-contact').value,
+                contact_title: document.getElementById('edit-intel-title').value,
+                phone: document.getElementById('edit-intel-phone').value,
+                email: document.getElementById('edit-intel-email').value,
+                pos_system: document.getElementById('edit-intel-pos').value,
+                pos_confidence: parseInt(document.getElementById('edit-intel-pos-confidence').value) || null,
+                equipment_age: document.getElementById('edit-intel-equipment-age').value,
+                replacement_score: parseInt(document.getElementById('edit-intel-score').value) || null,
+                issue_date: document.getElementById('edit-intel-issue-date').value,
+                expiration: document.getElementById('edit-intel-expiration').value,
+                notes: document.getElementById('edit-intel-notes').value
+            };
+            
+            try {
+                await putAPI(`/intelligence/${editingIntel.id}`, updates);
+                showMessage('✅ Intelligence record updated');
+                closeIntelModal();
+                loadIntelligence(currentIntelPage);
+                loadStats();
+                loadActivities();
+            } catch (e) {
+                showMessage('❌ Failed to save: ' + e.message, true);
+            }
+        }
+
+        async function createLeadFromIntel() {
+            if (!editingIntel) return;
+            
+            try {
+                const leadData = {
+                    business_name: editingIntel.business_name || editingIntel.dba || '',
+                    company_name: editingIntel.business_name || editingIntel.dba || '',
+                    county: editingIntel.county || editingIntel.city || '',
+                    city: editingIntel.city || '',
+                    state: editingIntel.state || 'CA',
+                    zip: editingIntel.zip || '',
+                    contact_name: document.getElementById('edit-intel-contact').value || '',
+                    contact_title: document.getElementById('edit-intel-title').value || '',
+                    phone: document.getElementById('edit-intel-phone').value || '',
+                    email: document.getElementById('edit-intel-email').value || '',
+                    pos_system: document.getElementById('edit-intel-pos').value || '',
+                    pos_confidence: parseInt(document.getElementById('edit-intel-pos-confidence').value) || null,
+                    equipment_age: document.getElementById('edit-intel-equipment-age').value || '',
+                    replacement_score: parseInt(document.getElementById('edit-intel-score').value) || null,
+                    review_sentiment: document.getElementById('edit-intel-sentiment')?.value || '',
+                    pos_mentions: parseInt(document.getElementById('edit-intel-mentions')?.value) || null,
+                    source_type: 'CA_ABC_Intelligence',
+                    source_id: editingIntel.id,
+                    status: 'new',
+                    tier: 'Tier 2'
+                };
+                
+                const result = await postAPI('/leads', leadData);
+                showMessage(`✅ Lead "${editingIntel.business_name || editingIntel.dba}" created successfully! Total leads: ${result.total_leads || 'updated'}`);
+                closeIntelModal();
+                
+                // Refresh stats and data
+                await loadStats();
+                if (document.getElementById('leads').classList.contains('active')) {
+                    await loadLeads(1);
+                }
+            } catch (e) {
+                showMessage('❌ Failed to create lead: ' + e.message, true);
+            }
+        }
+
+        // ============ PAGINATION ============
+        function renderPagination(containerId, current, total, callback) {
+            const container = document.getElementById(containerId);
+            if (total <= 1) {
+                container.innerHTML = '';
+                return;
+            }
+            
+            let html = '';
+            html += `<button class="page-btn" ${current === 1 ? 'disabled' : ''} onclick="${callback.name}(${current - 1})">← Prev</button>`;
+            
+            const start = Math.max(1, current - 2);
+            const end = Math.min(total, current + 2);
+            
+            if (start > 1) html += '<span style="padding: 8px; color: #64748b;">...</span>';
+            
+            for (let i = start; i <= end; i++) {
+                html += `<button class="page-btn ${i === current ? 'active' : ''}" onclick="${callback.name}(${i})">${i}</button>`;
+            }
+            
+            if (end < total) html += '<span style="padding: 8px; color: #64748b;">...</span>';
+            
+            html += `<button class="page-btn" ${current === total ? 'disabled' : ''} onclick="${callback.name}(${current + 1})">Next →</button>`;
+            
+            container.innerHTML = html;
+        }
+
+        // ============ EXPORT ============
+        function exportLeads() {
+            if (leadsData.length === 0) {
+                showMessage('No leads to export', true);
+                return;
+            }
+            
+            const headers = ['ID', 'Company', 'County', 'State', 'Status', 'Tier', 'POS System', 'POS Confidence', 'Equipment Age', 'Replacement Score', 'Sentiment', 'Email Sent', 'Opened', 'Clicked', 'Demo Scheduled', 'Source Type'];
+            const rows = leadsData.map(l => {
+                const state = extractStateFromCounty(l.county);
+                return [
+                    l.id, l.company_name, l.county, state, l.status, l.tier,
+                    l.pos_system, l.pos_confidence, l.equipment_age,
+                    l.replacement_score, l.review_sentiment,
+                    l.email_sent ? 'Yes' : 'No', l.email_opened ? 'Yes' : 'No',
+                    l.email_clicked ? 'Yes' : 'No', l.demo_scheduled ? 'Yes' : 'No',
+                    l.source_type
+                ];
+            });
+            
+            const csv = [headers.join(','), ...rows.map(r => r.map(v => `"${(v || '').toString().replace(/"/g, '\\"')}"`).join(','))].join('\n');
+            
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `depotchaos-leads-${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+            URL.revokeObjectURL(url);
+            
+            showMessage('✅ Leads exported to CSV');
+        }
+
+        function exportIntelligence() {
+            if (intelData.length === 0) {
+                showMessage('No intelligence to export', true);
+                return;
+            }
+            
+            const headers = ['ID', 'License', 'Business Name', 'DBA', 'Address', 'City', 'County', 'State', 'ZIP', 'License Type', 'Status', 'Issue Date', 'Expiration', 'POS System', 'POS Confidence', 'Equipment Age', 'Replacement Score', 'Notes'];
+            const rows = intelData.map(r => [
+                r.id, r.license_number, r.business_name, r.dba, r.address,
+                r.city, r.county, 'CA', r.zip, r.license_type, r.status,
+                r.issue_date, r.expiration, r.pos_system, r.pos_confidence,
+                r.equipment_age, r.replacement_score, r.notes
+            ]);
+            
+            const csv = [headers.join(','), ...rows.map(r => r.map(v => `"${(v || '').toString().replace(/"/g, '\\"')}"`).join(','))].join('\n');
+            
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `depotchaos-ca-abc-${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+            URL.revokeObjectURL(url);
+            
+            showMessage('✅ Intelligence exported to CSV');
+        }
+
+        // ============ REFRESH ALL ============
+        function refreshAll() {
+            loadStats();
+            loadActivities();
+            if (document.getElementById('leads').classList.contains('active')) loadLeads(currentLeadsPage);
+            if (document.getElementById('intelligence').classList.contains('active')) loadIntelligence(currentIntelPage);
+            if (document.getElementById('queue').classList.contains('active')) loadQueue();
+            showMessage('🔄 Data refreshed');
+        }
+
+        // ============ INIT ============
+        document.addEventListener('DOMContentLoaded', () => {
+            loadStats();
+            loadActivities();
+            
+            // Search debounce
+            document.getElementById('search-leads')?.addEventListener('input', debounce(filterLeads, 300));
+            document.getElementById('search-intel')?.addEventListener('input', debounce(filterIntelligence, 300));
+            document.getElementById('search-enrich')?.addEventListener('input', debounce(filterEnrichment, 300));
+            
+            // Modal close on outside click
+            document.getElementById('edit-lead-modal').addEventListener('click', (e) => {
+                if (e.target.id === 'edit-lead-modal') closeLeadModal();
+            });
+            document.getElementById('edit-intel-modal').addEventListener('click', (e) => {
+                if (e.target.id === 'edit-intel-modal') closeIntelModal();
+            });
+            
+            // Keyboard shortcuts
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    closeLeadModal();
+                    closeIntelModal();
+                }
+                if (e.ctrlKey && e.key === 'r') {
+                    e.preventDefault();
+                    refreshAll();
+                }
+            });
+
+            // Initialize calendar when tab shown
+            document.querySelector('[data-tab="calendar"]').addEventListener('click', () => {
+                loadCalendar();
+            });
+        });
+
+        // ============ CALENDAR FUNCTIONS ============
+        let calendarDate = new Date();
+        let calendarData = [];
+        let selectedDate = null;
+
+        async function loadCalendar() {
+            const container = document.getElementById('calendar-container');
+            const statsEl = document.getElementById('calendar-stats');
+            const listContainer = document.getElementById('callbacks-list-container');
+            container.innerHTML = '<div id="calendar-loading">Loading calendar...</div>';
+            listContainer.innerHTML = '<div id="callbacks-loading">Loading callbacks...</div>';
+
+            try {
+                // Fetch all leads with callbacks
+                const year = calendarDate.getFullYear();
+                const month = calendarDate.getMonth() + 1;
+                const data = await fetchAPI(`/calendar?year=${year}&month=${month}`);
+                calendarData = data.callbacks || [];
+
+                // Update month display
+                document.getElementById('calendar-month').textContent = 
+                    calendarDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+
+                // Update stats
+                const total = calendarData.length;
+                const today = calendarData.filter(c => isToday(c.callback_date)).length;
+                const thisWeek = calendarData.filter(c => isThisWeek(c.callback_date)).length;
+
+                statsEl.innerHTML = `
+                    <div class="stats-grid" style="grid-template-columns: repeat(3, 1fr);">
+                        <div class="stat-card">
+                            <div class="stat-label">Total Callbacks</div>
+                            <div class="stat-value">${total}</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Today</div>
+                            <div class="stat-value" style="color: #22c55e;">${today}</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">This Week</div>
+                            <div class="stat-value" style="color: #6366f1;">${thisWeek}</div>
+                        </div>
+                    </div>
+                `;
+
+                // Render calendar grid
+                renderCalendarGrid();
+
+                // Render callbacks list
+                renderCallbacksList();
+
+                // Update badge
+                if (total > 0) {
+                    document.getElementById('calendar-badge').textContent = total.toLocaleString();
+                    document.getElementById('calendar-badge').classList.remove('hidden');
+                }
+            } catch (e) {
+                container.innerHTML = `<div class="error-msg">Failed to load calendar: ${escapeHtml(e.message)}</div>`;
+            }
+        }
+
+        function renderCalendarGrid() {
+            const container = document.getElementById('calendar-container');
+            const year = calendarDate.getFullYear();
+            const month = calendarDate.getMonth();
+
+            // Days in month
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            const firstDay = new Date(year, month, 1).getDay();
+
+            // Build grid
+            let html = `
+                <div class="calendar-grid" style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px;">
+                    <div style="text-align: center; padding: 10px; color: #94a3b8; font-weight: 600;">Sun</div>
+                    <div style="text-align: center; padding: 10px; color: #94a3b8; font-weight: 600;">Mon</div>
+                    <div style="text-align: center; padding: 10px; color: #94a3b8; font-weight: 600;">Tue</div>
+                    <div style="text-align: center; padding: 10px; color: #94a3b8; font-weight: 600;">Wed</div>
+                    <div style="text-align: center; padding: 10px; color: #94a3b8; font-weight: 600;">Thu</div>
+                    <div style="text-align: center; padding: 10px; color: #94a3b8; font-weight: 600;">Fri</div>
+                    <div style="text-align: center; padding: 10px; color: #94a3b8; font-weight: 600;">Sat</div>
+            `;
+
+            // Empty cells for days before first day
+            for (let i = 0; i < firstDay; i++) {
+                html += `<div style="background: #252f42; border-radius: 8px; min-height: 100px;"></div>`;
+            }
+
+            // Days
+            const today = new Date();
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                const callbacks = calendarData.filter(c => c.callback_date?.startsWith(dateStr));
+                const isToday = today.getFullYear() === year && today.getMonth() === month && today.getDate() === day;
+                const isSelected = selectedDate === dateStr;
+                const hasCallbacks = callbacks.length > 0;
+
+                html += `
+                    <div onclick="selectCalendarDate('${dateStr}')" style="background: ${isSelected ? '#3730a3' : isToday ? '#1e293b' : '#252f42'}; border-radius: 8px; min-height: 100px; padding: 8px; border: ${isSelected ? '3px solid #8b5cf6' : isToday ? '2px solid #6366f1' : '1px solid transparent'}; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.background='#334155'" onmouseout="this.style.background='${isSelected ? '#3730a3' : isToday ? '#1e293b' : '#252f42'}'">
+                        <div style="font-weight: 600; color: ${isToday ? '#6366f1' : '#e2e8f0'}; margin-bottom: 4px;">${day} ${isToday ? '·' : ''}</div>
+                        ${callbacks.slice(0, 3).map(cb => `
+                            <div style="background: ${getCallbackColor(cb.status)}; border-radius: 4px; padding: 4px 6px; margin: 2px 0; font-size: 11px; cursor: pointer;" onclick="event.stopPropagation(); openLeadEditModalById('${cb.lead_id}')">
+                                <div style="font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${escapeHtml(cb.company_name || 'Unknown')}</div>
+                            </div>
+                        `).join('')}
+                        ${callbacks.length > 3 ? `<div style="text-align: center; color: #64748b; font-size: 11px; margin-top: 4px;">+${callbacks.length - 3} more</div>` : ''}
+                        ${hasCallbacks && callbacks.length <= 3 ? `<div style="text-align: center; color: #64748b; font-size: 11px; margin-top: 4px;">${callbacks.length} callback${callbacks.length > 1 ? 's' : ''}</div>` : ''}
+                    </div>
+                `;
+            }
+
+            html += `</div>`;
+            container.innerHTML = html;
+        }
+
+        function renderCallbacksList() {
+            const container = document.getElementById('callbacks-list-container');
+            const titleEl = document.getElementById('callbacks-list-title') || container.previousElementSibling;
+
+            let filteredData = calendarData;
+            
+            // Filter by selected date if any
+            if (selectedDate) {
+                filteredData = calendarData.filter(c => c.callback_date?.startsWith(selectedDate));
+            }
+
+            // Update title
+            if (titleEl) {
+                if (selectedDate) {
+                    const dateObj = new Date(selectedDate + 'T00:00:00');
+                    titleEl.innerHTML = `📋 Callbacks for ${dateObj.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })} <button class="btn btn-sm btn-secondary" onclick="clearDateSelection()" style="margin-left: 10px;">✕ Clear</button>`;
+                } else {
+                    titleEl.innerHTML = '📋 Upcoming Callbacks';
+                }
+            }
+
+            if (filteredData.length === 0) {
+                container.innerHTML = `<p style="color: #94a3b8; padding: 40px; text-align: center;">${selectedDate ? 'No callbacks for selected date' : 'No scheduled callbacks'}</p>`;
+                return;
+            }
+
+            // Sort by date
+            const sorted = [...filteredData].sort((a, b) => new Date(a.callback_date) - new Date(b.callback_date));
+
+            container.innerHTML = `
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date & Time</th>
+                            <th>Company</th>
+                            <th>Contact</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                            <th>Notes</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${sorted.slice(0, 50).map(cb => `
+                            <tr style="${isOverdue(cb.callback_date) ? 'background: rgba(239, 68, 68, 0.1);' : ''}">
+                                <td>
+                                    <div style="font-weight: 500;">${formatDate(cb.callback_date)}</div>
+                                    <div style="color: #94a3b8; font-size: 12px;">${cb.callback_time || 'Anytime'}</div>
+                                    ${isOverdue(cb.callback_date) ? '<span style="color: #ef4444; font-size: 12px;">⚠️ Overdue</span>' : ''}
+                                </td>
+                                <td>
+                                    <div style="font-weight: 500;">${escapeHtml(cb.company_name || '-')}</div>
+                                </td>
+                                <td>
+                                    <div>${escapeHtml(cb.contact_name || '-')}</div>
+                                    ${cb.contact_title ? `<div style="color: #64748b; font-size: 12px;">${escapeHtml(cb.contact_title)}</div>` : ''}
+                                </td>
+                                <td>
+                                    ${cb.phone ? `<a href="tel:${cb.phone}" style="color: #22c55e; text-decoration: none; font-weight: 500;">📞 ${escapeHtml(cb.phone)}</a>` : '<span style="color: #64748b;">-</span>'}
+                                </td>
+                                <td>
+                                    ${cb.email ? `<a href="mailto:${cb.email}" style="color: #6366f1; text-decoration: none; font-weight: 500;">✉️ ${escapeHtml(cb.email)}</a>` : '<span style="color: #64748b;">-</span>'}
+                                </td>
+                                <td style="max-width: 200px;" title="${escapeHtml(cb.callback_notes || '')}">${escapeHtml(truncate(cb.callback_notes, 50))}</td>
+                                <td>
+                                    <button class="btn btn-sm" onclick="openLeadEditModalById('${cb.lead_id}')">✏️ Edit</button>
+                                    <button class="btn btn-sm btn-success" onclick="markCallbackComplete('${cb.lead_id}')">✓ Done</button>
+                                </td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+        }
+
+        async function openLeadEditModalById(leadId) {
+            try {
+                const lead = await fetchAPI(`/leads/${leadId}`);
+                openLeadEditModal(lead);
+            } catch (e) {
+                showMessage('Failed to load lead: ' + e.message, true);
+            }
+        }
+
+        function selectCalendarDate(dateStr) {
+            selectedDate = dateStr;
+            renderCalendarGrid(); // Re-render to show selection
+            renderCallbacksList(); // Update list to show selected date
+        }
+
+        function clearDateSelection() {
+            selectedDate = null;
+            renderCalendarGrid();
+            renderCallbacksList();
+        }
+
+        async function markCallbackComplete(leadId) {
+            try {
+                await putAPI(`/leads/${leadId}`, {
+                    callback_date: null,
+                    callback_notes: 'Callback completed'
+                });
+                showMessage('✅ Callback marked complete');
+                loadCalendar();
+            } catch (e) {
+                showMessage('❌ Failed: ' + e.message, true);
+            }
+        }
+
+        function changeCalendarMonth(delta) {
+            calendarDate.setMonth(calendarDate.getMonth() + delta);
+            loadCalendar();
+        }
+
+        function isToday(dateStr) {
+            const d = new Date(dateStr);
+            const now = new Date();
+            return d.toDateString() === now.toDateString();
+        }
+
+        function isThisWeek(dateStr) {
+            const d = new Date(dateStr);
+            const now = new Date();
+            const weekStart = new Date(now);
+            weekStart.setDate(now.getDate() - now.getDay());
+            const weekEnd = new Date(weekStart);
+            weekEnd.setDate(weekStart.getDate() + 7);
+            return d >= weekStart && d < weekEnd;
+        }
+
+        function isOverdue(dateStr) {
+            const d = new Date(dateStr);
+            const now = new Date();
+            return d < now && !isToday(dateStr);
+        }
+
+        function formatDate(dateStr) {
+            return new Date(dateStr).toLocaleDateString('en-US', { 
+                weekday: 'short', month: 'short', day: 'numeric' 
+            });
+        }
+
+        function getCallbackColor(status) {
+            switch (status) {
+                case 'completed': return '#22c55e';
+                case 'cancelled': return '#ef4444';
+                case 'rescheduled': return '#eab308';
+                default: return '#3b82f6';
+            }
+        }
+
+        function truncate(str, len) {
+            if (!str) return '';
+            return str.length > len ? str.substring(0, len) + '...' : str;
+        }
+
+        // ============ HASH ROUTING ============
+        // Handle URL hash for customer IDs
+        function handleHashRouting() {
+            const hash = window.location.hash;
+            if (!hash) return;
+            
+            // Pattern: #/customer/{id}
+            const match = hash.match(/^#\/customer\/(\d+)$/);
+            if (match) {
+                const customerId = match[1];
+                // Navigate to leads tab and open customer
+                switchTab('leads');
+                
+                // Try to find and open the customer/lead
+                openCustomerById(customerId);
+            }
+        }
+
+        async function openCustomerById(customerId) {
+            try {
+                // First try to find in leads
+                const lead = await fetchAPI(`/leads/${customerId}`);
+                if (lead && lead.id) {
+                    openLeadEditModal(lead);
+                    return;
+                }
+            } catch (e) {
+                console.log('Not found in leads, trying intelligence...');
+            }
+            
+            try {
+                // Try intelligence records
+                const intel = await fetchAPI(`/intelligence/${customerId}`);
+                if (intel && intel.id) {
+                    openIntelModal(intel);
+                    return;
+                }
+            } catch (e) {
+                console.log('Not found in intelligence either');
+            }
+            
+            // Show message if not found
+            showMessage('Customer not found: ID ' + customerId, true);
+        }
+
+        // Expose functions to window for inline onclick handlers
+        window.sendNow = sendNow;
+        window.sendPreviewedEmail = sendPreviewedEmail;
+        window.cancelEmail = cancelEmail;
+        window.previewEmail = previewEmail;
+        window.cancelPreviewedEmail = cancelPreviewedEmail;
+        window.closeEmailPreviewModal = closeEmailPreviewModal;
+        window.openLeadEditModal = openLeadEditModal;
+        window.closeLeadModal = closeLeadModal;
+        window.saveLead = saveLead;
+        window.deleteLead = deleteLead;
+        window.deleteLeadFromModal = deleteLeadFromModal;
+        window.openIntelEditModal = openIntelEditModal;
+        window.closeIntelModal = closeIntelModal;
+        window.saveIntelligence = saveIntelligence;
+        window.deleteIntel = deleteIntel;
+        window.openEnrichEditModal = openEnrichEditModal;
+        window.closeEnrichModal = closeEnrichModal;
+        window.saveEnrichment = saveEnrichment;
+        window.promoteToLead = promoteToLead;
+        window.deleteVendor = deleteVendor;
+        window.showMessage = showMessage;
+        window.loadQueue = loadQueue;
+        window.loadLeads = loadLeads;
+        window.loadActivities = loadActivities;
+
+        // Listen for hash changes
+        window.addEventListener('hashchange', handleHashRouting);
+        
+        // Handle hash on initial load
+        window.addEventListener('load', () => {
+            // Delay slightly to allow initial data load
+            setTimeout(handleHashRouting, 1000);
+        });
+    </script>
+</body>
+</html>

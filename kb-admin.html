@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knowledge Base Admin - Performance Supply Depot</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f7fafc;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        header h1 {
+            color: #1a365d;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            color: #718096;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #1a365d;
+        }
+        
+        .stat-label {
+            color: #718096;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+        
+        .section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .section h2 {
+            color: #2c5282;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(26, 54, 93, 0.3);
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .btn-secondary {
+            background: #edf2f7;
+            color: #2d3748;
+        }
+        
+        .btn-secondary:hover {
+            background: #e2e8f0;
+        }
+        
+        .btn-danger {
+            background: #fed7d7;
+            color: #c53030;
+        }
+        
+        .btn-danger:hover {
+            background: #fc8181;
+        }
+        
+        .search-box {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .search-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: #2c5282;
+        }
+        
+        .document-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .document-item {
+            padding: 15px;
+            border-bottom: 1px solid #edf2f7;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        
+        .document-item:last-child {
+            border-bottom: none;
+        }
+        
+        .document-info h3 {
+            font-size: 1rem;
+            color: #2d3748;
+            margin-bottom: 4px;
+        }
+        
+        .document-info p {
+            font-size: 0.85rem;
+            color: #718096;
+        }
+        
+        .document-date {
+            font-size: 0.8rem;
+            color: #a0aec0;
+            white-space: nowrap;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .status-ready {
+            background: #c6f6d5;
+            color: #276749;
+        }
+        
+        .status-pending {
+            background: #fefcbf;
+            color: #975a16;
+        }
+        
+        .status-error {
+            background: #fed7d7;
+            color: #c53030;
+        }
+        
+        .result-item {
+            background: #f7fafc;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        
+        .result-item h4 {
+            color: #2c5282;
+            margin-bottom: 5px;
+        }
+        
+        .result-item p {
+            font-size: 0.9rem;
+            color: #4a5568;
+            margin-bottom: 5px;
+        }
+        
+        .result-item a {
+            font-size: 0.85rem;
+            color: #2c5282;
+        }
+        
+        .log-output {
+            background: #1a202c;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Consolas', monospace;
+            font-size: 0.85rem;
+            max-height: 300px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+        
+        .actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: #718096;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px 15px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🧠 Knowledge Base Admin</h1>
+            <p>Manage and search your website's AI knowledge base</p>
+        </header>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value" id="stat-docs">-<</div>
+                <div class="stat-label">Documents</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="stat-chunks">-<</div>
+                <div class="stat-label">Chunks</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="stat-last-crawl">-<</div>
+                <div class="stat-label">Last Crawl</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value"><span class="status-badge status-pending" id="kb-status">Checking...</span></div>
+                <div class="stat-label">Status</div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>🔍 Search Knowledge Base</h2>
+            
+            <div class="search-box">
+                <input type="text" class="search-input" id="search-input" 
+                       placeholder="Search for products, services, policies..."
+                       onkeypress="if(event.key==='Enter') doSearch()">
+                <button class="btn" onclick="doSearch()">
+                    🔍 Search
+                </button>
+            </div>
+            
+            <div id="search-results">
+                <!-- Results appear here -->
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>📄 Documents</h2>
+            
+            <div class="actions" style="margin-bottom: 20px;">
+                <button class="btn" onclick="refreshDocuments()">
+                    🔄 Refresh List
+                </button>
+            </div>
+            
+            <div class="document-list" id="document-list">
+                <p style="text-align: center; color: #718096;">Loading documents...</p>
+            </div>
+        </div>
+        
+        
+        <div class="section">
+            <h2>🕷️ Crawl Operations</h2>
+            
+            <p style="margin-bottom: 15px; color: #4a5568;">
+                Re-crawl the website to update the knowledge base with the latest content.
+            </p>
+            
+            <div class="actions">
+                <button class="btn" id="crawl-btn" onclick="startCrawl()">
+                    🚀 Start Crawl
+                </button>
+                
+                <button class="btn btn-secondary" onclick="viewCrawlLog()">
+                    📋 View Log
+                </button>
+            </div>
+            
+            <div id="crawl-output" class="hidden" style="margin-top: 20px;">
+                <h4>Crawl Output:</h4>
+                <div class="log-output" id="crawl-log"></div>
+            </div>
+        </div>
+        
+        
+        <footer>
+            <p>Performance Supply Depot LLC | <a href="/">← Back to Website</a></p>
+        </footer>
+    </div>
+    
+    <script>
+        // Load stats on page load
+        async function loadStats() {
+            try {
+                const res = await fetch('/api/kb/health');
+                const data = await res.json();
+                
+                if (data.exists) {
+                    document.getElementById('stat-docs').textContent = data.documents || 0;
+                    document.getElementById('stat-chunks').textContent = data.chunks || 0;
+                    document.getElementById('stat-last-crawl').textContent = 
+                        data.last_crawl ? new Date(data.last_crawl).toLocaleDateString() : 'Never';
+                    document.getElementById('kb-status').textContent = 'Ready';
+                    document.getElementById('kb-status').className = 'status-badge status-ready';
+                } else {
+                    document.getElementById('kb-status').textContent = 'Not Initialized';
+                    document.getElementById('kb-status').className = 'status-badge status-error';
+                    document.getElementById('stat-docs').textContent = '0';
+                    document.getElementById('stat-chunks').textContent = '0';
+                }
+            } catch (err) {
+                document.getElementById('kb-status').textContent = 'API Error';
+                document.getElementById('kb-status').className = 'status-badge status-error';
+            }
+        }
+        
+        // Search function
+        async function doSearch() {
+            const query = document.getElementById('search-input').value.trim();
+            if (!query) return;
+            
+            const resultsDiv = document.getElementById('search-results');
+            resultsDiv.innerHTML = '<p style="text-align: center; color: #718096;">Searching...</p>';
+            
+            try {
+                const res = await fetch('/api/kb/search', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({query: query, limit: 5})
+                });
+                
+                const data = await res.json();
+                
+                if (data.results && data.results.length > 0) {
+                    let html = `<p style="margin-bottom: 15px; color: #4a5568;">
+                        Found ${data.count} results for "${query}"</p>
+                    `;
+                    
+                    data.results.forEach((result, i) => {
+                        html += `
+                            <div class="result-item">
+                                <h4>${i + 1}. ${result.title}</h4>
+                                <p>${result.text.substring(0, 200)}...</p>
+                                <a href="${result.url}" target="_blank">
+                                    📄 View Page →
+                                </a>
+                            </div>
+                        `;
+                    });
+                    
+                    resultsDiv.innerHTML = html;
+                } else {
+                    resultsDiv.innerHTML = `
+                        <p style="text-align: center; color: #718096; padding: 20px;">
+                            No results found for "${query}"
+                        </p>
+                    `;
+                }
+            } catch (err) {
+                resultsDiv.innerHTML = `
+                    <p style="text-align: center; color: #c53030;">
+                        Search failed. Is the knowledge base initialized?
+                    </p>
+                `;
+            }
+        }
+        
+        // Refresh document list
+        async function refreshDocuments() {
+            const listDiv = document.getElementById('document-list');
+            listDiv.innerHTML = '<p style="text-align: center; color: #718096;">Loading...</p>';
+            
+            try {
+                const res = await fetch('/api/kb/documents?limit=50');
+                const data = await res.json();
+                
+                if (data.documents && data.documents.length > 0) {
+                    let html = '';
+                    data.documents.forEach(doc => {
+                        const date = new Date(doc.last_updated).toLocaleDateString();
+                        html += `
+                            <div class="document-item">
+                                <div class="document-info">
+                                    <h3>${doc.title || 'Untitled'}</h3>
+                                    <p>${doc.url}</p>
+                                </div>
+                                <div class="document-date">${date}</div>
+                            </div>
+                        `;
+                    });
+                    listDiv.innerHTML = html;
+                } else {
+                    listDiv.innerHTML = '<p style="text-align: center; color: #718096;">No documents found</p>';
+                }
+            } catch (err) {
+                listDiv.innerHTML = '<p style="text-align: center; color: #c53030;">Failed to load documents</p>';
+            }
+        }
+        
+        // Start crawl
+        async function startCrawl() {
+            const btn = document.getElementById('crawl-btn');
+            const output = document.getElementById('crawl-output');
+            const log = document.getElementById('crawl-log');
+            
+            btn.disabled = true;
+            btn.textContent = '🔄 Crawling...';
+            output.classList.remove('hidden');
+            log.textContent = 'Initiating crawl...\\n';
+            
+            try {
+                const res = await fetch('/api/kb/refresh', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'}
+                });
+                
+                const data = await res.json();
+                log.textContent += `Status: ${data.status}\\n`;
+                log.textContent += `Message: ${data.message}\\n`;
+                log.textContent += `\\nNote: Crawl runs in background. Refresh stats in a few minutes.`;
+                
+                // Re-enable after a delay
+                setTimeout(() => {
+                    btn.disabled = false;
+                    btn.textContent = '🚀 Start Crawl';
+                }, 5000);
+                
+            } catch (err) {
+                log.textContent += `Error: ${err.message}`;
+                btn.disabled = false;
+                btn.textContent = '🚀 Start Crawl';
+            }
+        }
+        
+        function viewCrawlLog() {
+            alert('Crawl logs would be displayed here. Check /root/.openclaw/workspace/logs/ for full logs.');
+        }
+        
+        // Initialize
+        loadStats();
+        refreshDocuments();
+    </script>
+    
+    <!-- Chat Widget -->
+    <script src="/widget/chat-widget.js"></script>
+    <script>
+        PSDepotChat.init({
+            apiUrl: 'http://localhost:8080',
+            position: 'bottom-right',
+            voiceEnabled: true
+        });
+    </script>
+</body>
+</html>

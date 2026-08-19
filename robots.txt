@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+Disallow: /appointments/admin/
+Disallow: /checkout.html
+Disallow: /cart-test.html
+Disallow: /clear-cart.html
+Disallow: /kb-admin.html
+Disallow: /service-log.html
+Disallow: /chat-demo.html
+Disallow: /brain-dashboard.html
+Disallow: /.backups/
+
+Sitemap: https://psdepot.com/sitemap.xml

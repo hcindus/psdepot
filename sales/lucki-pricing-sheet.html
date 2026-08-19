@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OrionStar Lucki - Pricing Sheet</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        @page { size: letter; margin: 0.5in; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: 10pt;
+            line-height: 1.4;
+            color: #333;
+            background: white;
+            padding: 20px;
+        }
+        
+        .sheet {
+            max-width: 8.5in;
+            margin: 0 auto;
+            border: 2px solid #0A1A2F;
+            padding: 30px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid #FF7A00;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .logo {
+            font-size: 18pt;
+            font-weight: 700;
+            color: #0A1A2F;
+        }
+        
+        .logo span { color: #FF7A00; }
+        
+        .doc-info {
+            text-align: right;
+            font-size: 9pt;
+            color: #666;
+        }
+        
+        .doc-info strong {
+            display: block;
+            color: #0A1A2F;
+            font-size: 11pt;
+        }
+        
+        h1 {
+            font-size: 24pt;
+            color: #0A1A2F;
+            margin-bottom: 5px;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .section {
+            background: #f7fafc;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        
+        .section h2 {
+            font-size: 12pt;
+            color: #0A1A2F;
+            border-bottom: 2px solid #FF7A00;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+        
+        .price-box {
+            background: linear-gradient(135deg, #0A1A2F 0%, #1a365d 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .price-large {
+            font-size: 36pt;
+            font-weight: 800;
+            color: #FF7A00;
+        }
+        
+        .price-unit {
+            font-size: 14pt;
+            color: #a0aec0;
+        }
+        
+        .stock-badge {
+            display: inline-block;
+            background: #48bb78;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 10pt;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+            font-size: 9pt;
+        }
+        
+        th, td {
+            padding: 8px 10px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        th {
+            background: #0A1A2F;
+            color: white;
+            font-weight: 600;
+        }
+        
+        tr:nth-child(even) {
+            background: #f7fafc;
+        }
+        
+        .highlight {
+            color: #FF7A00;
+            font-weight: 700;
+        }
+        
+        .service-option {
+            background: white;
+            border: 2px solid #FF7A00;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+        
+        .service-option h3 {
+            font-size: 11pt;
+            color: #FF7A00;
+            margin-bottom: 10px;
+        }
+        
+        .service-price {
+            font-size: 18pt;
+            font-weight: 700;
+            color: #0A1A2F;
+            float: right;
+        }
+        
+        ul {
+            margin-left: 20px;
+            margin-top: 5px;
+        }
+        
+        li {
+            margin-bottom: 5px;
+        }
+        
+        .terms {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #e2e8f0;
+            font-size: 8pt;
+            color: #666;
+        }
+        
+        .contact-footer {
+            margin-top: 20px;
+            padding: 15px;
+            background: #0A1A2F;
+            color: white;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+        }
+        
+        .contact-item {
+            font-size: 10pt;
+        }
+        
+        .contact-item strong {
+            display: block;
+            color: #FF7A00;
+            font-size: 11pt;
+            margin-bottom: 3px;
+        }
+        
+        @media print {
+            body { padding: 0; }
+            .sheet { border: 2px solid #0A1A2F; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sheet">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">Performance<span>Supply</span>Depot</div>
+            <div class="doc-info">
+                <strong>Authorized OrionStar Partner</strong>
+                Document: PS-LUCKI-001<br>
+                Effective: July 2026
+            </div>
+        </div>
+
+        <!-- Title -->
+        <h1>OrionStar Lucki AI Delivery Robot</h1>
+        <p class="subtitle">Model OS-R-DR01 • Professional-grade autonomous service robot</p>
+
+        <!-- Main Price -->
+        <div class="price-box">
+            <div class="price-large">$3,330.00</div>
+            <div class="price-unit">per unit</div>
+            <span class="stock-badge">✅ IN STOCK — 14 Units Available</span>
+        </div>
+
+        <!-- Two Column Layout -->
+        <div class="two-col">
+            
+            <!-- Specifications -->
+            <div class="section">
+                <h2>📋 Technical Specifications</h2>
+                <table>
+                    <tr><th>Feature</th><th>Specification</th></tr>
+                    <tr><td>Dimensions</td><td>21" × 52" × 20" (W×H×D)</td></tr>
+                    <tr><td>Weight</td><td>88 lbs (40 kg)</td></tr>
+                    <tr><td>Display</td><td>10.1" 1080P Touch Screen</td></tr>
+                    <tr><td>Navigation</td><td>LiDAR + 3D SLAM + Visual</td></tr>
+                    <tr><td>Battery</td><td>15Ah/25.2V Lithium Ion</td></tr>
+                    <tr><td>Battery Life</td><td><span class="highlight">12-15 hours</span></td></tr>
+                    <tr><td>Charge Time</td><td>4 hours</td></tr>
+                    <tr><td>Load Capacity</td><td><span class="highlight">88 lbs total</span> (22 lb/tray × 4)</td></tr>
+                    <tr><td>Connectivity</td><td>WiFi 2.4G/5G + 4G LTE</td></tr>
+                    <tr><td>Languages</td><td><span class="highlight">31 languages</span></td></tr>
+                    <tr><td>Materials</td><td>Aviation Aluminum + Food-Grade PC+ABS</td></tr>
+                    <tr><td>Operating Temp</td><td>32°F to 104°F (0°C to 40°C)</td></tr>
+                </table>
+            </div>
+
+            <!-- What's Included -->
+            <div class="section">
+                <h2>📦 What's Included</h2>
+                <ul>
+                    <li>OrionStar Lucki AI Delivery Robot (OS-R-DR01)</li>
+                    <li>4 metal trays with silicon covers</li>
+                    <li>Quick Install Guide</li>
+                    <li>Charger unit</li>
+                    <li>Location markers for mapping</li>
+                    <li>1-year manufacturer warranty</li>
+                </ul>
+
+                <h2 style="margin-top: 15px;">✅ Standard Benefits</h2>
+                <ul>
+                    <li><strong>Free shipping</strong> nationwide</li>
+                    <li><strong>Net 30</strong> terms for qualified businesses</li>
+                    <li>Phone &amp; email support</li>
+                    <li>Documentation &amp; user manual</li>
+                    <li>Remote diagnostics</li>
+                    <li>Firmware updates</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Service Package -->
+        <div class="service-option">
+            <div class="service-price">$3,899</div>
+            <h3>⭐ Complete Package (Robot + Services)</h3>
+            <p>Everything you need to get started. Includes:</p>
+            <div class="two-col" style="margin-top: 10px;">
+                <ul>
+                    <li>🤖 <strong>OrionStar Lucki Robot</strong> — OS-R-DR01</li>
+                    <li>📦 <strong>White Glove Delivery</strong> — Unboxing, assembly, placement</li>
+                    <li>🗺️ <strong>Space Mapping</strong> — LiDAR configuration for your floor plan</li>
+                </ul>
+                <ul>
+                    <li>👥 <strong>Staff Training</strong> — 2-hour hands-on session</li>
+                    <li>🛠️ <strong>90-Day Extended Support</strong> — Priority phone/email</li>
+                    <li>🔧 Remote Diagnostics — Real-time troubleshooting</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Volume Pricing -->
+        <div class="section" style="margin-top: 20px;">
+            <h2>💼 Volume Pricing</h2>
+            <table>
+                <tr>
+                    <th>Package</th>
+                    <th>Price</th>
+                    <th>Includes</th>
+                </tr>
+                <tr>
+                    <td><strong>Robot Only</strong></td>
+                    <td>$3,330.00</td>
+                    <td>Unit + free shipping + standard support</td>
+                </tr>
+                <tr>
+                    <td><strong>Complete Package</strong></td>
+                    <td><span class="highlight">$3,899.00</span></td>
+                    <td>Robot + delivery + mapping + training + 90-day support</td>
+                </tr>
+                <tr>
+                    <td>3+ Complete Packages</td>
+                    <td>Contact us</td>
+                    <td>Volume discounts available</td>
+                </tr>
+            </table>
+            <p style="font-size: 8pt; color: #666; margin-top: 10px;">
+                * Volume pricing available for multi-location deployments. Contact sales for enterprise pricing.
+            </p>
+        </div>
+
+        <!-- Terms -->
+        <div class="terms">
+            <strong>Terms &amp; Conditions:</strong> Prices subject to change without notice. Net 30 terms subject to credit approval. 
+            Setup package is optional and non-refundable once service has begun. Warranty covers manufacturer defects only. 
+            Shipping via ground freight; expedited shipping available at additional cost. California sales tax applies to CA deliveries.
+        </div>
+
+        <!-- Contact Footer -->
+        <div class="contact-footer">
+            <div class="contact-item">
+                <strong>📞 Sales</strong>
+                (888) 881-6834
+            </div>
+            <div class="contact-item">
+                <strong>✉️ Email</strong>
+                info@psdepot.com
+            </div>
+            <div class="contact-item">
+                <strong>🌐 Website</strong>
+                psdepot.com/robotics
+            </div>
+            <div class="contact-item">
+                <strong>📍 Location</strong>
+                Nationwide Delivery
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

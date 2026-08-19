@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CREAM - Comprehensive Real Estate Agent Management</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Top Navigation -->
+        <header class="top-bar">
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="logo">
+                <i class="fas fa-building"></i>
+                <span>CREAM</span>
+            </div>
+            <div class="user-menu">
+                <span class="welcome-text">Welcome, Agent A!</span>
+                <i class="fas fa-user-circle"></i>
+            </div>
+        </header>
+
+        <!-- Side Menu -->
+        <nav class="side-menu" id="sideMenu">
+            <div class="menu-header">
+                <span>Navigation</span>
+                <button class="close-menu" id="closeMenu">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <ul class="menu-list">
+                <li data-page="home" class="active">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </li>
+                <li data-page="plan">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Plan Business</span>
+                </li>
+                <li data-page="leads">
+                    <i class="fas fa-users"></i>
+                    <span>Leads</span>
+                </li>
+                <li data-page="appointments">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Appointments</span>
+                </li>
+                <li data-page="farming">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <span>Community Farming</span>
+                </li>
+                <li data-page="revenue">
+                    <i class="fas fa-dollar-sign"></i>
+                    <span>Revenue</span>
+                </li>
+                <li data-page="transactions">
+                    <i class="fas fa-exchange-alt"></i>
+                    <span>Transactions</span>
+                </li>
+                <li data-page="analyze">
+                    <i class="fas fa-database"></i>
+                    <span>Analyze DB</span>
+                </li>
+                <li data-page="letters">
+                    <i class="fas fa-envelope"></i>
+                    <span>Letter Generator</span>
+                </li>
+                <li data-page="website">
+                    <i class="fas fa-globe"></i>
+                    <span>Website Portal</span>
+                </li>
+                <li data-page="premium">
+                    <i class="fas fa-star"></i>
+                    <span>Premium Tools</span>
+                </li>
+                <li data-page="settings">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="content" id="content">
+            <!-- Dynamic content loads here -->
+        </main>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <button data-page="home" class="nav-item active">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </button>
+            <button data-page="leads" class="nav-item">
+                <i class="fas fa-users"></i>
+                <span>Leads</span>
+            </button>
+            <button data-page="farming" class="nav-item">
+                <i class="fas fa-map-marked-alt"></i>
+                <span>Farming</span>
+            </button>
+            <button data-page="revenue" class="nav-item">
+                <i class="fas fa-dollar-sign"></i>
+                <span>Revenue</span>
+            </button>
+        </nav>
+
+        <!-- Overlay -->
+        <div class="overlay" id="overlay"></div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

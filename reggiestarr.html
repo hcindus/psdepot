@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReggieStarr POS Systems | Performance Supply Depot</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a1a;
+            --bg-card: rgba(255, 255, 255, 0.05);
+            --text: #e5e5e5;
+            --text-muted: #a0a0a0;
+            --cyan: #00E0FF;
+            --orange: #FF7A00;
+            --border: rgba(0, 224, 255, 0.3);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .header {
+            background: linear-gradient(135deg, rgba(10, 10, 26, 0.95), rgba(20, 30, 50, 0.95));
+            border-bottom: 1px solid var(--border);
+            padding: 30px 40px;
+            text-align: center;
+        }
+        .header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 42px;
+            background: linear-gradient(135deg, var(--cyan), var(--orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .header p { color: var(--text-muted); margin-top: 10px; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 60px 40px; }
+        .systems {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+        .system-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .system-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(0, 224, 255, 0.1);
+        }
+        .system-card h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: var(--cyan);
+        }
+        .version-badge {
+            display: inline-block;
+            background: var(--orange);
+            color: #000;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        .features {
+            list-style: none;
+            margin: 20px 0;
+        }
+        .features li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .features li:before {
+            content: "✓";
+            color: var(--cyan);
+            margin-right: 10px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, var(--cyan), var(--orange));
+            color: #000;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: transform 0.2s;
+        }
+        .btn:hover { transform: translateY(-2px); }
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #22c55e;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>ReggieStarr POS Systems</h1>
+        <p>Professional Point of Sale Solutions by Performance Supply Depot</p>
+    </div>
+    <div class="container">
+        <div class="systems">
+            <div class="system-card">
+                <h2>RS-79</h2>
+                <span class="version-badge">Web-Based POS</span>
+                <p>Full-featured web POS with multi-currency, KDS, and split check support.</p>
+                <ul class="features">
+                    <li>Real-time transaction processing</li>
+                    <li>Kitchen Display System (KDS)</li>
+                    <li>Split check functionality</li>
+                    <li>Multi-currency support (BTC, USDC, USDT)</li>
+                    <li>Offline-first architecture</li>
+                    <li>Comprehensive reporting</li>
+                </ul>
+                <div class="status">
+                    <span class="status-dot"></span>
+                    <span>API Online: Port 5000</span>
+                </div>
+                <br>
+                <a href="/reggiestarr-pos/" class="btn">Launch RS-79 Web POS</a>
+            </div>
+            <div class="system-card">
+                <h2>RS-80</h2>
+                <span class="version-badge">Android Native</span>
+                <p>Next-generation Android POS with hardware integration and cloud sync.</p>
+                <ul class="features">
+                    <li>Native Android performance</li>
+                    <li>Hardware receipt printer support</li>
+                    <li>Barcode scanner integration</li>
+                    <li>Cloud synchronization</li>
+                    <li>End-to-end encryption</li>
+                    <li>Play Store ready</li>
+                </ul>
+                <div class="status">
+                    <span class="status-dot"></span>
+                    <span>APK Build Ready</span>
+                </div>
+                <br>
+                <a href="/rs-80/" class="btn">View RS-80 Details</a>
+            </div>
+        </div>
+    </div>
+
+<footer style="background:#0A1A2F;color:#fff;padding:1.2rem 2rem;margin-top:2rem;font-size:14px;">
+  <a href="/locations.html" style="color:#FF7A00;text-decoration:none;font-weight:600;">📍 View all service areas →</a>
+</footer>
+</body>
+</html>

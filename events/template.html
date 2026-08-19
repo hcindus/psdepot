@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{EVENT_TITLE}} | PSDEPOT</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --primary: {{PRIMARY_COLOR|#003366}};
+            --secondary: {{SECONDARY_COLOR|#ff6600}};
+            --accent: {{ACCENT_COLOR|#ffd700}};
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        /* Header Banner */
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.1) 50%, transparent 60%);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .badge {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .header h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header .date {
+            font-size: 24px;
+            color: var(--accent);
+            font-weight: bold;
+        }
+        
+        /* Event Countdown */
+        .countdown {
+            background: var(--dark);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .countdown h2 {
+            margin-bottom: 20px;
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .countdown-grid {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .countdown-item {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            min-width: 80px;
+        }
+        
+        .countdown-item .number {
+            font-size: 36px;
+            font-weight: bold;
+            color: var(--accent);
+        }
+        
+        .countdown-item .label {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: #aaa;
+        }
+        
+        /* Content */
+        .content {
+            padding: 40px;
+        }
+        
+        .event-description {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        /* Benefits */
+        .benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .benefit {
+            background: var(--light);
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .benefit:hover {
+            border-color: var(--secondary);
+            transform: translateY(-5px);
+        }
+        
+        .benefit-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+        
+        .benefit h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .benefit p {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            color: white;
+            padding: 50px;
+            text-align: center;
+            border-radius: 15px;
+        }
+        
+        .cta-section h2 {
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+        
+        .cta-section p {
+            font-size: 18px;
+            margin-bottom: 25px;
+            opacity: 0.9;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #e55a00;
+            transform: scale(1.05);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: var(--primary);
+            border: 2px solid white;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+        
+        .phone {
+            font-size: 32px;
+            font-weight: bold;
+            margin-top: 20px;
+            color: var(--accent);
+        }
+        
+        /* Promo Code */
+        .promo-code {
+            background: var(--accent);
+            color: var(--dark);
+            padding: 20px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        .promo-code span {
+            font-family: monospace;
+            background: white;
+            padding: 5px 15px;
+            border-radius: 5px;
+            margin-left: 10px;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #333;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        /* Event Types Styling */
+        .type-followup .badge { background: #ff6600; }
+        .type-promo .badge { background: #9c27b0; }
+        .type-new .badge { background: #28a745; }
+        .type-holiday .badge { background: #f44336; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="badge">{{EVENT_TYPE}}</div>
+            <h1>{{EVENT_TITLE}}</h1>
+            <div class="date">{{EVENT_DATE}}</div>
+        </div>
+        
+        <div class="countdown">
+            <h2>Event Starts In</h2>
+            <div class="countdown-grid">
+                <div class="countdown-item">
+                    <div class="number" id="days">00</div>
+                    <div class="label">Days</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="number" id="hours">00</div>
+                    <div class="label">Hours</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="number" id="minutes">00</div>
+                    <div class="label">Minutes</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="number" id="seconds">00</div>
+                    <div class="label">Seconds</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content">
+            <p class="event-description">{{EVENT_DESCRIPTION}}</p>
+            
+            <div class="benefits">
+                {{#each BENEFITS}}
+                <div class="benefit">
+                    <div class="benefit-icon">{{ICON}}</div>
+                    <h3>{{TITLE}}</h3>
+                    <p>{{DESCRIPTION}}</p>
+                </div>
+                {{/each}}
+            </div>
+            
+            <div class="cta-section">
+                <h2>{{CTA_TITLE}}</h2>
+                <p>{{CTA_DESCRIPTION}}</p>
+                <div class="cta-buttons">
+                    <a href="mailto:info@psdepot.com?subject={{EVENT_TITLE}} Inquiry" class="btn btn-primary">Contact Us</a>
+                    <a href="tel:888-881-6834" class="btn btn-secondary">Call Now</a>
+                </div>
+                <div class="phone">📞 888-881-6834</div>
+            </div>
+        </div>
+        
+        {{#if PROMO_CODE}}
+        <div class="promo-code">
+            Exclusive Offer Code: <span>{{PROMO_CODE}}</span>
+        </div>
+        {{/if}}
+        
+        <div class="footer">
+            <p><strong>Performance Supply Depot LLC</strong></p>
+            <p>California | Serving Nationwide</p>
+            <p><a href="https://psdepot.com">psdepot.com</a> | <a href="mailto:info@psdepot.com">info@psdepot.com</a></p>
+        </div>
+    </div>
+    
+    <script>
+        // Countdown Timer
+        const eventDate = new Date('{{EVENT_DATE_FULL}}').getTime();
+        
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = eventDate - now;
+            
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+        
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+</html>

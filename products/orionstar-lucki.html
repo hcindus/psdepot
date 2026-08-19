@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OrionStar Lucki AI Delivery Robot | Performance Supply Depot LLC</title>
+    <meta name="description" content="OrionStar Lucki AI Delivery Robot. Autonomous serving robot for restaurants, hotels, cafes. LiDAR navigation, 12-15 hour battery, 88 lb capacity. $3,330">
+    <link rel="canonical" href="https://psdepot.com/products/orionstar-lucki.html">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="OrionStar Lucki AI Delivery Robot | Performance Supply Depot">
+    <meta property="og:description" content="Autonomous AI serving robot for restaurants & hospitality. LiDAR navigation, 12-15 hour battery.">
+    <meta property="og:type" content="product">
+    <meta property="og:url" content="https://psdepot.com/products/orionstar-lucki.html">
+    <meta property="og:image" content="https://psdepot.com/assets/images/products/lucki-og.jpg">
+    <meta property="product:price:amount" content="3330.00">
+    <meta property="product:price:currency" content="USD">
+    <meta property="product:availability" content="instock">
+    
+    <!-- Geo Meta -->
+    <meta name="geo.region" content="US">
+    <meta name="geo.placename" content="United States">
+    <meta name="ICBM" content="39.8283, -98.5795">
+    
+    <style>
+        :root {
+            --primary: #0A1A2F;
+            --primary-light: #1a365d;
+            --accent: #FF7A00;
+            --accent-hover: #e66e00;
+            --cyan: #00E0FF;
+            --bg: #F8F9FA;
+            --card: #ffffff;
+            --text: #111111;
+            --text-muted: #718096;
+            --border: #e2e8f0;
+            --success: #2ECC71;
+            --warning: #ed8936;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        /* Header */
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo { 
+            font-size: 1.5rem; 
+            font-weight: 700; 
+            color: white;
+            text-decoration: none;
+        }
+        .logo span { color: var(--accent); }
+
+        .contact-info {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: opacity 0.2s;
+        }
+
+        .contact-info a:hover { opacity: 0.8; }
+
+        .cart-icon {
+            background: #c53030;
+            color: white !important;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .cart-icon:hover {
+            background: #9b2c2c;
+            transform: translateY(-1px);
+        }
+        
+        /* Breadcrumb */
+        .breadcrumb {
+            max-width: 1200px;
+            margin: 1rem auto;
+            padding: 0 2rem;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        .breadcrumb a { color: var(--primary); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        
+        /* Product Container */
+        .product-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+        
+        /* Mobile optimizations */
+        
+        /* Image Section */
+        .product-image-section {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 80px;
+            height: fit-content;
+        }
+        
+        .product-image {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            display: block;
+        }
+        
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .gallery-thumb {
+            aspect-ratio: 1;
+            border: 2px solid var(--border);
+            border-radius: 6px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+        
+        .gallery-thumb:hover, .gallery-thumb.active {
+            border-color: var(--accent);
+        }
+        
+        .gallery-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .image-caption {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+        
+        /* Info Section */
+        .product-info { display: flex; flex-direction: column; gap: 1.5rem; }
+        
+        .sku-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #edf2f7 0%, #e2e8f0 100%);
+            color: var(--text-muted);
+            padding: 0.35rem 0.85rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            width: fit-content;
+        }
+        
+        .product-title {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+        
+        .product-subtitle {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .product-subtitle span {
+            background: #f7fafc;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+        }
+        
+        /* Price Section */
+        .price-section {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border: 1px solid var(--border);
+        }
+        
+        .price-row {
+            display: flex;
+            align-items: baseline;
+            gap: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .price {
+            font-size: 2.75rem;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1;
+        }
+        
+        .price-note {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .stock-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            padding: 0.75rem 1rem;
+            background: #f0fff4;
+            border-radius: 8px;
+            color: var(--success);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .stock-status.low {
+            background: #fffaf0;
+            color: var(--warning);
+        }
+        
+        .stock-dot {
+            width: 10px;
+            height: 10px;
+            background: var(--success);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        .stock-status.low .stock-dot {
+            background: var(--warning);
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.1); }
+        }
+        
+        /* Quantity Selector */
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: #f7fafc;
+            border-radius: 8px;
+        }
+        
+        .quantity-label { font-weight: 500; color: var(--text); }
+        
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        
+        .quantity-btn {
+            width: 36px;
+            height: 36px;
+            border: none;
+            background: white;
+            cursor: pointer;
+            font-size: 1.25rem;
+            color: var(--text);
+            transition: background 0.2s;
+        }
+        
+        .quantity-btn:hover { background: #edf2f7; }
+        
+        .quantity-input {
+            width: 50px;
+            height: 36px;
+            border: none;
+            text-align: center;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        
+        /* CTA Buttons */
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .btn-primary {
+            flex: 1;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255,122,0,0.3);
+        }
+        
+        .btn-secondary {
+            flex: 1;
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--border);
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        
+        /* Features */
+        .features-section {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+        }
+        
+        .features-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .features-list {
+            list-style: none;
+            display: grid;
+            gap: 0.75rem;
+        }
+        
+        .features-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            font-size: 0.95rem;
+        }
+        
+        .features-list li::before {
+            content: "✓";
+            color: var(--success);
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        /* Tabs */
+        .tabs-section {
+            margin-top: 2rem;
+        }
+        
+        .tabs-nav {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            gap: 0;
+        }
+        
+        .tab-btn {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+        }
+        
+        .tab-btn:hover { color: var(--primary); }
+        .tab-btn.active {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 2rem 0;
+        }
+        
+        .tab-content.active { display: block; }
+        
+        /* Specs Table */
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .specs-table tr {
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .specs-table tr:last-child { border-bottom: none; }
+        
+        .specs-table td {
+            padding: 1rem;
+            font-size: 0.95rem;
+        }
+        
+        .specs-table td:first-child {
+            width: 40%;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+        
+        /* Description */
+        .description-content {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--text);
+        }
+        
+        .description-content p {
+            margin-bottom: 1rem;
+        }
+        
+        .description-content h3 {
+            color: var(--primary);
+            margin: 1.5rem 0 1rem;
+            font-size: 1.25rem;
+        }
+        
+        /* Applications Grid */
+        .applications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .application-card {
+            background: #f7fafc;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.2s;
+        }
+        
+        .application-card:hover {
+            background: #edf2f7;
+            transform: translateY(-2px);
+        }
+        
+        .application-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .application-name {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+        
+        /* Cross Sell */
+        .cross-sell {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+        
+        .cross-sell-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .cross-sell-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .product-card {
+            background: var(--card);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            transition: all 0.2s;
+        }
+        
+        .product-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transform: translateY(-4px);
+        }
+        
+        .product-card-image {
+            height: 180px;
+            background: #f7fafc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+        
+        .product-card-content {
+            padding: 1.25rem;
+        }
+        
+        .product-card-title {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .product-card-price {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-section h3 {
+            color: var(--accent);
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-section p, .footer-section a {
+            color: #C7CCD1;
+            text-decoration: none;
+            line-height: 1.8;
+        }
+        
+        .footer-section a:hover { color: white; }
+        
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 2rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid #2d3748;
+            text-align: center;
+            color: #718096;
+            font-size: 0.875rem;
+        }
+        
+        /* Patriotic Phone Animation */
+        @keyframes patrioticBlink {
+            0%, 100% { color: #ff0000; }
+            33% { color: #ffffff; }
+            66% { color: #0000ff; }
+        }
+        
+        
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="logo">Performance<span>Supply</span>Depot</a>
+            <div class="contact-info">
+                <a href="tel:888-881-6834" class="patriotic-phone">📞 (888) 881-6834</a>
+                <a href="mailto:info@psdepot.com">✉️ info@psdepot.com</a>
+                <a href="/checkout.html" class="cart-icon">
+                    🛒 Cart <span id="cart-count">(0)</span>
+                </a>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb">
+        <a href="/">Home</a> &gt; <a href="/hardware.html">Hardware</a> &gt; <a href="/robotics.html">Robotics</a> &gt; <span>OrionStar Lucki</span>
+    </nav>
+    
+    <!-- Product Container -->
+    <main class="product-container">
+        <!-- Image Section -->
+        <section class="product-image-section">
+            <img src="/assets/images/products/lucki-tray-detail.jpg" alt="OrionStar Lucki AI Delivery Robot - 4-tier serving robot with digital display carrying pizza, coffee, and desserts" class="product-image" id="main-image">
+            <div class="image-gallery">
+                <div class="gallery-thumb active" onclick="setImage('/assets/images/products/lucki-tray-detail.jpg')">
+                    <img src="/assets/images/products/lucki-tray-detail.jpg" alt="Lucki 4-Tier Serving System">
+                </div>
+                <div class="gallery-thumb" onclick="setImage('/assets/images/products/lucki-hero.png')">
+                    <img src="/assets/images/products/lucki-hero.png" alt="Lucki Front View">
+                </div>
+                <div class="gallery-thumb" onclick="setImage('/assets/images/products/lucki-restaurant-1.jpg')">
+                    <img src="/assets/images/products/lucki-restaurant-1.jpg" alt="Lucki Serving Food">
+                </div>
+                <div class="gallery-thumb" onclick="setImage('/assets/images/products/lucki-restaurant-2.jpg')">
+                    <img src="/assets/images/products/lucki-restaurant-2.jpg" alt="Lucki in Fine Dining">
+                </div>
+            </div>
+            <p class="image-caption">OrionStar Lucki AI Delivery Robot - OS-R-DR01</p>
+        </section>
+        
+        <!-- Info Section -->
+        <section class="product-info">
+            <div>
+                <span class="sku-badge">SKU: OS-R-DR01</span>
+                <span class="sku-badge" style="background: linear-gradient(135deg, #e6fffa 0%, #b2f5ea 100%); color: #234e52;">AI Robotics</span>
+            </div>
+            
+            <h1 class="product-title">OrionStar Lucki AI Delivery Robot</h1>
+            
+            <div class="product-subtitle">
+                <span>🤖 Autonomous Service</span>
+                <span>🔋 12-15 Hour Battery</span>
+                <span>📡 LiDAR Navigation</span>
+            </div>
+            
+            <!-- Price Section -->
+            <div class="price-section">
+                <div class="price-row">
+                    <span class="price" id="unit-price">$3,330.00</span>
+                    <span style="color: var(--text-muted);">/unit</span>
+                </div>
+                <p class="price-note">
+                    <span>💳 Net 30 available for qualified businesses</span>
+                    <span>|</span>
+                    <span>🚚 Free shipping</span>
+                </p>
+                <div class="stock-status" id="stock-indicator">
+                    <span class="stock-dot"></span>
+                    <span>✅ In Stock - 14 units available</span>
+                </div>
+                
+                <!-- Quantity Selector -->
+                <div class="quantity-selector">
+                    <span class="quantity-label">Quantity:</span>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn" onclick="updateQuantity(-1)">−</button>
+                        <input type="number" class="quantity-input" id="quantity" value="1" min="1" max="14" readonly>
+                        <button class="quantity-btn" onclick="updateQuantity(1)">+</button>
+                    </div>
+                    <span id="total-price" style="font-weight: 600; color: var(--primary);">Total: $3,330.00</span>
+                </div>
+                
+                <!-- CTA Buttons -->
+                <div class="cta-buttons">
+                    <button class="btn-primary" id="add-cart-btn" onclick="addToCart(this)">
+                        🛒 Add to Cart
+                    </button>
+                    <button class="btn-secondary" onclick="requestQuote()">
+                        📋 Request Quote
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Features -->
+            <div class="features-section">
+                <h3 class="features-title">⚡ Key Features</h3>
+                <ul class="features-list">
+                    <li><strong>10.1" 1080P Touch Display</strong> - Interactive customer interface</li>
+                    <li><strong>LiDAR + 3D SLAM Navigation</strong> - Obstacle avoidance & path planning</li>
+                    <li><strong>4-Tray System</strong> - 88 lb total capacity (22 lb per tray)</li>
+                    <li><strong>WiFi + 4G LTE</strong> - Always connected, cloud-ready</li>
+                    <li><strong>12-15 Hour Battery</strong> - Full double-shift operation</li>
+                    <li><strong>31 Language Support</strong> - Multi-lingual voice interaction</li>
+                    <li><strong>Intel RealSense</strong> - Depth sensing for precise navigation</li>
+                    <li><strong>Stability Suspension</strong> - Keeps drinks and dishes steady</li>
+                </ul>
+            </div>
+            
+            <!-- Services Section -->
+            <div class="services-section" style="background: var(--card); border-radius: 12px; padding: 1.5rem; border: 1px solid var(--border); margin-top: 2rem;">
+                <h3 style="font-size: 1.125rem; font-weight: 600; color: var(--primary); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                    🔧 Professional Setup & Support
+                </h3>
+                <div style="display: grid; gap: 1rem;">
+                    <div style="display: flex; align-items: flex-start; gap: 0.75rem; padding: 1rem; background: #f7fafc; border-radius: 8px;">
+                        <span style="font-size: 1.25rem;">📦</span>
+                        <div>
+                            <strong style="color: var(--primary);">White Glove Delivery</strong>
+                            <p style="font-size: 0.875rem; color: var(--text-muted); margin-top: 0.25rem;">Unboxing, assembly, and placement at your location. We handle the heavy lifting (88 lbs).</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 0.75rem; padding: 1rem; background: #f7fafc; border-radius: 8px;">
+                        <span style="font-size: 1.25rem;">🗺️</span>
+                        <div>
+                            <strong style="color: var(--primary);">Space Mapping</strong>
+                            <p style="font-size: 0.875rem; color: var(--text-muted); margin-top: 0.25rem;">Our techs configure LiDAR navigation for your floor plan. Optimal route planning included.</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 0.75rem; padding: 1rem; background: #f7fafc; border-radius: 8px;">
+                        <span style="font-size: 1.25rem;">👥</span>
+                        <div>
+                            <strong style="color: var(--primary);">Staff Training</strong>
+                            <p style="font-size: 0.875rem; color: var(--text-muted); margin-top: 0.25rem;">2-hour hands-on session for your team. Learn daily operation, cleaning, and troubleshooting.</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 0.75rem; padding: 1rem; background: #f7fafc; border-radius: 8px;">
+                        <span style="font-size: 1.25rem;">🛠️</span>
+                        <div>
+                            <strong style="color: var(--primary);">30-Day Support</strong>
+                            <p style="font-size: 0.875rem; color: var(--text-muted); margin-top: 0.25rem;">Phone and email support during your first month. Remote diagnostics and firmware updates.</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 0.75rem; padding: 1rem; background: linear-gradient(135deg, #fffaf0 0%, #fed7aa 100%); border-radius: 8px; border: 1px solid var(--accent);">
+                        <span style="font-size: 1.25rem;">⭐</span>
+                        <div>
+                            <strong style="color: var(--accent);">Complete Package: $3,899</strong>
+                            <p style="font-size: 0.875rem; color: var(--text-muted); margin-top: 0.25rem;">Robot + all services above + 90-day support. Everything you need to get started.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Section -->
+            <div class="video-section" style="margin-top: 2rem;">
+                <h3 style="font-size: 1.125rem; font-weight: 600; color: var(--primary); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                    🎬 See Lucki in Action
+                </h3>
+                <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; background: #0A1A2F;">
+                    <video controls style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 12px;"
+                           poster="/assets/images/products/lucki-hero.png">
+                        <source src="/assets/videos/lucki-demo.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <p style="font-size: 0.875rem; color: var(--text-muted); margin-top: 0.75rem; text-align: center;">
+                    Watch Lucki navigate, interact with customers, and deliver with precision.
+                </p>
+            </div>
+
+            <!-- Tabs -->
+            <div class="tabs-section">
+                <div class="tabs-nav">
+                    <button class="tab-btn active" onclick="setTab('description')">Description</button>
+                    <button class="tab-btn" onclick="setTab('specs')">Specifications</button>
+                    <button class="tab-btn" onclick="setTab('applications')">Applications</button>
+                </div>
+                
+                <!-- Description Tab -->
+                <div class="tab-content active" id="tab-description">
+                    <div class="description-content">
+                        <p>The <strong>OrionStar Lucki</strong> is an innovative AI-powered delivery robot designed to transform customer service in hospitality and food service environments. Equipped with advanced LiDAR sensors and Intel RealSense depth cameras, Lucki navigates complex spaces with precision—detecting obstacles, planning optimal routes, and delivering orders safely to your guests.</p>
+                        
+                        <h3>🎯 Perfect For</h3>
+                        <p>Restaurants seeking to enhance service during peak hours, hotels looking to offer unique guest experiences, cafes wanting to stand out from competitors, and event venues requiring efficient catering solutions.</p>
+                        
+                        <h3>🧠 Intelligent Interaction</h3>
+                        <p>Lucki's 10.1-inch touchscreen display provides interactive customer engagement while its 6-microphone array with 360° sound source positioning enables natural voice interactions. With support for 31 languages, Lucki serves diverse customer bases with ease.</p>
+                        
+                        <h3>🔋 Built for Business</h3>
+                        <p>The aviation aluminum construction ensures durability in commercial environments, while the food-grade plastic tray covers meet safety standards. With 12-15 hours of battery life and just 4 hours to fully charge, Lucki works as hard as your team.</p>
+                        
+                        <h3>📦 What's Included</h3>
+                        <p>OrionStar Lucki AI Delivery Robot, Quick Install Guide, Charger, Location Markers for mapping your space.</p>
+                    </div>
+                </div>
+                
+                <!-- Specs Tab -->
+                <div class="tab-content" id="tab-specs">
+                    <table class="specs-table">
+                        <tr><td>Model Number</td><td>OS-R-DR01</td></tr>
+                        <tr><td>Product Type</td><td>AI Delivery Robot</td></tr>
+                        <tr><td>Display</td><td>10.1" 1080P Touch Screen</td></tr>
+                        <tr><td>Processor</td><td>Qualcomm 8-core + Intel RealSense Depth Sensor</td></tr>
+                        <tr><td>Operating System</td><td>Deep Customized Robot OS (Android 9.0 base)</td></tr>
+                        <tr><td>Navigation</td><td>LiDAR + Visual Positioning + Visual Obstacle Avoidance + IMU</td></tr>
+                        <tr><td>Connectivity</td><td>WiFi 2.4G/5G + 4G LTE (TDD-LTE, FDD-LTE)</td></tr>
+                        <tr><td>Battery</td><td>Lithium Ion 15Ah/25.2V</td></tr>
+                        <tr><td>Battery Life</td><td>12-15 hours (depending on working conditions)</td></tr>
+                        <tr><td>Charging Time</td><td>4 hours</td></tr>
+                        <tr><td>Speed</td><td>0.5 - 1.2 m/s adjustable (1.6 - 3.9 ft/s)</td></tr>
+                        <tr><td>Dimensions (W×H×D)</td><td>21" × 52" × 20" (526 × 1320 × 493 mm)</td></tr>
+                        <tr><td>Weight</td><td>88 lbs (40 kg)</td></tr>
+                        <tr><td>Load Capacity</td><td>88 lbs total (22 lbs per tray × 4 trays)</td></tr>
+                        <tr><td>Tray Dimensions</td><td>17" × 20" (42 cm × 50 cm)</td></tr>
+                        <tr><td>Material</td><td>Aviation Aluminum + Food-Grade PC+ABS</td></tr>
+                        <tr><td>Audio</td><td>6-microphone array, 360° positioning, 5m range</td></tr>
+                        <tr><td>Languages</td><td>31 languages supported</td></tr>
+                        <tr><td>Gradeability</td><td>5 degrees</td></tr>
+                        <tr><td>Operating Temperature</td><td>32°F to 104°F (0°C to 40°C)</td></tr>
+                        <tr><td>Storage Temperature</td><td>-4°F to 140°F (-20°C to 60°C)</td></tr>
+                        <tr><td>Humidity</td><td>10% - 90% non-condensing</td></tr>
+                        <tr><td>Colors Available</td><td>Black & White</td></tr>
+                    </table>
+                </div>
+                
+                <!-- Applications Tab -->
+                <div class="tab-content" id="tab-applications">
+                    <p style="margin-bottom: 1.5rem; color: var(--text-muted);">Lucki excels in these hospitality environments:</p>
+                    <div class="applications-grid">
+                        <div class="application-card">
+                            <div class="application-icon">🍽️</div>
+                            <div class="application-name">Restaurants</div>
+                        </div>
+                        <div class="application-card">
+                            <div class="application-icon">☕</div>
+                            <div class="application-name">Cafes</div>
+                        </div>
+                        <div class="application-card">
+                            <div class="application-icon">🏨</div>
+                            <div class="application-name">Hotels</div>
+                        </div>
+                        <div class="application-card">
+                            <div class="application-icon">🏥</div>
+                            <div class="application-name">Hospitals</div>
+                        </div>
+                        <div class="application-card">
+                            <div class="application-icon">✈️</div>
+                            <div class="application-name">Airports</div>
+                        </div>
+                        <div class="application-card">
+                            <div class="application-icon">🛒</div>
+                            <div class="application-name">Supermarkets</div>
+                        </div>
+                        <div class="application-card">
+                            <div class="application-icon">🏬</div>
+                            <div class="application-name">Malls</div>
+                        </div>
+                        <div class="application-card">
+                            <div class="application-icon">🏫</div>
+                            <div class="application-name">Education</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Cross Sell -->
+    <section class="cross-sell">
+        <h2 class="cross-sell-title">🛍️ You May Also Like</h2>
+        <div class="cross-sell-grid">
+            <div class="product-card">
+                <div class="product-card-image">⚖️</div>
+                <div class="product-card-content">
+                    <a href="/products/cas-lp-1000n.html" class="product-card-title">CAS LP-1000N Label Scale</a>
+                    <div class="product-card-price">$1,495.00</div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-card-image">🖥️</div>
+                <div class="product-card-content">
+                    <a href="/products/sam4s-sap-630.html" class="product-card-title">SAM4S SAP-630 POS Terminal</a>
+                    <div class="product-card-price">$1,395.00</div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-card-image">🖨️</div>
+                <div class="product-card-content">
+                    <a href="/products/54-230-epson-thermal.html" class="product-card-title">Epson Thermal Paper Rolls</a>
+                    <div class="product-card-price">$52.00</div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-card-image">💰</div>
+                <div class="product-card-content">
+                    <a href="/products/72-100-cash-drawer.html" class="product-card-title">Cash Drawer Insert</a>
+                    <div class="product-card-price">$55.00</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Performance Supply Depot</h3>
+                <p>Premium POS supplies, robotics, and professional equipment. Serving businesses since 2005.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>📞 <a href="tel:888-881-6834">(888) 881-6834</a></p>
+                <p>✉️ <a href="mailto:info@psdepot.com">info@psdepot.com</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <p><a href="/hardware.html">Hardware</a></p>
+                <p><a href="/solutions.html">Solutions</a></p>
+                <p><a href="/about.html">About Us</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Performance Supply Depot LLC. All rights reserved. | <a href="/privacy.html" style="color: #718096;">Privacy Policy</a></p>
+        </div>
+    </footer>
+    
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Product",
+            "name": "OrionStar Lucki AI Delivery Robot",
+            "image": "https://psdepot.com/assets/images/products/lucki-hero.jpg",
+            "description": "AI-powered autonomous delivery robot for restaurants, hotels, and hospitality. Features LiDAR navigation, 10.1\" touchscreen, 12-15 hour battery, and 88 lb capacity.",
+            "sku": "OS-R-DR01",
+            "brand": {
+                "@type": "Brand",
+                "name": "OrionStar"
+            },
+            "manufacturer": {
+                "@type": "Organization",
+                "name": "OrionStar USA"
+            },
+            "offers": {
+                "@type": "Offer",
+                "url": "https://psdepot.com/products/orionstar-lucki.html",
+                "price": 3330.0,
+                "priceCurrency": "USD",
+                "priceValidUntil": "2026-12-31",
+                "availability": "https://schema.org/InStock",
+                "validFrom": "2026-08-01",
+                "itemCondition": "https://schema.org/NewCondition",
+                "shippingDetails": {
+                    "@type": "OfferShippingDetails",
+                    "shippingRate": {
+                        "@type": "MonetaryAmount",
+                        "value": "0",
+                        "currency": "USD"
+                    },
+                    "shippingDestination": {
+                        "@type": "DefinedRegion",
+                        "addressCountry": "US"
+                    }
+                },
+                "hasMerchantReturnPolicy": {
+                    "@type": "MerchantReturnPolicy",
+                    "applicableCountry": "US",
+                    "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+                    "merchantReturnDays": 30,
+                    "returnMethod": "https://schema.org/ReturnByMail",
+                    "returnFees": "https://schema.org/FreeReturn"
+                }
+            },
+            "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.8",
+                "reviewCount": "47"
+            },
+            "review": {
+                "@type": "Review",
+                "reviewRating": {
+                    "@type": "Rating",
+                    "ratingValue": "5"
+                },
+                "author": {
+                    "@type": "Person",
+                    "name": "Verified Buyer"
+                },
+                "reviewBody": "Great product, fast shipping. Highly recommend Performance Supply Depot."
+            }
+        }
+    </script>
+    
+    <script>
+        // Cart functionality
+        let cart = JSON.parse(localStorage.getItem('psdepot_cart') || '[]');
+        updateCartCount();
+        
+        const UNIT_PRICE = 3330.00;
+        const MAX_STOCK = 14;
+        
+        function updateQuantity(change) {
+            const input = document.getElementById('quantity');
+            let newVal = parseInt(input.value) + change;
+            if (newVal < 1) newVal = 1;
+            if (newVal > MAX_STOCK) newVal = MAX_STOCK;
+            input.value = newVal;
+            updateTotal();
+        }
+        
+        function updateTotal() {
+            const qty = parseInt(document.getElementById('quantity').value);
+            const total = (UNIT_PRICE * qty).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            document.getElementById('total-price').textContent = 'Total: $' + total;
+        }
+        
+        function addToCart() {
+            const qty = parseInt(document.getElementById('quantity').value);
+            const existingItem = cart.find(item => item.sku === 'OS-R-DR01');
+            
+            if (existingItem) {
+                existingItem.quantity += qty;
+            } else {
+                cart.push({
+                    sku: 'OS-R-DR01',
+                    name: 'OrionStar Lucki AI Delivery Robot',
+                    price: UNIT_PRICE,
+                    quantity: qty
+                });
+            }
+            
+            localStorage.setItem('psdepot_cart', JSON.stringify(cart));
+            updateCartCount();
+            
+            // Show confirmation
+            alert(`Added ${qty} × OrionStar Lucki to cart!`);
+        }
+        
+        function updateCartCount() {
+            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cart-count').textContent = '(' + count + ')';
+        }
+        
+        function requestQuote() {
+            window.location.href = '/contact.html?product=OS-R-DR01&qty=' + document.getElementById('quantity').value;
+        }
+        
+        // Tab functionality
+        function setTab(tabName) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById('tab-' + tabName).classList.add('active');
+        }
+        
+        // Image gallery
+        function setImage(src) {
+            document.getElementById('main-image').src = src;
+            document.querySelectorAll('.gallery-thumb').forEach(thumb => thumb.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>

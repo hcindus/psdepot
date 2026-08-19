@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partner Leads Dashboard</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, sans-serif;
+            background: #0d1117;
+            color: #e6edf3;
+            min-height: 100vh;
+        }
+
+        /* Top Bar */
+        .top-bar {
+            background: rgba(10, 14, 20, 0.98);
+            border-bottom: 2px solid;
+            border-image: linear-gradient(90deg, #bf0a30, #ffffff, #002868) 1;
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .top-bar .logo { font-weight: 800; color: #58a6ff; font-size: 1.1rem; }
+        .top-bar .nav { display: flex; gap: 16px; align-items: center; }
+        .top-bar a { color: #8b949e; text-decoration: none; font-size: 0.9rem; }
+        .top-bar a:hover { color: #c9d1d9; }
+        .top-bar .badge {
+            background: #238636; color: #fff; padding: 4px 10px; border-radius: 12px;
+            font-size: 0.8rem; font-weight: 600;
+        }
+
+        /* Stats Row */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 14px;
+            padding: 20px 24px;
+        }
+        .stat-card {
+            background: #161b22;
+            border: 1px solid #21262d;
+            border-radius: 12px;
+            padding: 18px 16px;
+            text-align: center;
+        }
+        .stat-card .stat-value {
+            font-size: 2rem;
+            font-weight: 900;
+            line-height: 1.1;
+        }
+        .stat-card .stat-label {
+            font-size: 0.8rem;
+            color: #8b949e;
+            margin-top: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .stat-value.blue { color: #58a6ff; }
+        .stat-value.green { color: #3fb950; }
+        .stat-value.red { color: #f85149; }
+        .stat-value.yellow { color: #d2991d; }
+
+        /* Close Ratio Bar */
+        .ratio-bar-wrap {
+            margin: 4px 0 8px;
+            background: #21262d;
+            border-radius: 6px;
+            height: 8px;
+            overflow: hidden;
+        }
+        .ratio-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #238636, #3fb950);
+            border-radius: 6px;
+            transition: width 0.5s ease;
+        }
+
+        /* Filters */
+        .filters-bar {
+            display: flex;
+            gap: 10px;
+            padding: 0 24px 16px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .filters-bar select, .filters-bar input {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 8px 12px;
+            color: #e6edf3;
+            font-size: 0.85rem;
+            font-family: inherit;
+        }
+        .filters-bar select:focus, .filters-bar input:focus {
+            outline: none;
+            border-color: #58a6ff;
+        }
+        .filters-bar .btn {
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: 1px solid #30363d;
+            background: #21262d;
+            color: #c9d1d9;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-family: inherit;
+            font-weight: 600;
+        }
+        .filters-bar .btn:hover { border-color: #58a6ff; }
+        .filters-bar .btn-primary {
+            background: #238636;
+            border-color: #238636;
+            color: #fff;
+        }
+        .filters-bar .btn-primary:hover { background: #2ea043; }
+
+        /* Table */
+        .table-wrap {
+            padding: 0 24px 20px;
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            min-width: 900px;
+        }
+        th {
+            background: #161b22;
+            padding: 10px 12px;
+            text-align: left;
+            font-weight: 600;
+            color: #8b949e;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            border-bottom: 2px solid #21262d;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        th:hover { color: #c9d1d9; }
+        th .sort-arrow { margin-left: 4px; }
+        td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #21262d;
+            vertical-align: middle;
+        }
+        tr:hover td { background: #161b22; }
+
+        /* Status Badges */
+        .status-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.78rem;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .status-open { background: rgba(210, 153, 29, 0.2); color: #d2991d; }
+        .status-contacted { background: rgba(88, 166, 255, 0.2); color: #58a6ff; }
+        .status-closed { background: rgba(63, 185, 80, 0.2); color: #3fb950; }
+        .status-other { background: rgba(248, 81, 73, 0.2); color: #f85149; }
+
+        .dest-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.72rem;
+            margin-right: 4px;
+        }
+        .dest-psd { background: rgba(88, 166, 255, 0.12); color: #58a6ff; }
+        .dest-chipp { background: rgba(63, 185, 80, 0.12); color: #3fb950; }
+        .dest-witzend { background: rgba(247, 120, 186, 0.12); color: #f778ba; }
+
+        /* Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 16px;
+            padding: 24px;
+            width: 90%;
+            max-width: 480px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        .modal h3 { margin-bottom: 16px; color: #fff; }
+        .modal .form-group { margin-bottom: 14px; }
+        .modal label { display: block; font-size: 0.85rem; color: #8b949e; margin-bottom: 4px; }
+        .modal select, .modal input, .modal textarea {
+            width: 100%;
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 10px 12px;
+            color: #e6edf3;
+            font-size: 0.9rem;
+            font-family: inherit;
+        }
+        .modal select:focus, .modal input:focus, .modal textarea:focus {
+            outline: none;
+            border-color: #58a6ff;
+        }
+        .modal .btn-row {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 18px;
+        }
+        .modal .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: 1px solid #30363d;
+            background: #21262d;
+            color: #c9d1d9;
+            cursor: pointer;
+            font-weight: 600;
+            font-family: inherit;
+        }
+        .modal .btn-save {
+            background: #238636;
+            border-color: #238636;
+            color: #fff;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #238636;
+            color: #fff;
+            padding: 14px 20px;
+            border-radius: 10px;
+            font-weight: 600;
+            z-index: 9999;
+            transform: translateX(120%);
+            transition: transform 0.3s;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+        }
+        .toast.show { transform: translateX(0); }
+        .toast.error { background: #da3633; }
+
+        /* ─── Mobile Responsive ─── */
+        @media (max-width: 900px) {
+            .top-bar {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+                padding: 10px 14px;
+            }
+            .top-bar .nav { flex-wrap: wrap; gap: 10px; }
+
+            .stats-row {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+                padding: 12px 14px;
+            }
+            .stat-card { padding: 12px 8px; }
+            .stat-card .stat-value { font-size: 1.3rem; }
+            .stat-card .stat-label { font-size: 0.7rem; }
+
+            .filters-bar {
+                padding: 0 14px 12px;
+                gap: 6px;
+            }
+            .filters-bar select,
+            .filters-bar input {
+                flex: 1 1 auto;
+                min-width: 100px;
+                font-size: 16px; /* prevent iOS zoom */
+                padding: 8px 10px;
+            }
+            .filters-bar .btn {
+                padding: 8px 12px;
+                font-size: 0.8rem;
+            }
+
+            .table-wrap {
+                padding: 0 6px 16px;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            table { font-size: 0.78rem; min-width: 800px; }
+
+            .modal {
+                width: 95%;
+                max-width: 100%;
+                padding: 18px 14px;
+                border-radius: 12px;
+                max-height: 85vh;
+            }
+            .modal h3 { font-size: 1.1rem; }
+            .modal select,
+            .modal input,
+            .modal textarea {
+                font-size: 16px; /* prevent iOS zoom */
+            }
+            .modal .btn-row { flex-wrap: wrap; }
+
+            .toast {
+                top: 0; right: 0; left: 0;
+                border-radius: 0 0 10px 10px;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .stats-row {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 6px;
+                padding: 10px 8px;
+            }
+            .stat-card .stat-value { font-size: 1.1rem; }
+            .stat-card .stat-label { font-size: 0.65rem; }
+            .stat-card { padding: 10px 6px; }
+
+            .filters-bar select,
+            .filters-bar input {
+                width: 100%;
+                flex: 1 1 100%;
+                min-width: 0;
+            }
+            .filters-bar .btn {
+                flex: 1 1 auto;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <span class="logo">🏪 PSD × 🤖 Chipp × 🍹 WitzEnd — 7 Approved Vendors</span>
+        <div class="nav">
+            <a href="../leads-portal/">+ New Lead</a>
+            <span class="badge" id="liveBadge">● LIVE</span>
+        </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-row" id="statsRow"></div>
+
+    <!-- Filters -->
+    <div class="filters-bar">
+        <select id="filterDest" onchange="renderTable()">
+            <option value="all">All Destinations</option>
+            <option value="psd">→ PSDepot</option>
+            <option value="chipp">→ Chipp</option>
+            <option value="witzend">→ WitzEnd</option>
+        </select>
+        <select id="filterStatus" onchange="renderTable()">
+            <option value="all">All Statuses</option>
+            <option value="open">Open</option>
+            <option value="contacted">Contacted</option>
+            <option value="closed">Closed</option>
+            <option value="other">Other</option>
+        </select>
+        <select id="filterSource" onchange="renderTable()">
+            <option value="all">All Sources</option>
+            <option value="psd">From PSDepot</option>
+            <option value="chipp">From Chipp</option>
+            <option value="witzend">From WitzEnd</option>
+        </select>
+        <select id="filterProduct" onchange="renderTable()">
+            <option value="all">All Products</option>
+        </select>
+        <input type="text" id="filterSearch" placeholder="🔍 Search business..." oninput="renderTable()">
+        <button class="btn" onclick="exportCSV()">📥 Export CSV</button>
+        <button class="btn btn-primary" onclick="sendReminders()">📧 Send Reminders</button>
+    </div>
+
+    <!-- Table -->
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th onclick="sortBy('createdAt')">Date Entered <span class="sort-arrow">↕</span></th>
+                    <th onclick="sortBy('businessName')">Company</th>
+                    <th>Contact</th>
+                    <th onclick="sortBy('product')">Product</th>
+                    <th>Destination</th>
+                    <th onclick="sortBy('status')">Status</th>
+                    <th onclick="sortBy('dateContacted')">Contacted <span class="sort-arrow">↕</span></th>
+                    <th>Notes</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="leadTable"></tbody>
+        </table>
+    </div>
+
+    <!-- Status Edit Modal -->
+    <div class="modal-overlay" id="statusModal">
+        <div class="modal">
+            <h3>Update Lead Status</h3>
+            <input type="hidden" id="editLeadId">
+            <div class="form-group">
+                <label>Company</label>
+                <div id="editCompany" style="color:#c9d1d9;font-weight:600;"></div>
+            </div>
+            <div class="form-group">
+                <label>Status</label>
+                <select id="editStatus" onchange="toggleOtherReason()">
+                    <option value="open">Open</option>
+                    <option value="contacted">Contacted</option>
+                    <option value="closed">Closed</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            <div class="form-group" id="otherReasonGroup" style="display:none;">
+                <label>Reason</label>
+                <input type="text" id="editOtherReason" placeholder="e.g. Not interested, Wrong contact, Duplicate...">
+            </div>
+            <div class="form-group">
+                <label>Date Contacted</label>
+                <input type="date" id="editDateContacted">
+            </div>
+            <div class="form-group">
+                <label>Notes</label>
+                <textarea id="editNotes" rows="2" placeholder="Add notes..."></textarea>
+            </div>
+            <div class="btn-row">
+                <button class="btn" onclick="closeModal()">Cancel</button>
+                <button class="btn btn-save" onclick="saveStatus()">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        const LEAD_KEY = 'psdepot_chipp_leads';
+        const API_BASE = '/api/leads';
+        let allLeads = [];
+        let sortField = 'createdAt';
+        let sortDir = 'desc';
+
+        // ─── DATA ────────────────────────────────────────────
+
+        async function loadLeads() {
+            // Primary: fetch from server API (shared across devices)
+            try {
+                const res = await fetch(API_BASE);
+                if (res.ok) {
+                    allLeads = await res.json();
+                    // Backup to localStorage
+                    localStorage.setItem(LEAD_KEY, JSON.stringify(allLeads));
+                    populateFilters();
+                    renderStats();
+                    renderTable();
+                    return;
+                }
+            } catch(e) {}
+            // Fallback: localStorage
+            try {
+                allLeads = JSON.parse(localStorage.getItem(LEAD_KEY) || '[]');
+            } catch(e) {
+                allLeads = [];
+            }
+            // Normalize old leads that may lack fields
+            allLeads.forEach(l => {
+                l.status = l.status || 'open';
+                l.dateContacted = l.dateContacted || '';
+                l.otherReason = l.otherReason || '';
+                l.destination = l.destination || 'psd';
+            });
+            populateFilters();
+            renderStats();
+            renderTable();
+        }
+
+        async function saveLeads() {
+            // Primary: sync to server
+            try {
+                await fetch(API_BASE + '/bulk', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(allLeads)
+                });
+            } catch(e) {}
+            // Backup: localStorage
+            localStorage.setItem(LEAD_KEY, JSON.stringify(allLeads));
+        }
+
+        function getLead(id) {
+            return allLeads.find(l => l.id === id);
+        }
+
+        // ─── STATS ────────────────────────────────────────────
+
+        function renderStats() {
+            const total = allLeads.length;
+            const open = allLeads.filter(l => l.status === 'open').length;
+            const contacted = allLeads.filter(l => l.status === 'contacted').length;
+            const closed = allLeads.filter(l => l.status === 'closed').length;
+            const other = allLeads.filter(l => l.status === 'other').length;
+            const resolved = closed + other;
+            const closeRate = total > 0 ? ((closed / total) * 100).toFixed(1) : 0;
+            const contactRate = total > 0 ? (((contacted + closed + other) / total) * 100).toFixed(1) : 0;
+
+            const toChipp = allLeads.filter(l => l.destination === 'chipp').length;
+            const toPsd = allLeads.filter(l => l.destination === 'psd').length;
+            const toWitzend = allLeads.filter(l => l.destination === 'witzend').length;
+
+            document.getElementById('statsRow').innerHTML = `
+                <div class="stat-card">
+                    <div class="stat-value blue">${total}</div>
+                    <div class="stat-label">Total Leads</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value yellow">${open}</div>
+                    <div class="stat-label">Open</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value blue">${contacted}</div>
+                    <div class="stat-label">Contacted</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value green">${closed}</div>
+                    <div class="stat-label">Closed Won</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value red">${other}</div>
+                    <div class="stat-label">Closed Lost</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value green">${closeRate}%</div>
+                    <div class="stat-label">Close Ratio</div>
+                    <div class="ratio-bar-wrap"><div class="ratio-bar-fill" style="width:${closeRate}%"></div></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value blue">${contactRate}%</div>
+                    <div class="stat-label">Contact Rate</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" style="color:#58a6ff;">${toPsd}</div>
+                    <div class="stat-label">→ PSDepot</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" style="color:#3fb950;">${toChipp}</div>
+                    <div class="stat-label">→ Chipp</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" style="color:#f778ba;">${toWitzend}</div>
+                    <div class="stat-label">→ WitzEnd</div>
+                </div>
+            `;
+        }
+
+        // ─── TABLE ────────────────────────────────────────────
+
+        function getFilteredLeads() {
+            const dest = document.getElementById('filterDest').value;
+            const status = document.getElementById('filterStatus').value;
+            const source = document.getElementById('filterSource').value;
+            const product = document.getElementById('filterProduct').value;
+            const search = document.getElementById('filterSearch').value.toLowerCase();
+
+            return allLeads.filter(l => {
+                if (dest !== 'all' && l.destination !== dest) return false;
+                if (status !== 'all' && l.status !== status) return false;
+                if (source !== 'all' && l.source !== source) return false;
+                if (product !== 'all' && l.product !== product) return false;
+                if (search && !l.businessName.toLowerCase().includes(search) && !l.contactName.toLowerCase().includes(search)) return false;
+                return true;
+            }).sort((a, b) => {
+                let va = a[sortField] || '';
+                let vb = b[sortField] || '';
+                if (sortField === 'createdAt' || sortField === 'dateContacted') {
+                    va = va || '0'; vb = vb || '0';
+                }
+                const cmp = va < vb ? -1 : va > vb ? 1 : 0;
+                return sortDir === 'asc' ? cmp : -cmp;
+            });
+        }
+
+        function sortBy(field) {
+            if (sortField === field) {
+                sortDir = sortDir === 'asc' ? 'desc' : 'asc';
+            } else {
+                sortField = field;
+                sortDir = 'asc';
+            }
+            renderTable();
+        }
+
+        function renderTable() {
+            const leads = getFilteredLeads();
+            const tbody = document.getElementById('leadTable');
+
+            if (leads.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="9" style="text-align:center;color:#484f58;padding:40px;">No leads found. <a href="../leads-portal/" style="color:#58a6ff;">Add one →</a></td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = leads.map(l => {
+                const created = fmtDate(l.createdAt);
+                const contacted = l.dateContacted ? fmtDate(l.dateContacted) : '—';
+                const statusLabel = statusText(l);
+                const statusClass = 'status-' + l.status;
+                const destClass = 'dest-' + (l.destination || 'psd');
+                const destLabel = destText(l.destination || 'psd');
+
+                return `
+                    <tr>
+                        <td>${created}</td>
+                        <td><strong>${esc(l.businessName)}</strong></td>
+                        <td>${esc(l.contactName)}<br><small style="color:#8b949e;">${esc(l.email)}</small>${l.address ? `<br><small style="color:#8b949e;">${esc(l.address)}${l.zip ? ' ' + esc(l.zip) : ''}</small>` : ''}</td>
+                        <td>${esc(l.product)}</td>
+                        <td><span class="dest-badge ${destClass}">→ ${destLabel}</span></td>
+                        <td><span class="status-badge ${statusClass}" onclick="openStatusModal('${l.id}')">${statusLabel}</span></td>
+                        <td>${contacted}</td>
+                        <td style="max-width:180px;font-size:0.82rem;color:#8b949e;">${esc(l.notes || '')}${l.otherReason ? `<br><span style="color:#f85149;">Reason: ${esc(l.otherReason)}</span>` : ''}</td>
+                        <td>
+                            <button class="btn" style="padding:4px 10px;font-size:0.75rem;" onclick="openStatusModal('${l.id}')">Edit</button>
+                        </td>
+                    </tr>`;
+            }).join('');
+        }
+
+        function populateFilters() {
+            const products = [...new Set(allLeads.map(l => l.product).filter(Boolean))].sort();
+            const sel = document.getElementById('filterProduct');
+            sel.innerHTML = '<option value="all">All Products</option>' +
+                products.map(p => `<option value="${escAttr(p)}">${p}</option>`).join('');
+        }
+
+        function fmtDate(iso) {
+            if (!iso) return '—';
+            const d = new Date(iso);
+            return d.toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' });
+        }
+
+        function statusText(l) {
+            if (l.status === 'other' && l.otherReason) return `Other: ${l.otherReason}`;
+            const map = { open: 'Open', contacted: 'Contacted', closed: 'Closed', other: 'Other' };
+            return map[l.status] || 'Open';
+        }
+
+        function destText(d) {
+            if (d === 'chipp') return 'Chipp';
+            if (d === 'witzend') return 'WitzEnd';
+            return 'PSD';
+        }
+
+        // ─── MODAL ────────────────────────────────────────────
+
+        function openStatusModal(id) {
+            const lead = getLead(id);
+            if (!lead) return;
+            document.getElementById('editLeadId').value = id;
+            document.getElementById('editCompany').textContent = lead.businessName;
+            document.getElementById('editStatus').value = lead.status || 'open';
+            document.getElementById('editDateContacted').value = lead.dateContacted ? lead.dateContacted.slice(0,10) : '';
+            document.getElementById('editNotes').value = lead.notes || '';
+            document.getElementById('editOtherReason').value = lead.otherReason || '';
+            toggleOtherReason();
+            document.getElementById('statusModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('statusModal').classList.remove('active');
+        }
+
+        function toggleOtherReason() {
+            const isOther = document.getElementById('editStatus').value === 'other';
+            document.getElementById('otherReasonGroup').style.display = isOther ? 'block' : 'none';
+        }
+
+        async function saveStatus() {
+            const id = document.getElementById('editLeadId').value;
+            const lead = getLead(id);
+            if (!lead) return;
+
+            lead.status = document.getElementById('editStatus').value;
+            lead.dateContacted = document.getElementById('editDateContacted').value;
+            lead.notes = document.getElementById('editNotes').value;
+            lead.otherReason = lead.status === 'other' ? document.getElementById('editOtherReason').value : '';
+
+            // Save to server (primary) and localStorage
+            await saveLeads();
+            
+            // Also POST individual update
+            try {
+                await fetch(API_BASE + '/update', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        id: lead.id,
+                        status: lead.status,
+                        dateContacted: lead.dateContacted,
+                        notes: lead.notes,
+                        otherReason: lead.otherReason
+                    })
+                });
+            } catch(e) {}
+
+            closeModal();
+            renderStats();
+            renderTable();
+            showToast('✅ Lead updated: ' + lead.businessName);
+        }
+
+        // ─── REMINDERS ────────────────────────────────────────
+
+        function sendReminders() {
+            const stale = allLeads.filter(l => l.status === 'open' || l.status === 'contacted');
+            if (stale.length === 0) {
+                showToast('No open leads to remind about.', true);
+                return;
+            }
+
+            // Build reminder payload and send to backend
+            const payload = {
+                leads: stale.map(l => ({
+                    id: l.id,
+                    businessName: l.businessName,
+                    product: l.product,
+                    destination: l.destination,
+                    status: l.status,
+                    daysOpen: Math.floor((Date.now() - new Date(l.createdAt).getTime()) / (1000*60*60*24)),
+                    source: l.source
+                })),
+                totalStale: stale.length
+            };
+
+            fetch('/api/leads/reminders', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            }).then(r => r.json()).then(data => {
+                if (data.ok) {
+                    showToast(`📧 Reminders sent for ${stale.length} open leads.`);
+                } else {
+                    showToast('⚠️ ' + (data.error || 'Failed to send reminders.'), true);
+                }
+            }).catch(() => {
+                showToast('⚠️ Backend not reachable — reminders must be sent from server.', true);
+            });
+        }
+
+        // ─── EXPORT ───────────────────────────────────────────
+
+        function exportCSV() {
+            const leads = getFilteredLeads();
+            if (leads.length === 0) { showToast('No leads to export.', true); return; }
+
+            const headers = ['Date Entered','Company','Contact','Email','Phone','City','State','Product','Destination','Source','Status','Date Contacted','Other Reason','Notes'];
+            const rows = leads.map(l => [
+                l.createdAt ? new Date(l.createdAt).toLocaleDateString() : '',
+                l.businessName, l.contactName, l.email, l.phone, l.city, l.state,
+                l.product, (l.destination || 'psd').toUpperCase(), l.source.toUpperCase(),
+                l.status, l.dateContacted || '', l.otherReason || '', (l.notes || '').replace(/,/g, ';')
+            ]);
+
+            const csv = [headers.join(','), ...rows.map(r => r.map(v => '"' + String(v).replace(/"/g, '""') + '"').join(','))].join('\n');
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'psd_chipp_leads_' + new Date().toISOString().slice(0,10) + '.csv';
+            a.click();
+            URL.revokeObjectURL(url);
+            showToast('📥 CSV exported.');
+        }
+
+        // ─── TOAST ────────────────────────────────────────────
+
+        function showToast(msg, isError) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.className = 'toast ' + (isError ? 'error' : '') + ' show';
+            setTimeout(() => toast.classList.remove('show'), 3500);
+        }
+
+        function esc(s) { const d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
+        function escAttr(s) { return (s || '').replace(/"/g, '&quot;').replace(/</g, '&lt;'); }
+
+        // ─── LIVE REFRESH ─────────────────────────────────────
+
+        async function checkPortalLeads() {
+            // Poll server for new leads
+            try {
+                const res = await fetch(API_BASE);
+                if (res.ok) {
+                    const serverLeads = await res.json();
+                    if (serverLeads.length !== allLeads.length) {
+                        await loadLeads();
+                        showToast('🔄 New lead detected — dashboard refreshed.');
+                    }
+                }
+            } catch(e) {
+                // Offline — check localStorage
+                const current = JSON.parse(localStorage.getItem(LEAD_KEY) || '[]');
+                if (current.length !== allLeads.length) {
+                    allLeads = current;
+                    renderStats();
+                    renderTable();
+                }
+            }
+        }
+
+        // Init
+        loadLeads();
+        setInterval(checkPortalLeads, 5000); // Poll every 5s for new leads from portal
+    </script>
+</body>
+</html>

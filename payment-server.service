@@ -1,0 +1,18 @@
+[Unit]
+Description=Performance Supply Depot Payment Server
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/psdepot.com
+Environment="STRIPE_SECRET_KEY=YOUR_STRIPE_TEST_KEY"
+Environment="STRIPE_WEBHOOK_SECRET=whsec_your_webhook_secret"
+Environment="PAYMENT_PORT=8081"
+ExecStart=/usr/bin/python3 /var/www/psdepot.com/payment_server.py
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POS Systems & Android Terminals | Performance Supply Depot</title>
+    <meta name="description" content="Modern POS systems and Android terminals from SAM4s. Touchscreen solutions, cloud-ready systems, and integrated POS hardware. Free shipping on qualifying orders.">
+    <meta name="keywords" content="POS system, Android terminal, touchscreen POS, SAM4s SAP-630, cloud POS, modern POS">
+    <link rel="canonical" href="https://psdepot.com/categories/pos-systems">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    
+    <style>
+        :root {
+            --primary: #1a365d;
+            --primary-dark: #0f2744;
+            --accent: #d69e2e;
+            --accent-hover: #b7791f;
+            --secondary: #ff6600;
+            --success: #28a745;
+            --bg: #f7fafc;
+            --card: #ffffff;
+            --text: #2d3748;
+            --text-muted: #718096;
+            --border: #e2e8f0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo { font-size: 1.5rem; font-weight: 700; text-decoration: none; color: white; }
+        .logo span { color: var(--accent); }
+
+        .contact-info {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: opacity 0.2s;
+        }
+
+        .contact-info a:hover { opacity: 0.8; }
+
+        .cart-icon {
+            background: #c53030;
+            color: white !important;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .cart-icon:hover {
+            background: #9b2c2c;
+            transform: translateY(-1px);
+        }
+        
+        .breadcrumb {
+            max-width: 1200px;
+            margin: 1rem auto;
+            padding: 0 2rem;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+        
+        .breadcrumb a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .breadcrumb a:hover { text-decoration: underline; }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 2.25rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .hero p {
+            font-size: 1.125rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .category-info {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .category-info h2 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .category-info p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            background: var(--bg);
+            border-radius: 8px;
+        }
+        
+        .feature-icon {
+            font-size: 1.25rem;
+        }
+        
+        .feature-text {
+            font-size: 0.95rem;
+            color: var(--text);
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .product-card {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border: 1px solid var(--border);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+        
+        .product-image {
+            background: var(--bg);
+            border-radius: 8px;
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+        
+        .product-placeholder {
+            font-size: 4rem;
+            opacity: 0.2;
+        }
+        
+        .product-sku {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+        
+        .product-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .product-title:hover {
+            color: var(--secondary);
+        }
+        
+        .product-description {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            flex: 1;
+        }
+        
+        .product-specs {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            background: var(--bg);
+            border-radius: 6px;
+        }
+        
+        .product-specs strong {
+            color: var(--text);
+        }
+        
+        .product-price-row {
+            display: flex;
+            align-items: baseline;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .price-current {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+        
+        .price-original {
+            font-size: 1rem;
+            color: var(--text-muted);
+            text-decoration: line-through;
+        }
+        
+        .price-savings {
+            font-size: 0.8rem;
+            color: var(--success);
+            font-weight: 600;
+        }
+        
+        .stock-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        
+        .stock-status.in-stock {
+            color: var(--success);
+        }
+        
+        .stock-status.pre-order {
+            color: var(--accent);
+        }
+        
+        .badge {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--primary-dark);
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .product-actions {
+            display: flex;
+            gap: 0.75rem;
+        }
+        
+        .btn {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.2s;
+        }
+        
+        .btn-primary {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #e55a00;
+        }
+        
+        .btn-secondary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--primary-dark);
+        }
+        
+        .footer {
+            background: var(--primary-dark);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+        
+        .footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="logo">Performance<span>Supply</span>Depot</a>
+            <div class="contact-info">
+                <a href="tel:888-881-6834">888-881-6834</a>
+                <a href="/checkout.html" class="cart-icon">🛒 Cart (<span id="cart-count">0</span>)</a>
+            </div>
+        </div>
+    </header>
+    
+    <nav class="breadcrumb">
+        <a href="/">Home</a> / 
+        <a href="/categories/">Categories</a> / 
+        <span>POS Systems</span>
+    </nav>
+    
+    <section class="hero">
+        <h1>POS Systems & Android Terminals</h1>
+        <p>Modern touchscreen POS systems and Android terminals from SAM4s. Cloud-ready solutions with integrated payment processing and back-office management.</p>
+    </section>
+    
+    <div class="container">
+        <div class="category-info">
+            <h2>About Our POS Systems</h2>
+            <p>Upgrade your business with modern POS systems featuring intuitive touchscreen interfaces, cloud connectivity, and seamless integration with payment processors. Our Android-based terminals offer the flexibility of app-based POS software while maintaining the reliability of dedicated hardware.</p>
+            
+            <div class="features-grid">
+                <div class="feature-item">
+                    <span class="feature-icon">📱</span>
+                    <span class="feature-text">10" Touchscreen</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">☁️</span>
+                    <span class="feature-text">Cloud-Ready</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">💳</span>
+                    <span class="feature-text">Payment Ready</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">📊</span>
+                    <span class="feature-text">Back Office</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🔌</span>
+                    <span class="feature-text">Full Integration</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🛡️</span>
+                    <span class="feature-text">2-Year Warranty</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="badge">📱 FLAT KEYBOARD</div>
+                <div class="product-image">
+                    <span class="product-placeholder">💻</span>
+                </div>
+                <div class="product-sku">SKU: PSD-SAP-630-FT</div>
+                
+                <a href="/products/sam4s-sap-630.html" class="product-title">SAM4s SAP-630 FT Flat Keyboard Android Terminal</a>
+                
+                <p class="product-description">10" touchscreen Android terminal with flat keyboard. Cloud-ready POS system with modern interface, full app support, and seamless payment integration.</p>
+                
+                <div class="product-specs">
+                    <strong>Display:</strong> 10" Touchscreen<br>
+                    <strong>OS:</strong> Android<br>
+                    <strong>Keyboard:</strong> Flat 60 Keys
+                </div>
+                
+                <div class="product-price-row">
+                    <span class="price-current">$1,331.67</span>
+                    <span class="price-original">$1,495.00</span>
+                    <span class="price-savings">Save $163</span>
+                </div>
+                
+                <div class="stock-status pre-order">
+                    ◐ Pre-Order (3 in stock, 25 on order)
+                </div>
+                
+                <div class="product-actions">
+                    <a href="/products/sam4s-sap-630.html" class="btn btn-secondary">View Details</a>
+                    <a href="/products/sam4s-sap-630.html" class="btn btn-primary">Pre-Order</a>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="badge">⌨️ RAISED KEYBOARD</div>
+                <div class="product-image">
+                    <span class="product-placeholder">💻</span>
+                </div>
+                <div class="product-sku">SKU: PSD-SAP-630-RT</div>
+                
+                <a href="/products/sam4s-sap-630.html" class="product-title">SAM4s SAP-630 RT Raised Keyboard Android Terminal</a>
+                
+                <p class="product-description">10" touchscreen Android terminal with raised keyboard. Best of both worlds - touch interface with tactile key entry for fast operation.</p>
+                
+                <div class="product-specs">
+                    <strong>Display:</strong> 10" Touchscreen<br>
+                    <strong>OS:</strong> Android<br>
+                    <strong>Keyboard:</strong> Raised 60 Keys
+                </div>
+                
+                <div class="product-price-row">
+                    <span class="price-current">$1,331.67</span>
+                    <span class="price-original">$1,495.00</span>
+                    <span class="price-savings">Save $163</span>
+                </div>
+                
+                <div class="stock-status pre-order">
+                    ◐ Pre-Order (2 in stock, 30 on order)
+                </div>
+                
+                <div class="product-actions">
+                    <a href="/products/sam4s-sap-630.html" class="btn btn-secondary">View Details</a>
+                    <a href="/products/sam4s-sap-630.html" class="btn btn-primary">Pre-Order</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="category-info" style="margin-top: 3rem;">
+            <h2>Complete Your System</h2>
+            <p>Pair your Android terminal with these essential components for a complete POS solution:</p>
+            
+            <div class="features-grid">
+                <div class="feature-item">
+                    <span class="feature-icon">💰</span>
+                    <span class="feature-text"><a href="/categories/standard-cash-drawers/">Cash Drawers</a></span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🖨️</span>
+                    <span class="feature-text"><a href="/categories/receipt-printers/">Receipt Printers</a></span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">💳</span>
+                    <span class="feature-text">Card Readers</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">📄</span>
+                    <span class="feature-text"><a href="/categories/thermal-paper/">Paper & Supplies</a></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <p><strong>Performance Supply Depot LLC</strong></p>
+        <p>Authorized SAM4s Dealer</p>
+        <p><a href="tel:888-881-6834">888-881-6834</a> | <a href="mailto:info@psdepot.com">info@psdepot.com</a></p>
+        <p><a href="https://psdepot.com">psdepot.com</a></p>
+    </footer>
+    
+    <script>
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('psdepot_cart') || '[]');
+            const count = cart.reduce((sum, item) => sum + (parseInt(item.quantity) || 0), 0);
+            document.getElementById('cart-count').textContent = count;
+        }
+        document.addEventListener('DOMContentLoaded', updateCartCount);
+    </script>
+</body>
+</html>

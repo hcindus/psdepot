@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="NOLMIswkaAcCgv3SZi3DHCXqnUG1NMvo88Ga711Uadk" />
+    <title>RS-79 & RS-80 POS Systems | Performance Supply Depot</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #e2e8f0;
+            min-height: 100vh;
+        }
+        .header {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            padding: 30px;
+            text-align: center;
+            border-bottom: 1px solid #475569;
+        }
+        .header h1 {
+            font-size: 36px;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        .header p {
+            color: #94a3b8;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .systems-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+            gap: 40px;
+        }
+        .system-card {
+            background: #1e293b;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #334155;
+        }
+        .system-header {
+            padding: 20px;
+            background: linear-gradient(135deg, #334155 0%, #475569 100%);
+            border-bottom: 1px solid #475569;
+        }
+        .system-header h2 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        .system-header .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-top: 5px;
+        }
+        .badge-stable { background: rgba(34, 197, 94, 0.2); color: #22c55e; }
+        .badge-beta { background: rgba(234, 179, 8, 0.2); color: #eab308; }
+        .system-body {
+            padding: 20px;
+        }
+        
+        /* POS Terminal Styles */
+        .pos-terminal {
+            background: #000;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            font-family: 'Courier New', monospace;
+        }
+        .pos-screen {
+            background: #0f172a;
+            border: 2px solid #334155;
+            border-radius: 8px;
+            padding: 15px;
+            min-height: 150px;
+            margin-bottom: 15px;
+        }
+        .pos-display {
+            text-align: right;
+            font-size: 32px;
+            color: #22c55e;
+            margin-bottom: 10px;
+        }
+        .pos-items {
+            font-size: 14px;
+            color: #94a3b8;
+            max-height: 100px;
+            overflow-y: auto;
+        }
+        .pos-keypad {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+        .pos-btn {
+            padding: 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .pos-btn:hover {
+            transform: scale(0.95);
+        }
+        .btn-number {
+            background: #334155;
+            color: #e2e8f0;
+        }
+        .btn-clear {
+            background: #ef4444;
+            color: white;
+        }
+        .btn-enter {
+            background: #22c55e;
+            color: white;
+            grid-column: span 2;
+        }
+        .btn-func {
+            background: #6366f1;
+            color: white;
+        }
+        .btn-plu {
+            background: #8b5cf6;
+            color: white;
+        }
+        
+        /* RS-79 Specific */
+        .rs79-display { color: #fbbf24; }
+        
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .product-btn {
+            padding: 15px 10px;
+            background: #475569;
+            border: none;
+            border-radius: 8px;
+            color: #e2e8f0;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s;
+        }
+        .product-btn:hover {
+            background: #6366f1;
+        }
+        .product-btn .price {
+            display: block;
+            color: #22c55e;
+            font-weight: 600;
+            margin-top: 5px;
+        }
+        
+        /* Comparison Table */
+        .comparison-section {
+            margin-top: 60px;
+            padding: 40px;
+            background: #1e293b;
+            border-radius: 16px;
+            border: 1px solid #334155;
+        }
+        .comparison-section h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #334155;
+        }
+        th {
+            background: #334155;
+            font-weight: 600;
+        }
+        .check { color: #22c55e; font-size: 20px; }
+        .xmark { color: #ef4444; font-size: 20px; }
+        .arrow { color: #eab308; font-size: 20px; }
+        
+        .footer {
+            text-align: center;
+            padding: 40px;
+            color: #64748b;
+            margin-top: 60px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>ReggieStarr POS Systems</h1>
+        <p>RS-79 Web Edition &bull; RS-80 Android Native</p>
+    </div>
+
+    <div class="container">
+        <div class="systems-grid">
+            <!-- RS-79 Web Edition -->
+            <div class="system-card">
+                <div class="system-header">
+                    <h2>RS-79 Web Edition</h2>
+                    <span class="badge badge-stable">✅ STABLE</span>
+                    <p style="margin-top: 10px; color: #94a3b8;">Browser-based POS with cloud sync</p>
+                </div>
+                <div class="system-body">
+                    <div class="pos-terminal" id="rs79-terminal">
+                        <div class="pos-screen">
+                            <div class="pos-display rs79-display" id="rs79-display">$0.00</div>
+                            <div class="pos-items" id="rs79-items">Ready for transaction...</div>
+                        </div>
+                        <div class="pos-keypad">
+                            <button class="pos-btn btn-clear" onclick="rs79Clear()">C</button>
+                            <button class="pos-btn btn-func" onclick="rs79Tax()">TAX</button>
+                            <button class="pos-btn btn-func" onclick="rs79Discount()">DISC</button>
+                            <button class="pos-btn btn-func" onclick="rs79Void()">VOID</button>
+                            
+                            <button class="pos-btn btn-plu" onclick="rs79PLU('BURGER')">🍔<br>Burger</button>
+                            <button class="pos-btn btn-plu" onclick="rs79PLU('FRIES')">🍟<br>Fries</button>
+                            <button class="pos-btn btn-plu" onclick="rs79PLU('SODA')">🥤<br>Soda</button>
+                            <button class="pos-btn btn-plu" onclick="rs79PLU('OPEN')">💰<br>Open</button>
+                            
+                            <button class="pos-btn btn-number" onclick="rs79Num(7)">7</button>
+                            <button class="pos-btn btn-number" onclick="rs79Num(8)">8</button>
+                            <button class="pos-btn btn-number" onclick="rs79Num(9)">9</button>
+                            <button class="pos-btn btn-func" onclick="rs79Qty()">QTY</button>
+                            
+                            <button class="pos-btn btn-number" onclick="rs79Num(4)">4</button>
+                            <button class="pos-btn btn-number" onclick="rs79Num(5)">5</button>
+                            <button class="pos-btn btn-number" onclick="rs79Num(6)">6</button>
+                            <button class="pos-btn btn-func" onclick="rs79Subtotal()">SUB</button>
+                            
+                            <button class="pos-btn btn-number" onclick="rs79Num(1)">1</button>
+                            <button class="pos-btn btn-number" onclick="rs79Num(2)">2</button>
+                            <button class="pos-btn btn-number" onclick="rs79Num(3)">3</button>
+                            <button class="pos-btn btn-func" onclick="rs79Total()">TOTAL</button>
+                            
+                            <button class="pos-btn btn-number" onclick="rs79Num(0)">0</button>
+                            <button class="pos-btn btn-number" onclick="rs79Num('00')">00</button>
+                            <button class="pos-btn btn-enter" onclick="rs79Enter()">ENTER</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RS-80 Android Native -->
+            <div class="system-card">
+                <div class="system-header">
+                    <h2>RS-80 Android Native</h2>
+                    <span class="badge badge-beta">🟡 READY FOR TESTING</span>
+                    <p style="margin-top: 10px; color: #94a3b8;">Offline-first Android POS with thermal printing</p>
+                </div>
+                <div class="system-body">
+                    <div class="pos-terminal" id="rs80-terminal">
+                        <div class="pos-screen">
+                            <div class="pos-display" id="rs80-display">₹0.00</div>
+                            <div class="pos-items" id="rs80-items">Offline Mode - Ready</div>
+                        </div>
+                        <div class="pos-keypad">
+                            <button class="pos-btn btn-clear" onclick="rs80Clear()">C</button>
+                            <button class="pos-btn btn-func" onclick="rs80TaxMode()">TAX MODE</button>
+                            <button class="pos-btn btn-func" onclick="rs80Print()">🖨️ PRINT</button>
+                            <button class="pos-btn btn-func" onclick="rs80Settings()">⚙️</button>
+                            
+                            <button class="pos-btn btn-plu" onclick="rs80PLU('BURGER')">🍔<br>₹150</button>
+                            <button class="pos-btn btn-plu" onclick="rs80PLU('PIZZA')">🍕<br>₹250</button>
+                            <button class="pos-btn btn-plu" onclick="rs80PLU('SODA')">🥤<br>₹40</button>
+                            <button class="pos-btn btn-plu" onclick="rs80OpenPrice()">💰<br>Open</button>
+                            
+                            <button class="pos-btn btn-number" onclick="rs80Num(7)">7</button>
+                            <button class="pos-btn btn-number" onclick="rs80Num(8)">8</button>
+                            <button class="pos-btn btn-number" onclick="rs80Num(9)">9</button>
+                            <button class="pos-btn btn-func" onclick="rs80Back()">←</button>
+                            
+                            <button class="pos-btn btn-number" onclick="rs80Num(4)">4</button>
+                            <button class="pos-btn btn-number" onclick="rs80Num(5)">5</button>
+                            <button class="pos-btn btn-number" onclick="rs80Num(6)">6</button>
+                            <button class="pos-btn btn-func" onclick="rs80Hold()">HOLD</button>
+                            
+                            <button class="pos-btn btn-number" onclick="rs80Num(1)">1</button>
+                            <button class="pos-btn btn-number" onclick="rs80Num(2)">2</button>
+                            <button class="pos-btn btn-number" onclick="rs80Num(3)">3</button>
+                            <button class="pos-btn btn-func" onclick="rs80Recall()">RECALL</button>
+                            
+                            <button class="pos-btn btn-number" onclick="rs80Num(0)">0</button>
+                            <button class="pos-btn btn-number" onclick="rs80Num('00')">00</button>
+                            <button class="pos-btn btn-enter" onclick="rs80Enter()">ENTER</button>
+                        </div>
+                    </div>
+                    <div class="product-grid">
+                        <button class="product-btn" onclick="rs80QuickPLU('TEA')">
+                            ☕ Tea
+                            <span class="price">₹20</span>
+                        </button>
+                        <button class="product-btn" onclick="rs80QuickPLU('COFFEE')">
+                            ☕ Coffee
+                            <span class="price">₹50</span>
+                        </button>
+                        <button class="product-btn" onclick="rs80QuickPLU('SAMOSA')">
+                            🥟 Samosa
+                            <span class="price">₹15</span>
+                        </button>
+                        <button class="product-btn" onclick="rs80QuickPLU('DOSA')">
+                            🍽️ Dosa
+                            <span class="price">₹80</span>
+                        </button>
+                        <button class="product-btn" onclick="rs80QuickPLU('THALI')">
+                            🍛 Thali
+                            <span class="price">₹120</span>
+                        </button>
+                        <button class="product-btn" onclick="rs80QuickPLU('WATER')">
+                            💧 Water
+                            <span class="price">₹10</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comparison Table -->
+        <div class="comparison-section">
+            <h2>Feature Comparison</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>RS-79 Web</th>
+                        <th>RS-80 Android</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Platform</td>
+                        <td>Browser (Any device)</td>
+                        <td>Android Native</td>
+                    </tr>
+                    <tr>
+                        <td>Internet Required</td>
+                        <td><span class="check">✅</span> Yes (for sync)</td>
+                        <td><span class="xmark">❌</span> No - Fully offline</td>
+                    </tr>
+                    <tr>
+                        <td>Thermal Printing</td>
+                        <td><span class="xmark">❌</span> Via browser</td>
+                        <td><span class="check">✅</span> ESC/POS Native</td>
+                    </tr>
+                    <tr>
+                        <td>Barcode Scanner</td>
+                        <td><span class="arrow">→</span> USB Camera</td>
+                        <td><span class="check">✅</span> USB-HID</td>
+                    </tr>
+                    <tr>
+                        <td>Cash Drawer</td>
+                        <td><span class="xmark">❌</span> Not supported</td>
+                        <td><span class="check">✅</span> Trigger ready</td>
+                    </tr>
+                    <tr>
+                        <td>Multi-Terminal</td>
+                        <td><span class="check">✅</span> Cloud sync</td>
+                        <td><span class="arrow">→</span> WiFi Mesh (planned)</td>
+                    </tr>
+                    <tr>
+                        <td>Status</td>
+                        <td><span class="badge-stable">✅ Production</span></td>
+                        <td><span class="badge-beta">🟡 Hardware Testing</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Built by <strong>AGI Company</strong> | Performance Supply Depot</p>
+        <p style="margin-top: 10px;"><a href="/rs-80" style="color: #6366f1;">RS-80 Product Page</a> | <a href="/depotchaos" style="color: #6366f1;">DepotChaos CRM</a></p>
+    </div>
+
+    <script>
+        // RS-79 JavaScript
+        let rs79Total = 0;
+        let rs79Items = [];
+        let rs79CurrentInput = '';
+        
+        function rs79UpdateDisplay() {
+            document.getElementById('rs79-display').textContent = '$' + rs79Total.toFixed(2);
+            document.getElementById('rs79-items').innerHTML = rs79Items.length > 0 
+                ? rs79Items.map(i => `• ${i.name}: $${i.price.toFixed(2)}`).join('<br>')
+                : 'Ready for transaction...';
+        }
+        
+        function rs79Clear() {
+            rs79Total = 0;
+            rs79Items = [];
+            rs79CurrentInput = '';
+            rs79UpdateDisplay();
+        }
+        
+        function rs79Num(n) {
+            rs79CurrentInput += n;
+        }
+        
+        function rs79Enter() {
+            if (rs79CurrentInput) {
+                const price = parseFloat(rs79CurrentInput) / 100;
+                rs79Items.push({ name: 'Open Price', price: price });
+                rs79Total += price;
+                rs79CurrentInput = '';
+                rs79UpdateDisplay();
+            }
+        }
+        
+        function rs79PLU(item) {
+            const prices = { BURGER: 8.99, FRIES: 3.99, SODA: 2.50, OPEN: 0 };
+            if (item === 'OPEN') {
+                rs79CurrentInput = prompt('Enter price (in cents):', '500');
+                if (rs79CurrentInput) rs79Enter();
+            } else {
+                rs79Items.push({ name: item, price: prices[item] });
+                rs79Total += prices[item];
+                rs79UpdateDisplay();
+            }
+        }
+        
+        function rs79Subtotal() { alert('Subtotal: $' + rs79Total.toFixed(2)); }
+        function rs79Total() { alert('Total: $' + rs79Total.toFixed(2) + '\nThank you!'); rs79Clear(); }
+        function rs79Tax() { rs79Total *= 1.0875; rs79UpdateDisplay(); }
+        function rs79Discount() { 
+            const discount = prompt('Discount %:', '10');
+            if (discount) { rs79Total *= (1 - discount/100); rs79UpdateDisplay(); }
+        }
+        function rs79Void() { 
+            if (rs79Items.length > 0) {
+                rs79Total -= rs79Items.pop().price;
+                rs79UpdateDisplay();
+            }
+        }
+        function rs79Qty() { alert('Quantity feature: Enter number then press PLU'); }
+
+        // RS-80 JavaScript
+        let rs80Total = 0;
+        let rs80Items = [];
+        let rs80CurrentInput = '';
+        let rs80TaxMode = 'EXCLUSIVE';
+        
+        function rs80UpdateDisplay() {
+            document.getElementById('rs80-display').textContent = '₹' + rs80Total.toFixed(2);
+            document.getElementById('rs80-items').innerHTML = rs80Items.length > 0 
+                ? rs80Items.map(i => `• ${i.name}: ₹${i.price.toFixed(2)}`).join('<br>')
+                : 'Offline Mode - Ready';
+        }
+        
+        function rs80Clear() {
+            rs80Total = 0;
+            rs80Items = [];
+            rs80CurrentInput = '';
+            rs80UpdateDisplay();
+        }
+        
+        function rs80Num(n) {
+            rs80CurrentInput += n;
+        }
+        
+        function rs80Enter() {
+            if (rs80CurrentInput) {
+                const price = parseFloat(rs80CurrentInput);
+                rs80Items.push({ name: 'Custom', price: price });
+                rs80Total += price;
+                rs80CurrentInput = '';
+                rs80UpdateDisplay();
+            }
+        }
+        
+        function rs80PLU(item) {
+            const prices = { BURGER: 150, PIZZA: 250, SODA: 40 };
+            rs80Items.push({ name: item, price: prices[item] });
+            rs80Total += prices[item];
+            rs80UpdateDisplay();
+        }
+        
+        function rs80QuickPLU(item) {
+            const prices = { TEA: 20, COFFEE: 50, SAMOSA: 15, DOSA: 80, THALI: 120, WATER: 10 };
+            rs80Items.push({ name: item, price: prices[item] });
+            rs80Total += prices[item];
+            rs80UpdateDisplay();
+        }
+        
+        function rs80OpenPrice() {
+            rs80CurrentInput = prompt('Enter price in ₹:', '100');
+            if (rs80CurrentInput) rs80Enter();
+        }
+        
+        function rs80TaxMode() {
+            const modes = ['EXCLUSIVE', 'INCLUSIVE', 'EXEMPT'];
+            const currentIndex = modes.indexOf(rs80TaxMode);
+            rs80TaxMode = modes[(currentIndex + 1) % modes.length];
+            alert('Tax mode: ' + rs80TaxMode);
+        }
+        
+        function rs80Print() {
+            if (rs80Items.length === 0) {
+                alert('No items to print!');
+                return;
+            }
+            const receipt = `=== REGGIESTARR RS-80 ===\n` +
+                rs80Items.map(i => `${i.name}: ₹${i.price.toFixed(2)}`).join('\n') +
+                `\n----------------\nTotal: ₹${rs80Total.toFixed(2)}\n\nThank you!`;
+            alert('🖨️ PRINTING RECEIPT:\n\n' + receipt);
+        }
+        
+        function rs80Settings() { alert('Settings:\n• Tax Rate: 5%\n• Currency: INR\n• Printer: ESC/POS'); }
+        function rs80Back() { 
+            if (rs80CurrentInput.length > 0) {
+                rs80CurrentInput = rs80CurrentInput.slice(0, -1);
+            }
+        }
+        function rs80Hold() { alert('Transaction held in memory'); }
+        function rs80Recall() { alert('Recalled held transaction'); }
+    </script>
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - AGI Company</title>
+    <meta name="description" content="Sign in to your AGI Company account to manage your AI agents.">
+    <style>
+        :root {
+            --bg-dark: #0a0a1a;
+            --bg-card: rgba(255, 255, 255, 0.05);
+            --header-bg: rgba(26, 54, 93, 0.95);
+            --text: #e5e5e5;
+            --text-muted: #a0a0a0;
+            --accent: #ed8936;
+            --accent-hover: #dd6b20;
+            --border: rgba(237, 137, 54, 0.3);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            min-height: 100vh;
+            line-height: 1.6;
+            display: flex; flex-direction: column;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            background: var(--header-bg);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            z-index: 1000;
+        }
+
+        .logo { font-size: 26px; font-weight: 800; color: var(--text); text-decoration: none; }
+        .logo span { color: var(--accent); }
+
+        .header-nav { display: flex; align-items: center; gap: 30px; }
+        .header-nav a {
+            color: var(--text); text-decoration: none; font-weight: 600; font-size: 15px; transition: color 0.3s;
+        }
+        .header-nav a:hover { color: var(--accent); }
+
+        .auth-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 20px 40px;
+        }
+
+        .auth-box {
+            width: 100%; max-width: 440px;
+            background: var(--bg-card); border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px; padding: 50px;
+        }
+
+        .auth-header { text-align: center; margin-bottom: 35px; }
+        .auth-header h1 { font-size: 32px; margin-bottom: 10px; }
+        .auth-header p { color: var(--text-muted); font-size: 16px; }
+
+        .form-group { margin-bottom: 25px; }
+        .form-group label {
+            display: block; margin-bottom: 10px; font-weight: 600; font-size: 14px;
+        }
+        .form-group input {
+            width: 100%; padding: 14px 18px; border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05); color: var(--text);
+            border-radius: 10px; font-size: 16px; transition: all 0.3s;
+        }
+        .form-group input:focus {
+            outline: none; border-color: var(--accent);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .form-options {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 25px;
+        }
+        .checkbox-label {
+            display: flex; align-items: center; gap: 10px; cursor: pointer;
+            font-size: 14px; color: var(--text-muted);
+        }
+        .checkbox-label input { width: 18px; height: 18px; accent-color: var(--accent); }
+        .forgot-link { color: var(--accent); text-decoration: none; font-size: 14px; }
+        .forgot-link:hover { text-decoration: underline; }
+
+        .btn {
+            display: block; width: 100%; padding: 16px; background: var(--accent); color: white;
+            text-decoration: none; border-radius: 10px; font-weight: 600; border: none;
+            cursor: pointer; font-size: 16px; text-align: center; transition: all 0.3s;
+        }
+        .btn:hover { background: #9b2c2c; transform: translateY(-2px); }
+
+        .divider {
+            display: flex; align-items: center; margin: 30px 0; color: var(--text-muted);
+        }
+        .divider::before, .divider::after {
+            content: ''; flex: 1; height: 1px; background: rgba(255, 255, 255, 0.1);
+        }
+        .divider span { padding: 0 15px; font-size: 14px; }
+
+        .social-login { display: flex; gap: 15px; }
+        .social-btn {
+            flex: 1; padding: 14px; border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05); color: var(--text);
+            border-radius: 10px; cursor: pointer; font-weight: 600;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            transition: all 0.3s;
+        }
+        .social-btn:hover { background: rgba(255, 255, 255, 0.1); }
+
+        .auth-footer {
+            text-align: center; margin-top: 30px; padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-muted); font-size: 14px;
+        }
+        .auth-footer a { color: var(--accent); text-decoration: none; }
+        .auth-footer a:hover { text-decoration: underline; }
+
+        .footer {
+            height: 60px;
+            background: var(--header-bg); backdrop-filter: blur(10px); border-top: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: space-between; padding: 0 30px;
+        }
+        .footer-left { color: var(--text); font-size: 14px; }
+        .footer-right { display: flex; gap: 25px; }
+        .footer-right a { color: var(--text-muted); text-decoration: none; font-size: 14px; }
+        .footer-right a:hover { color: var(--accent); }
+
+        @media (max-width: 768px) {
+            .auth-box { padding: 30px; }
+            .auth-header h1 { font-size: 24px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="logo">AGI<span>Company</span></a>
+        <nav class="header-nav">
+            <a href="index.html">Home</a>
+            <a href="products.html">Products</a>
+            <a href="agents.html">🤖 Agents</a>
+            <a href="cart.html">Cart</a>
+        </nav>
+    </header>
+
+    <div class="auth-container">
+        <div class="auth-box">
+            <div class="auth-header">
+                <h1>Welcome Back</h1>
+                <p>Sign in to manage your AI workforce</p>
+            </div>
+
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="you@company.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="••••••••" required>
+                </div>
+
+                <div class="form-options">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="remember">
+                        Remember me
+                    </label>
+                    <a href="#" class="forgot-link">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="btn">Sign In</button>
+            </form>
+
+            <div class="divider">
+                <span>or</span>
+            </div>
+
+            <div class="social-login">
+                <button class="social-btn" onclick="socialLogin('google')">
+                    🔍 Google
+                </button>
+                <button class="social-btn" onclick="socialLogin('github')">
+                    🐙 GitHub
+                </button>
+            </div>
+
+            <div class="auth-footer">
+                Don't have an account? <a href="register.html">Sign up</a>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-left">© 2026 AGI Company. All rights reserved.</div>
+        <div class="footer-right">
+            <a href="privacy.html">Privacy</a>
+            <a href="terms.html">Terms</a>
+            <a href="support.html">Support</a>
+        </div>
+    </footer>
+
+    <script src="cart.js"></script>
+    <script>
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Demo: just show success and redirect
+            showNotification('Welcome back! Redirecting...');
+            setTimeout(() => {
+                window.location.href = 'dashboard.html';
+            }, 1000);
+        });
+
+        function socialLogin(provider) {
+            showNotification(`Connecting to ${provider}...`);
+            setTimeout(() => {
+                window.location.href = 'dashboard.html';
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

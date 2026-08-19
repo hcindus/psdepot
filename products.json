@@ -1,0 +1,287 @@
+{
+  "site": "Performance Supply Depot LLC",
+  "url": "https://psdepot.com",
+  "description": "Premium POS supplies, thermal paper, printer ribbons, POS hardware, and professional repair services. Serving California since 2005.",
+  "contact": {
+    "phone": "+1-888-881-6834",
+    "email": "info@psdepot.com",
+    "service_area": "California, USA"
+  },
+  "shipping": {
+    "bay_area": "Same-day delivery",
+    "california": "1-2 day statewide",
+    "free_shipping_threshold": 500
+  },
+  "services": {
+    "printer_repair": {"in_shop": "$195/hour", "on_site": "$180/hour"},
+    "pos_installation": {"on_site": "$180/hour"},
+    "custom_cabling": {"rate": "$180/hour"},
+    "label_scale_setup": {"starting": "$195/hour"}
+  },
+  "updated": "2026-08-11T00:36:00Z",
+  "product_count": 24,
+  "categories": [
+    {"name": "Thermal Paper", "slug": "thermal-paper", "count": 5},
+    {"name": "Printer Ribbons", "slug": "printer-ribbons", "count": 3},
+    {"name": "POS Hardware", "slug": "pos-hardware", "count": 5},
+    {"name": "Scales", "slug": "scales", "count": 2},
+    {"name": "Beverage Portion Control", "slug": "capton-pouring-systems", "count": 8},
+    {"name": "Robotics", "slug": "robotics", "count": 1}
+  ],
+  "products": [
+    {
+      "sku": "PF-230",
+      "name": "PF-230 Phenol Free Thermal Paper",
+      "url": "https://psdepot.com/products/pf-230-phenol-free-thermal-paper.html",
+      "price": 124.10,
+      "currency": "USD",
+      "brand": "Clarion",
+      "category": "Thermal Paper",
+      "description": "Phenol-free thermal receipt paper 3 1/8 inch x 230 feet. BPA/BPS free, certified recyclable (WMU standard). 50 rolls per case.",
+      "specs": {"width": "3 1/8\"", "length": "230 ft", "quantity": "50 rolls/case"}
+    },
+    {
+      "sku": "15-741",
+      "name": "2 1/4\" x 74' Thermal Receipt Paper — Credit Card Terminals",
+      "url": "https://psdepot.com/products/15-741-credit-card-paper.html",
+      "price": 39.00,
+      "currency": "USD",
+      "brand": "Performance Supply Depot",
+      "category": "Thermal Paper",
+      "description": "Narrow thermal receipt paper rolls for credit card terminals and compact printers. 2 1/4 inch wide.",
+      "specs": {"width": "2 1/4\"", "length": "74 ft"}
+    },
+    {
+      "sku": "54-230",
+      "name": "Epson Thermal Paper 3 1/8 inch",
+      "url": "https://psdepot.com/products/54-230-epson-thermal.html",
+      "price": 99.00,
+      "currency": "USD",
+      "brand": "Performance Supply Depot",
+      "category": "Thermal Paper",
+      "description": "Epson-compatible thermal receipt paper. 3 1/8 inch width, standard POS printer size.",
+      "specs": {"width": "3 1/8\"", "compatibility": "Epson"}
+    },
+    {
+      "sku": "CC-235",
+      "name": "2-Ply Carbonless Paper",
+      "url": "https://psdepot.com/products/CC-235-carbonless-paper.html",
+      "price": 76.00,
+      "currency": "USD",
+      "brand": "Performance Supply Depot",
+      "category": "Paper",
+      "description": "2-ply carbonless paper rolls for impact printers. Creates instant copies without carbon sheets.",
+      "specs": {"ply": "2-ply", "type": "Carbonless"}
+    },
+    {
+      "sku": "13-305",
+      "name": "13-305 1-Ply Bond Paper 3\" x 165'",
+      "url": "https://psdepot.com/products/13-305-epson-impact-paper.html",
+      "price": 59.00,
+      "currency": "USD",
+      "brand": "Performance Supply Depot",
+      "category": "Paper",
+      "description": "Standard 1-ply bond paper for kitchen printers and impact POS systems.",
+      "specs": {"width": "3\"", "length": "165 ft", "ply": "1-ply"}
+    },
+    {
+      "sku": "62245",
+      "name": "ERC 30/34/38 Ribbons",
+      "url": "https://psdepot.com/products/62245-erc-ribbons.html",
+      "price": 42.00,
+      "currency": "USD",
+      "brand": "Performance Supply Depot",
+      "category": "Printer Ribbons",
+      "description": "Compatible ERC 30/34/38 printer ribbons for Epson and Star impact printers.",
+      "specs": {"compatibility": ["ERC-30", "ERC-34", "ERC-38"]}
+    },
+    {
+      "sku": "67240",
+      "name": "Star SP700 Ribbons",
+      "url": "https://psdepot.com/products/67240-star-ribbons.html",
+      "price": 52.00,
+      "currency": "USD",
+      "brand": "Performance Supply Depot",
+      "category": "Printer Ribbons",
+      "description": "Compatible ribbons for Star SP700 series impact printers.",
+      "specs": {"compatibility": "Star SP700"}
+    },
+    {
+      "sku": "30-210",
+      "name": "SAM4S ER-260 Cash Register",
+      "url": "https://psdepot.com/products/sam4s-er-260.html",
+      "price": 495.00,
+      "currency": "USD",
+      "brand": "SAM4S",
+      "category": "POS Hardware",
+      "description": "SAM4S ER-260 raised keyboard cash register. 2,000 PLUs, 20 departments, integrated thermal printer.",
+      "specs": {"plus": "2,000", "departments": 20}
+    },
+    {
+      "sku": "30-211",
+      "name": "SAM4S ER-265 Cash Register",
+      "url": "https://psdepot.com/products/sam4s-er-265.html",
+      "price": 495.00,
+      "currency": "USD",
+      "brand": "SAM4S",
+      "category": "POS Hardware",
+      "description": "SAM4S ER-265 flat keyboard cash register. 2,000 PLUs, 20 departments, spill-resistant design.",
+      "specs": {"plus": "2,000", "departments": 20}
+    },
+    {
+      "sku": "30-212",
+      "name": "SAM4S ER-940 Cash Register",
+      "url": "https://psdepot.com/products/sam4s-er-940.html",
+      "price": 895.00,
+      "currency": "USD",
+      "brand": "SAM4S",
+      "category": "POS Hardware",
+      "description": "SAM4S ER-940 high-capacity cash register. 15,000 PLUs, 99 departments, flat spill-resistant keyboard.",
+      "specs": {"plus": "15,000", "departments": 99}
+    },
+    {
+      "sku": "30-214",
+      "name": "SAM4S SAP-630 Android POS Terminal",
+      "url": "https://psdepot.com/products/sam4s-sap-630.html",
+      "price": 1395.00,
+      "currency": "USD",
+      "brand": "SAM4S",
+      "category": "POS Hardware",
+      "description": "SAM4S SAP-630 Android touchscreen POS terminal. 10-inch display, raised programmable keyboard, integrated printer.",
+      "specs": {"display": "10\" touchscreen", "os": "Android"}
+    },
+    {
+      "sku": "72-100",
+      "name": "5-Bill 5-Coin Cash Drawer Till Insert",
+      "url": "https://psdepot.com/products/72-100-cash-drawer.html",
+      "price": 55.00,
+      "currency": "USD",
+      "brand": "Performance Supply Depot",
+      "category": "POS Hardware",
+      "description": "Professional-grade cash drawer till insert with 5 bill compartments and 5 coin trays. Heavy-duty spring-loaded clips.",
+      "specs": {"bill_compartments": 5, "coin_trays": 5}
+    },
+    {
+      "sku": "30-155",
+      "name": "CAS LP-1000N Label Printing Scale",
+      "url": "https://psdepot.com/products/cas-lp-1000n.html",
+      "price": 1495.00,
+      "currency": "USD",
+      "brand": "CAS",
+      "category": "Scales",
+      "description": "CAS LP-1000N label printing scale. 30lb capacity, 4,000 PLUs, thermal label printing. NSF certified.",
+      "specs": {"capacity": "30 lb", "plus": "4,000", "certification": "NSF"}
+    },
+    {
+      "sku": "PDN-12",
+      "name": "CAS PDN Series POS Interface Scale",
+      "url": "https://psdepot.com/products/cas-pdn-series.html",
+      "price": 599.00,
+      "currency": "USD",
+      "brand": "CAS",
+      "category": "Scales",
+      "description": "CAS PDN Series POS Interface Scale with multiple capacity options. USB powered, works with major POS systems.",
+      "specs": {"capacities": "12/30/60 lb", "interface": "USB"}
+    },
+    {
+      "sku": "30-150",
+      "name": "Integrated POS Scale",
+      "url": "https://psdepot.com/products/30-150-integrated-scale.html",
+      "price": 795.00,
+      "currency": "USD",
+      "brand": "Performance Supply Depot",
+      "category": "Scales",
+      "description": "Integrated POS scale for retail and grocery checkout systems."
+    },
+    {
+      "sku": "CAP-100-1OZ",
+      "name": "Capton 1 oz Bottle Top Pourer",
+      "url": "https://psdepot.com/products/capton-1oz-pourer.html",
+      "price": 49.00,
+      "currency": "USD",
+      "brand": "Capton",
+      "category": "Beverage Portion Control",
+      "description": "Precision 1-ounce liquor pourer with automatic shutoff. Fits standard 750ml and 1L bottles. Stainless steel construction."
+    },
+    {
+      "sku": "CAP-150-15OZ",
+      "name": "Capton 1.5 oz Bottle Top Pourer",
+      "url": "https://psdepot.com/products/capton-1.5oz-pourer.html",
+      "price": 49.00,
+      "currency": "USD",
+      "brand": "Capton",
+      "category": "Beverage Portion Control",
+      "description": "1.5-ounce pourer for standard mixed drinks. Automatic portion control with smooth pour action."
+    },
+    {
+      "sku": "CAP-200-2OZ",
+      "name": "Capton 2 oz Bottle Top Pourer",
+      "url": "https://psdepot.com/products/capton-2oz-pourer.html",
+      "price": 49.00,
+      "currency": "USD",
+      "brand": "Capton",
+      "category": "Beverage Portion Control",
+      "description": "2-ounce pourer for doubles and large mixed drinks. Same precision engineering with larger portion."
+    },
+    {
+      "sku": "CAP-WINE-5OZ",
+      "name": "Capton Wine Pourer (5 oz)",
+      "url": "https://psdepot.com/products/capton-wine-pourer.html",
+      "price": 49.00,
+      "currency": "USD",
+      "brand": "Capton",
+      "category": "Beverage Portion Control",
+      "description": "Wine bottle pourer with 5-ounce portion control. Perfect for standard wine service."
+    },
+    {
+      "sku": "CAP-VARY-12PK",
+      "name": "Capton Variety Pack (12-Pack)",
+      "url": "https://psdepot.com/products/capton-variety-pack.html",
+      "price": 558.00,
+      "currency": "USD",
+      "brand": "Capton",
+      "category": "Beverage Portion Control",
+      "description": "Mixed set of 1oz, 1.5oz, and 2oz pourers. Ideal for new bar setups or complete station refresh."
+    },
+    {
+      "sku": "CAP-CLEAN-KIT",
+      "name": "Capton Pourer Cleaning Kit",
+      "url": "https://psdepot.com/products/capton-cleaning-kit.html",
+      "price": 34.99,
+      "currency": "USD",
+      "brand": "Capton",
+      "category": "Bar Accessories",
+      "description": "Complete cleaning and maintenance kit for Capton pourers. Includes brushes, cleaning solution, and instructions."
+    },
+    {
+      "sku": "POUR-ANALYTICS",
+      "name": "Capton PourLink Analytics",
+      "url": "https://psdepot.com/products/capton-pourlink-analytics.html",
+      "price": 3000.00,
+      "currency": "USD",
+      "brand": "Capton",
+      "category": "Beverage Portion Control Software",
+      "description": "Cloud-based pour tracking and analytics platform. Real-time monitoring, shrinkage detection, and pour performance reports."
+    },
+    {
+      "sku": "POUR-RECV",
+      "name": "Capton PourLink Receiver",
+      "url": "https://psdepot.com/products/capton-pourlink-receiver.html",
+      "price": 2200.00,
+      "currency": "USD",
+      "brand": "Capton",
+      "category": "Beverage Portion Control Hardware",
+      "description": "Wireless receiver hub for Capton beverage tracking system. Collects pour data from up to 24 pourers simultaneously."
+    },
+    {
+      "sku": "OS-R-DR01",
+      "name": "OrionStar Lucki AI Delivery Robot",
+      "url": "https://psdepot.com/products/orionstar-lucki.html",
+      "price": 3330.00,
+      "currency": "USD",
+      "brand": "OrionStar",
+      "category": "Robotics",
+      "description": "AI-powered autonomous delivery robot for restaurants, hotels, and hospitality. LiDAR navigation, 12-15 hour battery, 88 lb capacity."
+    }
+  ]
+}

@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collections - Past Due Accounts</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-tertiary: #1a1a2e;
+            --accent-cyan: #00E0FF;
+            --accent-orange: #FF7A00;
+            --accent-red: #ef4444;
+            --accent-yellow: #fbbf24;
+            --accent-green: #22c55e;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0b0;
+            --border-color: #2a2a3e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent-orange), var(--accent-red));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .header-stats {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .stat-item {
+            text-align: right;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .stat-value.danger { color: var(--accent-red); }
+        .stat-value.warning { color: var(--accent-yellow); }
+        .stat-value.success { color: var(--accent-green); }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .last-updated {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Summary Cards */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .summary-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: transform 0.2s;
+        }
+
+        .summary-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent-orange);
+        }
+
+        .summary-label {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .summary-value {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .summary-value.danger { color: var(--accent-red); }
+        .summary-value.warning { color: var(--accent-yellow); }
+        .summary-value.success { color: var(--accent-green); }
+
+        /* Filter Tabs */
+        .filter-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-tab {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .filter-tab:hover {
+            border-color: var(--accent-orange);
+            color: var(--text-primary);
+        }
+
+        .filter-tab.active {
+            background: var(--accent-orange);
+            color: white;
+            border-color: var(--accent-orange);
+        }
+
+        .filter-tab .count {
+            background: rgba(255,255,255,0.2);
+            padding: 0.125rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+        }
+
+        /* Table */
+        .table-container {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .table-header {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr 1fr 1fr 120px;
+            background: var(--bg-tertiary);
+            padding: 1rem 1.5rem;
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .table-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr 1fr 1fr 120px;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            align-items: center;
+            transition: background 0.2s;
+        }
+
+        .table-row:hover {
+            background: rgba(255, 122, 0, 0.05);
+        }
+
+        .table-row:last-child {
+            border-bottom: none;
+        }
+
+        .table-row.critical {
+            border-left: 4px solid var(--accent-red);
+        }
+
+        .customer-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .customer-name {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .customer-address {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .invoice-number {
+            font-family: monospace;
+            color: var(--accent-cyan);
+        }
+
+        .amount {
+            font-weight: 700;
+            font-size: 1.125rem;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .status-critical {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--accent-red);
+        }
+
+        .status-overdue {
+            background: rgba(251, 191, 36, 0.2);
+            color: var(--accent-yellow);
+        }
+
+        .status-due-soon {
+            background: rgba(0, 224, 255, 0.2);
+            color: var(--accent-cyan);
+        }
+
+        .status-current {
+            background: rgba(34, 197, 94, 0.2);
+            color: var(--accent-green);
+        }
+
+        .days-overdue {
+            font-weight: 700;
+        }
+
+        .days-overdue.critical { color: var(--accent-red); }
+        .days-overdue.warning { color: var(--accent-yellow); }
+
+        .actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            font-size: 0.875rem;
+        }
+
+        .btn-primary {
+            background: var(--accent-orange);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #e66e00;
+        }
+
+        .btn-secondary {
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .btn-success {
+            background: var(--accent-green);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #16a34a;
+        }
+
+        .paid-badge {
+            background: rgba(34, 197, 94, 0.2);
+            color: var(--accent-green);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        .actions {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Letter Preview Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 2rem;
+        }
+
+        .letter-preview {
+            background: white;
+            color: #000;
+            padding: 3rem;
+            max-width: 800px;
+            width: 100%;
+            border-radius: 8px;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 12pt;
+            line-height: 1.6;
+        }
+
+        .letter-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #000;
+            padding-bottom: 1rem;
+        }
+
+        .letter-header h2 {
+            margin: 0;
+            font-size: 18pt;
+            color: #000;
+        }
+
+        .letter-header p {
+            margin: 0.5rem 0 0 0;
+            font-size: 10pt;
+            color: #333;
+        }
+
+        .letter-body {
+            margin: 2rem 0;
+        }
+
+        .letter-body p {
+            margin: 1rem 0;
+        }
+
+        .invoice-details {
+            background: #f5f5f5;
+            border: 1px solid #ccc;
+            padding: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .invoice-details table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .invoice-details th,
+        .invoice-details td {
+            text-align: left;
+            padding: 0.5rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .letter-footer {
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        .close-modal {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background: var(--accent-red);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .print-btn {
+            background: var(--accent-green);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        /* Legend */
+        .legend {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .legend-dot.critical { background: var(--accent-red); }
+        .legend-dot.warning { background: var(--accent-yellow); }
+        .legend-dot.info { background: var(--accent-cyan); }
+        .legend-dot.success { background: var(--accent-green); }
+
+        /* Notes */
+        .notes-section {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .notes-title {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--accent-orange);
+        }
+
+        .notes-list {
+            list-style: none;
+        }
+
+        .notes-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        .notes-list li:last-child {
+            border-bottom: none;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 4rem;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 1200px) {
+            .table-header,
+            .table-row {
+                grid-template-columns: 2fr 1fr 1fr 1.5fr 1fr 1fr;
+            }
+            
+            .actions {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .header-stats {
+                width: 100%;
+                justify-content: space-around;
+            }
+
+            .table-container {
+                overflow-x: auto;
+            }
+
+            .table-header,
+            .table-row {
+                min-width: 1000px;
+            }
+        }
+
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            .letter-preview, .letter-preview * {
+                visibility: visible;
+            }
+            .letter-preview {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+            }
+            .close-modal, .print-btn {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">💰</div>
+                <div class="logo-text">Collections Department</div>
+            </div>
+            <div class="header-actions" style="display: flex; gap: 1rem; align-items: center;">
+                <button class="btn btn-secondary" onclick="clearCacheAndReload()" style="display: flex; align-items: center; gap: 0.5rem;">
+                    🧹 Clear Cache
+                </button>
+                <button class="btn btn-secondary" onclick="refreshData()" style="display: flex; align-items: center; gap: 0.5rem;">
+                    <span id="refresh-icon">🔄</span> Refresh
+                </button>
+                <button class="btn btn-primary" onclick="exportData()" style="display: flex; align-items: center; gap: 0.5rem;">
+                    📥 Export
+                </button>
+            </div>
+            <div class="header-stats">
+                <div class="stat-item">
+                    <div class="stat-label">Total Outstanding</div>
+                    <div class="stat-value danger" id="total-outstanding">$0</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Overdue Accounts</div>
+                    <div class="stat-value warning" id="overdue-count">0</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Due This Week</div>
+                    <div class="stat-value" id="due-this-week">0</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1 class="page-title">Accounts Receivable Monitor</h1>
+        <p class="page-subtitle">Track overdue invoices and payment collections</p>
+        <p class="last-updated">Last Updated: August 3, 2026 at 10:31 PM UTC | Performance Supply Depot</p>
+
+        <div class="summary-grid">
+            <div class="summary-card">
+                <div class="summary-label">Critical (>30 days overdue)</div>
+                <div class="summary-value danger" id="critical-amount">$0</div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-label">Overdue (1-30 days)</div>
+                <div class="summary-value warning" id="overdue-amount">$0</div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-label">Due This Week</div>
+                <div class="summary-value" id="due-soon-amount">$0</div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-label">Current (Not Yet Due)</div>
+                <div class="summary-value success" id="current-amount">$0</div>
+            </div>
+            <div class="summary-card" style="grid-column: span 2;">
+                <div class="summary-label">📊 Paid (Last 30 Days)</div>
+                <div class="summary-value success" id="paid-30-days">$—</div>
+            </div>
+        </div>
+
+        <!-- Squarespace Summary Grid -->
+        <div class="summary-grid" style="grid-template-columns: repeat(3, 1fr);">
+            <div class="summary-card" style="border-left: 4px solid var(--accent-green);">
+                <div class="summary-label">✅ Not Overdue (22)</div>
+                <div class="summary-value success" id="not-overdue-amount">$—</div>
+            </div>
+            <div class="summary-card" style="border-left: 4px solid var(--accent-red);">
+                <div class="summary-label">🔴 Overdue (15)</div>
+                <div class="summary-value danger" id="overdue-summary-amount">$—</div>
+            </div>
+            <div class="summary-card" style="border-left: 4px solid var(--text-secondary);">
+                <div class="summary-label">📝 Drafts (5)</div>
+                <div class="summary-value" style="color: var(--text-secondary);" id="drafts-amount">$—</div>
+            </div>
+        </div>
+
+        <div class="filter-tabs">
+            <div class="filter-tab active" data-filter="all">
+                <span>All Accounts</span>
+                <span class="count" id="count-all">0</span>
+            </div>
+            <div class="filter-tab" data-filter="critical">
+                <span>🔴 Critical</span>
+                <span class="count" id="count-critical">0</span>
+            </div>
+            <div class="filter-tab" data-filter="overdue">
+                <span>🟡 Overdue</span>
+                <span class="count" id="count-overdue">0</span>
+            </div>
+            <div class="filter-tab" data-filter="due-soon">
+                <span>🔵 Due Soon</span>
+                <span class="count" id="count-due-soon">0</span>
+            </div>
+            <div class="filter-tab" data-filter="current">
+                <span>🟢 Current</span>
+                <span class="count" id="count-current">0</span>
+            </div>
+            <div class="filter-tab" data-filter="paid">
+                <span>✅ Paid</span>
+                <span class="count" id="count-paid">0</span>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <div class="table-header">
+                <div>Customer</div>
+                <div>Invoice #</div>
+                <div>Amount</div>
+                <div>Location</div>
+                <div>Status</div>
+                <div>Days</div>
+                <div>Action</div>
+            </div>
+            <div id="table-body">
+                <!-- Rows populated by JavaScript -->
+            </div>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-dot critical"></div>
+                <span>Critical (>30 days overdue)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-dot warning"></div>
+                <span>Overdue (1-30 days)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-dot info"></div>
+                <span>Due Soon (Within 7 days)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-dot success"></div>
+                <span>Current (Not yet due)</span>
+            </div>
+        </div>
+
+                                <div class="notes-section">
+            <div class="notes-title">📋 Collections Notes - Updated August 3, 2026</div>
+            <ul class="notes-list">
+                <li><strong>Emmanual</strong> - Invoice #000008: 🔴 114 days overdue, VIEWED - $675.99 - CONNECTION ISSUES - MICROSALE</li>
+                <li><strong>Travis Hauffman</strong> - Invoice #4166108: 🔴 75 days overdue, VIEWED - $246.14 - Thank you for your order</li>
+                <li><strong>Heather Manager</strong> - Invoice #4276102: 🔴 65 days overdue, VIEWED - $438.29 - Please find your courtesy invoice attached.</li>
+                <li><strong>Travis Hauffman</strong> - Invoice #4306102: 🔴 60 days overdue, VIEWED - $163.24 - Thank you for your order</li>
+                <li><strong>Scott Walsh</strong> - Invoice #05056101: 🔴 58 days overdue, VIEWED - $384.60 - Thank you for your order.</li>
+                <li><strong>William Bishop</strong> - Invoice #061326006: 🔴 49 days overdue, VIEWED - $79.00 - If you approve, please process invoice</li>
+                <li><strong>Tanner SUPPLY ONLY</strong> - Invoice #061326-025: 🔴 40 days overdue, VIEWED - $329.48 - Thank you for your order.</li>
+                <li><strong>Leslie Manager</strong> - Invoice #061326-030: 🔴 38 days overdue, NOT VIEWED - $396.00 - Thank you for your order.</li>
+                <li><strong>George</strong> - Invoice #061326-031: 🔴 35 days overdue, VIEWED - $402.90 - Thank you for your order.</li>
+                <li><strong>Joycelin Magno</strong> - Invoice #060226003: 🔴 32 days overdue, VIEWED - $231.84 - Thank you for your order.</li>
+                <li><strong>John</strong> - Invoice #060126003: 🔴 32 days overdue, VIEWED - $163.24 - Thank you for your order.</li>
+                <li><strong>Maria Abundiz</strong> - Invoice #060826007: 🔴 26 days overdue, VIEWED - $292.28 - Thank you for your order.</li>
+                <li><strong>Bitu Manager</strong> - Invoice #061326-036: 🔴 21 days overdue, NOT VIEWED - $457.99 - screen</li>
+                <li><strong>Mark Edwards</strong> - Invoice #061326-033: 🔴 20 days overdue, VIEWED - $62.48 - Thank you for your order.</li>
+                <li><strong>Robert Simon</strong> - Invoice #061326022: 🔴 16 days overdue, VIEWED - $161.22</li>
+                <li><strong>Erick MAITRE'D</strong> - Invoice #061326018: 🔴 15 days overdue, VIEWED - $694.47 - Thank you for your order.</li>
+                <li><strong>Katie Rondeau</strong> - Invoice #061326016: 🔴 15 days overdue, VIEWED - $655.07 - ORDER # 651332</li>
+                <li><strong>Katie Rondeau</strong> - Invoice #061326015: 🔴 15 days overdue, VIEWED - $197.18 - ORDER # 642281</li>
+                <li><strong>The Cantina</strong> - Invoice #061326-027: 🔴 12 days overdue, VIEWED - $304.76 - Thank you for your order.</li>
+                <li><strong>Linda Manager</strong> - Invoice #062426-002: 🔴 11 days overdue, VIEWED - $174.98 - Thank you for your order.</li>
+            </ul>
+        </div>
+    </main>
+
+    <!-- Letter Preview Modal -->
+    <div class="modal-overlay" id="letterModal">
+        <button class="close-modal" onclick="closeLetter()">✕ Close</button>
+        <div class="letter-preview" id="letterContent">
+            <!-- Letter content populated by JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        // Load invoices from API
+        let invoices = [];
+        let isLoading = true;
+
+        // Embedded invoice data from Squarespace (June 16, 2026)
+                                const EMBEDDED_INVOICES = [
+            {"invoice": "003206", "customer": "Derrick Owner", "amount": 10612.24, "date": "01/15/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "We look forward to working with you.", "paid": true, "paidDate": "01/19/2026"},
+            {"invoice": "061326002", "customer": "Morris Owner", "amount": 8786.0, "date": "07/20/2026", "status": "Canceled", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Sam4s POS system", "paid": false, "paidDate": ""},
+            {"invoice": "052626010", "customer": "Robert Guerra", "amount": 3999.87, "date": "08/03/2026", "status": "Paid", "days": 0, "viewed": false, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "08/03/2026"},
+            {"invoice": "4306103", "customer": "John Guerra", "amount": 3980.0, "date": "05/05/2026", "status": "Paid", "days": 0, "viewed": false, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "05/06/2026"},
+            {"invoice": "061326-008", "customer": "Brent Warehouse", "amount": 3184.0, "date": "06/26/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "06/29/2026"},
+            {"invoice": "061326-035", "customer": "Enoc Ibarra", "amount": 2962.42, "date": "07/08/2026", "status": "Draft", "days": 0, "viewed": false, "address": "Fairfield, CA", "note": "Thank you for your business", "paid": false, "paidDate": ""},
+            {"invoice": "000017", "customer": "Chris Owner", "amount": 2718.34, "date": "04/14/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "NCC Customer", "paid": true, "paidDate": "04/14/2026"},
+            {"invoice": "000022", "customer": "Paige Sutter", "amount": 1965.0, "date": "05/20/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "POS Supplies", "paid": true, "paidDate": "05/31/2026"},
+            {"invoice": "061326029", "customer": "Katie Rondeau", "amount": 1829.67, "date": "07/01/2026", "status": "Overdue", "days": 3, "viewed": false, "address": "Fairfield, CA", "note": "ORDER # 655687", "paid": false, "paidDate": ""},
+            {"invoice": "4166107", "customer": "Emilio Owner", "amount": 1580.0, "date": "04/20/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "", "paid": true, "paidDate": "04/20/2026"},
+            {"invoice": "1623-06226001", "customer": "Vann Owner", "amount": 1459.22, "date": "06/23/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "scale drop ship", "paid": true, "paidDate": "06/25/2026"},
+            {"invoice": "061326-032", "customer": "Ross SUPPLY ONLY", "amount": 1447.12, "date": "07/02/2026", "status": "Overdue", "days": 5, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": false, "paidDate": ""},
+            {"invoice": "061326024", "customer": "Paige Sutter", "amount": 1415.0, "date": "06/23/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "POS Supplies", "paid": true, "paidDate": "07/13/2026"},
+            {"invoice": "061326003", "customer": "Sam Owner", "amount": 1385.45, "date": "06/25/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your continued business.", "paid": true, "paidDate": "06/25/2026"},
+            {"invoice": "5126102", "customer": "Nancy Crane", "amount": 1270.77, "date": "05/12/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "05/12/2026"},
+            {"invoice": "4276101", "customer": "Fernando", "amount": 1262.79, "date": "04/27/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your business", "paid": true, "paidDate": "04/27/2026"},
+            {"invoice": "060226005", "customer": "Marco Manager", "amount": 1262.79, "date": "06/04/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "06/04/2026"},
+            {"invoice": "000012", "customer": "Nick Owner", "amount": 1227.86, "date": "04/13/2026", "status": "Paid", "days": 0, "viewed": false, "address": "Fairfield, CA", "note": "", "paid": true, "paidDate": "04/13/2026"},
+            {"invoice": "4246-152", "customer": "Lauro Owner", "amount": 1179.5, "date": "07/21/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order", "paid": true, "paidDate": "07/21/2026"},
+            {"invoice": "061326010", "customer": "Armando Alvarez MAITRE'D", "amount": 1075.72, "date": "06/16/2026", "status": "Paid", "days": 0, "viewed": false, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "06/16/2026"},
+            {"invoice": "061326-041", "customer": "Julie Cattelin", "amount": 1064.96, "date": "07/16/2026", "status": "Overdue", "days": 4, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": false, "paidDate": ""},
+            {"invoice": "000024", "customer": "Lauro Owner", "amount": 993.91, "date": "04/15/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order", "paid": true, "paidDate": "04/15/2026"},
+            {"invoice": "061026004", "customer": "Francesco open", "amount": 967.48, "date": "06/16/2026", "status": "Paid", "days": 0, "viewed": false, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "06/16/2026"},
+            {"invoice": "061026001", "customer": "Myly", "amount": 966.31, "date": "06/11/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "07/03/2026"},
+            {"invoice": "060826002", "customer": "John Caine", "amount": 929.23, "date": "06/08/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "06/29/2026"},
+            {"invoice": "062626-028", "customer": "Mary T", "amount": 928.98, "date": "06/24/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your continued business.", "paid": true, "paidDate": "07/19/2026"},
+            {"invoice": "061326-028", "customer": "Jose Canchebolio", "amount": 926.48, "date": "06/26/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "07/14/2026"},
+            {"invoice": "051326006", "customer": "Myly", "amount": 901.36, "date": "05/15/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "05/15/2026"},
+            {"invoice": "05056104", "customer": "Robert Guerra", "amount": 899.87, "date": "05/28/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "06/08/2026"},
+            {"invoice": "4306105", "customer": "Be Manager", "amount": 898.62, "date": "05/07/2026", "status": "Paid", "days": 0, "viewed": false, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "05/07/2026"},
+            {"invoice": "4166105", "customer": "Katie Rondeau", "amount": 853.9, "date": "04/16/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "ORDER # 630668", "paid": true, "paidDate": "05/11/2026"},
+            {"invoice": "061026005", "customer": "Cindy or Beth Cd @ 2 months", "amount": 790.0, "date": "06/16/2026", "status": "Paid", "days": 0, "viewed": false, "address": "Fairfield, CA", "note": "", "paid": true, "paidDate": "07/13/2026"},
+            {"invoice": "052626003", "customer": "Randy SUPPLY ONLY", "amount": 756.01, "date": "05/26/2026", "status": "Paid", "days": 0, "viewed": false, "address": "Fairfield, CA", "note": "Thank you for your order", "paid": true, "paidDate": "05/26/2026"},
+            {"invoice": "4246102", "customer": "Lawrence Kam", "amount": 755.7, "date": "04/24/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "04/24/2026"},
+            {"invoice": "000021", "customer": "Margarito General Manager", "amount": 739.2, "date": "04/18/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "05/21/2026"},
+            {"invoice": "052226004", "customer": "Robert Guerra", "amount": 700.78, "date": "05/26/2026", "status": "Paid", "days": 0, "viewed": false, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "05/26/2026"},
+            {"invoice": "061326018", "customer": "Erick MAITRE'D", "amount": 694.47, "date": "06/25/2026", "status": "Overdue", "days": 15, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": false, "paidDate": ""},
+            {"invoice": "000008", "customer": "Emmanual", "amount": 675.99, "date": "04/11/2026", "status": "Overdue", "days": 114, "viewed": true, "address": "Fairfield, CA", "note": "CONNECTION ISSUES - MICROSALE", "paid": false, "paidDate": ""},
+            {"invoice": "052626005", "customer": "Janet Clyde", "amount": 675.0, "date": "05/26/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order", "paid": true, "paidDate": "05/26/2026"},
+            {"invoice": "6226101", "customer": "Betsy SUPPLY ONLY", "amount": 668.06, "date": "04/22/2026", "status": "Paid", "days": 0, "viewed": false, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "04/23/2026"},
+            {"invoice": "061326042", "customer": "Rene Del Fiero", "amount": 657.37, "date": "07/24/2026", "status": "Paid", "days": 0, "viewed": false, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "07/24/2026"},
+            {"invoice": "061326016", "customer": "Katie Rondeau", "amount": 655.07, "date": "06/19/2026", "status": "Overdue", "days": 15, "viewed": true, "address": "Fairfield, CA", "note": "ORDER # 651332", "paid": false, "paidDate": ""},
+            {"invoice": "000013", "customer": "Betsy Delfiero", "amount": 632.0, "date": "04/14/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Supply Order", "paid": true, "paidDate": "05/15/2026"},
+            {"invoice": "051326011", "customer": "Donato Owner", "amount": 616.54, "date": "05/20/2026", "status": "Paid", "days": 0, "viewed": false, "address": "Fairfield, CA", "note": "", "paid": true, "paidDate": "05/20/2026"},
+            {"invoice": "051326009", "customer": "Donato Owner", "amount": 606.67, "date": "05/20/2026", "status": "Canceled", "days": 0, "viewed": false, "address": "Fairfield, CA", "note": "", "paid": false, "paidDate": ""},
+            {"invoice": "000016", "customer": "Inder Bains", "amount": 606.67, "date": "04/19/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Cabling (4) Runs for total of $600.00 each additional run can be added for $150.00", "paid": true, "paidDate": "04/23/2026"},
+            {"invoice": "000018", "customer": "Megan Manager", "amount": 600.0, "date": "04/14/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Blue Tag MP7001", "paid": true, "paidDate": "04/24/2026"},
+            {"invoice": "060826003", "customer": "Oona open store", "amount": 590.0, "date": "06/14/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "07/10/2026"},
+            {"invoice": "052226001", "customer": "Katie Rondeau", "amount": 575.63, "date": "05/22/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "ORDER # 639326", "paid": true, "paidDate": "07/19/2026"},
+            {"invoice": "060826009", "customer": "Gilbert General Manager", "amount": 553.0, "date": "06/12/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your continued business.", "paid": true, "paidDate": "07/30/2026"},
+            {"invoice": "061326-145", "customer": "Carlos Ramos", "amount": 539.67, "date": "07/28/2026", "status": "Overdue", "days": 6, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": false, "paidDate": ""},
+            {"invoice": "051326007", "customer": "Mario ECR", "amount": 530.99, "date": "05/19/2026", "status": "Paid", "days": 0, "viewed": false, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "05/19/2026"},
+            {"invoice": "4306104", "customer": "Jen Yang SUPPLY ONLY", "amount": 525.72, "date": "05/07/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "06/18/2026"},
+            {"invoice": "060126004", "customer": "Izat", "amount": 520.86, "date": "06/02/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "06/02/2026"},
+            {"invoice": "060126001", "customer": "Margarito General Manager", "amount": 518.31, "date": "06/02/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "06/26/2026"},
+            {"invoice": "000007", "customer": "Hector CASIO", "amount": 512.41, "date": "02/26/2026", "status": "Paid", "days": 0, "viewed": false, "address": "Fairfield, CA", "note": "", "paid": true, "paidDate": "02/26/2026"},
+            {"invoice": "060826008", "customer": "Sergio Frigerio NCC", "amount": 510.0, "date": "06/10/2026", "status": "Canceled", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your continued business.", "paid": false, "paidDate": ""},
+            {"invoice": "061326001", "customer": "Ali Saleh", "amount": 507.16, "date": "06/14/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Sam4s SPT 4740", "paid": true, "paidDate": "06/15/2026"},
+            {"invoice": "4166106", "customer": "Peter Schumacher SUPPLY ONLY", "amount": 500.0, "date": "05/26/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "", "paid": true, "paidDate": "06/03/2026"},
+            {"invoice": "052226002", "customer": "Cory Manager", "amount": 496.0, "date": "05/29/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "06/24/2026"},
+            {"invoice": "000005", "customer": "Hari Shrestha", "amount": 489.35, "date": "12/12/2025", "status": "Paid", "days": 0, "viewed": false, "address": "Fairfield, CA", "note": "Service call", "paid": true, "paidDate": "12/12/2025"},
+            {"invoice": "061326-050", "customer": "Maria Manager", "amount": 480.0, "date": "07/31/2026", "status": "Overdue", "days": 3, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": false, "paidDate": ""},
+            {"invoice": "052626007", "customer": "Tony Salinas", "amount": 458.29, "date": "06/11/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "06/19/2026"},
+            {"invoice": "061326-036", "customer": "Bitu Manager", "amount": 457.99, "date": "07/13/2026", "status": "Overdue", "days": 21, "viewed": false, "address": "Fairfield, CA", "note": "screen", "paid": false, "paidDate": ""},
+            {"invoice": "4166-176", "customer": "Scott Walsh", "amount": 457.4, "date": "07/23/2026", "status": "Unpaid", "days": -19, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": false, "paidDate": ""},
+            {"invoice": "060526001", "customer": "Mario ECR", "amount": 453.42, "date": "06/05/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "06/05/2026"},
+            {"invoice": "062626-152", "customer": "Heather Manager", "amount": 453.42, "date": "07/27/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Please find your courtesy invoice attached.", "paid": true, "paidDate": "08/01/2026"},
+            {"invoice": "061326050", "customer": "Cesar Canul", "amount": 452.4, "date": "08/03/2026", "status": "Unpaid", "days": -30, "viewed": false, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": false, "paidDate": ""},
+            {"invoice": "061326020", "customer": "Tacos Sinaloa - Oakland Marlem", "amount": 449.13, "date": "06/19/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "06/26/2026"},
+            {"invoice": "4276102", "customer": "Heather Manager", "amount": 438.29, "date": "06/16/2026", "status": "Overdue", "days": 65, "viewed": true, "address": "Fairfield, CA", "note": "Please find your courtesy invoice attached.", "paid": false, "paidDate": ""},
+            {"invoice": "5126103", "customer": "Fernando", "amount": 434.09, "date": "05/13/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your business", "paid": true, "paidDate": "06/23/2026"},
+            {"invoice": "061026002", "customer": "Gabby Park Caféb Group", "amount": 421.56, "date": "06/14/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "07/30/2026"},
+            {"invoice": "tills", "customer": "Fernando", "amount": 410.19, "date": "06/22/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your business", "paid": true, "paidDate": "06/24/2026"},
+            {"invoice": "061326005", "customer": "Kevin Manager", "amount": 408.86, "date": "07/27/2026", "status": "Undelivered", "days": -49, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": false, "paidDate": ""},
+            {"invoice": "061326-031", "customer": "George", "amount": 402.9, "date": "06/29/2026", "status": "Overdue", "days": 35, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": false, "paidDate": ""},
+            {"invoice": "052626004", "customer": "Bitu Manager", "amount": 401.59, "date": "05/26/2026", "status": "Paid", "days": 0, "viewed": false, "address": "Fairfield, CA", "note": "", "paid": true, "paidDate": "05/27/2026"},
+            {"invoice": "061326-030", "customer": "Leslie Manager", "amount": 396.0, "date": "06/26/2026", "status": "Overdue", "days": 38, "viewed": false, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": false, "paidDate": ""},
+            {"invoice": "052626009", "customer": "Aldo Owner", "amount": 394.36, "date": "06/01/2026", "status": "Paid", "days": 0, "viewed": false, "address": "Fairfield, CA", "note": "Thank you for your continued business.", "paid": true, "paidDate": "06/01/2026"},
+            {"invoice": "4246103", "customer": "Lawrence Kam", "amount": 390.0, "date": "04/24/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your continued business.", "paid": true, "paidDate": "04/24/2026"},
+            {"invoice": "4246-102", "customer": "Michael General Manager", "amount": 390.0, "date": "07/13/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order", "paid": true, "paidDate": "07/20/2026"},
+            {"invoice": "061326019", "customer": "Marlem", "amount": 389.01, "date": "06/18/2026", "status": "Draft", "days": 0, "viewed": false, "address": "Fairfield, CA", "note": "", "paid": false, "paidDate": ""},
+            {"invoice": "052226003", "customer": "Michael General Manager", "amount": 387.17, "date": "05/23/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order", "paid": true, "paidDate": "06/30/2026"},
+            {"invoice": "000020", "customer": "Matt GM", "amount": 386.9, "date": "04/14/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "05/01/2026"},
+            {"invoice": "05056101", "customer": "Scott Walsh", "amount": 384.6, "date": "07/23/2026", "status": "Overdue", "days": 58, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": false, "paidDate": ""},
+            {"invoice": "061326-043", "customer": "Pedro Ulloa", "amount": 382.3, "date": "07/17/2026", "status": "Paid", "days": 0, "viewed": false, "address": "Fairfield, CA", "note": "", "paid": true, "paidDate": "07/17/2026"},
+            {"invoice": "4166103", "customer": "James General Manager", "amount": 382.3, "date": "04/16/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order", "paid": true, "paidDate": "04/23/2026"},
+            {"invoice": "000011", "customer": "Judy Manager", "amount": 380.38, "date": "04/13/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "", "paid": true, "paidDate": "04/13/2026"},
+            {"invoice": "000015", "customer": "Renee loscaporalestaqueria@outlook.com", "amount": 367.5, "date": "07/13/2026", "status": "Paid", "days": 0, "viewed": false, "address": "Fairfield, CA", "note": "Thank you for your order", "paid": true, "paidDate": "07/31/2026"},
+            {"invoice": "060526002", "customer": "Nick Owner", "amount": 360.45, "date": "06/07/2026", "status": "Refunded", "days": 0, "viewed": false, "address": "Fairfield, CA", "note": "", "paid": false, "paidDate": ""},
+            {"invoice": "061326009", "customer": "Victor Sabido", "amount": 357.48, "date": "06/16/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "06/25/2026"},
+            {"invoice": "061326023", "customer": "Alvaro call back", "amount": 348.62, "date": "06/19/2026", "status": "Paid", "days": 0, "viewed": false, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "07/07/2026"},
+            {"invoice": "000003", "customer": "Don Tom La Torre", "amount": 348.32, "date": "07/09/2025", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Powercable", "paid": true, "paidDate": "07/09/2025"},
+            {"invoice": "4166114", "customer": "Bo Thompson SUPPLY ONLY", "amount": 336.74, "date": "06/15/2026", "status": "Undelivered", "days": -73, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": false, "paidDate": ""},
+            {"invoice": "061326-049", "customer": "Becky NCC", "amount": 329.75, "date": "07/22/2026", "status": "Unpaid", "days": -18, "viewed": false, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": false, "paidDate": ""},
+            {"invoice": "061326-025", "customer": "Tanner SUPPLY ONLY", "amount": 329.48, "date": "06/24/2026", "status": "Overdue", "days": 40, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": false, "paidDate": ""},
+            {"invoice": "061326046", "customer": "Ann Flider", "amount": 322.78, "date": "07/29/2026", "status": "Paid", "days": 0, "viewed": false, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "07/29/2026"},
+            {"invoice": "061326-045", "customer": "David Dearstyne", "amount": 320.01, "date": "07/20/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "07/20/2026"},
+            {"invoice": "5126101", "customer": "Becky NCC", "amount": 315.12, "date": "05/12/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "06/15/2026"},
+            {"invoice": "000002", "customer": "Don Tom La Torre", "amount": 312.24, "date": "07/09/2025", "status": "Canceled", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Clear sales totals and GT, cable repair", "paid": false, "paidDate": ""},
+            {"invoice": "061326014", "customer": "Abe left msg", "amount": 312.16, "date": "06/19/2026", "status": "Paid", "days": 0, "viewed": false, "address": "Fairfield, CA", "note": "", "paid": true, "paidDate": "06/19/2026"},
+            {"invoice": "061326037", "customer": "John", "amount": 305.16, "date": "07/14/2026", "status": "Unpaid", "days": -10, "viewed": false, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": false, "paidDate": ""},
+            {"invoice": "061326-027", "customer": "The Cantina", "amount": 304.76, "date": "06/25/2026", "status": "Overdue", "days": 12, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": false, "paidDate": ""},
+            {"invoice": "061326004", "customer": "Kelly left msg", "amount": 302.28, "date": "06/15/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "07/27/2026"},
+            {"invoice": "05056102", "customer": "Dan Ok for now", "amount": 300.73, "date": "05/13/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you!", "paid": true, "paidDate": "05/31/2026"},
+            {"invoice": "000025", "customer": "Michael General Manager", "amount": 296.65, "date": "04/24/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order", "paid": true, "paidDate": "05/09/2026"},
+            {"invoice": "061326047", "customer": "Laura", "amount": 295.98, "date": "07/30/2026", "status": "Unpaid", "days": -26, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": false, "paidDate": ""},
+            {"invoice": "061326-029", "customer": "Lilliana Owner", "amount": 293.69, "date": "06/26/2026", "status": "Paid", "days": 0, "viewed": false, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "06/26/2026"},
+            {"invoice": "061326-046", "customer": "Charlie Cross", "amount": 292.56, "date": "07/20/2026", "status": "Unpaid", "days": -16, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": false, "paidDate": ""},
+            {"invoice": "060826007", "customer": "Maria Abundiz", "amount": 292.28, "date": "06/08/2026", "status": "Overdue", "days": 26, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": false, "paidDate": ""},
+            {"invoice": "061326044", "customer": "Yvette Owner", "amount": 290.84, "date": "07/25/2026", "status": "Overdue", "days": 10, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order", "paid": false, "paidDate": ""},
+            {"invoice": "42461-026", "customer": "Caffe Greco", "amount": 285.0, "date": "06/28/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "07/27/2026"},
+            {"invoice": "060826001", "customer": "Nick Owner", "amount": 285.0, "date": "06/08/2026", "status": "Paid", "days": 0, "viewed": false, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "06/08/2026"},
+            {"invoice": "052626008", "customer": "Sam Owner", "amount": 285.0, "date": "05/29/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your continued business.", "paid": true, "paidDate": "06/15/2026"},
+            {"invoice": "000010", "customer": "Caffe Greco", "amount": 285.0, "date": "03/06/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "ER-900 Cash Drawer issue / Back up reprogram.", "paid": true, "paidDate": "03/06/2026"},
+            {"invoice": "000023", "customer": "Mary T", "amount": 285.0, "date": "05/20/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your continued business.", "paid": true, "paidDate": "05/31/2026"},
+            {"invoice": "060826004", "customer": "Nick Owner", "amount": 273.74, "date": "06/09/2026", "status": "Paid", "days": 0, "viewed": false, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "06/09/2026"},
+            {"invoice": "061326043", "customer": "Chris Davenport", "amount": 273.63, "date": "07/25/2026", "status": "Overdue", "days": 10, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your continued business.", "paid": false, "paidDate": ""},
+            {"invoice": "061326-047", "customer": "Marco Palmieri", "amount": 254.93, "date": "07/29/2026", "status": "Paid", "days": 0, "viewed": false, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "07/29/2026"},
+            {"invoice": "4166-107", "customer": "Cindy or Beth Cd @ 2 months", "amount": 253.67, "date": "07/06/2026", "status": "Paid", "days": 0, "viewed": false, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "07/19/2026"},
+            {"invoice": "061326026", "customer": "Paul Manager Manager", "amount": 250.45, "date": "06/24/2026", "status": "Paid", "days": 0, "viewed": false, "address": "Fairfield, CA", "note": "", "paid": true, "paidDate": "06/24/2026"},
+            {"invoice": "061326030", "customer": "Becky NCC", "amount": 249.73, "date": "07/02/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "07/21/2026"},
+            {"invoice": "052626006", "customer": "Becky NCC", "amount": 249.14, "date": "05/27/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "07/13/2026"},
+            {"invoice": "4166113", "customer": "Michael Dunsford NCC", "amount": 347.8, "date": "04/23/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "05/16/2026"},
+            {"invoice": "061326013", "customer": "Bitu Manager", "amount": 249.14, "date": "06/19/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "scanner", "paid": true, "paidDate": "06/24/2026"},
+            {"invoice": "4166108", "customer": "Travis Hauffman", "amount": 246.14, "date": "04/23/2026", "status": "Overdue", "days": 75, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order", "paid": false, "paidDate": ""},
+            {"invoice": "000019", "customer": "Marco SUPPLY ONLY", "amount": 242.67, "date": "04/14/2026", "status": "Paid", "days": 0, "viewed": false, "address": "Fairfield, CA", "note": "", "paid": true, "paidDate": "04/14/2026"},
+            {"invoice": "061326049", "customer": "Sam Manager", "amount": 232.99, "date": "07/31/2026", "status": "Unpaid", "days": -27, "viewed": false, "address": "Fairfield, CA", "note": "Thank you.", "paid": false, "paidDate": ""},
+            {"invoice": "060126002", "customer": "Sam Manager", "amount": 232.53, "date": "06/02/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you.", "paid": true, "paidDate": "06/05/2026"},
+            {"invoice": "4166109", "customer": "Sam Manager", "amount": 232.53, "date": "04/20/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you.", "paid": true, "paidDate": "05/07/2026"},
+            {"invoice": "051326005", "customer": "Chris Davenport", "amount": 232.53, "date": "05/13/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your continued business.", "paid": true, "paidDate": "05/26/2026"},
+            {"invoice": "060826006", "customer": "Lupe", "amount": 232.07, "date": "06/08/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "06/08/2026"},
+            {"invoice": "060226003", "customer": "Joycelin Magno", "amount": 231.84, "date": "06/02/2026", "status": "Overdue", "days": 32, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": false, "paidDate": ""},
+            {"invoice": "4246101", "customer": "Paolo Gomez", "amount": 230.93, "date": "06/10/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order", "paid": true, "paidDate": "06/10/2026"},
+            {"invoice": "061326-039", "customer": "Pedro Owner", "amount": 230.24, "date": "07/08/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "07/08/2026"},
+            {"invoice": "061026003", "customer": "Laura", "amount": 221.33, "date": "06/11/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "06/18/2026"},
+            {"invoice": "051326010", "customer": "Donato Owner", "amount": 213.68, "date": "05/20/2026", "status": "Paid", "days": 0, "viewed": false, "address": "Fairfield, CA", "note": "", "paid": true, "paidDate": "05/20/2026"},
+            {"invoice": "061326012", "customer": "Nick Owner", "amount": 212.75, "date": "06/18/2026", "status": "Paid", "days": 0, "viewed": false, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "06/18/2026"},
+            {"invoice": "4166111", "customer": "Leslie Manager", "amount": 200.81, "date": "04/23/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order", "paid": true, "paidDate": "05/09/2026"},
+            {"invoice": "061326015", "customer": "Katie Rondeau", "amount": 197.18, "date": "06/19/2026", "status": "Overdue", "days": 15, "viewed": true, "address": "Fairfield, CA", "note": "ORDER # 642281", "paid": false, "paidDate": ""},
+            {"invoice": "052026001", "customer": "Katie Rondeau", "amount": 178.0, "date": "05/20/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "ORDER # 642281", "paid": true, "paidDate": "07/19/2026"},
+            {"invoice": "4166104", "customer": "Katie Rondeau", "amount": 178.0, "date": "04/16/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "ORDER # 630670", "paid": true, "paidDate": "05/15/2026"},
+            {"invoice": "060126007", "customer": "Izat left msg", "amount": 178.0, "date": "06/02/2026", "status": "Paid", "days": 0, "viewed": false, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "06/02/2026"},
+            {"invoice": "062426-002", "customer": "Linda Manager", "amount": 174.98, "date": "06/24/2026", "status": "Overdue", "days": 11, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": false, "paidDate": ""},
+            {"invoice": "061326-040", "customer": "Fernando", "amount": 171.69, "date": "07/22/2026", "status": "Canceled", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your business", "paid": false, "paidDate": ""},
+            {"invoice": "061326011", "customer": "Michael Owner", "amount": 168.51, "date": "06/18/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "06/19/2026"},
+            {"invoice": "061326048", "customer": "Isabel Vicente", "amount": 166.62, "date": "07/30/2026", "status": "Paid", "days": 0, "viewed": false, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "07/30/2026"},
+            {"invoice": "4166-126", "customer": "Travis Hauffman", "amount": 165.5, "date": "07/30/2026", "status": "Unpaid", "days": -26, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order", "paid": false, "paidDate": ""},
+            {"invoice": "4306102", "customer": "Travis Hauffman", "amount": 163.24, "date": "05/05/2026", "status": "Overdue", "days": 60, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order", "paid": false, "paidDate": ""},
+            {"invoice": "060126003", "customer": "John", "amount": 163.24, "date": "07/14/2026", "status": "Overdue", "days": 32, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": false, "paidDate": ""},
+            {"invoice": "061326022", "customer": "Robert Simon", "amount": 161.22, "date": "06/19/2026", "status": "Overdue", "days": 16, "viewed": true, "address": "Fairfield, CA", "note": "", "paid": false, "paidDate": ""},
+            {"invoice": "061326-052", "customer": "Audrey SUPPLY ONLY", "amount": 152.58, "date": "07/22/2026", "status": "Paid", "days": 0, "viewed": false, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "07/22/2026"},
+            {"invoice": "061326041", "customer": "Jenny left msg", "amount": 152.38, "date": "07/22/2026", "status": "Paid", "days": 0, "viewed": false, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "07/22/2026"},
+            {"invoice": "05056103", "customer": "Robert Guerra", "amount": 152.38, "date": "05/11/2026", "status": "Paid", "days": 0, "viewed": false, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "05/11/2026"},
+            {"invoice": "4166112", "customer": "Arden Chenda", "amount": 151.34, "date": "04/20/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order", "paid": true, "paidDate": "04/21/2026"},
+            {"invoice": "060226004", "customer": "Ema Kye", "amount": 151.14, "date": "06/02/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "07/06/2026"},
+            {"invoice": "052626001", "customer": "Travis Hauffman", "amount": 150.36, "date": "05/26/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order", "paid": true, "paidDate": "07/19/2026"},
+            {"invoice": "052626002", "customer": "Travis Hauffman", "amount": 149.9, "date": "05/26/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order", "paid": true, "paidDate": "07/19/2026"},
+            {"invoice": "061326031", "customer": "Ken Owner", "amount": 149.9, "date": "07/06/2026", "status": "Paid", "days": 0, "viewed": false, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "07/06/2026"},
+            {"invoice": "061626-030", "customer": "Amrit Owner", "amount": 149.28, "date": "06/28/2026", "status": "Paid", "days": 0, "viewed": false, "address": "Fairfield, CA", "note": "Thank you for your order", "paid": true, "paidDate": "06/28/2026"},
+            {"invoice": "4166-108", "customer": "Kayla Manager", "amount": 146.95, "date": "07/08/2026", "status": "Unpaid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you!", "paid": false, "paidDate": ""},
+            {"invoice": "4306-104", "customer": "Ken Owner", "amount": 144.77, "date": "07/29/2026", "status": "Paid", "days": 0, "viewed": false, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "07/29/2026"},
+            {"invoice": "061326-042", "customer": "Aa Weissman", "amount": 123.26, "date": "07/20/2026", "status": "Unpaid", "days": -16, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": false, "paidDate": ""},
+            {"invoice": "05056106", "customer": "Aaron Weissman", "amount": 114.56, "date": "05/12/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "05/29/2026"},
+            {"invoice": "05056107", "customer": "Aaron Weissman", "amount": 114.56, "date": "05/12/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "05/29/2026"},
+            {"invoice": "061326034", "customer": "Betsy SUPPLY ONLY", "amount": 114.56, "date": "07/10/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "07/10/2026"},
+            {"invoice": "061326035", "customer": "Betsy Delfiero", "amount": 110.06, "date": "07/10/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Supply Order", "paid": true, "paidDate": "07/10/2026"},
+            {"invoice": "4246104", "customer": "Betsy SUPPLY ONLY", "amount": 110.06, "date": "04/24/2026", "status": "Paid", "days": 0, "viewed": false, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "04/24/2026"},
+            {"invoice": "061326007", "customer": "Sarah Willams", "amount": 110.06, "date": "06/15/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "06/24/2026"},
+            {"invoice": "060826005", "customer": "Caffe Greco", "amount": 109.52, "date": "06/08/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "06/30/2026"},
+            {"invoice": "4306101", "customer": "Katie Fryxell", "amount": 104.63, "date": "05/11/2026", "status": "Canceled", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order", "paid": false, "paidDate": ""},
+            {"invoice": "060226006", "customer": "Heather Owner", "amount": 99.16, "date": "06/04/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your continued business.", "paid": true, "paidDate": "06/05/2026"},
+            {"invoice": "061326017", "customer": "Becky NCC", "amount": 99.0, "date": "06/18/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "07/13/2026"},
+            {"invoice": "061326038", "customer": "Joycelin Magno", "amount": 98.66, "date": "07/14/2026", "status": "Unpaid", "days": -10, "viewed": false, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": false, "paidDate": ""},
+            {"invoice": "062926-001", "customer": "Michael General Manager", "amount": 83.95, "date": "06/29/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order", "paid": true, "paidDate": "07/31/2026"},
+            {"invoice": "061326021", "customer": "Gregory Lachica", "amount": 80.9, "date": "06/19/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order", "paid": true, "paidDate": "07/13/2026"},
+            {"invoice": "4166-156", "customer": "Travis Hauffman", "amount": 80.61, "date": "07/30/2026", "status": "Unpaid", "days": -26, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order", "paid": false, "paidDate": ""},
+            {"invoice": "4166-136", "customer": "Katie Rondeau", "amount": 79.43, "date": "07/15/2026", "status": "Unpaid", "days": -11, "viewed": true, "address": "Fairfield, CA", "note": "ORDER # 660090", "paid": false, "paidDate": ""},
+            {"invoice": "061326006", "customer": "William Bishop", "amount": 79.0, "date": "06/18/2026", "status": "Overdue", "days": 49, "viewed": true, "address": "Fairfield, CA", "note": "If you approve, please process invoice", "paid": false, "paidDate": ""},
+            {"invoice": "061426-001", "customer": "Emad Ali", "amount": 73.15, "date": "06/24/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "06/24/2026"},
+            {"invoice": "070126-001", "customer": "General Manager", "amount": 69.29, "date": "07/09/2026", "status": "Paid", "days": 0, "viewed": false, "address": "Fairfield, CA", "note": "Thank you fir your business", "paid": true, "paidDate": "07/09/2026"},
+            {"invoice": "060126006", "customer": "Izat left msg", "amount": 65.34, "date": "06/02/2026", "status": "Paid", "days": 0, "viewed": false, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "06/02/2026"},
+            {"invoice": "061326-033", "customer": "Mark Edwards", "amount": 62.48, "date": "07/21/2026", "status": "Overdue", "days": 20, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": false, "paidDate": ""},
+            {"invoice": "05056105", "customer": "Joycelin Magno", "amount": 62.48, "date": "05/13/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "Thank you for your order.", "paid": true, "paidDate": "05/31/2026"},
+            {"invoice": "051326008", "customer": "Don Tom La Torre", "amount": 60.83, "date": "05/19/2026", "status": "Paid", "days": 0, "viewed": true, "address": "Fairfield, CA", "note": "", "paid": true, "paidDate": "05/19/2026"},
+            {"invoice": "4166-106", "customer": "Satinder Sherfill", "amount": 10612.24, "date": "07/06/2026", "status": "Overdue", "days": 3, "viewed": true, "address": "Fairfield, CA", "note": "Sam4s POS system", "paid": false, "paidDate": ""}
+        ];
+
+        // Fetch from database API
+        async function fetchFromDB() {
+            try {
+                const response = await fetch('/collections/api');
+                const data = await response.json();
+                if (data.success) {
+                    return data.invoices;
+                }
+                throw new Error(data.error || 'API error');
+            } catch (e) {
+                console.error('Failed to fetch from DB:', e);
+                return null;
+            }
+        }
+
+        // Load with fallback
+        async function loadData() {
+            // Try API first
+            const dbData = await fetchFromDB();
+            if (dbData && dbData.length > 0) {
+                invoices = dbData;
+            } else {
+                // Use embedded data as fallback
+                invoices = EMBEDDED_INVOICES.map(inv => ({...inv, paid: inv.paid || false}));
+            }
+
+            // Merge with localStorage paid status and edits (only if not already paid)
+            const saved = localStorage.getItem('collections_invoices');
+            if (saved) {
+                const savedData = JSON.parse(saved);
+                invoices.forEach(inv => {
+                    const savedInv = savedData.find(s => s.invoice === inv.invoice);
+                    // Don't override embedded paid status
+                    if (savedInv && savedInv.paid && !inv.paid) {
+                        inv.paid = true;
+                        inv.paidDate = savedInv.paidDate;
+                        inv.paidAmount = savedInv.paidAmount;
+                    }
+                    // Preserve edited addresses
+                    if (savedInv && savedInv.address !== inv.address && savedInv.edited) {
+                        inv.address = savedInv.address;
+                        inv.edited = true;
+                    }
+                    // Carry over any newly marked paid from localStorage
+                    if (!savedInv && inv.paid) {
+                        // Already paid in embedded data, nothing to merge
+                    }
+                });
+                // Add any new items from localStorage that aren't in embedded
+                savedData.forEach(savedInv => {
+                    if (!invoices.find(inv => inv.invoice === savedInv.invoice)) {
+                        invoices.push(savedInv);
+                    }
+                });
+            }
+            isLoading = false;
+            updateStats();
+            renderTable();
+        }
+
+        function formatCurrency(amount) {
+            return '$' + amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        }
+
+        function getStatusClass(days, status) {
+            if (days > 0) {
+                if (days > 30) return 'status-critical';
+                return 'status-overdue';
+            }
+            if (days >= -7) return 'status-due-soon';
+            return 'status-current';
+        }
+
+        function getStatusText(days, status) {
+            if (days > 0) {
+                if (days > 30) return 'Critical';
+                return 'Overdue';
+            }
+            if (days >= -7) return 'Due Soon';
+            if (status === 'Undelivered') return 'Undelivered';
+            return 'Current';
+        }
+
+        function generateReminderLetter(invoice) {
+            const dueText = invoice.days > 0 
+                ? `${invoice.days} days overdue` 
+                : `Due in ${Math.abs(invoice.days)} days`;
+            
+            return `
+                <div class="letter-header">
+                    <h2>PERFORMANCE SUPPLY DEPOT LLC</h2>
+                    <p>1880 Oak Point Court | Fairfield, CA 94534<br>
+                    Phone: 888-881-6834 | Email: info@psdepot.com</p>
+                </div>
+                
+                <div class="letter-body">
+                    <p style="text-align: right;">${new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
+                    
+                    <p><strong>${invoice.customer}</strong><br>
+                    ${invoice.address.replace(/, /g, '<br>')}</p>
+                    
+                    <p><strong>RE: Payment Reminder - Invoice #${invoice.invoice}</strong></p>
+                    
+                    <p>Dear ${invoice.customer},\u003c/p>
+                    
+                    <p>We hope this letter finds you well. We are writing to remind you that payment for the following invoice is ${dueText} in our records.\u003c/p>
+                    
+                    <div class="invoice-details">
+                        <table>
+                            <tr>
+                                <th>Invoice Number:\u003c/th>
+                                <td>${invoice.invoice}</td>
+                            </tr>
+                            <tr>
+                                <th>Invoice Date:\u003c/th>
+                                <td>${invoice.date}</td>
+                            </tr>
+                            <tr>
+                                <th>Amount Due:\u003c/th>
+                                <td style="font-size: 14pt; font-weight: bold;">${formatCurrency(invoice.amount)}</td>
+                            </tr>
+                            <tr>
+                                <th>Status:\u003c/th>
+                                <td>${getStatusText(invoice.days, invoice.status).toUpperCase()} - ${dueText.toUpperCase()}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <p>Please remit payment at your earliest convenience. We value your business and appreciate your prompt attention to this matter.\u003c/p>
+                    
+                    <p>If you have already submitted payment, please disregard this notice. If you have any questions or concerns regarding this invoice, please do not hesitate to contact our Accounts Payable department.\u003c/p>
+                    
+                    <p>We accept payment via:\u003c/p>
+                    <ul>
+                        <li>Check payable to: Performance Supply Depot LLC</li>
+                        <li>Credit card (Visa, MasterCard, American Express)\u003c/li>
+                        <li>ACH bank transfer\u003c/li>
+                        <li>Online portal: psdepot.com/pay\u003c/li>
+                    </ul>
+                    
+                    <p>Thank you for your continued business and cooperation.\u003c/p>
+                    
+                    <p>Sincerely,\u003cbr>
+                    <br>
+                    <strong>Accounts Payable Department</strong><br>
+                    Performance Supply Depot LLC</p>
+                </div>
+                
+                <div class="letter-footer">
+                    <p style="font-size: 9pt; color: #666;">This is a computer-generated notice. Please retain for your records.\u003cbr>
+                    Accounts Payable: info@psdepot.com | 888-881-6834</p>
+                </div>
+                
+                <button class="print-btn" onclick="window.print()">🖨️ Print Letter</button>
+            `;
+        }
+
+        function openLetter(invoiceId) {
+            const invoice = invoices.find(i => i.invoice === invoiceId);
+            if (!invoice) {
+                console.error('Invoice not found:', invoiceId);
+                showToast('❌ Invoice not found');
+                return;
+            }
+            
+            console.log('Generating letter for:', invoice.customer, '| Address:', invoice.address);
+            document.getElementById('letterContent').innerHTML = generateReminderLetter(invoice);
+            document.getElementById('letterModal').classList.add('active');
+        }
+
+        function closeLetter() {
+            document.getElementById('letterModal').classList.remove('active');
+        }
+
+        function renderTable(filter = 'all') {
+            const tbody = document.getElementById('table-body');
+            
+            let filtered = invoices.filter(i => !i.paid); // Default: exclude paid
+            if (filter === 'paid') filtered = invoices.filter(i => i.paid);
+            else if (filter === 'critical') filtered = invoices.filter(i => !i.paid && i.days > 30);
+            else if (filter === 'overdue') filtered = invoices.filter(i => !i.paid && i.days > 0 && i.days <= 30);
+            else if (filter === 'due-soon') filtered = invoices.filter(i => !i.paid && i.days <= 0 && i.days >= -14);
+            else if (filter === 'current') filtered = invoices.filter(i => !i.paid && i.days < -14);
+
+            if (filtered.length === 0) {
+                const icon = filter === 'paid' ? '💰' : '✅';
+                const message = filter === 'paid' ? 'No paid invoices yet' : 'No accounts in this category';
+                tbody.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1/-1;">
+                        <div style="font-size: 4rem; margin-bottom: 1rem;">${icon}</div>
+                        <h3>${message}</h3>
+                    </div>
+                `;
+                return;
+            }
+
+            tbody.innerHTML = filtered.map(inv => `
+                <div class="table-row ${inv.days > 30 ? 'critical' : ''}">
+                    <div class="customer-info">
+                        <div class="customer-name">${inv.customer}
+                            ${!inv.viewed ? '<span style="color: var(--accent-red); margin-left: 0.5rem;">👁️</span>' : ''}
+                        </div>
+                        <div class="customer-address" id="addr-${inv.invoice}">${inv.address}</div>
+                        <button class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.75rem; margin-top: 0.25rem;" onclick="editAddress('${inv.invoice}')">✏️ Edit Address</button>
+                        ${inv.note ? `<div style="font-size: 0.75rem; color: var(--accent-orange); margin-top: 0.25rem;">📝 ${inv.note}</div>` : ''}
+                    </div>
+                    <div class="invoice-number">${inv.invoice}</div>
+                    <div class="amount">${formatCurrency(inv.amount)}</div>
+                    <div class="customer-address">${inv.address.split(',')[1]}, ${inv.address.split(',')[2]}</div>
+                    <div>
+                        <span class="status-badge ${getStatusClass(inv.days, inv.status)}">
+                            ${getStatusText(inv.days, inv.status)}
+                        </span>
+                    </div>
+                    <div class="days-overdue ${inv.days > 30 ? 'critical' : inv.days > 0 ? 'warning' : inv.paid ? 'success' : ''}">
+                        ${inv.paid 
+                            ? `Paid on ${new Date(inv.paidDate).toLocaleDateString()}`
+                            : inv.days > 0 
+                                ? `${inv.days} days overdue` 
+                                : `${Math.abs(inv.days)} days left`
+                        }
+                    </div>
+                    <div class="actions">
+                        ${inv.paid 
+                            ? `<span class="paid-badge">✅ Paid</span>
+                               <button class="btn btn-secondary" onclick="undoPaid('${inv.invoice}')" style="padding: 0.5rem;">↩️ Undo</button>`
+                            : inv.days > 0 
+                                ? `<button class="btn btn-primary" onclick="openLetter('${inv.invoice}')">📄 Letter</button>
+                                   <button class="btn btn-success" onclick="markPaid('${inv.invoice}')">💰 Paid</button>`
+                                : `<button class="btn btn-secondary" onclick="markPaid('${inv.invoice}')">💰 Paid</button>`
+                        }
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function updateStats() {
+            // Only count unpaid invoices
+            const unpaid = invoices.filter(i => !i.paid);
+            const total = unpaid.reduce((sum, inv) => sum + inv.amount, 0);
+            const critical = unpaid.filter(i => i.days > 30);
+            const overdue = unpaid.filter(i => i.days > 0 && i.days <= 30);
+            const dueSoon = unpaid.filter(i => i.days <= 0 && i.days >= -7);
+            const current = unpaid.filter(i => i.days < -7);
+            const paid = invoices.filter(i => i.paid);
+
+            console.log('=== Collections Stats Debug ===');
+            console.log('Total invoices:', invoices.length);
+            console.log('Unpaid:', unpaid.length, 'Total:', total);
+            console.log('Critical (>30):', critical.length, '=', critical.reduce((s,i)=>s+i.amount,0));
+            console.log('Overdue (1-30):', overdue.length, '=', overdue.reduce((s,i)=>s+i.amount,0));
+            console.log('Due Soon (-7 to 0):', dueSoon.length, '=', dueSoon.reduce((s,i)=>s+i.amount,0));
+            console.log('Current (<-7):', current.length, '=', current.reduce((s,i)=>s+i.amount,0));
+            console.log('Paid:', paid.length);
+
+            document.getElementById('total-outstanding').textContent = formatCurrency(total);
+            document.getElementById('overdue-count').textContent = overdue.length + critical.length;
+            document.getElementById('due-this-week').textContent = dueSoon.length;
+            
+            document.getElementById('critical-amount').textContent = formatCurrency(critical.reduce((s, i) => s + i.amount, 0));
+            document.getElementById('overdue-amount').textContent = formatCurrency(overdue.reduce((s, i) => s + i.amount, 0));
+            document.getElementById('due-soon-amount').textContent = formatCurrency(dueSoon.reduce((s, i) => s + i.amount, 0));
+            document.getElementById('current-amount').textContent = formatCurrency(current.reduce((s, i) => s + i.amount, 0));
+
+            document.getElementById('count-all').textContent = unpaid.length;
+            document.getElementById('count-critical').textContent = critical.length;
+            document.getElementById('count-overdue').textContent = overdue.length;
+            document.getElementById('count-due-soon').textContent = unpaid.filter(i => i.days <= 0 && i.days >= -14).length;
+            document.getElementById('count-current').textContent = current.length;
+            
+            // Update paid count if element exists
+            const paidCountEl = document.getElementById('count-paid');
+            if (paidCountEl) {
+                paidCountEl.textContent = paid.length;
+            }
+
+            // Update subtitle to show paid count
+            const subtitle = document.querySelector('.page-subtitle');
+            if (paid.length > 0) {
+                subtitle.innerHTML = `Track overdue invoices and payment collections <span style="color: var(--accent-green);">• ${paid.length} paid (${formatCurrency(paid.reduce((s, i) => s + i.amount, 0))})</span>`;
+            }
+
+            // Update Squarespace summary grid
+            const allOverdue = unpaid.filter(i => i.days > 0);
+            const notOverdue = unpaid.filter(i => i.days <= 0 && i.status !== 'Draft' && i.status !== 'Canceled' && i.status !== 'Refunded');
+            const drafts = unpaid.filter(i => i.status === 'Draft' && i.amount > 0);
+            
+            const notOverdueEl = document.getElementById('not-overdue-amount');
+            const overdueSummaryEl = document.getElementById('overdue-summary-amount');
+            const draftsEl = document.getElementById('drafts-amount');
+            
+            if (notOverdueEl) {
+                notOverdueEl.textContent = formatCurrency(notOverdue.reduce((s,i) => s + i.amount, 0));
+                notOverdueEl.previousElementSibling.textContent = `✅ Not Overdue (${notOverdue.length})`;
+            }
+            if (overdueSummaryEl) {
+                overdueSummaryEl.textContent = formatCurrency(allOverdue.reduce((s,i) => s + i.amount, 0));
+                overdueSummaryEl.previousElementSibling.textContent = `🔴 Overdue (${allOverdue.length})`;
+            }
+            if (draftsEl) {
+                draftsEl.textContent = formatCurrency(drafts.reduce((s,i) => s + i.amount, 0));
+                draftsEl.previousElementSibling.textContent = `📝 Drafts (${drafts.length})`;
+            }
+        }
+
+        // Mark an invoice as paid
+        function markPaid(invoiceId) {
+            const invoice = invoices.find(i => i.invoice === invoiceId);
+            if (!invoice) return;
+            
+            if (confirm(`Mark invoice #${invoiceId} for ${invoice.customer} as PAID?\nAmount: ${formatCurrency(invoice.amount)}`)) {
+                invoice.paid = true;
+                invoice.paidDate = new Date().toISOString();
+                invoice.paidAmount = invoice.amount;
+                
+                // Save to localStorage
+                localStorage.setItem('collections_invoices', JSON.stringify(invoices));
+                
+                // Update UI
+                updateStats();
+                const activeFilter = document.querySelector('.filter-tab.active').dataset.filter;
+                renderTable(activeFilter);
+                
+                // Show success message
+                showToast(`✅ Invoice #${invoiceId} marked as paid!`);
+            }
+        }
+
+        // Undo marking as paid
+        function undoPaid(invoiceId) {
+            const invoice = invoices.find(i => i.invoice === invoiceId);
+            if (!invoice) return;
+            
+            if (confirm(`Undo payment for invoice #${invoiceId} - ${invoice.customer}?`)) {
+                invoice.paid = false;
+                delete invoice.paidDate;
+                delete invoice.paidAmount;
+                
+                // Save to localStorage
+                localStorage.setItem('collections_invoices', JSON.stringify(invoices));
+                
+                // Update UI
+                updateStats();
+                const activeFilter = document.querySelector('.filter-tab.active').dataset.filter;
+                renderTable(activeFilter);
+                
+                // Show success message
+                showToast(`↩️ Invoice #${invoiceId} restored to unpaid!`);
+            }
+        }
+
+        // Clear cache and reload from embedded data
+        function clearCacheAndReload() {
+            if (confirm('Clear all local changes (paid status, edited addresses) and reload fresh data from Squarespace?')) {
+                localStorage.removeItem('collections_invoices');
+                invoices = EMBEDDED_INVOICES.map(inv => ({...inv, paid: inv.paid || false}));
+                updateStats();
+                const activeFilter = document.querySelector('.filter-tab.active').dataset.filter;
+                renderTable(activeFilter);
+                showToast('✅ Cache cleared! Fresh data loaded from Squarespace.');
+            }
+        }
+
+        // Refresh data (reload from server or reset)
+        async function refreshData() {
+            const refreshIcon = document.getElementById('refresh-icon');
+            refreshIcon.style.animation = 'spin 1s linear infinite';
+            
+            // Reload from embedded data and merge with localStorage
+            invoices = EMBEDDED_INVOICES.map(inv => ({...inv, paid: inv.paid || false}));
+            
+            // Merge with localStorage paid status and edits
+            const saved = localStorage.getItem('collections_invoices');
+            if (saved) {
+                const savedData = JSON.parse(saved);
+                invoices.forEach(inv => {
+                    const savedInv = savedData.find(s => s.invoice === inv.invoice);
+                    if (savedInv && savedInv.paid) {
+                        inv.paid = true;
+                        inv.paidDate = savedInv.paidDate;
+                        inv.paidAmount = savedInv.paidAmount;
+                    }
+                    if (savedInv && savedInv.address !== inv.address && savedInv.edited) {
+                        inv.address = savedInv.address;
+                        inv.edited = true;
+                    }
+                });
+            }
+            
+            updateStats();
+            const activeFilter = document.querySelector('.filter-tab.active').dataset.filter;
+            renderTable(activeFilter);
+            
+            refreshIcon.style.animation = '';
+            showToast('🔄 Data refreshed!');
+        }
+
+        // Export data to CSV
+        function exportData() {
+            const unpaid = invoices.filter(i => !i.paid);
+            const paid = invoices.filter(i => i.paid);
+            
+            let csv = 'Invoice #,Customer,Amount,Status,Days,Address,Note,Paid\n';
+            
+            [...unpaid, ...paid].forEach(inv => {
+                csv += `"${inv.invoice}","${inv.customer}",${inv.amount},"${inv.status}",${inv.days},"${inv.address}","${inv.note || ''}",${inv.paid ? 'Yes' : 'No'}\n`;
+            });
+            
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `collections_export_${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+            URL.revokeObjectURL(url);
+            
+            showToast('📥 Export downloaded!');
+        }
+
+        // Toast notification
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.style.cssText = `
+                position: fixed;
+                bottom: 2rem;
+                right: 2rem;
+                background: var(--accent-green);
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 8px;
+                font-weight: 600;
+                z-index: 10000;
+                animation: slideIn 0.3s ease;
+            `;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // Add animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes spin {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+            }
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Edit address function
+        function editAddress(invoiceId) {
+            const invoice = invoices.find(i => i.invoice === invoiceId);
+            if (!invoice) return;
+            
+            const newAddress = prompt('Enter new address:', invoice.address);
+            if (newAddress && newAddress !== invoice.address) {
+                invoice.address = newAddress;
+                invoice.edited = true; // Mark as edited so it persists
+                localStorage.setItem('collections_invoices', JSON.stringify(invoices));
+                const activeFilter = document.querySelector('.filter-tab.active').dataset.filter;
+                renderTable(activeFilter);
+                showToast('✅ Address updated! Letter will use new address.');
+            }
+        }
+
+        // Filter tabs
+        document.querySelectorAll('.filter-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                renderTable(tab.dataset.filter);
+            });
+        });
+
+        // Close modal on outside click
+        document.getElementById('letterModal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('letterModal')) {
+                closeLetter();
+            }
+        });
+
+        // Initialize
+        loadData();
+    </script>
+</body>
+</html>

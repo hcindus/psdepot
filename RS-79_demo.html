@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReggieStarr POS - Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #00d4ff, #7b2cbf);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .config-bar {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        
+        .config-bar select, .config-bar button {
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .config-bar button:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .main-container {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        @media (max-width: 900px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .left-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .receipt-display {
+            background: #000;
+            border-radius: 15px;
+            padding: 20px;
+            font-family: 'Courier New', monospace;
+            min-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .receipt-display h3 {
+            color: #00ff00;
+            margin-bottom: 15px;
+            text-align: center;
+            border-bottom: 2px solid #00ff00;
+            padding-bottom: 10px;
+        }
+        
+        .receipt-content {
+            color: #00ff00;
+            white-space: pre-wrap;
+            line-height: 1.6;
+        }
+        
+        .transaction-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #00ff00;
+        }
+        
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .info-item.total {
+            grid-column: span 2;
+            font-size: 1.3em;
+            font-weight: bold;
+            border-top: 2px solid #00ff00;
+            padding-top: 10px;
+            margin-top: 10px;
+        }
+        
+        .input-section {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 20px;
+        }
+        
+        .input-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .input-row input, .input-row select {
+            flex: 1;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(0,0,0,0.3);
+            color: #fff;
+            font-size: 16px;
+        }
+        
+        .input-row input::placeholder {
+            color: rgba(255,255,255,0.5);
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, #00d4ff, #0099cc);
+            color: #fff;
+        }
+        
+        .btn-success {
+            background: linear-gradient(45deg, #00ff88, #00cc66);
+            color: #000;
+        }
+        
+        .btn-danger {
+            background: linear-gradient(45deg, #ff4444, #cc0000);
+            color: #fff;
+        }
+        
+        .btn-warning {
+            background: linear-gradient(45deg, #ffaa00, #cc8800);
+            color: #000;
+        }
+        
+        .btn-info {
+            background: linear-gradient(45deg, #7b2cbf, #9d4edd);
+            color: #fff;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+        
+        .right-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .panel-section {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 20px;
+        }
+        
+        .panel-section h3 {
+            margin-bottom: 15px;
+            color: #00d4ff;
+            font-size: 1.1em;
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        
+        .product-btn {
+            padding: 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            background: rgba(255,255,255,0.05);
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: left;
+        }
+        
+        .product-btn:hover {
+            background: rgba(255,255,255,0.15);
+            border-color: #00d4ff;
+        }
+        
+        .product-btn .name {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .product-btn .price {
+            color: #00ff88;
+            font-size: 0.9em;
+        }
+        
+        .function-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        
+        .function-btn {
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .tax-types {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .tax-btn {
+            padding: 10px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            background: rgba(255,255,255,0.05);
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tax-btn.active {
+            background: rgba(0,212,255,0.3);
+            border-color: #00d4ff;
+        }
+        
+        .payment-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .payment-btn {
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1em;
+            transition: all 0.3s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .payment-btn.cash {
+            background: linear-gradient(45deg, #2ecc71, #27ae60);
+            color: #fff;
+        }
+        
+        .payment-btn.card {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: #fff;
+        }
+        
+        .payment-btn.crypto {
+            background: linear-gradient(45deg, #f39c12, #e67e22);
+            color: #fff;
+        }
+        
+        .status-bar {
+            background: rgba(0,0,0,0.5);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            font-size: 0.9em;
+        }
+        
+        .status-bar .connected {
+            color: #00ff88;
+        }
+        
+        .status-bar .disconnected {
+            color: #ff4444;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: #1a1a2e;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .modal-header h2 {
+            color: #00d4ff;
+        }
+        
+        .close-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+        
+        .kds-display {
+            margin-top: 20px;
+        }
+        
+        .kds-order {
+            background: rgba(255,165,0,0.1);
+            border: 1px solid #ffa500;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 10px;
+        }
+        
+        .kds-order.completed {
+            background: rgba(0,255,0,0.1);
+            border-color: #00ff00;
+            opacity: 0.6;
+        }
+        
+        .split-check-display {
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 10px;
+        }
+        
+        .split-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .error-message {
+            background: rgba(255,68,68,0.2);
+            border: 1px solid #ff4444;
+            border-radius: 8px;
+            padding: 10px;
+            margin: 10px 0;
+            color: #ff4444;
+        }
+        
+        .success-message {
+            background: rgba(0,255,136,0.2);
+            border: 1px solid #00ff88;
+            border-radius: 8px;
+            padding: 10px;
+            margin: 10px 0;
+            color: #00ff88;
+        }
+        
+        #loading {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.9);
+            padding: 30px;
+            border-radius: 15px;
+            z-index: 2000;
+        }
+        
+        .spinner {
+            border: 4px solid rgba(255,255,255,0.1);
+            border-left-color: #00d4ff;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🛒 ReggieStarr POS</h1>
+        <p>Performance Supply Depot - Demo System</p>
+    </div>
+    
+    <div class="config-bar">
+        <select id="languageSelect" onchange="changeLanguage()">
+            <option value="en">🇺🇸 English</option>
+            <option value="es">🇪🇸 Español</option>
+            <option value="fr">🇫🇷 Français</option>
+            <option value="de">🇩🇪 Deutsch</option>
+            <option value="it">🇮🇹 Italiano</option>
+            <option value="pt">🇵🇹 Português</option>
+            <option value="ja">🇯🇵 日本語</option>
+            <option value="zh">🇨🇳 中文</option>
+        </select>
+        <select id="currencySelect" onchange="changeCurrency()">
+            <option value="USD">🇺🇸 USD ($)</option>
+            <option value="EUR">🇪🇺 EUR (€)</option>
+            <option value="GBP">🇬🇧 GBP (£)</option>
+            <option value="BTC">₿ Bitcoin</option>
+            <option value="USDC">💲 USDC</option>
+            <option value="USDT">💲 USDT</option>
+            <option value="JPY">🇯🇵 JPY (¥)</option>
+            <option value="CNY">🇨🇳 CNY (¥)</option>
+            <option value="CAD">🇨🇦 CAD (C$)</option>
+            <option value="AUD">🇦🇺 AUD (A$)</option>
+        </select>
+        <button onclick="updateRates()">🔄 Update Rates</button>
+        <button onclick="showKDS()">👨‍🍳 KDS View</button>
+    </div>
+    
+    <div class="main-container">
+        <div class="left-panel">
+            <div class="receipt-display">
+                <h3>📄 CURRENT TRANSACTION</h3>
+                <div class="receipt-content" id="receiptContent">
+                    No active transaction. Start by adding items.
+                </div>
+                <div class="transaction-info" id="transactionInfo" style="display: none;">
+                    <div class="info-item">
+                        <span>Subtotal:</span>
+                        <span id="subtotal">$0.00</span>
+                    </div>
+                    <div class="info-item">
+                        <span>Tax:</span>
+                        <span id="tax">$0.00</span>
+                    </div>
+                    <div class="info-item total">
+                        <span>TOTAL:</span>
+                        <span id="total">$0.00</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="input-section">
+                <div class="input-row">
+                    <input type="text" id="pluInput" placeholder="Enter PLU Code (e.g., 1001)" list="productList">
+                    <input type="number" id="qtyInput" placeholder="Qty" value="1" min="1">
+                    <select id="taxTypeSelect">
+                        <option value="standard">Standard Tax</option>
+                        <option value="non_tax">Non-Tax</option>
+                        <option value="exempt">Tax Exempt</option>
+                        <option value="inclusive">Tax Inclusive</option>
+                    </select>
+                </div>
+                <div class="input-row">
+                    <input type="number" id="discountAmt" placeholder="Discount $" value="0" step="0.01">
+                    <input type="number" id="discountPct" placeholder="Discount %" value="0" min="0" max="100">
+                    <input type="text" id="itemNotes" placeholder="Notes (e.g., 'No onions')">
+                </div>
+                <div class="input-row">
+                    <button class="btn btn-primary" onclick="addItem()">➕ Add Item</button>
+                    <button class="btn btn-danger" onclick="voidLastItem()">❌ Void Last</button>
+                    <button class="btn btn-warning" onclick="cancelTransaction()">🚫 Cancel</button>
+                </div>
+            </div>
+            
+            <div class="panel-section">
+                <h3>🎯 Quick Actions</h3>
+                <div class="function-grid">
+                    <button class="btn btn-info" onclick="showSplitModal()">Split Check</button>
+                    <button class="btn btn-info" onclick="holdTransaction()">Hold</button>
+                    <button class="btn btn-info" onclick="showRecallModal()">Recall</button>
+                    <button class="btn btn-info" onclick="reprintReceipt()">Reprint</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="right-panel">
+            <div class="panel-section">
+                <h3>🏪 Products</h3>
+                <div class="product-grid" id="productGrid">
+                    <!-- Products loaded from API -->
+                </div>
+            </div>
+            
+            <div class="panel-section">
+                <h3>💳 Payment</h3>
+                <div class="payment-methods">
+                    <button class="payment-btn cash" onclick="processPayment('Cash')">
+                        <span>💵 Cash</span>
+                        <span id="cashAmount"></span>
+                    </button>
+                    <button class="payment-btn card" onclick="processPayment('Credit Card')">
+                        <span>💳 Credit Card</span>
+                        <span></span>
+                    </button>
+                    <button class="payment-btn card" onclick="processPayment('Debit Card')">
+                        <span>💳 Debit Card</span>
+                        <span></span>
+                    </button>
+                    <button class="payment-btn crypto" onclick="processPayment('BTC')">
+                        <span>₿ Bitcoin</span>
+                        <span></span>
+                    </button>
+                    <button class="payment-btn crypto" onclick="processPayment('USDC')">
+                        <span>💲 USDC</span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="panel-section">
+                <h3>📊 Reports</h3>
+                <div class="function-grid">
+                    <button class="btn btn-info" onclick="showZReport()">Z-Report</button>
+                    <button class="btn btn-info" onclick="showSalesReport()">Sales</button>
+                </div>
+            </div>
+            
+            <div class="status-bar">
+                <span id="apiStatus">API: <span class="disconnected">Disconnected</span></span>
+                <span id="txnStatus" style="margin-left: 20px;">No Active Transaction</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- KDS Modal -->
+    <div class="modal" id="kdsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>👨‍🍳 Kitchen Display System</h2>
+                <button class="close-btn" onclick="closeModal('kdsModal')">&times;</button>
+            </div>
+            <div id="kdsDisplay" class="kds-display">
+                <!-- KDS orders loaded here -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- Split Check Modal -->
+    <div class="modal" id="splitModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🪓 Split Check</h2>
+                <button class="close-btn" onclick="closeModal('splitModal')">&times;</button>
+            </div>
+            <div>
+                <label>Number of splits:</label>
+                <input type="number" id="splitCount" value="2" min="2" max="10">
+                <button class="btn btn-primary" onclick="splitByNumber()">Split</button>
+            </div>
+            <div id="splitResult" class="split-check-display"></div>
+        </div>
+    </div>
+    
+    <!-- Recall Modal -->
+    <div class="modal" id="recallModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>📋 Recall Transaction</h2>
+                <button class="close-btn" onclick="closeModal('recallModal')">&times;</button>
+            </div>
+            <div>
+                <label>Hold ID:</label>
+                <input type="text" id="holdIdInput" placeholder="Enter Hold ID">
+                <button class="btn btn-primary" onclick="recallTransaction()">Recall</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Reports Modal -->
+    <div class="modal" id="reportModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>📊 Report</h2>
+                <button class="close-btn" onclick="closeModal('reportModal')">&times;</button>
+            </div>
+            <pre id="reportContent" style="white-space: pre-wrap; font-family: monospace; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 10px;"></pre>
+        </div>
+    </div>
+    
+    <div id="loading">
+        <div class="spinner"></div>
+    </div>
+
+    <datalist id="productList"></datalist>
+
+    <script>
+        // API Configuration
+        const API_URL = 'http://localhost:5001';
+        
+        // State
+        let currentTransaction = null;
+        let products = [];
+        let currentLanguage = 'en';
+        let currentCurrency = 'USD';
+        let currencySymbol = '$';
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAPIStatus();
+            loadProducts();
+            startTransaction();
+        });
+        
+        // API Status Check
+        async function checkAPIStatus() {
+            try {
+                const response = await fetch(`${API_URL}/products`, { method: 'GET' });
+                if (response.ok) {
+                    document.getElementById('apiStatus').innerHTML = 'API: <span class="connected">Connected</span>';
+                } else {
+                    throw new Error('API not responding');
+                }
+            } catch (error) {
+                document.getElementById('apiStatus').innerHTML = 'API: <span class="disconnected">Disconnected - Using Demo Mode</span>';
+                loadDemoProducts();
+            }
+        }
+        
+        // Load Products
+        async function loadProducts() {
+            try {
+                const response = await fetch(`${API_URL}/products`);
+                const data = await response.json();
+                products = data.products;
+                displayProducts();
+                populateDatalist();
+            } catch (error) {
+                console.error('Failed to load products:', error);
+                loadDemoProducts();
+            }
+        }
+        
+        function loadDemoProducts() {
+            products = [
+                { plu_code: '1001', name: 'Apple', price: 0.50, department: 'Produce' },
+                { plu_code: '1002', name: 'Banana', price: 0.30, department: 'Produce' },
+                { plu_code: '1003', name: 'Sandwich', price: 5.99, department: 'Food' },
+                { plu_code: '1004', name: 'Vape Pen', price: 19.99, department: 'Tobacco' },
+                { plu_code: '1005', name: 'E-Liquid', price: 14.99, department: 'Tobacco' },
+                { plu_code: '1006', name: 'Water Bottle', price: 1.29, department: 'Beverages' },
+                { plu_code: '1007', name: 'Coffee', price: 3.50, department: 'Beverages' },
+                { plu_code: '1008', name: 'Muffin', price: 2.99, department: 'Food' },
+            ];
+            displayProducts();
+            populateDatalist();
+        }
+        
+        function displayProducts() {
+            const grid = document.getElementById('productGrid');
+            grid.innerHTML = products.map(p => `
+                <button class="product-btn" onclick="addProduct('${p.plu_code}')">
+                    <span class="name">${p.name}</span>
+                    <span class="price">${currencySymbol}${p.price.toFixed(2)}</span>
+                </button>
+            `).join('');
+        }
+        
+        function populateDatalist() {
+            const datalist = document.getElementById('productList');
+            datalist.innerHTML = products.map(p => `
+                <option value="${p.plu_code}">${p.name} - ${currencySymbol}${p.price.toFixed(2)}</option>
+            `).join('');
+        }
+        
+        // Transaction Management
+        async function startTransaction() {
+            try {
+                const response = await fetch(`${API_URL}/transaction/start`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        clerk_name: 'Demo Clerk',
+                        pin: '1234',
+                        currency: currentCurrency,
+                        language: currentLanguage
+                    })
+                });
+                const data = await response.json();
+                if (data.success) {
+                    currentTransaction = data.transaction_id;
+                    document.getElementById('txnStatus').textContent = `Transaction: ${data.transaction_id}`;
+                    updateReceipt();
+                }
+            } catch (error) {
+                console.error('Failed to start transaction:', error);
+                document.getElementById('txnStatus').textContent = 'Demo Mode - No Backend';
+            }
+        }
+        
+        async function addItem() {
+            const plu = document.getElementById('pluInput').value;
+            const qty = parseFloat(document.getElementById('qtyInput').value) || 1;
+            const taxType = document.getElementById('taxTypeSelect').value;
+            const discountAmt = parseFloat(document.getElementById('discountAmt').value) || 0;
+            const discountPct = parseFloat(document.getElementById('discountPct').value) || 0;
+            const notes = document.getElementById('itemNotes').value;
+            
+            if (!plu) {
+                showError('Please enter a PLU code');
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${API_URL}/transaction/item`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        plu_code: plu,
+                        quantity: qty,
+                        tax_type: taxType,
+                        discount_amount: discountAmt,
+                        discount_percent: discountPct,
+                        notes: notes
+                    })
+                });
+                const data = await response.json();
+                if (data.success) {
+                    updateReceiptDisplay(data.transaction);
+                    clearInputs();
+                } else {
+                    showError(data.message);
+                }
+            } catch (error) {
+                // Demo mode fallback
+                addDemoItem(plu, qty, taxType, discountAmt, discountPct, notes);
+            }
+        }
+        
+        function addProduct(pluCode) {
+            document.getElementById('pluInput').value = pluCode;
+            addItem();
+        }
+        
+        function addDemoItem(plu, qty, taxType, discountAmt, discountPct, notes) {
+            const product = products.find(p => p.plu_code === plu);
+            if (!product) {
+                showError('Product not found');
+                return;
+            }
+            
+            const subtotal = product.price * qty;
+            const discount = discountAmt + (subtotal * discountPct / 100);
+            const taxable = subtotal - discount;
+            const taxRate = taxType === 'standard' ? 0.0875 : 0;
+            const tax = taxable * taxRate;
+            const total = taxable + tax;
+            
+            if (!currentTransaction) {
+                currentTransaction = {
+                    id: 'DEMO-' + Date.now(),
+                    items: [],
+                    subtotal: 0,
+                    tax_total: 0,
+                    total: 0
+                };
+            }
+            
+            currentTransaction.items.push({
+                name: product.name,
+                quantity: qty,
+                unit_price: product.price,
+                subtotal: subtotal,
+                discount: discount,
+                tax: tax,
+                total: total,
+                notes: notes
+            });
+            
+            updateDemoReceipt();
+        }
+        
+        async function voidLastItem() {
+            try {
+                const response = await fetch(`${API_URL}/transaction`);
+                const data = await response.json();
+                if (data.items && data.items.length > 0) {
+                    const lastItem = data.items[data.items.length - 1];
+                    await fetch(`${API_URL}/transaction/void`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ item_id: lastItem.id })
+                    });
+                    updateReceipt();
+                }
+            } catch (error) {
+                if (currentTransaction && currentTransaction.items) {
+                    currentTransaction.items.pop();
+                    updateDemoReceipt();
+                }
+            }
+        }
+        
+        async function cancelTransaction() {
+            try {
+                await fetch(`${API_URL}/transaction/cancel`, { method: 'POST' });
+                currentTransaction = null;
+                startTransaction();
+            } catch (error) {
+                currentTransaction = null;
+                document.getElementById('receiptContent').innerHTML = 'Transaction cancelled. Starting new...';
+                document.getElementById('transactionInfo').style.display = 'none';
+            }
+        }
+        
+        // Payment
+        async function processPayment(method) {
+            if (!currentTransaction) {
+                showError('No active transaction');
+                return;
+            }
+            
+            const amount = parseFloat(prompt(`Enter ${method} amount:`));
+            if (!amount || amount <= 0) return;
+            
+            try {
+                const response = await fetch(`${API_URL}/payment`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        method: method,
+                        amount: amount,
+                        currency: currentCurrency
+                    })
+                });
+                const data = await response.json();
+                if (data.success) {
+                    updateReceiptDisplay(data.transaction);
+                    if (data.is_complete) {
+                        showSuccess(`Payment complete! Change: ${currencySymbol}${data.change.toFixed(2)}`);
+                        setTimeout(() => startTransaction(), 2000);
+                    }
+                }
+            } catch (error) {
+                showSuccess(`Payment processed: ${method} ${currencySymbol}${amount.toFixed(2)}`);
+            }
+        }
+        
+        // Split Check
+        function showSplitModal() {
+            document.getElementById('splitModal').classList.add('active');
+        }
+        
+        async function splitByNumber() {
+            const num = parseInt(document.getElementById('splitCount').value);
+            try {
+                const response = await fetch(`${API_URL}/split/by-number`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ num_splits: num })
+                });
+                const data = await response.json();
+                displaySplits(data.splits);
+            } catch (error) {
+                showError('Split check requires backend');
+            }
+        }
+        
+        function displaySplits(splits) {
+            const result = document.getElementById('splitResult');
+            result.innerHTML = splits.map(s => `
+                <div class="split-item">
+                    <span>Check ${s.split_number}</span>
+                    <span>${s.currency} ${s.amount.toFixed(2)}</span>
+                </div>
+            `).join('');
+        }
+        
+        // Hold/Recall
+        async function holdTransaction() {
+            try {
+                const response = await fetch(`${API_URL}/transaction/hold`, { method: 'POST' });
+                const data = await response.json();
+                if (data.success) {
+                    showSuccess(`Transaction held: ${data.hold_id}`);
+                    currentTransaction = null;
+                    startTransaction();
+                }
+            } catch (error) {
+                showError('Hold requires backend');
+            }
+        }
+        
+        function showRecallModal() {
+            document.getElementById('recallModal').classList.add('active');
+        }
+        
+        async function recallTransaction() {
+            const holdId = document.getElementById('holdIdInput').value;
+            try {
+                const response = await fetch(`${API_URL}/transaction/recall`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ hold_id: holdId })
+                });
+                const data = await response.json();
+                if (data.success) {
+                    currentTransaction = data.transaction.id;
+                    updateReceiptDisplay(data.transaction);
+                    closeModal('recallModal');
+                }
+            } catch (error) {
+                showError('Recall requires backend');
+            }
+        }
+        
+        // KDS
+        async function showKDS() {
+            document.getElementById('kdsModal').classList.add('active');
+            try {
+                const response = await fetch(`${API_URL}/kds/orders?status=pending`);
+                const data = await response.json();
+                displayKDSOrders(data.orders);
+            } catch (error) {
+                document.getElementById('kdsDisplay').innerHTML = '<p>KDS requires backend connection</p>';
+            }
+        }
+        
+        function displayKDSOrders(orders) {
+            const display = document.getElementById('kdsDisplay');
+            if (!orders || orders.length === 0) {
+                display.innerHTML = '<p>No pending orders</p>';
+                return;
+            }
+            display.innerHTML = orders.map(o => `
+                <div class="kds-order" id="${o.order_id}">
+                    <h4>Order ${o.order_id}</h4>
+                    <p>Clerk: ${o.clerk}</p>
+                    <ul>${o.items.map(i => `<li>${i.qty}x ${i.name}</li>`).join('')}</ul>
+                    <button class="btn btn-success" onclick="completeKDS('${o.order_id}')">Complete</button>
+                </div>
+            `).join('');
+        }
+        
+        async function completeKDS(orderId) {
+            try {
+                await fetch(`${API_URL}/kds/complete`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ order_id: orderId })
+                });
+                document.getElementById(orderId).classList.add('completed');
+            } catch (error) {
+                showError('KDS complete failed');
+            }
+        }
+        
+        // Reports
+        async function showZReport() {
+            try {
+                const response = await fetch(`${API_URL}/reports/zreport`);
+                const data = await response.json();
+                showReport(data.report);
+            } catch (error) {
+                showReport('Z-Report requires backend');
+            }
+        }
+        
+        async function showSalesReport() {
+            try {
+                const response = await fetch(`${API_URL}/reports/sales?days=1`);
+                const data = await response.json();
+                showReport(data.report);
+            } catch (error) {
+                showReport('Sales report requires backend');
+            }
+        }
+        
+        function showReport(content) {
+            document.getElementById('reportContent').textContent = content;
+            document.getElementById('reportModal').classList.add('active');
+        }
+        
+        // Receipt
+        async function updateReceipt() {
+            try {
+                const response = await fetch(`${API_URL}/transaction`);
+                const data = await response.json();
+                updateReceiptDisplay(data);
+            } catch (error) {
+                // Demo mode - keep current display
+            }
+        }
+        
+        function updateReceiptDisplay(transaction) {
+            if (!transaction || !transaction.items) {
+                document.getElementById('receiptContent').innerHTML = 'No active transaction';
+                document.getElementById('transactionInfo').style.display = 'none';
+                return;
+            }
+            
+            const items = transaction.items
+                .filter(i => !i.is_voided)
+                .map(i => `${i.name} x${i.quantity} @ ${currencySymbol}${i.unit_price.toFixed(2)} = ${currencySymbol}${i.total.toFixed(2)}`)
+                .join('\n');
+            
+            document.getElementById('receiptContent').innerHTML = `<pre>${items || 'No items'}</pre>`;
+            
+            document.getElementById('subtotal').textContent = currencySymbol + transaction.subtotal.toFixed(2);
+            document.getElementById('tax').textContent = currencySymbol + transaction.tax_total.toFixed(2);
+            document.getElementById('total').textContent = currencySymbol + transaction.total.toFixed(2);
+            document.getElementById('transactionInfo').style.display = 'grid';
+            
+            // Update payment buttons
+            document.getElementById('cashAmount').textContent = currencySymbol + transaction.total.toFixed(2);
+        }
+        
+        function updateDemoReceipt() {
+            if (!currentTransaction || !currentTransaction.items) return;
+            
+            const subtotal = currentTransaction.items.reduce((sum, i) => sum + i.subtotal, 0);
+            const tax = currentTransaction.items.reduce((sum, i) => sum + i.tax, 0);
+            const total = currentTransaction.items.reduce((sum, i) => sum + i.total, 0);
+            
+            const items = currentTransaction.items
+                .map(i => `${i.name} x${i.quantity} @ ${currencySymbol}${i.unit_price.toFixed(2)} = ${currencySymbol}${i.total.toFixed(2)}`)
+                .join('\n');
+            
+            document.getElementById('receiptContent').innerHTML = `<pre>${items}</pre>`;
+            document.getElementById('subtotal').textContent = currencySymbol + subtotal.toFixed(2);
+            document.getElementById('tax').textContent = currencySymbol + tax.toFixed(2);
+            document.getElementById('total').textContent = currencySymbol + total.toFixed(2);
+            document.getElementById('transactionInfo').style.display = 'grid';
+        }
+        
+        async function reprintReceipt() {
+            try {
+                const response = await fetch(`${API_URL}/receipt/reprint`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ transaction_id: currentTransaction || '0' })
+                });
+                const data = await response.json();
+                showReport(data.receipt);
+            } catch (error) {
+                showReport('Reprint requires backend');
+            }
+        }
+        
+        // Currency
+        function changeCurrency() {
+            currentCurrency = document.getElementById('currencySelect').value;
+            const symbols = { 'USD': '$', 'EUR': '€', 'GBP': '£', 'BTC': '₿', 'JPY': '¥', 'CNY': '¥', 'CAD': 'C$', 'AUD': 'A$', 'USDC': '$', 'USDT': '$' };
+            currencySymbol = symbols[currentCurrency] || '$';
+            displayProducts();
+            updateReceipt();
+        }
+        
+        async function updateRates() {
+            try {
+                await fetch(`${API_URL}/currency/update`, { method: 'POST' });
+                showSuccess('Exchange rates updated');
+            } catch (error) {
+                showError('Rate update requires backend');
+            }
+        }
+        
+        // Language
+        function changeLanguage() {
+            currentLanguage = document.getElementById('languageSelect').value;
+            showSuccess(`Language changed to ${document.getElementById('languageSelect').options[document.getElementById('languageSelect').selectedIndex].text}`);
+        }
+        
+        // Utilities
+        function clearInputs() {
+            document.getElementById('pluInput').value = '';
+            document.getElementById('qtyInput').value = '1';
+            document.getElementById('discountAmt').value = '0';
+            document.getElementById('discountPct').value = '0';
+            document.getElementById('itemNotes').value = '';
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+        
+        function showError(message) {
+            const div = document.createElement('div');
+            div.className = 'error-message';
+            div.textContent = message;
+            document.body.appendChild(div);
+            setTimeout(() => div.remove(), 3000);
+        }
+        
+        function showSuccess(message) {
+            const div = document.createElement('div');
+            div.className = 'success-message';
+            div.textContent = message;
+            document.body.appendChild(div);
+            setTimeout(() => div.remove(), 3000);
+        }
+        
+        // Close modals on outside click
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.classList.remove('active');
+            }
+        }
+    </script>
+</body>
+</html>

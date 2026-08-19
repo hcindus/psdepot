@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - AGI Company</title>
+    <meta name="description" content="Get in touch with AGI Company for sales, support, or general inquiries.">
+    <style>
+        :root {
+            --bg-dark: #0a0a1a;
+            --bg-card: rgba(255, 255, 255, 0.05);
+            --header-bg: rgba(26, 54, 93, 0.95);
+            --text: #e5e5e5;
+            --text-muted: #a0a0a0;
+            --accent: #ed8936;
+            --accent-hover: #dd6b20;
+            --border: rgba(237, 137, 54, 0.3);
+            --success: #48bb78;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            background: var(--header-bg);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            z-index: 1000;
+        }
+
+        .logo { font-size: 26px; font-weight: 800; color: var(--text); text-decoration: none; }
+        .logo span { color: var(--accent); }
+
+        .header-nav { display: flex; align-items: center; gap: 30px; }
+        .header-nav a {
+            color: var(--text); text-decoration: none; font-weight: 600; font-size: 15px; transition: color 0.3s;
+        }
+        .header-nav a:hover { color: var(--accent); }
+
+        .layout { display: flex; min-height: 100vh; padding-top: 70px; padding-bottom: 60px; }
+
+        .sidebar {
+            width: 260px; background: rgba(26, 54, 93, 0.9); border-right: 1px solid var(--border);
+            padding: 30px 20px; position: fixed; left: 0; top: 70px; bottom: 60px; overflow-y: auto;
+        }
+
+        .sidebar-section { margin-bottom: 35px; }
+        .sidebar-title {
+            font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--accent);
+            margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid var(--border); font-weight: 700;
+        }
+        .sidebar-menu { list-style: none; }
+        .sidebar-menu li { margin-bottom: 8px; }
+        .sidebar-menu a {
+            display: flex; align-items: center; padding: 12px 15px; color: var(--text-muted);
+            text-decoration: none; border-radius: 8px; transition: all 0.3s; font-size: 14px;
+        }
+        .sidebar-menu a:hover, .sidebar-menu a.active { background: rgba(237, 137, 54, 0.15); color: var(--accent); }
+        .sidebar-menu .icon { margin-right: 12px; font-size: 18px; width: 24px; text-align: center; }
+
+        .main-content { flex: 1; margin-left: 260px; padding: 40px 60px; }
+
+        .page-header { margin-bottom: 40px; }
+        .page-header h1 { font-size: 42px; margin-bottom: 10px; }
+        .page-header p { color: var(--text-muted); font-size: 18px; }
+
+        .contact-layout { display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; }
+
+        .contact-info h3 { font-size: 24px; margin-bottom: 25px; }
+        .contact-methods { margin-bottom: 40px; }
+        .contact-method {
+            display: flex; align-items: flex-start; gap: 20px; padding: 25px;
+            background: var(--bg-card); border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px; margin-bottom: 20px;
+        }
+        .contact-method-icon {
+            width: 50px; height: 50px; border-radius: 12px; background: rgba(237, 137, 54, 0.15);
+            display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0;
+        }
+        .contact-method-content h4 { font-size: 16px; margin-bottom: 5px; }
+        .contact-method-content p { color: var(--text-muted); font-size: 14px; margin: 0; }
+        .contact-method-content a { color: var(--accent); text-decoration: none; }
+
+        .contact-form {
+            background: var(--bg-card); border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px; padding: 40px;
+        }
+        .contact-form h3 { font-size: 24px; margin-bottom: 30px; }
+
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-bottom: 25px; }
+        .form-group label {
+            display: block; margin-bottom: 10px; font-weight: 600; font-size: 14px;
+        }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%; padding: 14px 18px; border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05); color: var(--text);
+            border-radius: 10px; font-size: 16px; transition: all 0.3s;
+        }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            outline: none; border-color: var(--accent);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        .form-group textarea { min-height: 150px; resize: vertical; }
+        .form-group.full-width { grid-column: 1 / -1; }
+
+        .btn {
+            display: inline-block; padding: 16px 40px; background: var(--accent); color: white;
+            text-decoration: none; border-radius: 10px; font-weight: 600; border: none;
+            cursor: pointer; font-size: 16px; transition: all 0.3s;
+        }
+        .btn:hover { background: #9b2c2c; transform: translateY(-2px); }
+
+        .faq-section { margin-top: 60px; }
+        .faq-section h3 { font-size: 28px; margin-bottom: 30px; }
+        .faq-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; }
+        .faq-item {
+            background: var(--bg-card); border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px; padding: 25px;
+        }
+        .faq-item h4 { font-size: 16px; margin-bottom: 12px; color: var(--accent); }
+        .faq-item p { color: var(--text-muted); font-size: 14px; line-height: 1.6; }
+
+        .footer {
+            position: fixed; bottom: 0; left: 0; right: 0; height: 60px;
+            background: var(--header-bg); backdrop-filter: blur(10px); border-top: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: space-between; padding: 0 30px; z-index: 1000;
+        }
+        .footer-left { color: var(--text); font-size: 14px; }
+        .footer-right { display: flex; gap: 25px; }
+        .footer-right a { color: var(--text-muted); text-decoration: none; font-size: 14px; }
+        .footer-right a:hover { color: var(--accent); }
+
+        @media (max-width: 1024px) {
+            .contact-layout { grid-template-columns: 1fr; }
+            .faq-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar { display: none; }
+            .main-content { margin-left: 0; padding: 20px; }
+            .form-grid { grid-template-columns: 1fr; }
+            .contact-form { padding: 25px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="logo">AGI<span>Company</span></a>
+        <nav class="header-nav">
+            <a href="index.html">Home</a>
+            <a href="products.html">Products</a>
+            <a href="agents.html">🤖 Agents</a>
+            <a href="cart.html">Cart</a>
+            <a href="login.html">Login</a>
+        </nav>
+    </header>
+
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-title">Main Menu</div>
+                <ul class="sidebar-menu">
+                    <li><a href="index.html"><span class="icon">🏠</span> Home</a></li>
+                    <li><a href="products.html"><span class="icon">🛍️</span> Products</a></li>
+                    <li><a href="agents.html"><span class="icon">🤖</span> Agents</a></li>
+                </ul>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-title">Support</div>
+                <ul class="sidebar-menu">
+                    <li><a href="help.html"><span class="icon">❓</span> Help Center</a></li>
+                    <li><a href="contact.html" class="active"><span class="icon">✉️</span> Contact Us</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="page-header">
+                <h1>Contact Us</h1>
+                <p>Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+            </div>
+
+            <div class="contact-layout">
+                <div class="contact-info">
+                    <h3>Get in Touch</h3>
+                    
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <div class="contact-method-icon">📧</div>
+                            <div class="contact-method-content">
+                                <h4>Email</h4>
+                                <p><a href="mailto:hello@agicompany.ai">hello@agicompany.ai</a></p>
+                                <p>For general inquiries</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-method">
+                            <div class="contact-method-icon">📞</div>
+                            <div class="contact-method-content">
+                                <h4>Phone</h4>
+                                <p><a href="tel:+1-800-AGI-COMP">1-800-AGI-COMP</a></p>
+                                <p>Mon-Fri, 9am-6pm EST</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-method">
+                            <div class="contact-method-icon">💬</div>
+                            <div class="contact-method-content">
+                                <h4>Live Chat</h4>
+                                <p>Available 24/7</p>
+                                <p>Chat with our support agents</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form">
+                    <h3>Send us a Message</h3>
+                    
+                    <form id="contact-form">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" name="name" placeholder="John Doe" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" placeholder="john@company.com" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="company">Company</label>
+                                <input type="text" id="company" name="company" placeholder="Your Company">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <select id="subject" name="subject" required>
+                                    <option value="">Select a subject</option>
+                                    <option value="sales">Sales Inquiry</option>
+                                    <option value="support">Technical Support</option>
+                                    <option value="demo">Request Demo</option>
+                                    <option value="partners">Partnership</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label for="message">Message</label>
+                                <textarea id="message" name="message" placeholder="Tell us how we can help you..." required></textarea>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="faq-section">
+                <h3>Frequently Asked Questions</h3>
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <h4>How quickly can I deploy an agent?</h4>
+                        <p>Most agents are ready to work within minutes of subscription. Simply select your agent, complete checkout, and they're online and ready.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h4>Can I customize agent behavior?</h4>
+                        <p>Yes! Each agent can be customized with your company knowledge, tone preferences, and specific workflows through our dashboard.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h4>What about data security?</h4>
+                        <p>We use enterprise-grade encryption, SOC 2 compliance, and your data is never used to train models. Full data residency options available.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h4>Do you offer enterprise pricing?</h4>
+                        <p>Absolutely. Contact our sales team for custom pricing, dedicated infrastructure, and SLAs tailored to your organization.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-left">© 2026 AGI Company. All rights reserved.</div>
+        <div class="footer-right">
+            <a href="privacy.html">Privacy</a>
+            <a href="terms.html">Terms</a>
+            <a href="support.html">Support</a>
+        </div>
+    </footer>
+
+    <script src="cart.js"></script>
+    <script>
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            showNotification('Message sent! We\'ll get back to you soon.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>

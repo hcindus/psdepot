@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="NOLMIswkaAcCgv3SZi3DHCXqnUG1NMvo88Ga711Uadk" />
+    <title>Products | POS Hardware & Cash Drawers | Performance Supply Depot</title>
+    <meta name="description" content="Browse our complete catalog of POS hardware, cash drawers, cash registers, receipt printers, and accessories. Authorized dealer for M-S Cash Drawer, CAS, SAM4s, and more.">
+    <meta name="keywords" content="POS products, cash drawers, cash registers, receipt printers, POS hardware, M-S Cash Drawer">
+    <link rel="canonical" href="https://psdepot.com/products">
+    <meta property="og:image" content="https://psdepot.com/assets/images/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://psdepot.com/assets/images/og-image.png">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    
+    <style>
+        :root {
+            --primary: #0A1A2F;
+            --primary-dark: #0f2744;
+            --accent: #d69e2e;
+            --accent-hover: #b7791f;
+            --secondary: #ff6600;
+            --success: #28a745;
+            --bg: #F8F9FA;
+            --card: #ffffff;
+            --text: #111111;
+            --text-muted: #718096;
+            --border: #e2e8f0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        /* Header */
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo { font-size: 1.5rem; font-weight: 700; text-decoration: none; color: white; }
+        .logo span { color: var(--accent); }
+
+        .contact-info {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: opacity 0.2s;
+        }
+
+        .contact-info a:hover { opacity: 0.8; }
+
+        .cart-icon {
+            background: #c53030;
+            color: white !important;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .cart-icon:hover {
+            background: #9b2c2c;
+            transform: translateY(-1px);
+        }
+        
+        /* Breadcrumb */
+        .breadcrumb {
+            max-width: 1200px;
+            margin: 1rem auto;
+            padding: 0 2rem;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+        
+        .breadcrumb a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .breadcrumb a:hover { text-decoration: underline; }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.125rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        /* Section Title */
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border);
+        }
+        
+        /* Featured Vendor */
+        .vendor-banner {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        /* Mobile optimizations */
+        
+        .vendor-logo {
+            background: var(--bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .vendor-logo img {
+            max-width: 150px;
+            height: auto;
+        }
+        
+        .vendor-info h2 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .vendor-info p {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+        
+        .vendor-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+            color: white;
+            padding: 0.35rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        
+        /* Category Grid */
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .category-card {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border: 1px solid var(--border);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+        
+        .category-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .category-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .category-count {
+            background: var(--bg);
+            color: var(--text-muted);
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        
+        .category-description {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+        
+        .category-price {
+            font-size: 0.875rem;
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .btn-view {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        
+        .btn-view:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        /* Product List Preview */
+        .product-list {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+        
+        .product-list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            font-size: 0.875rem;
+        }
+        
+        .product-list-item:not(:last-child) {
+            border-bottom: 1px dashed var(--border);
+        }
+        
+        .product-name {
+            color: var(--text);
+        }
+        
+        .product-price-sm {
+            color: var(--secondary);
+            font-weight: 600;
+        }
+        
+        /* Other Vendors Section */
+        .vendors-section {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 3rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .vendors-section h2 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .vendors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .vendor-card {
+            background: var(--bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid var(--border);
+            transition: all 0.2s;
+        }
+        
+        .vendor-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+        
+        .vendor-card h3 {
+            font-size: 1.125rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .vendor-card p {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--primary-dark);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+        
+        .footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        /* Cart Script */
+        .cart-count { font-weight: bold; }
+    
+        .footer-cta {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 2rem;
+            background: var(--primary);
+            color: white;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .footer-cta h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .footer-cta p {
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+        .footer-cta .phone {
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-decoration: none;
+            display: inline-block;
+            animation: patrioticBlink 1.5s infinite;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        @keyframes patrioticBlink {
+            0%, 33% {
+                color: #ff0000;
+                text-shadow: 0 0 20px rgba(255,0,0,0.8), 2px 2px 4px rgba(0,0,0,0.3);
+            }
+            34%, 66% {
+                color: #ffffff;
+                text-shadow: 0 0 20px rgba(255,255,255,0.8), 2px 2px 4px rgba(0,0,0,0.3);
+            }
+            67%, 100% {
+                color: #0000ff;
+                text-shadow: 0 0 20px rgba(0,0,255,0.8), 2px 2px 4px rgba(0,0,0,0.3);
+            }
+        }
+
+        .footer-cta .phone:hover {
+            animation-duration: 0.5s;
+        }
+
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="logo">Performance<span>Supply</span>Depot</a>
+            <div class="contact-info">
+                <a href="tel:888-881-6834">888-881-6834</a>
+                <a href="/checkout.html" class="cart-icon">🛒 Cart (<span id="cart-count">0</span>)</a>
+            </div>
+        </div>
+    </header>
+    
+    <nav class="breadcrumb">
+        <a href="/">Home</a> / 
+        <span>Products</span>
+    </nav>
+    
+    <section class="hero">
+        <h1>Our Products</h1>
+        <p>Browse our complete catalog of POS hardware, cash drawers, cash registers, and accessories from industry-leading manufacturers.</p>
+    </section>
+    
+    <div class="container">
+        <!-- Featured Vendor -->
+        <div class="vendor-banner">
+            <div class="vendor-logo">
+                <img src="/assets/images/vendors/ms-cashdrawer-logo.png" alt="M-S Cash Drawer">
+            </div>
+            <div class="vendor-info">
+                <h2>M-S Cash Drawer</h2>
+                <p>Industry-leading cash drawer manufacturer and POS distributor. 12-time RSPA Vendor Award of Excellence winner.</p>
+                <div class="vendor-badge">🏆 12x Award Winner</div>
+            </div>
+        </div>
+        
+        <!-- Cash Drawers Section -->
+        <h2 class="section-title">Cash Drawers</h2>
+        
+        <div class="category-grid">
+            <div class="category-card">
+                <div class="category-header">
+                    <div class="category-title">Compact Cash Drawers</div>
+                    <div class="category-count">3 items</div>
+                </div>
+                <p class="category-description">13" compact cash drawers perfect for retail environments with limited counter space. Available in black and white finishes.</p>
+                <div class="category-price">Starting at $125.00</div>
+                
+                <a href="/categories/compact-cash-drawers" class="btn-view">View Products →</a>
+                
+                <div class="product-list">
+                    <div class="product-list-item">
+                        <span class="product-name">CC-330 13" 4-Bill/5-Coin Black</span>
+                        <span class="product-price-sm">$125.00</span>
+                    </div>
+                    <div class="product-list-item">
+                        <span class="product-name">CC-330 13" 4-Bill/5-Coin White</span>
+                        <span class="product-price-sm">$125.00</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="category-card">
+                <div class="category-header">
+                    <div class="category-title">Standard Cash Drawers</div>
+                    <div class="category-count">4 items</div>
+                </div>
+                <p class="category-description">16" standard cash drawers for medium to high-traffic retail. Multiple bill/coin configurations available.</p>
+                <div class="category-price">Starting at $130.00</div>
+                
+                <a href="/categories/standard-cash-drawers" class="btn-view">View Products →</a>
+                
+                <div class="product-list">
+                    <div class="product-list-item">
+                        <span class="product-name">CC-410 16" 5-Bill/5-Coin Black</span>
+                        <span class="product-price-sm">$130.00</span>
+                    </div>
+                    <div class="product-list-item">
+                        <span class="product-name">CC-410 16" 5-Bill/8-Coin Black</span>
+                        <span class="product-price-sm">$130.00</span>
+                    </div>
+                    <div class="product-list-item">
+                        <span class="product-name">CC-410 16" 5-Bill/8-Coin White</span>
+                        <span class="product-price-sm">$130.00</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="category-card">
+                <div class="category-header">
+                    <div class="category-title">Heavy Duty Cash Drawers</div>
+                    <div class="category-count">2 items</div>
+                </div>
+                <p class="category-description">18" heavy duty cash drawers for high-traffic retail and restaurants. Extra durability for demanding environments.</p>
+                <div class="category-price">Starting at $160.00</div>
+                
+                <a href="/categories/heavy-duty-cash-drawers" class="btn-view">View Products →</a>
+                
+                <div class="product-list">
+                    <div class="product-list-item">
+                        <span class="product-name">CC-460 18" 5-Bill/8-Coin Black</span>
+                        <span class="product-price-sm">$160.00</span>
+                    </div>
+                    <div class="product-list-item">
+                        <span class="product-name">CRS 160018 Heavy Duty 18"</span>
+                        <span class="product-price-sm">$200.00</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="category-card">
+                <div class="category-header">
+                    <div class="category-title">CF Series Premium</div>
+                    <div class="category-count">3 items</div>
+                </div>
+                <p class="category-description">Premium CF series cash drawers with advanced features and media slots. Professional grade construction.</p>
+                <div class="category-price">Starting at $151.67</div>
+                
+                <a href="/categories/cf-series-cash-drawers" class="btn-view">View Products →</a>
+                
+                <div class="product-list">
+                    <div class="product-list-item">
+                        <span class="product-name">CF-405BX 16" 5-Bill/5-Coin with Media</span>
+                        <span class="product-price-sm">$151.67</span>
+                    </div>
+                    <div class="product-list-item">
+                        <span class="product-name">CF-460BX 17.3" Heavy Duty with SS Front</span>
+                        <span class="product-price-sm">$196.67</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="category-card">
+                <div class="category-header">
+                    <div class="category-title">Till Inserts & Trays</div>
+                    <div class="category-count">1 item</div>
+                </div>
+                <p class="category-description">Replacement till inserts and trays for standard cash drawers. 5-bill/5-coin configuration with spring-loaded clips.</p>
+                <div class="category-price">$55.00</div>
+                
+                <a href="/products/72-100-cash-drawer.html" class="btn-view">View Product →</a>
+                
+                <div class="product-list">
+                    <div class="product-list-item">
+                        <span class="product-name">72-100 5-Bill/5-Coin Till Insert</span>
+                        <span class="product-price-sm">$55.00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Cash Registers Section -->
+        <h2 class="section-title">Cash Registers</h2>
+        
+        <div class="category-grid">
+            <div class="category-card">
+                <div class="category-header">
+                    <div class="category-title">CAS Cash Registers</div>
+                    <div class="category-count">5 items</div>
+                </div>
+                <p class="category-description">Professional electronic cash registers from CAS America. Split keyboard, raised keyboard, and flat keyboard models available.</p>
+                <div class="category-price">Starting at $478.33</div>
+                
+                <a href="/products/mscashdrawer/cas-se-c3500mc-split-keyboard-cash-register.html" class="btn-view">Browse CAS →</a>
+            </div>
+            
+            <div class="category-card">
+                <div class="category-header">
+                    <div class="category-title">CRS SAM4s Cash Registers</div>
+                    <div class="category-count">15 items</div>
+                </div>
+                <p class="category-description">Professional ECRs from SAM4s. Single-station and dual-station printers, flat and raised keyboards, spill-resistant models.</p>
+                <div class="category-price">Starting at $265.00</div>
+                
+                <a href="/products/mscashdrawer/sam4s-er-180u-open-line-cash-register.html" class="btn-view">Browse SAM4s →</a>
+                
+                <div class="product-list">
+                    <div class="product-list-item">
+                        <span class="product-name">ER-180U Entry Level</span>
+                        <span class="product-price-sm">$265.00</span>
+                    </div>
+                    <div class="product-list-item">
+                        <span class="product-name">ER-945 Dual-Station</span>
+                        <span class="product-price-sm">$848.33</span>
+                    </div>
+                    <div class="product-list-item">
+                        <span class="product-name">SPS-345 Spill-Resistant</span>
+                        <span class="product-price-sm">$898.33</span>
+                    </div>
+                    <div class="product-list-item">
+                        <span class="product-name">SAP-630 Android Terminal</span>
+                        <span class="product-price-sm">$1,331.67</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Other Vendors -->
+        <div class="vendors-section">
+            <h2>Other Product Categories</h2>
+            
+            <div class="vendors-grid">
+                <a href="/products/printer-ribbons.html" class="vendor-card" style="text-decoration: none; color: inherit;">
+                    <h3>🖨️ Receipt Printers</h3>
+                    <p>Star Micronics, Epson, thermal and impact printers</p>
+                </a>
+                
+                <a href="/products/cas-lp-1000n.html" class="vendor-card" style="text-decoration: none; color: inherit;">
+                    <h3>⚖️ Scales</h3>
+                    <p>CAS LP-1000N label printing, PDN retail scales</p>
+                </a>
+                
+                <div class="vendor-card">
+                    <h3>🏷️ Label Printers</h3>
+                    <p>Bixolon, Citizen desktop label printers</p>
+                </div>
+                
+                <a href="/products/sam4s-sap-630.html" class="vendor-card" style="text-decoration: none; color: inherit;">
+                    <h3>💻 POS Systems</h3>
+                    <p>SAM4s Android terminals, touchscreen solutions</p>
+                </a>
+                
+                <a href="/products/pf-230-phenol-free-thermal-paper.html" class="vendor-card" style="text-decoration: none; color: inherit;">
+                    <h3>📄 Paper & Supplies</h3>
+                    <p>Thermal paper, ribbons, POS consumables</p>
+                </a>
+                
+                <a href="/products/capton-pouring-systems.html" class="vendor-card" style="text-decoration: none; color: inherit;">
+                    <h3>🍷 Pouring Systems</h3>
+                    <p>Capton beverage portion control pourers</p>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Quick Links -->
+        <div class="vendors-section" style="margin-top: 2rem;">
+            <h2>Popular Products</h2>
+            
+            <div class="vendors-grid">
+                <a href="/RS-80.html" class="vendor-card" style="text-decoration: none; color: inherit;">
+                    <h3>Reggie Starr RS-80 POS</h3>
+                    <p>Native Android point of sale system</p>
+                </a>
+                
+                <a href="/products/sam4s-er-260.html" class="vendor-card" style="text-decoration: none; color: inherit;">
+                    <h3>SAM4s ER-260</h3>
+                    <p>Raised keyboard cash register</p>
+                </a>
+                
+                <a href="/products/sam4s-er-265.html" class="vendor-card" style="text-decoration: none; color: inherit;">
+                    <h3>SAM4s ER-265</h3>
+                    <p>Flat keyboard cash register</p>
+                </a>
+                
+                <a href="/products/sam4s-er-940.html" class="vendor-card" style="text-decoration: none; color: inherit;">
+                    <h3>SAM4s ER-940</h3>
+                    <p>Dual-station printer ECR</p>
+                </a>
+                
+                <a href="/products/cas-pdn-series.html" class="vendor-card" style="text-decoration: none; color: inherit;">
+                    <h3>CAS PDN Scale</h3>
+                    <p>Retail dual-display scale</p>
+                </a>
+                
+                <a href="/products/thermal-paper.html" class="vendor-card" style="text-decoration: none; color: inherit;">
+                    <h3>Thermal Paper</h3>
+                    <p>Receipt paper rolls</p>
+                </a>
+                
+                <a href="/products/capton-1.5oz-pourer.html" class="vendor-card" style="text-decoration: none; color: inherit;">
+                    <h3>Capton 1.5 oz Pourer</h3>
+                    <p>Standard shot portion control</p>
+                </a>
+                
+                <a href="/products/72-100-cash-drawer.html" class="vendor-card" style="text-decoration: none; color: inherit;">
+                    <h3>72-100 Till Insert</h3>
+                    <p>5-Bill/5-Coin cash drawer tray</p>
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <p><strong>Performance Supply Depot LLC</strong></p>
+        <p>Authorized Dealer for M-S Cash Drawer, CAS, SAM4s, and more</p>
+        <p><a href="tel:888-881-6834">888-881-6834</a> | <a href="mailto:info@psdepot.com">info@psdepot.com</a></p>
+        <p><a href="https://psdepot.com">psdepot.com</a></p>
+    </footer>
+    
+    <script>
+        // Cart count updater
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('psdepot_cart') || '[]');
+            const count = cart.reduce((sum, item) => sum + (parseInt(item.quantity) || 0), 0);
+            document.getElementById('cart-count').textContent = count;
+        }
+        document.addEventListener('DOMContentLoaded', updateCartCount);
+    </script>
+
+    <section class="footer-cta">
+        <h3>Questions About This Product?</h3>
+        <p>Our team can help you choose the right solution. Call for a free consultation.</p>
+        <a href="tel:8888816834" class="phone">(888) 881-6834</a>
+    </section>
+
+</body>
+</html>

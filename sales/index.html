@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PSDEPOT - No Discount Promotions</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #003366, #1a1a2e);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: white;
+            padding: 40px;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        
+        .header h1 {
+            font-size: 36px;
+            color: #003366;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 18px;
+            color: #666;
+        }
+        
+        .promo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .promo-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .promo-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .promo-header {
+            padding: 25px;
+            text-align: center;
+            color: white;
+        }
+        
+        .promo-icon {
+            font-size: 50px;
+            margin-bottom: 10px;
+        }
+        
+        .promo-name {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .promo-theme {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .promo-body {
+            padding: 25px;
+        }
+        
+        .promo-angle {
+            font-size: 16px;
+            color: #555;
+            font-style: italic;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .benefits {
+            list-style: none;
+        }
+        
+        .benefits li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #555;
+        }
+        
+        .benefits li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #28a745;
+            font-weight: bold;
+        }
+        
+        .promo-footer {
+            padding: 20px;
+            background: #f9f9f9;
+            text-align: center;
+        }
+        
+        .urgency {
+            background: #003366;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 13px;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        
+        .cta {
+            display: block;
+            background: #ff6600;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        
+        .cta:hover {
+            background: #e55a00;
+        }
+        
+        .cta-secondary {
+            display: block;
+            background: #003366;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+        
+        .cta-secondary:hover {
+            background: #005599;
+        }
+        
+        .phone {
+            font-size: 20px;
+            font-weight: bold;
+            color: #003366;
+            margin-top: 15px;
+        }
+        
+        .phone-blink {
+            font-size: 20px;
+            font-weight: bold;
+            display: inline-block;
+            padding: 5px 15px;
+            background: #003366;
+            color: white;
+            border-radius: 10px;
+            animation: blink 1.5s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { color: #ff0000; }
+            33% { color: #ffffff; }
+            66% { color: #0000ff; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>PSDEPOT Promotions</h1>
+            <p>Value-Added Deals — No Discounts Required</p>
+        </div>
+        
+        <div class="promo-grid">
+            <!-- Free Shipping -->
+            <div class="promo-card">
+                <div class="promo-header" style="background: #003366;">
+                    <div class="promo-icon">🚚</div>
+                    <div class="promo-name">Free Shipping Week</div>
+                    <div class="promo-theme">Convenience</div>
+                </div>
+                <div class="promo-body">
+                    <div class="promo-angle">"Your time is valuable. We handle the logistics."</div>
+                    <ul class="benefits">
+                        <li>Free expedited shipping</li>
+                        <li>Same-day processing before 2PM</li>
+                        <li>Real-time tracking updates</li>
+                        <li>Signature confirmation included</li>
+                    </ul>
+                </div>
+                <div class="promo-footer">
+                    <div class="urgency">This Week Only</div>
+                    <a href="mailto:info@psdepot.com?subject=Free Shipping Inquiry" class="cta">Get Free Shipping</a>
+                    <div class="phone-blink">📞 888-881-6834</div>
+                </div>
+            </div>
+            
+            <!-- Net 30 -->
+            <div class="promo-card">
+                <div class="promo-header" style="background: #1a5f2a;">
+                    <div class="promo-icon">💳</div>
+                    <div class="promo-name">Net 30 Terms</div>
+                    <div class="promo-theme">Cash Flow Friendly</div>
+                </div>
+                <div class="promo-body">
+                    <div class="promo-angle">"Buy now, pay later. No interest, no hassle."</div>
+                    <ul class="benefits">
+                        <li>30-day payment terms</li>
+                        <li>No credit check required</li>
+                        <li>Automatic approval (returning)</li>
+                        <li>Increased purchasing power</li>
+                    </ul>
+                </div>
+                <div class="promo-footer">
+                    <div class="urgency">Apply Today, Use Tomorrow</div>
+                    <a href="mailto:info@psdepot.com?subject=Net 30 Terms Inquiry" class="cta">Apply for Net 30</a>
+                    <div class="phone-blink">📞 888-881-6834</div>
+                </div>
+            </div>
+            
+            <!-- Bundle -->
+            <div class="promo-card">
+                <div class="promo-header" style="background: #8b4513;">
+                    <div class="promo-icon">📦</div>
+                    <div class="promo-name">Systems Bundle</div>
+                    <div class="promo-theme">Complete Solutions</div>
+                </div>
+                <div class="promo-body">
+                    <div class="promo-angle">"Everything you need, nothing you don't."</div>
+                    <ul class="benefits">
+                        <li>POS + Scanner + Printer included</li>
+                        <li>Free setup and configuration</li>
+                        <li>3 months free support</li>
+                        <li>Future upgrade discounts</li>
+                    </ul>
+                </div>
+                <div class="promo-footer">
+                    <div class="urgency">Bundle Pricing Ends Soon</div>
+                    <a href="mailto:info@psdepot.com?subject=Bundle Inquiry" class="cta">Get Bundle Pricing</a>
+                    <div class="phone-blink">📞 888-881-6834</div>
+                </div>
+            </div>
+            
+            <!-- Trade-Up -->
+            <div class="promo-card">
+                <div class="promo-header" style="background: #4a0080;">
+                    <div class="promo-icon">🔄</div>
+                    <div class="promo-name">Trade-Up Program</div>
+                    <div class="promo-theme">Upgrade & Recycle</div>
+                </div>
+                <div class="promo-body">
+                    <div class="promo-angle">"Your old equipment has value. Turn it into new."</div>
+                    <ul class="benefits">
+                        <li>Free pickup of old equipment</li>
+                        <li>Environmentally responsible</li>
+                        <li>Credit toward new purchase</li>
+                        <li>Secure data wipe included</li>
+                    </ul>
+                </div>
+                <div class="promo-footer">
+                    <div class="urgency">30-Day Trade-In Value</div>
+                    <a href="mailto:info@psdepot.com?subject=Trade-Up Inquiry" class="cta">Get Trade-In Value</a>
+                    <div class="phone-blink">📞 888-881-6834</div>
+                </div>
+            </div>
+            
+            <!-- Loyalty -->
+            <div class="promo-card">
+                <div class="promo-header" style="background: #ffd700; color: #003366;">
+                    <div class="promo-icon">⭐</div>
+                    <div class="promo-name">Loyalty Rewards</div>
+                    <div class="promo-theme">Exclusive Benefits</div>
+                </div>
+                <div class="promo-body">
+                    <div class="promo-angle">"The more you buy, the more you earn."</div>
+                    <ul class="benefits">
+                        <li>Earn points on every purchase</li>
+                        <li>Redeem for free equipment</li>
+                        <li>Early access to new products</li>
+                        <li>Dedicated account manager</li>
+                    </ul>
+                </div>
+                <div class="promo-footer">
+                    <div class="urgency">Enroll This Month = Double Points</div>
+                    <a href="mailto:info@psdepot.com?subject=Loyalty Program Inquiry" class="cta">Join VIP Program</a>
+                    <div class="phone-blink">📞 888-881-6834</div>
+                </div>
+            </div>
+            
+            <!-- Priority Support -->
+            <div class="promo-card">
+                <div class="promo-header" style="background: #cc0000;">
+                    <div class="promo-icon">🛡️</div>
+                    <div class="promo-name">Priority Support</div>
+                    <div class="promo-theme">White Glove Service</div>
+                </div>
+                <div class="promo-body">
+                    <div class="promo-angle">"Because your business can't afford downtime."</div>
+                    <ul class="benefits">
+                        <li>Direct line to support team</li>
+                        <li>4-hour response guarantee</li>
+                        <li>Remote diagnostics included</li>
+                        <li>Replacement priority</li>
+                    </ul>
+                </div>
+                <div class="promo-footer">
+                    <div class="urgency">Added to All Orders This Month</div>
+                    <a href="mailto:info@psdepot.com?subject=Priority Support Inquiry" class="cta">Add Priority Support</a>
+                    <div class="phone-blink">📞 888-881-6834</div>
+                </div>
+            </div>
+            
+            <!-- Easy Financing -->
+            <div class="promo-card">
+                <div class="promo-header" style="background: #2e5a1c;">
+                    <div class="promo-icon">📊</div>
+                    <div class="promo-name">Easy Financing</div>
+                    <div class="promo-theme">Flexible Payments</div>
+                </div>
+                <div class="promo-body">
+                    <div class="promo-angle">"Get the equipment you need, spread the cost."</div>
+                    <ul class="benefits">
+                        <li>0% financing available</li>
+                        <li>Terms from 6 to 36 months</li>
+                        <li>Quick 5-minute approval</li>
+                        <li>No hidden fees</li>
+                    </ul>
+                </div>
+                <div class="promo-footer">
+                    <div class="urgency">Apply Today, Decision in 5 Minutes</div>
+                    <a href="mailto:info@psdepot.com?subject=Financing Inquiry" class="cta">Apply for Financing</a>
+                    <div class="phone-blink">📞 888-881-6834</div>
+                </div>
+            </div>
+            
+            <!-- Volume Pricing -->
+            <div class="promo-card">
+                <div class="promo-header" style="background: #1a4d1a;">
+                    <div class="promo-icon">🏢</div>
+                    <div class="promo-name">Volume Pricing</div>
+                    <div class="promo-theme">Multi-Location Discount</div>
+                </div>
+                <div class="promo-body">
+                    <div class="promo-angle">"More locations, more savings, more support."</div>
+                    <ul class="benefits">
+                        <li>Custom pricing for 3+ locations</li>
+                        <li>Centralized ordering system</li>
+                        <li>Consolidated invoicing</li>
+                        <li>Dedicated account team</li>
+                    </ul>
+                </div>
+                <div class="promo-footer">
+                    <div class="urgency">Consultation This Week</div>
+                    <a href="mailto:info@psdepot.com?subject=Volume Pricing Inquiry" class="cta">Get Volume Quote</a>
+                    <div class="phone-blink">📞 888-881-6834</div>
+                </div>
+            </div>
+            
+            <!-- Free Consultation -->
+            <div class="promo-card">
+                <div class="promo-header" style="background: #0066cc;">
+                    <div class="promo-icon">💼</div>
+                    <div class="promo-name">Free Consultation</div>
+                    <div class="promo-theme">Expert Advice</div>
+                </div>
+                <div class="promo-body">
+                    <div class="promo-angle">"Let us help you optimize your operations."</div>
+                    <ul class="benefits">
+                        <li>30-minute free consultation</li>
+                        <li>Workflow analysis included</li>
+                        <li>Custom recommendations</li>
+                        <li>No obligation to purchase</li>
+                    </ul>
+                </div>
+                <div class="promo-footer">
+                    <div class="urgency">Schedule This Week</div>
+                    <a href="mailto:info@psdepot.com?subject=Free Consultation" class="cta">Book Consultation</a>
+                    <div class="phone-blink">📞 888-881-6834</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

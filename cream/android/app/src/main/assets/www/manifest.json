@@ -1,0 +1,8 @@
+{
+  "name": "CREAM - Real Estate Management",
+  "short_name": "CREAM",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#1E3A8A",
+  "background_color": "#ffffff"
+}

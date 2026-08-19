@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout — Performance Supply Depot LLC</title>
+    <meta name="description" content="Secure checkout for POS supplies, thermal paper, printer ribbons, and hardware. Free shipping on orders over $500.">
+    <link rel="canonical" href="https://psdepot.com/checkout.html">
+    <meta property="og:image" content="https://psdepot.com/assets/images/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://psdepot.com/assets/images/og-image.png">
+    <meta name="robots" content="index, follow">
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta name="theme-color" content="#1a365d">
+    <!-- Open Graph -->
+    <meta property="og:title" content="Secure Checkout — Performance Supply Depot LLC">
+    <meta property="og:description" content="Complete your order for premium POS supplies with secure Stripe payment processing.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://psdepot.com/checkout.html">
+    <!-- Schema.org WebSite -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Performance Supply Depot LLC",
+      "url": "https://psdepot.com",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://psdepot.com/?search={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://js.stripe.com/v3/"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #0A1A2F;
+            --primary-light: #1a3a5f;
+            --accent: #FF7A00;
+            --accent-hover: #E66E00;
+            --bg: #F8F9FA;
+            --card: #ffffff;
+            --text: #111111;
+            --text-muted: #718096;
+            --border: #e2e8f0;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        /* Header */
+        header {
+            background: var(--primary);
+            color: white;
+            padding: 16px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: white;
+            text-decoration: none;
+        }
+        .logo span { color: #00E0FF; }
+        .nav-links a {
+            color: rgba(0, 224, 255, 0.7);
+            text-decoration: none;
+            font-weight: 500;
+            margin-left: 24px;
+        }
+        .nav-links a:hover { color: white; }
+        /* Checkout Layout */
+        .checkout-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            padding: 48px 0;
+        }
+        .checkout-section {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 32px;
+            border: 1px solid var(--border);
+        }
+        .checkout-section h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid var(--border);
+        }
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 6px;
+        }
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: inherit;
+        }
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        /* Cart Items */
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .cart-item-info h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+        .cart-item-info p {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+        .cart-item-price {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .cart-item-actions {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-top: 8px;
+        }
+        .cart-item-actions button {
+            background: var(--border);
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+        .cart-item-actions button:hover {
+            background: var(--primary);
+            color: white;
+        }
+        .cart-item-actions button:active {
+            background: var(--primary);
+            color: white;
+        }
+        .remove-btn {
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+        .cart-item-actions span {
+            font-weight: 600;
+            min-width: 24px;
+            text-align: center;
+        }
+        .remove-btn {
+            background: var(--accent) !important;
+            color: white !important;
+            width: auto !important;
+            padding: 0 12px !important;
+            font-size: 12px !important;
+        }
+        /* Cart Summary */
+        .cart-summary {
+            background: #edf2f7;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 24px;
+        }
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+        .summary-row.total {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+            padding-top: 12px;
+            border-top: 2px solid var(--border);
+            margin-top: 12px;
+        }
+        .summary-row span:first-child { color: var(--text-muted); }
+        .summary-row span:last-child { font-weight: 600; }
+        /* Address Lookup */
+        .lookup-btn {
+            width: 100%;
+            background: var(--primary-light);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .lookup-btn:hover { background: var(--primary); }
+        .lookup-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        .lookup-result {
+            background: #d1fae5;
+            border: 1px solid #10b981;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .lookup-result.found {
+            background: #d1fae5;
+            border-color: #10b981;
+        }
+        .lookup-result.not-found {
+            background: #fed7d7;
+            border-color: #fc8181;
+        }
+        .lookup-result h4 {
+            margin: 0 0 8px 0;
+            font-size: 16px;
+        }
+        .lookup-result p {
+            margin: 0;
+            font-size: 14px;
+        }
+        /* Empty Cart */
+        .empty-cart {
+            text-align: center;
+            padding: 48px;
+            color: var(--text-muted);
+        }
+        .empty-cart a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        /* Payment */
+        #card-element {
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: white;
+        }
+        #card-errors {
+            color: var(--accent);
+            font-size: 14px;
+            margin-top: 8px;
+        }
+        .submit-btn {
+            width: 100%;
+            background: var(--accent);
+            color: white;
+            padding: 16px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 24px;
+        }
+        .submit-btn:hover {
+            background: #9b2c2c;
+        }
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        #spinner {
+            display: none;
+            text-align: center;
+            margin-top: 16px;
+        }
+        /* Success */
+        .success-message {
+            display: none;
+            background: #d1fae5;
+            border: 1px solid #10b981;
+            padding: 24px;
+            border-radius: 8px;
+            margin-top: 24px;
+            text-align: center;
+        }
+        .success-message h3 {
+            color: #065f46;
+            margin-bottom: 8px;
+        }
+        .success-message p {
+            color: #047857;
+        }
+        /* Footer */
+        footer {
+            background: #1a202c;
+            color: #C7CCD1;
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 48px;
+        }
+        /* Patriotic Blinking Phone */
+        @keyframes patrioticBlink {
+            0%, 33% { color: #c53030; text-shadow: 0 0 10px rgba(197,48,48,0.5); }
+            34%, 66% { color: #ffffff; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
+            67%, 100% { color: #3182ce; text-shadow: 0 0 10px rgba(49,130,206,0.5); }
+        }
+        
+        /* Mobile */
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 26px; }
+            .product-grid { grid-template-columns: 1fr; }
+            .cta-phone { font-size: 28px; }
+            .header-content { flex-wrap: wrap; gap: 8px; }
+            .header-nav a { margin-left: 12px; font-size: 14px; }
+            .logo { font-size: 20px; }
+            .btn { padding: 12px 16px; font-size: 14px; min-height: 44px; }
+            .features-grid { grid-template-columns: 1fr 1fr; }
+            .compatibility-grid { grid-template-columns: 1fr 1fr; }
+            .info-grid { grid-template-columns: 1fr; }
+            .hero { padding: 40px 16px; }
+            .section { padding: 32px 0; }
+            .section-title { font-size: 24px; }
+            .product-card { padding: 16px; }
+            .product-price { font-size: 22px; }
+            .container { padding: 0 16px; } .cta-section { padding: 40px 16px; } .cta-section h2 { font-size: 24px; }
+            footer { padding: 32px 16px; }
+        }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            .cart-item {
+                flex-direction: column;
+                gap: 16px;
+            }
+            .cart-item-actions button {
+                width: 44px;
+                height: 44px;
+                font-size: 18px;
+            }
+            .cart-item-actions span {
+                min-width: 32px;
+                font-size: 18px;
+            }
+            .remove-btn {
+                width: auto !important;
+                padding: 12px 20px !important;
+                font-size: 14px !important;
+            }
+        
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">Performance<span>Supply</span>Depot</a>
+                <nav class="nav-links">
+                    <a href="/">Home</a>
+                    <a href="/#products">Products</a>
+                    <a href="/#services">Services</a>
+                    <a href="/contact.html">Contact</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="checkout-wrapper">
+            <!-- Billing & Shipping -->
+            <div class="checkout-section">
+                <h2>📝 Billing & Shipping</h2>
+                
+                <form id="checkout-form">
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fullName">Full Name *</label>
+                        <input type="text" id="fullName" name="fullName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="company">Company (optional)</label>
+                        <input type="text" id="company" name="company">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address">Street Address *</label>
+                        <input type="text" id="address" name="address" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="city">City *</label>
+                            <input type="text" id="city" name="city" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="state">State *</label>
+                            <select id="state" name="state" required>
+                                <option value="">Select...</option>
+                                <option value="CA">California</option>
+                                <option value="NV">Nevada</option>
+                                <option value="OR">Oregon</option>
+                                <option value="WA">Washington</option>
+                                <option value="AZ">Arizona</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="zip">ZIP Code *</label>
+                            <input type="text" id="zip" name="zip" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone *</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="button" class="lookup-btn" onclick="lookupAddress()">🔍 Auto-fill Address from Phone</button>
+                    </div>
+                    <div id="lookup-result" class="lookup-result" style="display: none;"></div>
+
+                    <h3 style="margin: 32px 0 16px 0; font-size: 18px; color: var(--primary);">💳 Payment</h3>
+                    
+                    <div class="form-group">
+                        <label for="card-element">Card Details</label>
+                        <div id="card-element"></div>
+                        <div id="card-errors"></div>
+                    </div>
+
+                    <button type="submit" class="submit-btn" id="submit-btn">
+                        Complete Order
+                    </button>
+                    <div id="spinner">Processing...</div>
+                </form>
+
+                <div class="success-message" id="success-message">
+                    <h3>✓ Order Placed Successfully!</h3>
+                    <p>Order #: <span id="order-id"></span></p>
+                    <p>A confirmation email has been sent.</p>
+                </div>
+            </div>
+
+            <!-- Order Summary -->
+            <div class="checkout-section">
+                <h2>📦 Order Summary</h2>
+                
+                <div id="cart-items">
+                    <!-- Cart items injected here -->
+                </div>
+
+                <div class="cart-summary" id="cart-summary" style="display: none;">
+                    <div class="summary-row">
+                        <span>Subtotal</span>
+                        <span id="subtotal">$0.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Tax (8.25%)</span>
+                        <span id="tax">$0.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Shipping ($15.56/item)</span>
+                        <span id="shipping">$0.00</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Total</span>
+                        <span id="total">$0.00</span>
+                    </div>
+                </div>
+
+                <div class="empty-cart" id="empty-cart">
+                    <p>Your cart is empty</p>
+                    <p><a href="/">← Continue Shopping</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p><strong>Performance Supply Depot LLC</strong></p>
+            <p>📞 <span class="patriotic-phone">(888) 881-6834</span> | 📞 (415) 571-9724</p>
+            <p><a href="mailto:info@psdepot.com" style="color: rgba(0, 224, 255, 0.7); text-decoration: none;">✉️ info@psdepot.com</a></p>
+            <p style="margin-top: 16px; font-size: 14px;">© 2026 Performance Supply Depot LLC</p>
+        </div>
+    </footer>
+
+    <script>
+        // Cart Management
+        const TAX_RATE = 0.0825;
+        const SHIPPING_PER_ITEM = 15.56;
+
+        function getCart() {
+            return JSON.parse(localStorage.getItem('psdepot_cart') || '[]');
+        }
+
+        function saveCart(cart) {
+            localStorage.setItem('psdepot_cart', JSON.stringify(cart));
+        }
+
+        function updateQuantity(sku, delta) {
+            let cart = getCart();
+            const item = cart.find(i => i.sku === sku);
+            if (item) {
+                item.quantity += delta;
+                if (item.quantity <= 0) {
+                    cart = cart.filter(i => i.sku !== sku);
+                }
+                saveCart(cart);
+                renderCart();
+            }
+        }
+
+        function removeItem(sku) {
+            if (!sku) return;
+            let cart = getCart();
+            cart = cart.filter(i => i.sku !== sku);
+            saveCart(cart);
+            renderCart();
+        }
+
+        function handleRemoveTouch(e, sku) {
+            e.preventDefault();
+            e.stopPropagation();
+            removeItem(sku);
+        }
+
+        function formatPrice(price) {
+            return '$' + price.toFixed(2);
+        }
+
+        function renderCart() {
+            const cart = getCart();
+            const cartItems = document.getElementById('cart-items');
+            const cartSummary = document.getElementById('cart-summary');
+            const emptyCart = document.getElementById('empty-cart');
+
+            if (cart.length === 0) {
+                cartItems.innerHTML = '';
+                cartSummary.style.display = 'none';
+                emptyCart.style.display = 'block';
+                document.getElementById('submit-btn').disabled = true;
+                return;
+            }
+
+            emptyCart.style.display = 'none';
+            cartSummary.style.display = 'block';
+            document.getElementById('submit-btn').disabled = false;
+
+            let html = '';
+            let subtotal = 0;
+            let itemCount = 0;
+
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                subtotal += itemTotal;
+                itemCount += item.quantity;
+                html += `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <h3>${item.name}</h3>
+                            <p>SKU: ${item.sku}</p>
+                            <div class="cart-item-actions">
+                                <button onclick="updateQuantity('${item.sku}', -1)">−</button>
+                                <span>${item.quantity}</span>
+                                <button onclick="updateQuantity('${item.sku}', 1)">+</button>
+                                <button class="remove-btn" onclick="removeItem('${item.sku}')">Remove</button>
+                            </div>
+                        </div>
+                        <div class="cart-item-price">
+                            ${formatPrice(itemTotal)}
+                        </div>
+                    </div>
+                `;
+            });
+
+            cartItems.innerHTML = html;
+
+            const tax = subtotal * TAX_RATE;
+            const shipping = itemCount * SHIPPING_PER_ITEM;
+            const total = subtotal + tax + shipping;
+
+            document.getElementById('subtotal').textContent = formatPrice(subtotal);
+            document.getElementById('tax').textContent = formatPrice(tax);
+            document.getElementById('shipping').textContent = formatPrice(shipping);
+            document.getElementById('total').textContent = formatPrice(total);
+
+            return { subtotal, tax, shipping, total };
+        }
+
+        // Stripe Integration
+        const stripe = Stripe('pk_live_51PJRYHJ5gaWR1O3EOTLRzEZ7NxK2pDIeoLxaZDwFu7xnPgRSZfMkI6Dc6UivWzgS6ZC4EonbeY2gD1gEoceTZNKx00zs00oHeB');
+        const elements = stripe.elements();
+        const cardElement = elements.create('card', {
+            style: {
+                base: {
+                    fontSize: '16px',
+                    color: '#2d3748',
+                    '::placeholder': { color: '#a0aec0' }
+                },
+                invalid: { color: '#c53030' }
+            }
+        });
+
+        cardElement.mount('#card-element');
+        cardElement.on('change', (event) => {
+            const errorElement = document.getElementById('card-errors');
+            errorElement.textContent = event.error ? event.error.message : '';
+        });
+
+        // API Base URL - Stripe Payment API (use same domain to avoid CORS)
+        const API_BASE = window.location.hostname === 'localhost' ? 'http://localhost:4242' : 'https://psdepot.com';
+
+        // Form Submission
+        document.getElementById('checkout-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const cart = getCart();
+            if (cart.length === 0) return;
+
+            const btn = document.getElementById('submit-btn');
+            const spinner = document.getElementById('spinner');
+            btn.disabled = true;
+            spinner.style.display = 'block';
+
+            const totals = renderCart();
+            const amountCents = Math.round(totals.total * 100);
+
+            try {
+                // Step 1: Create PaymentIntent on backend
+                const response = await fetch(`${API_BASE}/api/create-payment-intent`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        amount: amountCents,
+                        currency: 'usd',
+                        items: cart.map(item => ({
+                            sku: item.sku,
+                            name: item.name,
+                            quantity: item.quantity,
+                            price: Math.round(item.price * 100)  // cents
+                        }))
+                    })
+                });
+
+                const { clientSecret, paymentIntentId, error: serverError } = await response.json();
+                
+                if (serverError) {
+                    throw new Error(serverError);
+                }
+
+                // Step 2: Confirm payment with Stripe
+                const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+                    payment_method: {
+                        card: cardElement,
+                        billing_details: {
+                            name: document.getElementById('fullName').value,
+                            email: document.getElementById('email').value,
+                            phone: document.getElementById('phone').value,
+                            address: {
+                                line1: document.getElementById('address').value,
+                                city: document.getElementById('city').value,
+                                state: document.getElementById('state').value,
+                                postal_code: document.getElementById('zip').value
+                            }
+                        }
+                    }
+                });
+
+                if (error) {
+                    throw new Error(error.message);
+                }
+
+                if (paymentIntent.status === 'succeeded') {
+                    // Payment successful!
+                    document.getElementById('checkout-form').style.display = 'none';
+                    document.getElementById('success-message').style.display = 'block';
+                    document.getElementById('order-id').textContent = paymentIntentId;
+
+                    // Clear cart
+                    localStorage.removeItem('psdepot_cart');
+                    renderCart();
+                } else {
+                    throw new Error('Payment not completed');
+                }
+
+            } catch (err) {
+                document.getElementById('card-errors').textContent = err.message;
+                btn.disabled = false;
+                spinner.style.display = 'none';
+            }
+        });
+
+        // Address Lookup Function
+        async function lookupAddress() {
+            const phone = document.getElementById('phone').value.trim();
+            const resultDiv = document.getElementById('lookup-result');
+            const btn = document.querySelector('.lookup-btn');
+            
+            if (!phone) {
+                resultDiv.innerHTML = '<p>Please enter a phone number first</p>';
+                resultDiv.className = 'lookup-result not-found';
+                resultDiv.style.display = 'block';
+                return;
+            }
+            
+            btn.disabled = true;
+            btn.textContent = 'Looking up...';
+            
+            try {
+                // Try the business lookup endpoint
+                const response = await fetch(`${API_BASE}/api/lookup-business`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ phone: phone })
+                });
+                
+                const data = await response.json();
+                
+                if (data.found && data.business) {
+                    // Auto-fill the form
+                    document.getElementById('fullName').value = data.business.name || '';
+                    document.getElementById('address').value = data.business.address?.street || '';
+                    document.getElementById('city').value = data.business.address?.city || '';
+                    document.getElementById('state').value = data.business.address?.state || '';
+                    document.getElementById('zip').value = data.business.address?.zip || '';
+                    
+                    // Show success
+                    resultDiv.innerHTML = `
+                        <h4>✓ Found: ${data.business.name}</h4>
+                        <p>${data.business.address?.street}, ${data.business.address?.city}, ${data.business.address?.state} ${data.business.address?.zip}</p>
+                    `;
+                    resultDiv.className = 'lookup-result found';
+                } else {
+                    resultDiv.innerHTML = '<p>No address found for this phone number. Please enter manually.</p>';
+                    resultDiv.className = 'lookup-result not-found';
+                }
+            } catch (err) {
+                console.error('Lookup error:', err);
+                resultDiv.innerHTML = '<p>Lookup service unavailable. Please enter your address manually.</p>';
+                resultDiv.className = 'lookup-result not-found';
+            } finally {
+                btn.disabled = false;
+                btn.textContent = '🔍 Auto-fill Address from Phone';
+                resultDiv.style.display = 'block';
+            }
+        }
+
+        // Initial render
+        renderCart();
+    </script>
+</body>
+</html>

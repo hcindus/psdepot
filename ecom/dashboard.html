@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - AGI Company</title>
+    <meta name="description" content="Manage your AI agents, view analytics, and control your autonomous workforce.">
+    <style>
+        :root {
+            --bg-dark: #0a0a1a;
+            --bg-card: rgba(255, 255, 255, 0.05);
+            --header-bg: rgba(26, 54, 93, 0.95);
+            --text: #e5e5e5;
+            --text-muted: #a0a0a0;
+            --accent: #ed8936;
+            --accent-hover: #dd6b20;
+            --border: rgba(237, 137, 54, 0.3);
+            --success: #48bb78;
+            --warning: #ed8936;
+            --info: #4299e1;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            background: var(--header-bg);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            z-index: 1000;
+        }
+
+        .logo { font-size: 26px; font-weight: 800; color: var(--text); text-decoration: none; }
+        .logo span { color: var(--accent); }
+
+        .header-nav { display: flex; align-items: center; gap: 30px; }
+        .header-nav a {
+            color: var(--text); text-decoration: none; font-weight: 600; font-size: 15px; transition: color 0.3s;
+        }
+        .header-nav a:hover, .header-nav a.active { color: var(--accent); }
+
+        .user-menu {
+            display: flex; align-items: center; gap: 15px;
+        }
+        .user-avatar {
+            width: 40px; height: 40px; border-radius: 50%; background: var(--accent);
+            display: flex; align-items: center; justify-content: center; font-weight: 700;
+        }
+
+        .layout { display: flex; min-height: 100vh; padding-top: 70px; padding-bottom: 60px; }
+
+        .sidebar {
+            width: 260px; background: rgba(26, 54, 93, 0.9); border-right: 1px solid var(--border);
+            padding: 30px 20px; position: fixed; left: 0; top: 70px; bottom: 60px; overflow-y: auto;
+        }
+
+        .sidebar-section { margin-bottom: 35px; }
+        .sidebar-title {
+            font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--accent);
+            margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid var(--border); font-weight: 700;
+        }
+        .sidebar-menu { list-style: none; }
+        .sidebar-menu li { margin-bottom: 8px; }
+        .sidebar-menu a {
+            display: flex; align-items: center; padding: 12px 15px; color: var(--text-muted);
+            text-decoration: none; border-radius: 8px; transition: all 0.3s; font-size: 14px;
+        }
+        .sidebar-menu a:hover, .sidebar-menu a.active { background: rgba(237, 137, 54, 0.15); color: var(--accent); }
+        .sidebar-menu .icon { margin-right: 12px; font-size: 18px; width: 24px; text-align: center; }
+
+        .main-content { flex: 1; margin-left: 260px; padding: 40px 60px; }
+
+        .page-header { margin-bottom: 40px; }
+        .page-header h1 { font-size: 36px; margin-bottom: 5px; }
+        .page-header p { color: var(--text-muted); font-size: 16px; }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; margin-bottom: 40px;
+        }
+        .stat-card {
+            background: var(--bg-card); border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px; padding: 25px; position: relative;
+        }
+        .stat-card-header {
+            display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px;
+        }
+        .stat-card-title { font-size: 14px; color: var(--text-muted); text-transform: uppercase; }
+        .stat-card-icon {
+            width: 45px; height: 45px; border-radius: 12px; display: flex; align-items: center; justify-content: center;
+            font-size: 20px;
+        }
+        .icon-blue { background: rgba(66, 153, 225, 0.2); color: var(--info); }
+        .icon-green { background: rgba(72, 187, 120, 0.2); color: var(--success); }
+        .icon-orange { background: rgba(237, 137, 54, 0.2); color: var(--accent); }
+        .icon-purple { background: rgba(159, 122, 234, 0.2); color: #9f7aea; }
+
+        .stat-card-value { font-size: 36px; font-weight: 800; margin-bottom: 8px; }
+        .stat-card-change {
+            font-size: 14px; display: flex; align-items: center; gap: 5px;
+        }
+        .stat-card-change.up { color: var(--success); }
+        .stat-card-change.down { color: #f56565; }
+
+        /* Chart Section */
+        .chart-section {
+            display: grid; grid-template-columns: 2fr 1fr; gap: 30px; margin-bottom: 40px;
+        }
+        .chart-card {
+            background: var(--bg-card); border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px; padding: 30px;
+        }
+        .chart-card h3 { font-size: 20px; margin-bottom: 25px; }
+
+        .chart-placeholder {
+            height: 250px; background: rgba(255, 255, 255, 0.02); border-radius: 12px;
+            display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 15px;
+            border: 2px dashed rgba(255, 255, 255, 0.1);
+        }
+        .chart-placeholder-icon { font-size: 48px; opacity: 0.5; }
+        .chart-placeholder-text { color: var(--text-muted); }
+
+        /* Activity List */
+        .activity-list { list-style: none; }
+        .activity-item {
+            display: flex; align-items: flex-start; gap: 15px; padding: 18px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .activity-item:last-child { border-bottom: none; }
+        .activity-icon {
+            width: 40px; height: 40px; border-radius: 10px;
+            display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0;
+        }
+        .activity-content { flex: 1; }
+        .activity-text { font-size: 14px; margin-bottom: 4px; }
+        .activity-text strong { color: var(--accent); }
+        .activity-time { font-size: 12px; color: var(--text-muted); }
+
+        /* Agent Table */
+        .agents-section { margin-bottom: 40px; }
+        .section-header {
+            display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;
+        }
+        .section-header h2 { font-size: 24px; }
+
+        .agent-table {
+            width: 100%; background: var(--bg-card); border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px; overflow: hidden;
+        }
+        .table-header {
+            display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 0.5fr;
+            padding: 20px; background: rgba(26, 54, 93, 0.5); font-size: 13px;
+            color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;
+        }
+        .table-row {
+            display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 0.5fr;
+            padding: 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); align-items: center;
+        }
+        .table-row:last-child { border-bottom: none; }
+        .table-row:hover { background: rgba(255, 255, 255, 0.02); }
+
+        .agent-cell {
+            display: flex; align-items: center; gap: 15px;
+        }
+        .agent-cell-avatar {
+            width: 45px; height: 45px; border-radius: 12px; background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+            display: flex; align-items: center; justify-content: center; font-size: 20px;
+        }
+        .agent-cell-info h4 { font-size: 15px; margin-bottom: 3px; }
+        .agent-cell-info p { font-size: 13px; color: var(--text-muted); }
+
+        .status-badge {
+            display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px;
+            border-radius: 20px; font-size: 12px; font-weight: 600;
+        }
+        .status-active { background: rgba(72, 187, 120, 0.2); color: var(--success); }
+        .status-paused { background: rgba(237, 137, 54, 0.2); color: var(--accent); }
+        .status-offline { background: rgba(160, 160, 160, 0.2); color: var(--text-muted); }
+
+        .btn {
+            display: inline-block; padding: 12px 28px; background: var(--accent); color: white;
+            text-decoration: none; border-radius: 8px; font-weight: 600; border: none;
+            cursor: pointer; font-size: 15px; transition: all 0.3s;
+        }
+        .btn:hover { background: #9b2c2c; transform: translateY(-2px); }
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1); color: var(--text); border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .btn-secondary:hover { background: rgba(255, 255, 255, 0.2); }
+
+        .footer {
+            position: fixed; bottom: 0; left: 0; right: 0; height: 60px;
+            background: var(--header-bg); backdrop-filter: blur(10px); border-top: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: space-between; padding: 0 30px; z-index: 1000;
+        }
+        .footer-left { color: var(--text); font-size: 14px; }
+        .footer-right { display: flex; gap: 25px; }
+        .footer-right a { color: var(--text-muted); text-decoration: none; font-size: 14px; }
+        .footer-right a:hover { color: var(--accent); }
+
+        @media (max-width: 1200px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .chart-section { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar { display: none; }
+            .main-content { margin-left: 0; padding: 20px; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .table-header, .table-row { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="logo">AGI<span>Company</span></a>
+        <nav class="header-nav">
+            <a href="index.html">Home</a>
+            <a href="products.html">Products</a>
+            <a href="agents.html">🤖 Agents</a>
+            <a href="cart.html">Cart</a>
+        </nav>
+        <div class="user-menu">
+            <div class="user-avatar">JD</div>
+        </div>
+    </header>
+
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-title">Dashboard</div>
+                <ul class="sidebar-menu">
+                    <li><a href="dashboard.html" class="active"><span class="icon">📊</span> Overview</a></li>
+                    <li><a href="agents.html"><span class="icon">🤖</span> My Agents</a></li>
+                    <li><a href="analytics.html"><span class="icon">📈</span> Analytics</a></li>
+                    <li><a href="billing.html"><span class="icon">💳</span> Billing</a></li>
+                </ul>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-title">Account</div>
+                <ul class="sidebar-menu">
+                    <li><a href="profile.html"><span class="icon">👤</span> Profile</a></li>
+                    <li><a href="settings.html"><span class="icon">⚙️</span> Settings</a></li>
+                    <li><a href="index.html"><span class="icon">🚪</span> Logout</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="page-header">
+                <h1>Dashboard</h1>
+                <p>Welcome back! Here's what's happening with your AI workforce.</p>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-card-header">
+                        <div class="stat-card-title">Active Agents</div>
+                        <div class="stat-card-icon icon-blue">🤖</div>
+                    </div>
+                    <div class="stat-card-value">12</div>
+                    <div class="stat-card-change up">
+                        ↑ 3 from last month
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-card-header">
+                        <div class="stat-card-title">Tasks Completed</div>
+                        <div class="stat-card-icon icon-green">✓</div>
+                    </div>
+                    <div class="stat-card-value">8,429</div>
+                    <div class="stat-card-change up">
+                        ↑ 24% this week
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-card-header">
+                        <div class="stat-card-title">Uptime</div>
+                        <div class="stat-card-icon icon-orange">⚡</div>
+                    </div>
+                    <div class="stat-card-value">99.97%</div>
+                    <div class="stat-card-change up">
+                        ↑ 0.02% improvement
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-card-header">
+                        <div class="stat-card-title">Monthly Cost</div>
+                        <div class="stat-card-icon icon-purple">💰</div>
+                    </div>
+                    <div class="stat-card-value">$1,847</div>
+                    <div class="stat-card-change down">
+                        ↓ 12% vs. human staff
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <div class="chart-section">
+                <div class="chart-card">
+                    <h3>📈 Activity Overview</h3>
+                    <div class="chart-placeholder">
+                        <div class="chart-placeholder-icon">📊</div>
+                        <div class="chart-placeholder-text">Activity chart coming soon</div>
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <h3>📋 Recent Activity</h3>
+                    <ul class="activity-list">
+                        <li class="activity-item">
+                            <div class="activity-icon icon-green">✓</div>
+                            <div class="activity-content">
+                                <div class="activity-text"><strong>Rebecca</strong> handled 23 calls</div>
+                                <div class="activity-time">2 minutes ago</div>
+                            </div>
+                        </li>
+                        <li class="activity-item">
+                            <div class="activity-icon icon-blue">💻</div>
+                            <div class="activity-content">
+                                <div class="activity-text"><strong>CodeReviewer-01</strong> approved PR #1,247</div>
+                                <div class="activity-time">5 minutes ago</div>
+                            </div>
+                        </li>
+                        <li class="activity-item">
+                            <div class="activity-icon icon-purple">💰</div>
+                            <div class="activity-content">
+                                <div class="activity-text"><strong>Fortune</strong> identified $47k savings</div>
+                                <div class="activity-time">28 minutes ago</div>
+                            </div>
+                        </li>
+                        <li class="activity-item">
+                            <div class="activity-icon icon-orange">🔐</div>
+                            <div class="activity-content">
+                                <div class="activity-text"><strong>Sentinel</strong> blocked 3 attacks</div>
+                                <div class="activity-time">45 minutes ago</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Agents Table -->
+            <div class="agents-section">
+                <div class="section-header">
+                    <h2>Your Agents</h2>
+                    <a href="products.html" class="btn btn-secondary">+ Add Agent</a>
+                </div>
+
+                <div class="agent-table">
+                    <div class="table-header">
+                        <div>Agent</div>
+                        <div>Status</div>
+                        <div>Tasks Today</div>
+                        <div>Uptime</div>
+                        <div></div>
+                    </div>
+
+                    <div class="table-row">
+                        <div class="agent-cell">
+                            <div class="agent-cell-avatar">📞</div>
+                            <div class="agent-cell-info">
+                                <h4>Rebecca</h4>
+                                <p>Lead Receptionist</p>
+                            </div>
+                        </div>
+                        <div><span class="status-badge status-active">● Active</span></div>
+                        <div>247</div>
+                        <div>99.9%</div>
+                        <div><button class="btn btn-secondary" style="padding: 8px 16px; font-size: 13px;">Manage</button></div>
+                    </div>
+
+                    <div class="table-row">
+                        <div class="agent-cell">
+                            <div class="agent-cell-avatar">💻</div>
+                            <div class="agent-cell-info">
+                                <h4>CodeReviewer-01</h4>
+                                <p>Code Review Lead</p>
+                            </div>
+                        </div>
+                        <div><span class="status-badge status-active">● Active</span></div>
+                        <div>89</div>
+                        <div>100%</div>
+                        <div><button class="btn btn-secondary" style="padding: 8px 16px; font-size: 13px;">Manage</button></div>
+                    </div>
+
+                    <div class="table-row">
+                        <div class="agent-cell">
+                            <div class="agent-cell-avatar">💰</div>
+                            <div class="agent-cell-info">
+                                <h4>Fortune</h4>
+                                <p>Chief Financial Officer</p>
+                            </div>
+                        </div>
+                        <div><span class="status-badge status-active">● Active</span></div>
+                        <div>12</div>
+                        <div>99.8%</div>
+                        <div><button class="btn btn-secondary" style="padding: 8px 16px; font-size: 13px;">Manage</button></div>
+                    </div>
+
+                    <div class="table-row">
+                        <div class="agent-cell">
+                            <div class="agent-cell-avatar">🔐</div>
+                            <div class="agent-cell-info">
+                                <h4>Sentinel</h4>
+                                <p>Chief Security Officer</p>
+                            </div>
+                        </div>
+                        <div><span class="status-badge status-active">● Active</span></div>
+                        <div>156</div>
+                        <div>100%</div>
+                        <div><button class="btn btn-secondary" style="padding: 8px 16px; font-size: 13px;">Manage</button></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-left">© 2026 AGI Company. All rights reserved.</div>
+        <div class="footer-right">
+            <a href="privacy.html">Privacy</a>
+            <a href="terms.html">Terms</a>
+            <a href="support.html">Support</a>
+        </div>
+    </footer>
+
+    <script src="cart.js"></script>
+</body>
+</html>

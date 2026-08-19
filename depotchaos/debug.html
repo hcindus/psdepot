@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DepotChaos Debug</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; background: #0f172a; color: white; }
+        .box { border: 1px solid #475569; padding: 20px; margin: 10px 0; border-radius: 8px; }
+        .error { border-color: #ef4444; color: #ef4444; }
+        .success { border-color: #22c55e; color: #22c55e; }
+        pre { background: #1e293b; padding: 10px; border-radius: 4px; overflow: auto; }
+        button { padding: 10px 20px; background: #6366f1; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background: #4f46e5; }
+    </style>
+</head>
+<body>
+    <h1>DepotChaos API Debug</h1>
+    
+    <div class="box">
+        <h2>1. Check Connection</h2>
+        <div id="conn-status">Not tested</div>
+        <button onclick="testConnection()">Test Connection</button>
+    </div>
+    
+    <div class="box">
+        <h2>2. Load Stats</h2>
+        <div id="stats-result">Not loaded</div>
+        <button onclick="testStats()">Load Stats</button>
+    </div>
+    
+    <div class="box">
+        <h2>3. Console Log</h2>
+        <pre id="console">Open browser console (F12) to see detailed logs</pre>
+    </div>
+    
+    <script>
+        const API_BASE = '/api';
+        
+        function log(msg) {
+            console.log(msg);
+            document.getElementById('console').textContent += '\n' + msg;
+        }
+        
+        async function testConnection() {
+            const status = document.getElementById('conn-status');
+            try {
+                log('Testing connection to ' + API_BASE + '/stats...');
+                const response = await fetch(API_BASE + '/stats');
+                log('Response status: ' + response.status);
+                log('Response ok: ' + response.ok);
+                
+                if (response.ok) {
+                    status.className = 'box success';
+                    status.textContent = 'Connected! Status: ' + response.status;
+                } else {
+                    status.className = 'box error';
+                    status.textContent = 'Error: HTTP ' + response.status;
+                }
+            } catch (e) {
+                status.className = 'box error';
+                status.textContent = 'Connection failed: ' + e.message;
+                log('Error: ' + e.message);
+            }
+        }
+        
+        async function testStats() {
+            const result = document.getElementById('stats-result');
+            try {
+                log('Fetching stats...');
+                const response = await fetch(API_BASE + '/stats');
+                const data = await response.json();
+                log('Data received: ' + JSON.stringify(data).substring(0, 100) + '...');
+                
+                result.innerHTML = `
+                    <strong>Total Leads:</strong> ${data.total_leads || 'N/A'}<br>
+                    <strong>Intelligence:</strong> ${data.intelligence_records || 'N/A'}<br>
+                    <strong>New Today:</strong> ${data.new_today || 'N/A'}
+                `;
+                result.className = 'box success';
+            } catch (e) {
+                result.textContent = 'Error: ' + e.message;
+                result.className = 'box error';
+                log('Error: ' + e.message);
+            }
+        }
+        
+        // Auto-test on load
+        document.addEventListener('DOMContentLoaded', () => {
+            log('Page loaded. Ready to test.');
+        });
+    </script>
+</body>
+</html>

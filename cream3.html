@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CREAM Enterprise - White-label real estate CRM for brokerages with team management, SSO, and dedicated support.">
+    <title>CREAM Enterprise - Brokerage CRM Solution | Performance Supply Depot</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1E3A8A;
+            --primary-light: #3B82F6;
+            --accent: #10B981;
+            --purple: #8B5CF6;
+            --pink: #EC4899;
+            --gold: #F59E0B;
+            --bg-dark: #0a0a1a;
+            --bg-card: #141424;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0b0;
+            --border: rgba(255,255,255,0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            background: rgba(10, 10, 26, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+
+        .logo-enterprise {
+            background: linear-gradient(135deg, #EC4899 0%, #8B5CF6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-left: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            border: 1px solid var(--pink);
+            border-radius: 4px;
+            letter-spacing: 0.05em;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-enterprise {
+            background: linear-gradient(135deg, #EC4899 0%, #8B5CF6 100%);
+            color: white;
+        }
+
+        .btn-enterprise:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(236, 72, 153, 0.3);
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 2rem 4rem;
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a0a1a 50%, #0a0a1a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(236, 72, 153, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.15) 0%, transparent 50%);
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(236, 72, 153, 0.1);
+            border: 1px solid var(--pink);
+            border-radius: 50px;
+            font-size: 0.875rem;
+            color: var(--pink);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 .gradient {
+            background: linear-gradient(135deg, #EC4899 0%, #8B5CF6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2vw, 1.35rem);
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        .features-enterprise {
+            padding: 6rem 2rem;
+            background: var(--bg-dark);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .feature-card:hover {
+            border-color: var(--pink);
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .solutions {
+            padding: 6rem 2rem;
+            background: linear-gradient(180deg, var(--bg-card) 0%, var(--bg-dark) 100%);
+        }
+
+        .solution-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .solution-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .solution-content h3 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .solution-content ul {
+            list-style: none;
+        }
+
+        .solution-content li {
+            padding: 0.5rem 0;
+            color: var(--text-secondary);
+        }
+
+        .solution-content li::before {
+            content: '→';
+            color: var(--pink);
+            margin-right: 0.75rem;
+        }
+
+        .solution-visual {
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+            border-radius: 12px;
+            padding: 2rem;
+            min-height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            width: 100%;
+        }
+
+        .team-member {
+            background: var(--bg-card);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .team-avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #EC4899 0%, #8B5CF6 100%);
+            border-radius: 50%;
+            margin: 0 auto 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+            font-weight: 700;
+        }
+
+        .sso-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            width: 100%;
+        }
+
+        .sso-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            text-align: center;
+            flex: 1;
+        }
+
+        .sso-arrow {
+            color: var(--pink);
+            font-size: 1.5rem;
+        }
+
+        .pricing-enterprise {
+            padding: 6rem 2rem;
+            text-align: center;
+            background: var(--bg-dark);
+        }
+
+        .pricing-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #EC4899 0%, #8B5CF6 100%);
+            border-radius: 20px 20px 0 0;
+        }
+
+        .price-custom {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #EC4899 0%, #8B5CF6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 1rem 0;
+        }
+
+        .features-list {
+            list-style: none;
+            margin: 2rem 0;
+            text-align: left;
+            display: inline-block;
+        }
+
+        .features-list li {
+            padding: 0.75rem 0;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .features-list li::before {
+            content: '✓';
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .contact-form {
+            max-width: 500px;
+            margin: 3rem auto 0;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--pink);
+        }
+
+        footer {
+            padding: 3rem 2rem;
+            background: var(--bg-dark);
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .solution-card {
+                grid-template-columns: 1fr;
+                padding: 2rem;
+            }
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .sso-diagram {
+                flex-direction: column;
+            }
+            .sso-arrow {
+                transform: rotate(90deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="https://psdepot.com" class="logo">
+                🏠 CREAM <span class="logo-enterprise">ENTERPRISE</span>
+            </a>
+            <div>
+                <a href="#contact" class="btn btn-enterprise">Contact Sales →</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">🏢 Built for Brokerages</div>
+            <h1>
+                White-Label Real Estate<br>
+                <span class="gradient">CRM for Teams</span>
+            </h1>
+            <p class="hero-subtitle">
+                CREAM Enterprise empowers brokerages with custom branding, team management, 
+                SSO integration, and dedicated support. Deploy your own branded CRM in weeks.
+            </p>
+            <a href="#contact" class="btn btn-enterprise btn-large">Schedule Demo</a>
+        </div>
+    </section>
+
+    <section class="features-enterprise">
+        <div class="container">
+            <div class="section-header">
+                <h2>Enterprise Features</h2>
+                <p style="color: var(--text-secondary);">Everything your brokerage needs to compete in the modern market.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🏷️</div>
+                    <h3>White Label</h3>
+                    <p>Full customization with your brokerage branding, colors, logo, and custom domain. Your agents see your brand, not ours.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h3>Team Management</h3>
+                    <p>Unlimited agents, offices, and regions. Assign leads, track performance, and manage permissions by role.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔐</div>
+                    <h3>SSO Integration</h3>
+                    <p>SAML 2.0 and OAuth 2.0 support. Integrate with your existing identity provider (Okta, Azure AD, Google Workspace).</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Brokerage Analytics</h3>
+                    <p>Executive dashboard showing firm-wide metrics. Track agent performance, office rankings, and revenue forecasts.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💾</div>
+                    <h3>Data Export</h3>
+                    <p>Full data portability. Export leads, transactions, and reports in standard formats (CSV, JSON, XML).</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>SOC 2 Compliance</h3>
+                    <p>Enterprise-grade security with SOC 2 Type II certification. Encrypted data at rest and in transit.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📞</div>
+                    <h3>Dedicated Support</h3>
+                    <p>Priority phone and email support. Dedicated account manager. Custom training sessions for your team.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔗</div>
+                    <h3>API Access</h3>
+                    <p>Full REST API with webhooks. Integrate with your MLS, accounting software, and marketing tools.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="solutions">
+        <div class="container">
+            <div class="section-header">
+                <h2>Built for Your Business</h2>
+            </div>
+            
+            <div class="solution-card">
+                <div class="solution-content">
+                    <h3>Team Collaboration</h3>
+                    <ul>
+                        <li>Unlimited agents and offices</li>
+                        <li>Lead assignment and routing</li>
+                        <li>Performance leaderboards</li>
+                        <li>Activity tracking and reporting</li>
+                        <li>Commission splits and calculations</li>
+                    </ul>
+                </div>
+                <div class="solution-visual">
+                    <div class="team-grid">
+                        <div class="team-member">
+                            <div class="team-avatar">JD</div>
+                            <div style="font-size: 0.75rem;">Agent</div>
+                        </div>
+                        <div class="team-member">
+                            <div class="team-avatar">MK</div>
+                            <div style="font-size: 0.75rem;">Agent</div>
+                        </div>
+                        <div class="team-member">
+                            <div class="team-avatar">SL</div>
+                            <div style="font-size: 0.75rem;">Agent</div>
+                        </div>
+                        <div class="team-member">
+                            <div class="team-avatar">+12</div>
+                            <div style="font-size: 0.75rem;">More</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="solution-card">
+                <div class="solution-content">
+                    <h3>SSO & Security</h3>
+                    <ul>
+                        <li>SAML 2.0 support</li>
+                        <li>OAuth 2.0 integration</li>
+                        <li>Multi-factor authentication</li>
+                        <li>Role-based access control</li>
+                        <li>Audit logs and compliance</li>
+                    </ul>
+                </div>
+                <div class="solution-visual">
+                    <div class="sso-diagram">
+                        <div class="sso-box">
+                            <div style="font-size: 1.5rem;">🔐</div>
+                            <div>Your IdP</div>
+                        </div>
+                        <div class="sso-arrow">→</div>
+                        <div class="sso-box">
+                            <div style="font-size: 1.5rem;">🏠</div>
+                            <div>CREAM</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing-enterprise" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2>Custom Pricing</h2>
+                <p style="color: var(--text-secondary);">Tailored to your brokerage size and needs.</p>
+            </div>
+            
+            <div class="pricing-card">
+                <div class="price-custom">Let's Talk</div>
+                <p style="color: var(--text-secondary); margin-bottom: 2rem;">Get a custom quote based on your agent count and requirements.</p>
+                
+                <ul class="features-list">
+                    <li>Everything in CREAM Pro</li>
+                    <li>White-label branding</li>
+                    <li>Unlimited agents</li>
+                    <li>SSO integration</li>
+                    <li>Dedicated account manager</li>
+                    <li>Custom training sessions</li>
+                    <li>SLA guarantee</li>
+                    <li>API access</li>
+                </ul>
+            </div>
+            
+            <div class="contact-form">
+                <h3 style="margin-bottom: 1.5rem;">Request Enterprise Demo</h3>
+                
+                <form action="mailto:sales@psdepot.com" method="post" enctype="text/plain">
+                    <div class="form-group">
+                        <label>Brokerage Name</label>
+                        <input type="text" name="brokerage" placeholder="Acme Realty" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Number of Agents</label>
+                        <select name="agents" required>
+                            <option>10-25 agents</option>
+                            <option>26-50 agents</option>
+                            <option>51-100 agents</option>
+                            <option>100+ agents</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Your Email</label>
+                        <input type="email" name="email" placeholder="you@brokerage.com" required>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-enterprise" style="width: 100%; padding: 1rem;">Request Demo</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p style="color: var(--text-secondary);">© 2026 Performance Supply Depot LLC. All rights reserved.</p>
+        <p style="margin-top: 0.5rem;">
+            <a href="https://psdepot.com/cream.html" style="color: var(--primary-light); margin-right: 1rem;">CREAM Standard</a>
+            <a href="https://psdepot.com/cream2.html" style="color: var(--gold);">CREAM Pro</a>
+        </p>
+    </footer>
+</body>
+</html>

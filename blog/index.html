@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="NOLMIswkaAcCgv3SZi3DHCXqnUG1NMvo88Ga711Uadk" />
+    <title>POS Supplies Blog | Solutions for California Businesses | Performance Supply Depot</title>
+    <meta name="description" content="Expert advice on POS supplies, thermal paper, receipt rolls, and point-of-sale solutions for California restaurants and retail businesses.">
+    <link rel="canonical" href="https://psdepot.com/blog/">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0A1A2F;
+            --primary-light: #1a3a5f;
+            --accent: #FF7A00;
+            --bg: #F8F9FA;
+            --card: #ffffff;
+            --text: #111111;
+            --text-muted: #718096;
+            --border: #e2e8f0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        /* Header */
+        header {
+            background: var(--primary);
+            color: white;
+            padding: 16px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .logo span { color: #63b3ed; }
+        
+        .header-nav a {
+            color: #bee3f8;
+            text-decoration: none;
+            font-weight: 500;
+            margin-left: 24px;
+            transition: color 0.2s;
+        }
+        
+        .header-nav a:hover { color: white; }
+        
+        .cart-icon {
+            background: var(--accent);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+        }
+        
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 80px 24px;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 24px;
+        }
+        
+        /* Blog Grid */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+        
+        @media (max-width: 992px) {
+            .blog-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        
+        @media (max-width: 768px) {
+            .blog-grid { grid-template-columns: 1fr; }
+        }
+        
+        .blog-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        }
+        
+        .blog-card-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 64px;
+        }
+        
+        .blog-card-content {
+            padding: 24px;
+        }
+        
+        .blog-category {
+            color: var(--accent);
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+        
+        .blog-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+        
+        .blog-card p {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        .blog-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+        
+        .read-more {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        
+        /* Newsletter */
+        .newsletter {
+            background: white;
+            border-radius: 12px;
+            padding: 48px;
+            margin-top: 60px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .newsletter h2 {
+            font-size: 28px;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+        
+        .newsletter p {
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            gap: 12px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        
+        .newsletter-form button {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 48px 24px;
+            text-align: center;
+            margin-top: 80px;
+        }
+        
+        footer a {
+            color: #bee3f8;
+            text-decoration: none;
+        }
+        
+        .footer-contact {
+            margin-bottom: 16px;
+        }
+        
+        .footer-contact a {
+            margin: 0 16px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="/" class="logo">Performance<span>Supply</span>Depot</a>
+            <nav class="header-nav">
+                <a href="/">Home</a>
+                <a href="/">Products</a>
+                <a href="/blog/">Blog</a>
+                <a href="/contact.html">Contact</a>
+                <a href="/checkout.html" class="cart-icon">🛒 Cart (<span id="cart-count">0</span>)</a>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <h1>POS Solutions Blog</h1>
+        <p>Practical advice for California restaurants and retail businesses. No fluff—just solutions.</p>
+    </section>
+    
+    <div class="container">
+        <div class="blog-grid">
+            <a href="/blog/pos-paper-restaurants-2024.html" class="blog-card">
+                <div class="blog-card-image">🍽️</div>
+                <div class="blog-card-content">
+                    <div class="blog-category">Restaurant Solutions</div>
+                    <h3>Best POS Paper for Restaurants in 2024</h3>
+                    <p>The right thermal paper prevents jams, extends printer life, and ensures receipts last for taxes. Here's what actually works for busy kitchens.</p>
+                    <div class="blog-meta">
+                        <span>5 min read</span>
+                        <span class="read-more">Read More →</span>
+                    </div>
+                </div>
+            </a>
+            
+            <a href="/blog/choose-receipt-paper-size.html" class="blog-card">
+                <div class="blog-card-image">📏</div>
+                <div class="blog-card-content">
+                    <div class="blog-category">Buying Guide</div>
+                    <h3>How to Choose Receipt Paper Size: 2¼" vs 3⅛"</h3>
+                    <p>The wrong size causes jams and wastes money. Here's a simple guide to picking the right width for your printer without guessing.</p>
+                    <div class="blog-meta">
+                        <span>4 min read</span>
+                        <span class="read-more">Read More →</span>
+                    </div>
+                </div>
+            </a>
+            
+            <a href="/blog/bpa-free-thermal-paper-benefits.html" class="blog-card">
+                <div class="blog-card-image">🌿</div>
+                <div class="blog-card-content">
+                    <div class="blog-category">Health & Safety</div>
+                    <h3>Why BPA-Free Thermal Paper Matters for Your Business</h3>
+                    <p>BPA exposure affects employees and customers. Learn why switching to phenol-free paper is good for health—and your bottom line.</p>
+                    <div class="blog-meta">
+                        <span>6 min read</span>
+                        <span class="read-more">Read More →</span>
+                    </div>
+                </div>
+            </a>
+            
+            <a href="/blog/how-to-clean-thermal-printer.html" class="blog-card">
+                <div class="blog-card-image">🧹</div>
+                <div class="blog-card-content">
+                    <div class="blog-category">Maintenance</div>
+                    <h3>How to Clean a Thermal Printer — Printhead Maintenance Guide</h3>
+                    <p>Step-by-step guide to cleaning your receipt printer. Extend printhead life, prevent paper jams, and get crisp receipts in under 5 minutes.</p>
+                    <div class="blog-meta">
+                        <span>6 min read</span>
+                        <span class="read-more">Read More →</span>
+                    </div>
+                </div>
+            </a>
+            
+            <a href="/blog/thermal-vs-bond-paper-guide.html" class="blog-card">
+                <div class="blog-card-image">📄</div>
+                <div class="blog-card-content">
+                    <div class="blog-category">Buying Guide</div>
+                    <h3>Thermal vs Bond Paper — Which Does Your POS Printer Need?</h3>
+                    <p>Using the wrong paper can destroy your printhead. Learn the difference, cost comparison, and how to identify your printer type in 30 seconds.</p>
+                    <div class="blog-meta">
+                        <span>5 min read</span>
+                        <span class="read-more">Read More →</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+        
+        <div class="newsletter">
+            <h2>Get Solutions Delivered</h2>
+            <p>Weekly POS tips, product recommendations, and California-specific advice. No spam—just solutions.</p>
+            <div class="newsletter-form">
+                <input type="email" placeholder="Enter your email">
+                <button type="submit">Subscribe</button>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p class="footer-contact">
+            📞 <a href="tel:888-881-6834">(888) 881-6834</a> | 
+            ✉️ <a href="mailto:info@psdepot.com">info@psdepot.com</a>
+        </p>
+        <p>© 2024 Performance Supply Depot LLC. All rights reserved.</p>
+    </footer>
+    
+    <script>
+        // Cart count
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('psdepot_cart') || '[]');
+            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cart-count').textContent = count;
+        }
+        updateCartCount();
+    </script>
+</body>
+</html>

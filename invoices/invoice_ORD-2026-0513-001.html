@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Invoice #ORD-2026-0513-001</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; color: #333; }
+        .header { border-bottom: 2px solid #00E0FF; padding-bottom: 20px; margin-bottom: 30px; }
+        .company { font-size: 24px; font-weight: bold; color: #00E0FF; }
+        .invoice-title { font-size: 18px; color: #666; margin-top: 10px; }
+        .customer-info { margin: 20px 0; }
+        .info-row { margin: 5px 0; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th { background: #00E0FF; color: white; padding: 10px; text-align: left; }
+        td { padding: 10px; border-bottom: 1px solid #ddd; }
+        .total-section { margin-top: 30px; border-top: 2px solid #00E0FF; padding-top: 20px; }
+        .total-row { display: flex; justify-content: space-between; margin: 5px 0; }
+        .grand-total { font-size: 18px; font-weight: bold; color: #00E0FF; }
+        .status { display: inline-block; padding: 5px 15px; border-radius: 15px; font-weight: bold; }
+        .status-RECEIVED { background: #FFD700; color: #333; }
+        .status-PROCESSING { background: #00BFFF; color: white; }
+        .status-SHIPPED { background: #32CD32; color: white; }
+        .status-DELIVERED { background: #00E0FF; color: white; }
+        .status-ISSUE { background: #FF4444; color: white; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="company">Performance Supply Depot</div>
+        <div class="invoice-title">INVOICE #ORD-2026-0513-001</div>
+        <div style="margin-top: 10px;">
+            <span class="status status-RECEIVED">RECEIVED</span>
+        </div>
+    </div>
+    
+    <div class="customer-info">
+        <div class="info-row"><strong>Customer:</strong> Jane Smith</div>
+        <div class="info-row"><strong>Company:</strong> Coffee Corner Café</div>
+        <div class="info-row"><strong>Email:</strong> jane@coffeecorner.com</div>
+        <div class="info-row"><strong>Phone:</strong> (555) 123-4567</div>
+        <div class="info-row"><strong>Order Date:</strong> 2026-05-13 01:35:46</div>
+        <div class="info-row"><strong>Tracking:</strong> None</div>
+    </div>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>SKU</th>
+                <th>Description</th>
+                <th>Qty</th>
+                <th>Unit Price</th>
+                <th>Line Total</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+                <td></td>
+                <td>Thermal Receipt Paper Rolls (</td>
+                <td>2</td>
+                <td>$80.00</td>
+                <td>$160.00</td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td>Clover Mini POS Terminal</td>
+                <td>1</td>
+                <td>$599.00</td>
+                <td>$599.00</td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td>Cash Drawer (Black)</td>
+                <td>3</td>
+                <td>$125.00</td>
+                <td>$375.00</td>
+            </tr>
+
+        </tbody>
+    </table>
+    
+    <div class="total-section">
+        <div class="total-row">
+            <span>Subtotal:</span>
+            <span>$1064.00</span>
+        </div>
+        <div class="total-row">
+            <span>Tax (7.75%):</span>
+            <span>$82.46</span>
+        </div>
+        <div class="total-row">
+            <span>Shipping:</span>
+            <span>$25.00</span>
+        </div>
+        <div class="total-row grand-total">
+            <span>TOTAL:</span>
+            <span>$1171.46</span>
+        </div>
+    </div>
+    
+    <div style="margin-top: 40px; padding: 20px; background: #f5f5f5; border-radius: 5px;">
+        <strong>Payment Terms:</strong> Net 30<br>
+        <strong>Questions?</strong> Contact us at info@psdepot.com or 888-881-6834
+    </div>
+</body>
+</html>

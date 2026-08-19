@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="NOLMIswkaAcCgv3SZi3DHCXqnUG1NMvo88Ga711Uadk" />
+    <title>RS-80 - Offline-First Android POS | Performance Supply Depot</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #e2e8f0;
+            line-height: 1.6;
+        }
+        .header {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 1px solid #475569;
+        }
+        .header h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .header .subtitle {
+            font-size: 20px;
+            color: #94a3b8;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 16px;
+            margin-bottom: 40px;
+        }
+        .hero h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        .hero p {
+            font-size: 18px;
+            color: #94a3b8;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+        .cta-button {
+            display: inline-block;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+        .cta-button:hover {
+            transform: translateY(-2px);
+        }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        .feature-card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 30px;
+            transition: transform 0.2s;
+        }
+        .feature-card:hover {
+            transform: translateY(-4px);
+            border-color: #6366f1;
+        }
+        .feature-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #6366f1;
+        }
+        .feature-card p {
+            color: #94a3b8;
+        }
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+        .status-section {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid #22c55e;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+        .status-section h2 {
+            color: #22c55e;
+            margin-bottom: 20px;
+        }
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        .status-item {
+            background: rgba(0,0,0,0.2);
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .status-item .label {
+            color: #94a3b8;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        .status-item .value {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        .docs-section {
+            background: #1e293b;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+        .docs-section h2 {
+            margin-bottom: 20px;
+        }
+        .doc-list {
+            list-style: none;
+        }
+        .doc-list li {
+            padding: 15px;
+            border-bottom: 1px solid #334155;
+        }
+        .doc-list li:last-child {
+            border-bottom: none;
+        }
+        .doc-list a {
+            color: #6366f1;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .doc-list a:hover {
+            text-decoration: underline;
+        }
+        .footer {
+            text-align: center;
+            padding: 40px;
+            border-top: 1px solid #334155;
+            color: #64748b;
+        }
+        .footer a {
+            color: #94a3b8;
+            text-decoration: none;
+        }
+        .badge {
+            display: inline-block;
+            padding: 6px 12px;
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="badge">✅ READY FOR TESTING</div>
+        <h1>RS-80</h1>
+        <div class="subtitle">Offline-First Android POS System</div>
+    </div>
+
+    <div class="container">
+        <div class="hero">
+            <h2>Sovereignty-First Point of Sale</h2>
+            <p>Zero subscriptions. Zero cloud dependency. Power-only operation anywhere on Earth. The successor to ReggieStarr POS, built for complete offline independence.</p>
+            <a href="#status" class="cta-button">View Status</a>
+        </div>
+
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">📴</div>
+                <h3>100% Offline</h3>
+                <p>SQLite database with local storage. No internet required. Works completely disconnected.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🖨️</div>
+                <h3>Thermal Printing</h3>
+                <p>ESC/POS compatible thermal receipt printing. TCP/IP connection to 58mm/80mm printers.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🧮</div>
+                <h3>Calculator Keypad</h3>
+                <p>7-8-9 top layout with Clear/Enter row. Double-zero by single zero. Built for speed.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💰</div>
+                <h3>Tax System</h3>
+                <p>Exclusive, Inclusive, and Exempt tax modes. Per-item tax configuration. Flexible for any jurisdiction.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔓</div>
+                <h3>Open Price</h3>
+                <p>Zero PLU triggers custom price entry. Perfect for variable-price items and open-ended sales.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💵</div>
+                <h3>Cash Payments</h3>
+                <p>MVP hardware support for cash transactions. Cash drawer trigger integration ready.</p>
+            </div>
+        </div>
+
+        <div id="status" class="status-section">
+            <h2>📊 Build Status - v1.0.0 MVP</h2>
+            <div class="status-grid">
+                <div class="status-item">
+                    <div class="label">Total Files</div>
+                    <div class="value">31</div>
+                </div>
+                <div class="status-item">
+                    <div class="label">Language</div>
+                    <div class="value">Kotlin</div>
+                </div>
+                <div class="status-item">
+                    <div class="label">Database</div>
+                    <div class="value">SQLite</div>
+                </div>
+                <div class="status-item">
+                    <div class="label">UI Framework</div>
+                    <div class="value">Jetpack Compose</div>
+                </div>
+                <div class="status-item">
+                    <div class="label">Printer Module</div>
+                    <div class="value" style="color: #22c55e;">✅ Complete</div>
+                </div>
+                <div class="status-item">
+                    <div class="label">Assigned To</div>
+                    <div class="value">Chelios2</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="docs-section">
+            <h2>📚 Documentation & Testing</h2>
+            <ul class="doc-list">
+                <li>
+                    <a href="https://github.com/hcindus/AOS-Brain/tree/master/reggiestarr-rs80">📁 Source Code (GitHub)</a>
+                    <span style="color: #64748b; margin-left: 10px;">— Complete Android Studio project</span>
+                </li>
+                <li>
+                    <a href="/rs-80/docs/THERMAL_PRINTER_TEST.md">🖨️ Thermal Printer Test Protocol</a>
+                    <span style="color: #64748b; margin-left: 10px;">— Hardware testing procedures</span>
+                </li>
+                <li>
+                    <a href="/depotchaos">📋 DepotChaos Task Tracking</a>
+                    <span style="color: #64748b; margin-left: 10px;">— DF-RS80-001-v2 assigned to Chelios2</span>
+                </li>
+                <li>
+                    <a href="https://github.com/hcindus/AOS-Brain/blob/master/reggiestarr-rs80/docs/ARCHITECTURE.md">🏗️ Architecture Documentation</a>
+                    <span style="color: #64748b; margin-left: 10px;">— Technical specifications</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="docs-section" style="background: rgba(99, 102, 241, 0.1); border: 1px solid #6366f1;">
+            <h2 style="color: #6366f1;">🎯 Next Steps</h2>
+            <ol style="color: #94a3b8; margin-left: 20px; line-height: 2;">
+                <li><strong>Hardware Testing:</strong> Connect thermal printer and run test protocol</li>
+                <li><strong>Barcode Scanner:</strong> Integrate USB-HID barcode scanner support</li>
+                <li><strong>Cash Drawer:</strong> Test cash drawer trigger integration</li>
+                <li><strong>Multi-Terminal:</strong> Local WiFi mesh with CRDT sync</li>
+                <li><strong>Production Deploy:</strong> SUNMI V2 Pro / PAX A920 target devices</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Built by <strong>AGI Company</strong> | <a href="https://psdepot.com">psdepot.com</a></p>
+        <p style="margin-top: 10px; font-size: 14px;">Part of the ReggieStarr POS ecosystem</p>
+    </div>
+</body>
+</html>

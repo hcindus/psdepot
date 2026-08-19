@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head><title>DepotChaos Intelligence Test</title></head>
+<body>
+<h1>API Test</h1>
+<div id="result">Loading...</div>
+<script>
+async function testAPI() {
+    try {
+        const response = await fetch('/api/intelligence?page=1&per_page=5');
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const data = await response.json();
+        document.getElementById('result').innerHTML = `
+            <p>✅ API works!</p>
+            <p>Total records: ${data.total}</p>
+            <p>Records returned: ${data.records?.length || 0}</p>
+            <p>First record: ${data.records?.[0]?.business_name || 'N/A'}</p>
+            <pre>${JSON.stringify(data.records?.[0] || {}, null, 2).substring(0, 500)}</pre>
+        `;
+    } catch (e) {
+        document.getElementById('result').innerHTML = `<p style="color:red">❌ Error: ${e.message}</p>`;
+    }
+}
+testAPI();
+</script>
+</body>
+</html>

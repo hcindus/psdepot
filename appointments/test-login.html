@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Login - PSD Appointments</title>
+    <style>
+        body { font-family: sans-serif; max-width: 400px; margin: 50px auto; padding: 20px; }
+        .form-group { margin-bottom: 15px; }
+        input { width: 100%; padding: 10px; font-size: 16px; }
+        button { width: 100%; padding: 15px; background: #00E0FF; border: none; cursor: pointer; font-size: 16px; }
+        .error { color: red; margin-top: 10px; }
+        .success { color: green; margin-top: 10px; }
+        #log { margin-top: 20px; padding: 10px; background: #f0f0f0; font-family: monospace; font-size: 12px; max-height: 200px; overflow-y: auto; }
+    </style>
+</head>
+<body>
+    <h1>PSD Appointments - Test Login</h1>
+    <p>Demo mode is active. Any email/password should work.</p>
+    
+    <form id="loginForm">
+        <div class="form-group">
+            <input type="email" id="email" placeholder="Email" value="test@test.com" required>
+        </div>
+        <div class="form-group">
+            <input type="password" id="password" placeholder="Password" value="password123" required>
+        </div>
+        <button type="submit">Sign In</button>
+    </form>
+    
+    <div id="message"></div>
+    <div id="log"></div>
+
+    <script>
+        // DEMO MODE - Inline auth logic
+        const DEMO_MODE = true;
+        
+        function log(msg) {
+            const logEl = document.getElementById('log');
+            logEl.innerHTML += new Date().toLocaleTimeString() + ': ' + msg + '<br>';
+            console.log(msg);
+        }
+        
+        function storeTokens(accessToken, refreshToken, expiresIn, rememberMe) {
+            const storage = rememberMe ? localStorage : sessionStorage;
+            storage.setItem('psd_accessToken', accessToken);
+            storage.setItem('psd_refreshToken', refreshToken);
+            storage.setItem('psd_tokenExpiry', Date.now() + (expiresIn * 1000));
+        }
+        
+        const AuthAPI = {
+            login({ email, password, rememberMe = false }) {
+                log('Login called with email: ' + email);
+                
+                if (DEMO_MODE) {
+                    log('DEMO MODE: Creating demo user');
+                    const demoUser = {
+                        id: 'demo-user-001',
+                        email: email || 'demo@psdepot.com',
+                        name: 'Demo User',
+                        company: 'Performance Supply Depot',
+                        role: 'admin'
+                    };
+                    const demoToken = 'demo-jwt-token-' + Date.now();
+                    storeTokens(demoToken, demoToken, 3600, rememberMe);
+                    const storage = rememberMe ? localStorage : sessionStorage;
+                    storage.setItem('psd_user', JSON.stringify(demoUser));
+                    storage.setItem('psd_rememberMe', rememberMe ? 'true' : 'false');
+                    
+                    log('Demo user created successfully');
+                    
+                    return Promise.resolve({
+                        success: true,
+                        user: demoUser,
+                        accessToken: demoToken,
+                        refreshToken: demoToken,
+                        expiresIn: 3600
+                    });
+                }
+                
+                return Promise.reject(new Error('Real auth not configured'));
+            }
+        };
+        
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            log('Form submitted');
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const msgEl = document.getElementById('message');
+            
+            try {
+                log('Calling AuthAPI.login...');
+                const result = await AuthAPI.login({ email, password });
+                log('Login result: ' + JSON.stringify(result, null, 2));
+                
+                if (result.success) {
+                    msgEl.innerHTML = '<div class="success">Login successful! Redirecting...</div>';
+                    log('Login successful!');
+                    
+                    // Store tokens
+                    localStorage.setItem('psd_accessToken', result.accessToken);
+                    localStorage.setItem('psd_user', JSON.stringify(result.user));
+                    
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 1500);
+                } else {
+                    msgEl.innerHTML = '<div class="error">Login failed: ' + (result.error || 'Unknown error') + '</div>';
+                }
+            } catch (err) {
+                log('Error: ' + err.message);
+                msgEl.innerHTML = '<div class="error">Error: ' + err.message + '</div>';
+            }
+        });
+        
+        log('Page loaded. DEMO_MODE: ' + DEMO_MODE);
+    </script>
+</body>
+</html>

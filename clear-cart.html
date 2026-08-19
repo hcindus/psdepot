@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="canonical" href="https://psdepot.com/clear-cart.html">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart Cleared — Performance Supply Depot LLC</title>
+    <meta name="description" content="Your shopping cart has been cleared. Start fresh with premium POS supplies.">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #1a365d;
+            --primary-light: #2c5282;
+            --accent: #c53030;
+            --accent-hover: #9b2c2c;
+            --bg: #f7fafc;
+            --card: #ffffff;
+            --text: #2d3748;
+            --text-muted: #718096;
+            --border: #e2e8f0;
+            --success: #48bb78;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Header */
+        header {
+            background: var(--primary);
+            color: white;
+            padding: 16px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: #63b3ed;
+        }
+        
+        .header-nav a {
+            color: #bee3f8;
+            text-decoration: none;
+            font-weight: 500;
+            margin-left: 24px;
+            transition: color 0.2s;
+        }
+        
+        .header-nav a:hover {
+            color: white;
+        }
+        
+        /* Main Content */
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 48px 24px;
+        }
+        
+        .clear-cart-container {
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .success-icon {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 32px;
+            background: linear-gradient(135deg, var(--success) 0%, #38a169 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 24px rgba(72, 187, 120, 0.3);
+        }
+        
+        .success-icon svg {
+            width: 60px;
+            height: 60px;
+            fill: white;
+        }
+        
+        .clear-cart-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+        
+        .clear-cart-message {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            line-height: 1.8;
+        }
+        
+        .clear-cart-card {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border: 1px solid var(--border);
+        }
+        
+        .cart-status {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 16px 24px;
+            background: #f0fff4;
+            border-radius: 8px;
+            margin-bottom: 32px;
+        }
+        
+        .cart-status-icon {
+            width: 24px;
+            height: 24px;
+            background: var(--success);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .cart-status-icon svg {
+            width: 14px;
+            height: 14px;
+            fill: white;
+        }
+        
+        .cart-status-text {
+            font-weight: 600;
+            color: #276749;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
+            color: white;
+            padding: 16px 40px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+            box-shadow: 0 4px 12px rgba(197, 48, 48, 0.3);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(197, 48, 48, 0.4);
+        }
+        
+        .secondary-links {
+            margin-top: 24px;
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .secondary-links a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        
+        .secondary-links a:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 32px 24px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-contact {
+            margin-bottom: 16px;
+        }
+        
+        .footer-contact a {
+            color: #bee3f8;
+            text-decoration: none;
+            margin: 0 12px;
+            transition: color 0.2s;
+        }
+        
+        .footer-contact a:hover {
+            color: white;
+        }
+        
+        .footer-copyright {
+            font-size: 0.875rem;
+            color: #a0aec0;
+        }
+        
+        /* Mobile */
+        @media (max-width: 768px) {
+            .clear-cart-title {
+                font-size: 2rem;
+            }
+            
+            .success-icon {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .success-icon svg {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .clear-cart-card {
+                padding: 24px;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 16px;
+            }
+            
+            .header-nav a {
+                margin: 0 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="/" class="logo">Performance<span>Supply</span>Depot</a>
+            <nav class="header-nav">
+                <a href="/">Home</a>
+                <a href="/#products">Products</a>
+                <a href="/contact.html">Contact</a>
+            </nav>
+        </div>
+    </header>
+    
+    <main>
+        <div class="clear-cart-container">
+            <div class="success-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                </svg>
+            </div>
+            
+            <h1 class="clear-cart-title">Cart Cleared!</h1>
+            
+            <div class="clear-cart-card">
+                <div class="cart-status">
+                    <div class="cart-status-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                        </svg>
+                    </div>
+                    <span class="cart-status-text">Your shopping cart has been successfully cleared</span>
+                </div>
+                
+                <p class="clear-cart-message">
+                    Your cart is now empty and ready for new items. Browse our selection of premium POS supplies, thermal paper, printer ribbons, and hardware.
+                </p>
+                
+                <a href="/" class="cta-button">Continue Shopping</a>
+                
+                <div class="secondary-links">
+                    <a href="/#products">View Products</a>
+                    <a href="/contact.html">Contact Support</a>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-contact">
+                <a href="tel:888-881-6834">📞 (888) 881-6834</a>
+                <a href="tel:415-571-9724">📞 (415) 571-9724</a>
+                <a href="mailto:info@psdepot.com">✉️ info@psdepot.com</a>
+            </div>
+            <p class="footer-copyright">© 2026 Performance Supply Depot LLC. Serving California since 2005.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Clear cart data
+        localStorage.removeItem('psdepot_cart');
+        localStorage.removeItem('psdepot_cart_checkout');
+    </script>
+</body>
+</html>

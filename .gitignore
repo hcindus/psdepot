@@ -1,0 +1,28 @@
+# Backups
+.backups/
+
+# Admin (sensitive)
+admin/
+
+# Secrets
+.env
+.env.*
+*.key
+*.pem
+
+# Large binaries / downloads
+downloads/
+*.apk
+*.zip
+*.exe
+
+# Large media
+assets/videos/
+
+# Python
+__pycache__/
+*.pyc
+
+# OS
+.DS_Store
+ivory-auto/

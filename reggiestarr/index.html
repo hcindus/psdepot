@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReggieStarr RS-79 POS System</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Header -->
+        <header class="pos-header">
+            <div class="logo">
+                <i class="fas fa-cash-register"></i>
+                <span>ReggieStarr RS-79</span>
+            </div>
+            <div class="header-actions">
+                <button class="header-btn" id="voidBtn">
+                    <i class="fas fa-undo"></i> VOID
+                </button>
+                <button class="header-btn" id="discBtn">
+                    <i class="fas fa-percent"></i> DISC
+                </button>
+                <button class="header-btn" id="holdBtn">
+                    <i class="fas fa-pause"></i> HOLD
+                </button>
+            </div>
+        </header>
+
+        <div class="pos-container">
+            <!-- Main Display Area -->
+            <div class="main-area">
+                <!-- Receipt Display -->
+                <div class="receipt-section">
+                    <div class="receipt-header">
+                        <span>Transaction #001</span>
+                        <span id="currentTime">12:00 PM</span>
+                    </div>
+                    <div class="receipt-items" id="receiptItems">
+                        <!-- Items added here -->
+                    </div>
+                    <div class="receipt-totals">
+                        <div class="total-line">
+                            <span>Subtotal</span>
+                            <span id="subtotal">$0.00</span>
+                        </div>
+                        <div class="total-line">
+                            <span>Tax (8.5%)</span>
+                            <span id="taxAmount">$0.00</span>
+                        </div>
+                        <div class="total-line discount" id="discountLine" style="display: none; color: var(--success)">
+                            <span>Discount</span>
+                            <span id="discountAmount">-$0.00</span>
+                        </div>
+                        <div class="total-line grand-total">
+                            <span>TOTAL</span>
+                            <span id="grandTotal">$0.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Items -->
+                <div class="quick-items">
+                    <div class="quick-item" data-plu="BURGER" data-price="8.99" data-name="Burger">
+                        <i class="fas fa-hamburger"></i>
+                        <span>Burger</span>
+                        <span class="price">$8.99</span>
+                    </div>
+                    <div class="quick-item" data-plu="FRIES" data-price="3.99" data-name="Fries">
+                        <i class="fas fa-utensils"></i>
+                        <span>Fries</span>
+                        <span class="price">$3.99</span>
+                    </div>
+                    <div class="quick-item" data-plu="SODA" data-price="2.49" data-name="Soda">
+                        <i class="fas fa-glass-whiskey"></i>
+                        <span>Soda</span>
+                        <span class="price">$2.49</span>
+                    </div>
+                    <div class="quick-item" data-plu="SHAKE" data-price="4.99" data-name="Shake">
+                        <i class="fas fa-ice-cream"></i>
+                        <span>Shake</span>
+                        <span class="price">$4.99</span>
+                    </div>
+                    <div class="quick-item" data-plu="SALAD" data-price="6.99" data-name="Salad">
+                        <i class="fas fa-leaf"></i>
+                        <span>Salad</span>
+                        <span class="price">$6.99</span>
+                    </div>
+                    <div class="quick-item" data-plu="COFFEE" data-price="1.99" data-name="Coffee">
+                        <i class="fas fa-coffee"></i>
+                        <span>Coffee</span>
+                        <span class="price">$1.99</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Sidebar -->
+            <div class="sidebar">
+                <!-- PLU Entry -->
+                <div class="plu-section">
+                    <div class="plu-display" id="pluDisplay">
+                        <span class="plu-label">PLU</span>
+                        <span class="plu-value" id="pluValue"></span>
+                    </div>
+                </div>
+
+                <!-- Numeric Keypad -->
+                <div class="keypad">
+                    <div class="keypad-row">
+                        <button class="key" data-key="7">7</button>
+                        <button class="key" data-key="8">8</button>
+                        <button class="key" data-key="9">9</button>
+                    </div>
+                    <div class="keypad-row">
+                        <button class="key" data-key="4">4</button>
+                        <button class="key" data-key="5">5</button>
+                        <button class="key" data-key="6">6</button>
+                    </div>
+                    <div class="keypad-row">
+                        <button class="key" data-key="1">1</button>
+                        <button class="key" data-key="2">2</button>
+                        <button class="key" data-key="3">3</button>
+                    </div>
+                    <div class="keypad-row">
+                        <button class="key" data-key="C">C</button>
+                        <button class="key" data-key="0">0</button>
+                        <button class="key" data-key="ENT">ENT</button>
+                    </div>
+                </div>
+
+                <!-- Payment Methods -->
+                <div class="payment-section">
+                    <button class="payment-btn" data-method="cash">
+                        <i class="fas fa-money-bill-wave"></i>
+                        <span>Cash</span>
+                    </button>
+                    <button class="payment-btn" data-method="credit">
+                        <i class="fas fa-credit-card"></i>
+                        <span>Credit</span>
+                    </button>
+                    <button class="payment-btn" data-method="debit">
+                        <i class="fas fa-university"></i>
+                        <span>Debit</span>
+                    </button>
+                    <button class="payment-btn" data-method="ebt">
+                        <i class="fas fa-id-card"></i>
+                        <span>EBT</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="pos-footer">
+            <div class="footer-info">
+                <span id="statusText">Ready</span>
+            </div>
+            <div class="footer-actions">
+                <button class="footer-btn" id="printReceipt">
+                    <i class="fas fa-print"></i> Print
+                </button>
+                <button class="footer-btn" id="clearAll">
+                    <i class="fas fa-trash"></i> Clear
+                </button>
+            </div>
+        </footer>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

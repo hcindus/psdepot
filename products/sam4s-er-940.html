@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAM4S ER-940 Cash Register | Performance Supply Depot LLC</title>
+    <meta name="description" content="SAM4S ER-940 flat keyboard cash register. 15,000 PLUs, 99 departments, integrated receipt printer. Professional-grade POS solution for retail and food service.">
+    <link rel="canonical" href="https://psdepot.com/products/sam4s-er-940.html">
+    <meta property="og:image" content="https://psdepot.com/assets/images/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://psdepot.com/assets/images/og-image.png">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    
+    <style>
+        :root {
+            --primary: #0A1A2F;
+            --primary-dark: #0f2744;
+            --accent: #d69e2e;
+            --accent-hover: #b7791f;
+            --bg: #F8F9FA;
+            --card: #ffffff;
+            --text: #111111;
+            --text-muted: #718096;
+            --border: #e2e8f0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        /* Header */
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .contact-info {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: opacity 0.2s;
+        }
+
+        .contact-info a:hover { opacity: 0.8; }
+
+        .cart-icon {
+            background: #c53030;
+            color: white !important;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .cart-icon:hover {
+            background: #9b2c2c;
+            transform: translateY(-1px);
+        }
+        
+        /* Breadcrumb */
+        .breadcrumb {
+            max-width: 1200px;
+            margin: 1rem auto;
+            padding: 0 2rem;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+        
+        .breadcrumb a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Product Container */
+        .product-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+        
+        /* Mobile optimizations */
+        
+        /* Image Section */
+        .product-image-section {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .product-image {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            display: block;
+        }
+        
+        .image-caption {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+        
+        /* Info Section */
+        .product-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .sku-badge {
+            display: inline-block;
+            background: #edf2f7;
+            color: var(--text-muted);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .product-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1.2;
+        }
+        
+        .product-subtitle {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+        }
+        
+        .price-section {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .price-note {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+        
+        .stock-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            color: #38a169;
+            font-weight: 500;
+        }
+        
+        .stock-dot {
+            width: 8px;
+            height: 8px;
+            background: #38a169;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: #f7fafc;
+            border-radius: 8px;
+        }
+
+        .quantity-label { font-weight: 500; color: var(--text); }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .quantity-btn {
+            width: 36px;
+            height: 36px;
+            border: none;
+            background: white;
+            cursor: pointer;
+            font-size: 1.25rem;
+            color: var(--text);
+            transition: background 0.2s;
+        }
+
+        .quantity-btn:hover { background: #edf2f7; }
+
+        .quantity-input {
+            width: 50px;
+            height: 36px;
+            border: none;
+            text-align: center;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .btn-primary {
+            flex: 1;
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .btn-primary:hover {
+            background: #9b2c2c;
+            transform: translateY(-1px);
+        }
+        
+        .btn-secondary {
+            flex: 1;
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--border);
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            text-align: center;
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            background: rgba(26, 54, 93, 0.05);
+        }
+        
+        /* Features */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        /* Mobile optimizations */
+        
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            background: #f7fafc;
+            border-radius: 8px;
+        }
+        
+        .feature-icon {
+            width: 24px;
+            height: 24px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.75rem;
+            flex-shrink: 0;
+        }
+        
+        .feature-text {
+            font-size: 0.9rem;
+        }
+        
+        /* Tabs */
+        .tabs-section {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 1.5rem;
+        }
+        
+        .tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+        }
+        
+        .tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--accent);
+        }
+        
+        .tab-content {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        /* Specs Table */
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .specs-table tr {
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .specs-table tr:last-child {
+            border-bottom: none;
+        }
+        
+        .specs-table td {
+            padding: 1rem;
+        }
+        
+        .specs-table td:first-child {
+            font-weight: 600;
+            color: var(--text-muted);
+            width: 40%;
+        }
+        
+        /* Description */
+        .description-content {
+            line-height: 1.8;
+        }
+        
+        .description-content h3 {
+            color: var(--primary);
+            margin: 1.5rem 0 0.75rem;
+            font-size: 1.25rem;
+        }
+        
+        .description-content p {
+            margin-bottom: 1rem;
+        }
+        
+        .description-content ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .description-content li {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Footer CTA */
+        .footer-cta {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 2rem;
+            background: var(--primary);
+            color: white;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .footer-cta h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-cta p {
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-cta .phone {
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-decoration: none;
+            display: inline-block;
+            animation: patrioticBlink 1.5s infinite;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        @keyframes patrioticBlink {
+            0%, 33% { 
+                color: #ff0000; 
+                text-shadow: 0 0 20px rgba(255,0,0,0.8), 2px 2px 4px rgba(0,0,0,0.3);
+            }
+            34%, 66% { 
+                color: #ffffff; 
+                text-shadow: 0 0 20px rgba(255,255,255,0.8), 2px 2px 4px rgba(0,0,0,0.3);
+            }
+            67%, 100% { 
+                color: #0000ff; 
+                text-shadow: 0 0 20px rgba(0,0,255,0.8), 2px 2px 4px rgba(0,0,0,0.3);
+            }
+        }
+        
+        .footer-cta .phone:hover { 
+            animation-duration: 0.5s;
+        }
+        
+
+        
+        /* Footer */
+        .footer {
+            background: var(--primary-dark);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            font-size: 0.875rem;
+            opacity: 0.8;
+        }
+    </style>
+<script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Product",
+            "name": "SAM4S ER-940 Cash Register",
+            "image": "https://psdepot.com/assets/images/sam4s-er-940.jpg",
+            "description": "SAM4S ER-940 high-capacity cash register. 15,000 PLUs, 99 departments, flat spill-resistant keyboard. Professional-grade POS solution.",
+            "sku": "30-212",
+            "brand": {
+                "@type": "Brand",
+                "name": "SAM4S"
+            },
+            "offers": {
+                "@type": "Offer",
+                "url": "https://psdepot.com/products/sam4s-er-940.html",
+                "price": 895.0,
+                "priceCurrency": "USD",
+                "availability": "https://schema.org/InStock",
+                "priceValidUntil": "2027-12-31",
+                "validFrom": "2026-08-01",
+                "shippingDetails": {
+                    "@type": "OfferShippingDetails",
+                    "shippingRate": {
+                        "@type": "MonetaryAmount",
+                        "value": "0",
+                        "currency": "USD"
+                    },
+                    "deliveryTime": {
+                        "@type": "ShippingDeliveryTime",
+                        "handlingTime": {
+                            "@type": "QuantitativeValue",
+                            "minValue": "0",
+                            "maxValue": "1",
+                            "unitCode": "DAY"
+                        },
+                        "transitTime": {
+                            "@type": "QuantitativeValue",
+                            "minValue": "1",
+                            "maxValue": "5",
+                            "unitCode": "DAY"
+                        }
+                    },
+                    "shippingDestination": {
+                        "@type": "DefinedRegion",
+                        "addressCountry": "US",
+                        "addressRegion": "CA"
+                    }
+                },
+                "hasMerchantReturnPolicy": {
+                    "@type": "MerchantReturnPolicy",
+                    "applicableCountry": "US",
+                    "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+                    "merchantReturnDays": 30,
+                    "returnMethod": "https://schema.org/ReturnByMail",
+                    "returnFees": "https://schema.org/FreeReturn"
+                }
+            },
+            "mpn": "30-212",
+            "itemCondition": "https://schema.org/NewCondition",
+            "manufacturer": {
+                "@type": "Organization",
+                "name": "SAM4S"
+            },
+            "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.8",
+                "reviewCount": "47"
+            },
+            "review": {
+                "@type": "Review",
+                "reviewRating": {
+                    "@type": "Rating",
+                    "ratingValue": "5"
+                },
+                "author": {
+                    "@type": "Person",
+                    "name": "Verified Buyer"
+                },
+                "reviewBody": "Great product, fast shipping. Highly recommend Performance Supply Depot."
+            }
+        }
+    </script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://psdepot.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Products", "item": "https://psdepot.com/products/"},
+    {"@type": "ListItem", "position": 3, "name": "POS Systems", "item": "https://psdepot.com/products/pos-systems/"},
+    {"@type": "ListItem", "position": 4, "name": "Sam4s ER-940 Electronic Cash Register", "item": "https://psdepot.com/products/sam4s-er-940.html"}
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is the ER-940 suitable for a restaurant?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The ER-940 is restaurant-optimized with 88 preset menu item keys, modifier support (cook temps, sides), split tender, tip tracking, and kitchen printer support. It's a full-featured restaurant POS in a standalone register."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How many menu items can I program?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Up to 5,000 PLUs with descriptions, prices, and department assignments. The flat keyboard with 88 direct keys makes high-volume counter service extremely efficient."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can it network with other registers?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, up to 8 ER-940s can be networked together for multi-station environments with consolidated reporting. Requires IRC (Inter-Register Communication) cabling."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">PerformanceSupplyDepot</div>
+            <div class="contact-info">
+                <a href="tel:888-881-6834">📞 (888) 881-6834</a>
+                <a href="/checkout.html" class="cart-icon">
+                    🛒 Cart (<span id="cart-count">0</span>)
+                </a>
+            </div>
+        </div>
+    </header>
+    
+    <div class="breadcrumb">
+        <a href="/">Home</a> / <a href="/#hardware">POS Hardware</a> / SAM4S ER-940
+    </div>
+    
+    <main class="product-container">
+        <div class="product-image-section">
+            <img src="/assets/images/sam4s-er-940.jpg" alt="SAM4S ER-940 Cash Register with flat keyboard and customer display" loading="lazy" class="product-image">
+            <p class="image-caption">SAM4S ER-940 — Professional Cash Register with Flat Keyboard</p>
+        </div>
+        
+        <div class="product-info">
+            <div>
+                <span class="sku-badge">SKU: 30-212</span>
+                <h1 class="product-title">SAM4S ER-940 Cash Register</h1>
+                <p class="product-subtitle">Flat Keyboard • 15,000 PLUs • 99 Departments</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <span class="feature-text">15,000 PLU capacity</span>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <span class="feature-text">99 departments</span>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <span class="feature-text">Flat spill-resistant keyboard</span>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <span class="feature-text">Integrated receipt printer</span>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <span class="feature-text">Raised customer display</span>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <span class="feature-text">No monthly fees</span>
+                </div>
+            </div>
+            
+            <div class="price-section">
+                <div class="price">$895.00</div>
+                <div class="price-note">Local shipping rates applied to each order</div>
+                <div class="stock-status">
+                    <span class="stock-dot"></span>
+                    In Stock — Ships within 24 hours
+                </div>
+
+                <div class="quantity-selector">
+                    <span class="quantity-label">Quantity:</span>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn" onclick="updateQuantity(-1)">−</button>
+                        <input type="number" class="quantity-input" id="quantity" value="1" min="1" max="10" readonly>
+                        <button class="quantity-btn" onclick="updateQuantity(1)">+</button>
+                    </div>
+                </div>
+
+                <div class="cta-buttons">
+                    <button class="btn-primary" onclick="addToCartFromPage()" id="addToCartBtn">Add to Cart</button>
+                    <a href="/contact.html" class="btn-secondary">Request Quote</a>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <section class="tabs-section">
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('description')">Description</button>
+            <button class="tab" onclick="showTab('specs')">Specifications</button>
+            <button class="tab" onclick="showTab('support')">Support</button>
+        </div>
+        
+        <div id="description" class="tab-content">
+            <div class="description-content">
+                <h3>Professional-Grade Cash Management</h3>
+                <p>The SAM4S ER-940 is a high-capacity electronic cash register designed for demanding retail and food service environments. With its flat, spill-resistant keyboard and raised customer display, it delivers the durability and visibility your business needs.</p>
+                
+                <h3>Key Features</h3>
+                <ul>
+                    <li><strong>15,000 PLU Capacity:</strong> Handle extensive product catalogs with ease</li>
+                    <li><strong>99 Departments:</strong> Organize sales by category for detailed reporting</li>
+                    <li><strong>Flat Keyboard Design:</strong> Easy to clean, ideal for food service environments</li>
+                    <li><strong>Dual Receipt Printer:</strong> Journal + receipt printer with auto-cutter</li>
+                    <li><strong>Raised Customer Display:</strong> Clear visibility with item name and price</li>
+                    <li><strong>Multiple Payment Options:</strong> Cash, check, credit, and multiple tender types</li>
+                </ul>
+                
+                <h3>Ideal For</h3>
+                <ul>
+                    <li>Restaurants and cafes</li>
+                    <li>Retail stores with high SKU counts</li>
+                    <li>Convenience stores</li>
+                    <li>Quick-service establishments</li>
+                </ul>
+                
+                <h3>Why Choose the ER-940?</h3>
+                <p>Unlike cloud-based POS systems with recurring monthly fees, the ER-940 is a one-time purchase. Program it once, and it runs independently — no internet required, no subscription costs, no surprises. Perfect for businesses that need reliable, offline-capable transaction processing.</p>
+            </div>
+        </div>
+        
+        <div id="specs" class="tab-content" style="display: none;">
+            <table class="specs-table">
+                <tr>
+                    <td>Model</td>
+                    <td>SAM4S ER-940</td>
+                </tr>
+                <tr>
+                    <td>Keyboard Type</td>
+                    <td>Flat (spill-resistant)</td>
+                </tr>
+                <tr>
+                    <td>PLU Capacity</td>
+                    <td>15,000 items</td>
+                </tr>
+                <tr>
+                    <td>Departments</td>
+                    <td>99</td>
+                </tr>
+                <tr>
+                    <td>Clerks</td>
+                    <td>50</td>
+                </tr>
+                <tr>
+                    <td>Receipt Printer</td>
+                    <td>2-station thermal (journal + receipt)</td>
+                </tr>
+                <tr>
+                    <td>Customer Display</td>
+                    <td>Raised, adjustable angle</td>
+                </tr>
+                <tr>
+                    <td>Operator Display</td>
+                    <td>10-line LCD</td>
+                </tr>
+                <tr>
+                    <td>Connectivity</td>
+                    <td>2 RS-232 ports, 1 drawer kick</td>
+                </tr>
+                <tr>
+                    <td>Dimensions</td>
+                    <td>17.3" W x 17.7" D x 15.4" H</td>
+                </tr>
+                <tr>
+                    <td>Weight</td>
+                    <td>Approx. 22 lbs</td>
+                </tr>
+                <tr>
+                    <td>Power</td>
+                    <td>120V AC</td>
+                </tr>
+                <tr>
+                    <td>Warranty</td>
+                    <td>1 year manufacturer</td>
+                </tr>
+            </table>
+        </div>
+        
+        <div id="support" class="tab-content" style="display: none;">
+            <div class="description-content">
+                <h3>What's Included</h3>
+                <ul>
+                    <li>SAM4S ER-940 Cash Register</li>
+                    <li>Cash drawer with 5 bill / 5 coin compartments</li>
+                    <li>Power cord</li>
+                    <li>Operator manual</li>
+                    <li>Programming keys</li>
+                </ul>
+                
+                <h3>Optional Add-Ons</h3>
+                <ul>
+                    <li>External barcode scanner</li>
+                    <li>Additional cash drawer</li>
+                    <li>Extended warranty</li>
+                    <li>On-site setup and training</li>
+                </ul>
+                
+                <h3>Service & Support</h3>
+                <p>Performance Supply Depot provides:</p>
+                <ul>
+                    <li>Free phone support for programming questions</li>
+                    <li>Repair services available</li>
+                    <li>Ribbon and paper supplies in stock</li>
+                    <li>Training available (in-person or remote)</li>
+                </ul>
+                
+                <h3>Programming Services</h3>
+                <p>Don't want to program it yourself? We offer complete menu programming services starting at $150. Send us your menu or product list, and we'll configure everything before shipping.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="footer-cta">
+        <h3>Questions About the ER-940?</h3>
+        <p>Our team has 20+ years of experience with SAM4S registers. Call for a free consultation.</p>
+        <a href="tel:8888816834" class="phone">(888) 881-6834</a>
+    </section>
+    
+    <footer class="footer">
+        <p>&copy; 2026 Performance Supply Depot LLC. Serving California since 2005.</p>
+    </footer>
+    
+    
+    <script>
+        // Cart Management - Matches main psdepot.com
+        function getCart() {
+            return JSON.parse(localStorage.getItem('psdepot_cart') || '[]');
+        }
+
+        function saveCart(cart) {
+            localStorage.setItem('psdepot_cart', JSON.stringify(cart));
+            updateCartCount();
+        }
+
+        function updateCartCount() {
+            const cart = getCart();
+            const count = cart.reduce((sum, item) => sum + (parseInt(item.quantity) || 0), 0);
+            const cartCountEl = document.getElementById('cart-count');
+            if (cartCountEl) cartCountEl.textContent = count;
+        }
+
+        function addToCartFromPage() {
+            const sku = '30-212';
+            const name = 'SAM4S ER-940 Cash Register';
+            const price = 895.00;
+            const qty = parseInt(document.getElementById('quantity').value) || 1;
+            
+            let cart = getCart();
+            const existing = cart.find(item => item.sku === sku);
+            
+            if (existing) {
+                existing.quantity += qty;
+            } else {
+                cart.push({ sku, name, price, quantity: qty });
+            }
+            
+            saveCart(cart);
+            
+            // Visual feedback
+            const btn = document.getElementById('addToCartBtn');
+            const originalText = btn.textContent;
+            btn.textContent = '✓ Added!';
+            btn.style.background = '#48bb78';
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.style.background = '';
+            }, 1500);
+        }
+
+        function updateQuantity(change) {
+            const input = document.getElementById('quantity');
+            let value = parseInt(input.value) + change;
+            if (value < 1) value = 1;
+            if (value > 10) value = 10;
+            input.value = value;
+        }
+
+        function showTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.style.display = 'none';
+            });
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.getElementById(tabName).style.display = 'block';
+            event.target.classList.add('active');
+        }
+
+        // Initialize cart count on load
+        updateCartCount();
+    </script>
+
+</body>
+</html>

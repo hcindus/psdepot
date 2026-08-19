@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PSDepot Service Log - 2026-05-25</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        
+        .header .date {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .summary {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .summary-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border-left: 4px solid #c53030;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .summary-card .icon {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+        
+        .summary-card .count {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1a365d;
+        }
+        
+        .summary-card .label {
+            font-size: 12px;
+            color: #718096;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a365d;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .ticket {
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .ticket-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .ticket-number {
+            font-weight: 700;
+            color: #c53030;
+            font-size: 14px;
+        }
+        
+        .ticket-type {
+            background: #bee3f8;
+            color: #2c5282;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .ticket-fields {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        
+        .field {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .field.full-width {
+            grid-column: span 2;
+        }
+        
+        .field label {
+            font-size: 10px;
+            color: #718096;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 3px;
+        }
+        
+        .field input,
+        .field textarea {
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            padding: 8px;
+            font-size: 14px;
+            font-family: inherit;
+            background: white;
+        }
+        
+        .field input:focus,
+        .field textarea:focus {
+            outline: none;
+            border-color: #2c5282;
+        }
+        
+        .field textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+        
+        .checkbox-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        
+        .status-bar {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .status-btn {
+            flex: 1;
+            min-width: 100px;
+            padding: 10px;
+            border: 2px solid #e2e8f0;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            transition: all 0.2s;
+        }
+        
+        .status-btn:hover {
+            border-color: #2c5282;
+        }
+        
+        .status-btn.active {
+            background: #2c5282;
+            border-color: #2c5282;
+            color: white;
+        }
+        
+        .status-btn.completed {
+            background: #38a169;
+            border-color: #38a169;
+            color: white;
+        }
+        
+        .footer-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            flex: 1;
+            min-width: 120px;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .btn-primary {
+            background: #c53030;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #9b2c2c;
+        }
+        
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #2d3748;
+        }
+        
+        .btn-secondary:hover {
+            background: #cbd5e0;
+        }
+        
+        .signature-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px dashed #e2e8f0;
+        }
+        
+        .signature-box {
+            border: 2px solid #e2e8f0;
+            border-radius: 6px;
+            height: 80px;
+            margin-top: 10px;
+            background: white;
+        }
+        
+        .print-only {
+            display: none;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .no-print {
+                display: none !important;
+            }
+            
+            .print-only {
+                display: block;
+            }
+            
+            .section {
+                box-shadow: none;
+                border: 1px solid #e2e8f0;
+                break-inside: avoid;
+            }
+            
+            .ticket {
+                break-inside: avoid;
+            }
+            
+            .field input,
+            .field textarea {
+                border: 1px solid #ccc;
+            }
+        }
+        
+        .timestamp {
+            font-size: 12px;
+            color: #718096;
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .driver-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🚛 Performance Supply Depot</h1>
+        <div class="date">Service Log — Monday, May 25, 2026</div>
+    </div>
+    
+    <div class="summary">
+        <div class="summary-card">
+            <div class="icon">📄</div>
+            <div class="count">2</div>
+            <div class="label">Deliveries</div>
+        </div>
+        <div class="summary-card">
+            <div class="icon">🚚</div>
+            <div class="count">2</div>
+            <div class="label">Pickups</div>
+        </div>
+        <div class="summary-card">
+            <div class="icon">🔧</div>
+            <div class="count">2</div>
+            <div class="label">Repairs</div>
+        </div>
+    </div>
+    
+    <div class="section">
+        <div class="section-title">👤 Driver Information</div>
+        <div class="driver-info">
+            <div class="field">
+                <label>Driver Name</label>
+                <input type="text" placeholder="Enter name">
+            </div>
+            <div class="field">
+                <label>Vehicle / Route #</label>
+                <input type="text" placeholder="e.g., Van-01">
+            </div>
+            <div class="field">
+                <label>Start Time</label>
+                <input type="time">
+            </div>
+            <div class="field">
+                <label>End Time</label>
+                <input type="time">
+            </div>
+        </div>
+    </div>
+
+    <!-- DELIVERIES -->
+    <div class="section">
+        <div class="section-title">📄 Paper Deliveries</div>
+        
+        <div class="ticket">
+            <div class="ticket-header">
+                <span class="ticket-number">DEL-001</span>
+                <span class="ticket-type">Delivery</span>
+            </div>
+            <div class="ticket-fields">
+                <div class="field">
+                    <label>Customer Name</label>
+                    <input type="text" placeholder="Business name">
+                </div>
+                <div class="field">
+                    <label>Contact Phone</label>
+                    <input type="tel" placeholder="(555) 555-5555">
+                </div>
+                <div class="field full-width">
+                    <label>Delivery Address</label>
+                    <input type="text" placeholder="Street address">
+                </div>
+                <div class="field">
+                    <label>City / State / ZIP</label>
+                    <input type="text" placeholder="City, ST 12345">
+                </div>
+                <div class="field">
+                    <label>Items Delivered</label>
+                    <input type="text" placeholder="e.g., 2 cases receipt paper">
+                </div>
+                <div class="field full-width">
+                    <label>Special Instructions</label>
+                    <textarea placeholder="Delivery notes..."></textarea>
+                </div>
+            </div>
+            <div class="status-bar">
+                <button class="status-btn" onclick="setStatus(this)">⏳ Pending</button>
+                <button class="status-btn" onclick="setStatus(this)">🚚 In Transit</button>
+                <button class="status-btn" onclick="setStatus(this)">✅ Completed</button>
+                <button class="status-btn" onclick="setStatus(this)">❌ Failed</button>
+            </div>
+        </div>
+        
+        <div class="ticket">
+            <div class="ticket-header">
+                <span class="ticket-number">DEL-002</span>
+                <span class="ticket-type">Delivery</span>
+            </div>
+            <div class="ticket-fields">
+                <div class="field">
+                    <label>Customer Name</label>
+                    <input type="text" placeholder="Business name">
+                </div>
+                <div class="field">
+                    <label>Contact Phone</label>
+                    <input type="tel" placeholder="(555) 555-5555">
+                </div>
+                <div class="field full-width">
+                    <label>Delivery Address</label>
+                    <input type="text" placeholder="Street address">
+                </div>
+                <div class="field">
+                    <label>City / State / ZIP</label>
+                    <input type="text" placeholder="City, ST 12345">
+                </div>
+                <div class="field">
+                    <label>Items Delivered</label>
+                    <input type="text" placeholder="e.g., 1 case ink ribbons">
+                </div>
+                <div class="field full-width">
+                    <label>Special Instructions</label>
+                    <textarea placeholder="Delivery notes..."></textarea>
+                </div>
+            </div>
+            <div class="status-bar">
+                <button class="status-btn" onclick="setStatus(this)">⏳ Pending</button>
+                <button class="status-btn" onclick="setStatus(this)">🚚 In Transit</button>
+                <button class="status-btn" onclick="setStatus(this)">✅ Completed</button>
+                <button class="status-btn" onclick="setStatus(this)">❌ Failed</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PICKUPS -->
+    <div class="section">
+        <div class="section-title">🚚 Equipment Pickups</div>
+        
+        <div class="ticket">
+            <div class="ticket-header">
+                <span class="ticket-number">PU-001</span>
+                <span class="ticket-type">Pickup</span>
+            </div>
+            <div class="ticket-fields">
+                <div class="field">
+                    <label>Customer Name</label>
+                    <input type="text" placeholder="Business name">
+                </div>
+                <div class="field">
+                    <label>Contact Phone</label>
+                    <input type="tel" placeholder="(555) 555-5555">
+                </div>
+                <div class="field full-width">
+                    <label>Pickup Address</label>
+                    <input type="text" placeholder="Street address">
+                </div>
+                <div class="field">
+                    <label>City / State / ZIP</label>
+                    <input type="text" placeholder="City, ST 12345">
+                </div>
+                <div class="field">
+                    <label>Equipment</label>
+                    <input type="text" placeholder="e.g., Samsung ER-5200M">
+                </div>
+                <div class="field full-width">
+                    <label>Condition / Reason</label>
+                    <textarea placeholder="Equipment condition, reason for pickup..."></textarea>
+                </div>
+            </div>
+            <div class="status-bar">
+                <button class="status-btn" onclick="setStatus(this)">⏳ Pending</button>
+                <button class="status-btn" onclick="setStatus(this)">🚚 In Transit</button>
+                <button class="status-btn" onclick="setStatus(this)">✅ Completed</button>
+                <button class="status-btn" onclick="setStatus(this)">❌ Failed</button>
+            </div>
+        </div>
+        
+        <div class="ticket">
+            <div class="ticket-header">
+                <span class="ticket-number">PU-002</span>
+                <span class="ticket-type">Pickup</span>
+            </div>
+            <div class="ticket-fields">
+                <div class="field">
+                    <label>Customer Name</label>
+                    <input type="text" placeholder="Business name">
+                </div>
+                <div class="field">
+                    <label>Contact Phone</label>
+                    <input type="tel" placeholder="(555) 555-5555">
+                </div>
+                <div class="field full-width">
+                    <label>Pickup Address</label>
+                    <input type="text" placeholder="Street address">
+                </div>
+                <div class="field">
+                    <label>City / State / ZIP</label>
+                    <input type="text" placeholder="City, ST 12345">
+                </div>
+                <div class="field">
+                    <label>Equipment</label>
+                    <input type="text" placeholder="e.g., Scale, Printer, etc.">
+                </div>
+                <div class="field full-width">
+                    <label>Condition / Reason</label>
+                    <textarea placeholder="Equipment condition, reason for pickup..."></textarea>
+                </div>
+            </div>
+            <div class="status-bar">
+                <button class="status-btn" onclick="setStatus(this)">⏳ Pending</button>
+                <button class="status-btn" onclick="setStatus(this)">🚚 In Transit</button>
+                <button class="status-btn" onclick="setStatus(this)">✅ Completed</button>
+                <button class="status-btn" onclick="setStatus(this)">❌ Failed</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- REPAIRS -->
+    <div class="section">
+        <div class="section-title">🔧 Register Repairs</div>
+        
+        <div class="ticket">
+            <div class="ticket-header">
+                <span class="ticket-number">REP-001</span>
+                <span class="ticket-type">Repair</span>
+            </div>
+            <div class="ticket-fields">
+                <div class="field">
+                    <label>Customer Name</label>
+                    <input type="text" placeholder="Business name">
+                </div>
+                <div class="field">
+                    <label>Contact Phone</label>
+                    <input type="tel" placeholder="(555) 555-5555">
+                </div>
+                <div class="field full-width">
+                    <label>Service Address</label>
+                    <input type="text" placeholder="Street address">
+                </div>
+                <div class="field">
+                    <label>City / State / ZIP</label>
+                    <input type="text" placeholder="City, ST 12345">
+                </div>
+                <div class="field">
+                    <label>Equipment Model</label>
+                    <input type="text" placeholder="e.g., ReggieStarr RS-79">
+                </div>
+                <div class="field full-width">
+                    <label>Issue Description</label>
+                    <textarea placeholder="Describe the problem..."></textarea>
+                </div>
+                <div class="field full-width">
+                    <label>Work Performed / Resolution</label>
+                    <textarea placeholder="Notes on repair work..."></textarea>
+                </div>
+                <div class="field">
+                    <label>Parts Used</label>
+                    <input type="text" placeholder="Part numbers if any">
+                </div>
+                <div class="field">
+                    <label>Time Spent</label>
+                    <input type="text" placeholder="e.g., 45 min">
+                </div>
+            </div>
+            <div class="checkbox-group">
+                <label class="checkbox-item">
+                    <input type="checkbox"> Warranty Repair
+                </label>
+                <label class="checkbox-item">
+                    <input type="checkbox"> Invoice Required
+                </label>
+                <label class="checkbox-item">
+                    <input type="checkbox"> Follow-up Needed
+                </label>
+            </div>
+            <div class="status-bar">
+                <button class="status-btn" onclick="setStatus(this)">⏳ Pending</button>
+                <button class="status-btn" onclick="setStatus(this)">🔧 In Progress</button>
+                <button class="status-btn" onclick="setStatus(this)">✅ Completed</button>
+                <button class="status-btn" onclick="setStatus(this)">📋 Parts Ordered</button>
+            </div>
+        </div>
+        
+        <div class="ticket">
+            <div class="ticket-header">
+                <span class="ticket-number">REP-002</span>
+                <span class="ticket-type">Repair</span>
+            </div>
+            <div class="ticket-fields">
+                <div class="field">
+                    <label>Customer Name</label>
+                    <input type="text" placeholder="Business name">
+                </div>
+                <div class="field">
+                    <label>Contact Phone</label>
+                    <input type="tel" placeholder="(555) 555-5555">
+                </div>
+                <div class="field full-width">
+                    <label>Service Address</label>
+                    <input type="text" placeholder="Street address">
+                </div>
+                <div class="field">
+                    <label>City / State / ZIP</label>
+                    <input type="text" placeholder="City, ST 12345">
+                </div>
+                <div class="field">
+                    <label>Equipment Model</label>
+                    <input type="text" placeholder="e.g., Samsung POS">
+                </div>
+                <div class="field full-width">
+                    <label>Issue Description</label>
+                    <textarea placeholder="Describe the problem..."></textarea>
+                </div>
+                <div class="field full-width">
+                    <label>Work Performed / Resolution</label>
+                    <textarea placeholder="Notes on repair work..."></textarea>
+                </div>
+                <div class="field">
+                    <label>Parts Used</label>
+                    <input type="text" placeholder="Part numbers if any">
+                </div>
+                <div class="field">
+                    <label>Time Spent</label>
+                    <input type="text" placeholder="e.g., 30 min">
+                </div>
+            </div>
+            <div class="checkbox-group">
+                <label class="checkbox-item">
+                    <input type="checkbox"> Warranty Repair
+                </label>
+                <label class="checkbox-item">
+                    <input type="checkbox"> Invoice Required
+                </label>
+                <label class="checkbox-item">
+                    <input type="checkbox"> Follow-up Needed
+                </label>
+            </div>
+            <div class="status-bar">
+                <button class="status-btn" onclick="setStatus(this)">⏳ Pending</button>
+                <button class="status-btn" onclick="setStatus(this)">🔧 In Progress</button>
+                <button class="status-btn" onclick="setStatus(this)">✅ Completed</button>
+                <button class="status-btn" onclick="setStatus(this)">📋 Parts Ordered</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SIGNATURES -->
+    <div class="section signature-section">
+        <div class="section-title">✍️ Signatures</div>
+        <div class="ticket-fields">
+            <div class="field">
+                <label>Technician Signature</label>
+                <div class="signature-box"></div>
+            </div>
+            <div class="field">
+                <label>Customer Signature (if required)</label>
+                <div class="signature-box"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ACTIONS -->
+    <div class="footer-actions no-print">
+        <button class="btn btn-primary" onclick="window.print()">🖨️ Print Log</button>
+        <button class="btn btn-secondary" onclick="saveLog()">💾 Save</button>
+        <button class="btn btn-secondary" onclick="clearLog()">🔄 Clear</button>
+        <button class="btn btn-secondary" onclick="emailLog()">📧 Email</button>
+    </div>
+    
+    <div class="timestamp">
+        Generated: 2026-05-25 03:12 UTC | PSDepot Service System
+    </div>
+
+    <script>
+        // Set status button active
+        function setStatus(btn) {
+            const buttons = btn.parentElement.querySelectorAll('.status-btn');
+            buttons.forEach(b => {
+                b.classList.remove('active', 'completed');
+            });
+            btn.classList.add('active');
+            if (btn.textContent.includes('Completed')) {
+                btn.classList.add('completed');
+            }
+            saveToStorage();
+        }
+        
+        // Auto-save to localStorage
+        function saveToStorage() {
+            const data = {};
+            document.querySelectorAll('input, textarea').forEach(el => {
+                if (el.id || el.name) {
+                    data[el.id || el.name] = el.value;
+                }
+            });
+            document.querySelectorAll('.status-btn.active').forEach((el, idx) => {
+                data['status_' + idx] = el.textContent;
+            });
+            localStorage.setItem('psdepot_service_log_2026_05_25', JSON.stringify(data));
+        }
+        
+        // Load from localStorage
+        function loadFromStorage() {
+            const saved = localStorage.getItem('psdepot_service_log_2026_05_25');
+            if (saved) {
+                const data = JSON.parse(saved);
+                Object.keys(data).forEach(key => {
+                    if (key.startsWith('status_')) {
+                        // Restore status buttons
+                    } else {
+                        const el = document.getElementById(key) || document.querySelector('[name="' + key + '"]');
+                        if (el) el.value = data[key];
+                    }
+                });
+            }
+        }
+        
+        // Save log
+        function saveLog() {
+            saveToStorage();
+            alert('Service log saved!');
+        }
+        
+        // Clear log
+        function clearLog() {
+            if (confirm('Clear all entries?')) {
+                localStorage.removeItem('psdepot_service_log_2026_05_25');
+                document.querySelectorAll('input, textarea').forEach(el => el.value = '');
+                document.querySelectorAll('.status-btn').forEach(el => el.classList.remove('active', 'completed'));
+            }
+        }
+        
+        // Email log
+        function emailLog() {
+            const subject = 'PSDepot Service Log - 2026-05-25';
+            const body = 'Service log attached.\n\nGenerated from mobile device.';
+            window.location.href = `mailto:info@psdepot.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        }
+        
+        // Auto-save on input
+        document.querySelectorAll('input, textarea').forEach(el => {
+            el.addEventListener('blur', saveToStorage);
+        });
+        
+        // Load on start
+        loadFromStorage();
+    </script>
+</body>
+</html>

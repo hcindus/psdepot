@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PSDEPOT - Event Calendar</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 0; background: #f5f5f5; }
+        .container { max-width: 1000px; margin: 0 auto; background: white; }
+        
+        .header { background: #003366; color: white; padding: 40px; text-align: center; }
+        .header h1 { margin: 0; font-size: 36px; }
+        .header p { margin: 10px 0 0 0; color: #ffd700; font-size: 18px; }
+        
+        .controls { background: #f9f9f9; padding: 20px; display: flex; justify-content: center; gap: 15px; border-bottom: 1px solid #eee; }
+        .controls button { padding: 10px 20px; border: 2px solid #003366; background: white; color: #003366; font-weight: bold; cursor: pointer; border-radius: 5px; }
+        .controls button:hover { background: #003366; color: white; }
+        .controls button.active { background: #ff6600; color: white; border-color: #ff6600; }
+        
+        .calendar { padding: 30px; }
+        .month-title { text-align: center; color: #003366; font-size: 28px; margin: 0 0 20px 0; }
+        
+        .days-header { display: grid; grid-template-columns: repeat(7, 1fr); background: #003366; color: white; padding: 15px 0; text-align: center; font-weight: bold; }
+        .days-header div { text-align: center; }
+        
+        .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
+        .day { min-height: 100px; border: 1px solid #ddd; padding: 10px; background: white; }
+        .day.empty { background: #f9f9f9; border: none; }
+        .day.today { background: #fff3e0; border: 2px solid #ff6600; }
+        .day-number { font-weight: bold; color: #003366; margin-bottom: 5px; }
+        .day.today .day-number { color: #ff6600; }
+        .day.empty .day-number { color: #ccc; }
+        
+        .event { background: #003366; color: white; padding: 5px 8px; font-size: 12px; margin-bottom: 3px; border-radius: 3px; cursor: pointer; }
+        .event:hover { background: #005599; }
+        .event.holiday { background: #f44336; }
+        
+        .holiday-legend {
+            background: #f9f9f9;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            border-bottom: 1px solid #eee;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+        }
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+        }
+        .legend-followup { background: #ff6600; }
+        .legend-new { background: #28a745; }
+        .legend-promo { background: #9c27b0; }
+        .legend-holiday { background: #f44336; }
+        
+        .federal-holidays {
+            background: linear-gradient(135deg, #fff3e0, #ffccbc);
+            padding: 20px 30px;
+            margin: 20px 30px;
+            border-radius: 10px;
+            border-left: 4px solid #ff6600;
+        }
+        .federal-holidays h4 {
+            color: #003366;
+            margin: 0 0 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .federal-holidays ul {
+            margin: 0;
+            padding-left: 20px;
+            color: #666;
+        }
+        .federal-holidays li {
+            margin: 5px 0;
+        }
+        
+        .event-list { margin-top: 30px; }
+        .event-list h3 { color: #003366; border-bottom: 2px solid #ff6600; padding-bottom: 10px; }
+        .event-item { display: flex; justify-content: space-between; padding: 15px; border-bottom: 1px solid #eee; align-items: center; }
+        .event-item:hover { background: #f9f9f9; }
+        .event-date { background: #003366; color: white; padding: 10px 15px; border-radius: 5px; text-align: center; min-width: 60px; }
+        .event-date span { display: block; font-size: 12px; }
+        .event-date strong { font-size: 20px; }
+        .event-info { flex: 1; margin-left: 20px; }
+        .event-info h4 { margin: 0 0 5px 0; color: #003366; }
+        .event-info p { margin: 0; color: #666; font-size: 14px; }
+        .event-type { padding: 5px 15px; border-radius: 20px; font-size: 12px; color: white; }
+        .type-followup { background: #ff6600; }
+        .type-new { background: #28a745; }
+        .type-promo { background: #9c27b0; }
+        .type-holiday { background: #f44336; }
+        
+        .contact-section { background: #003366; color: white; padding: 40px; margin-top: 30px; }
+        .contact-section h2 { margin: 0 0 20px 0; text-align: center; }
+        .contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; text-align: center; }
+        .contact-item h3 { color: #ffd700; margin: 0 0 10px 0; }
+        .contact-item p { margin: 0; font-size: 18px; }
+        
+        .footer { background: #333; color: #999; padding: 20px; text-align: center; font-size: 12px; }
+        
+        .phone-blink { font-size: 24px; font-weight: bold; animation: blink 1.5s infinite; display: inline-block; padding: 5px 15px; background: white; border-radius: 10px; color: #003366; }
+        @keyframes blink { 0%, 100% { color: #ff0000; } 33% { color: #ffffff; } 66% { color: #0000ff; } }
+        
+        @media (max-width: 768px) {
+            .days-header div { font-size: 12px; }
+            .day { min-height: 70px; padding: 5px; }
+            .event { font-size: 10px; padding: 3px; }
+            .contact-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>PSDEPOT Event Calendar</h1>
+            <p>Stay Connected with Your Customers</p>
+        </div>
+        
+        <div class="controls">
+            <button onclick="prevMonth()">&#8592; Previous</button>
+            <button id="monthSelect" onclick="toggleMonth()"></button>
+            <button onclick="nextMonth()">Next &#8594;</button>
+        </div>
+        
+        <div class="holiday-legend">
+            <div class="legend-item"><div class="legend-dot legend-followup"></div> Follow-up</div>
+            <div class="legend-item"><div class="legend-dot legend-new"></div> New Customer</div>
+            <div class="legend-item"><div class="legend-dot legend-promo"></div> Promotion</div>
+            <div class="legend-item"><div class="legend-dot legend-holiday"></div> Federal Holiday</div>
+        </div>
+        
+        <div class="calendar">
+            <h2 class="month-title" id="monthTitle"></h2>
+            
+            <div class="days-header">
+                <div>Sun</div>
+                <div>Mon</div>
+                <div>Tue</div>
+                <div>Wed</div>
+                <div>Thu</div>
+                <div>Fri</div>
+                <div>Sat</div>
+            </div>
+            
+            <div class="calendar-grid" id="calendarGrid"></div>
+        </div>
+        
+        <div class="event-list">
+            <h3>2026 Federal Holidays</h3>
+            <div class="federal-holidays">
+                <h4>🇺🇸 US Federal Holidays</h4>
+                <ul>
+                    <li><strong>Jan 1</strong> - New Year's Day</li>
+                    <li><strong>Jan 19</strong> - Martin Luther King Jr. Day</li>
+                    <li><strong>Feb 16</strong> - Presidents' Day</li>
+                    <li><strong>May 25</strong> - Memorial Day</li>
+                    <li><strong>Jun 19</strong> - Juneteenth</li>
+                    <li><strong>Jul 3</strong> - Independence Day (Observed)</li>
+                    <li><strong>Sep 7</strong> - Labor Day</li>
+                    <li><strong>Oct 12</strong> - Columbus Day / Indigenous Peoples' Day</li>
+                    <li><strong>Nov 11</strong> - Veterans Day</li>
+                    <li><strong>Nov 26</strong> - Thanksgiving Day</li>
+                    <li><strong>Nov 27</strong> - Day After Thanksgiving</li>
+                    <li><strong>Dec 25</strong> - Christmas Day</li>
+                </ul>
+            </div>
+            
+            <h3>Upcoming Outreach Events</h3>
+            <div id="eventList"></div>
+        </div>
+        
+        <div class="contact-section">
+            <h2>Need Help?</h2>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <h3>Call Us</h3>
+                    <p><span class="phone-blink">888-881-6834</span></p>
+                </div>
+                <div class="contact-item">
+                    <h3>Email</h3>
+                    <p><a href="mailto:info@psdepot.com" style="color: white;">info@psdepot.com</a></p>
+                </div>
+                <div class="contact-item">
+                    <h3>Website</h3>
+                    <p><a href="https://psdepot.com" style="color: white;">psdepot.com</a></p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Performance Supply Depot LLC | California | Nationwide</p>
+            <p>2026 Performance Supply Depot LLC. All rights reserved.</p>
+        </div>
+    </div>
+    
+    <script>
+        let currentDate = new Date();
+        let currentMonth = currentDate.getMonth();
+        let currentYear = currentDate.getFullYear();
+        
+        // Events database
+        const events = [
+            // Recurring monthly
+            { date: '1st-mon', type: 'followup', title: 'Monthly Newsletter', desc: 'Send monthly newsletter to all customers' },
+            { date: '2nd-mon', type: 'new', title: 'New Product Alert', desc: 'Email new arrivals to prospects' },
+            { date: '3rd-tue', type: 'followup', title: 'Follow-up Tuesday', desc: 'Contact customers with pending orders' },
+            { date: '4th-wed', type: 'promo', title: 'Mid-Month Promo', desc: 'Send special offers to inactive customers' },
+            
+            // US Federal Holidays 2026
+            { date: '2026-01-01', type: 'holiday', title: "New Year's Day", desc: 'Federal Holiday - Office Closed' },
+            { date: '2026-01-19', type: 'holiday', title: 'MLK Day', desc: "Martin Luther King Jr. Day - 3rd Monday of January" },
+            { date: '2026-02-16', type: 'holiday', title: "Presidents' Day", desc: "Washington's Birthday - 3rd Monday of February" },
+            { date: '2026-05-25', type: 'holiday', title: 'Memorial Day', desc: 'Last Monday of May' },
+            { date: '2026-06-19', type: 'holiday', title: 'Juneteenth', desc: 'Juneteenth National Independence Day' },
+            { date: '2026-07-03', type: 'holiday', title: 'Independence Day (Observed)', desc: 'Friday before July 4th' },
+            { date: '2026-09-07', type: 'holiday', title: 'Labor Day', desc: 'First Monday of September' },
+            { date: '2026-10-12', type: 'holiday', title: 'Columbus Day', desc: "Indigenous Peoples' Day - 2nd Monday of October" },
+            { date: '2026-11-11', type: 'holiday', title: 'Veterans Day', desc: 'Veterans Day' },
+            { date: '2026-11-26', type: 'holiday', title: 'Thanksgiving', desc: '4th Thursday of November' },
+            { date: '2026-11-27', type: 'holiday', title: 'Day After Thanksgiving', desc: 'Black Friday Shopping Day' },
+            { date: '2026-12-25', type: 'holiday', title: 'Christmas Day', desc: 'Federal Holiday' },
+            { date: '2026-12-31', type: 'holiday', title: "New Year's Eve", desc: 'End of Year Planning Day' },
+            
+            // Quarterly
+            { date: '2026-07-01', type: 'promo', title: 'Q3 Kickoff', desc: 'Quarterly promotion launch' },
+            { date: '2026-10-01', type: 'promo', title: 'Q4 Kickoff', desc: 'Holiday season promotion' },
+            
+            // Holiday Shopping Campaigns
+            { date: '2026-11-01', type: 'promo', title: 'Black Friday Prep', desc: 'Prepare holiday promotions' },
+            { date: '2026-12-01', type: 'promo', title: 'Holiday Sale Kickoff', desc: 'December promotion campaign' },
+            { date: '2026-12-15', type: 'promo', title: 'Last Minute Deals', desc: 'Last chance holiday offers' },
+            
+            // Contact campaigns
+            { date: '2026-07-15', type: 'followup', title: 'Mid-Year Check-in', desc: 'Reach out to all customers for reviews' },
+            { date: '2026-08-01', type: 'new', title: 'Back to Business', desc: 'August B2B outreach campaign' },
+            { date: '2026-09-01', type: 'promo', title: 'Fall Sale Launch', desc: 'Seasonal promotion campaign' },
+            { date: '2026-10-15', type: 'followup', title: 'Q4 Prep', desc: 'Prepare holiday season outreach' },
+            { date: '2026-11-01', type: 'new', title: 'Holiday Catalog', desc: 'Send holiday product catalog' },
+            { date: '2026-12-01', type: 'promo', title: 'Year End Clearance', desc: 'Year-end sale promotion' },
+        ];
+        
+        const months = ['January', 'February', 'March', 'April', 'May', 'June', 
+                        'July', 'August', 'September', 'October', 'November', 'December'];
+        
+        function getDaysInMonth(year, month) {
+            return new Date(year, month + 1, 0).getDate();
+        }
+        
+        function getFirstDayOfMonth(year, month) {
+            return new Date(year, month, 1).getDay();
+        }
+        
+        function getNthWeekday(year, month, weekday, n) {
+            let date = new Date(year, month, 1);
+            let count = 0;
+            while (count < n) {
+                if (date.getDay() === weekday) count++;
+                if (count < n) date.setDate(date.getDate() + 1);
+            }
+            return date.getDate();
+        }
+        
+        function getEventsForDate(date) {
+            const dateStr = date.toISOString().split('T')[0];
+            const day = date.getDay();
+            const dayOfMonth = date.getDate();
+            
+            let matching = events.filter(e => {
+                if (e.date === dateStr) return true;
+                if (e.date === `${dayOfMonth}-${day}`) return true;
+                
+                // Handle "1st-mon", "2nd-tue" patterns
+                if (e.date.includes('-mon') || e.date.includes('-tue') || 
+                    e.date.includes('-wed') || e.date.includes('-thu')) {
+                    const parts = e.date.split('-');
+                    const nth = parseInt(parts[0]);
+                    const targetDay = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'].indexOf(parts[1]);
+                    const expectedDate = getNthWeekday(currentYear, currentMonth, targetDay, nth);
+                    return dayOfMonth === expectedDate;
+                }
+                return false;
+            });
+            
+            return matching;
+        }
+        
+        function renderCalendar() {
+            document.getElementById('monthTitle').textContent = months[currentMonth] + ' ' + currentYear;
+            
+            const grid = document.getElementById('calendarGrid');
+            grid.innerHTML = '';
+            
+            const daysInMonth = getDaysInMonth(currentYear, currentMonth);
+            const firstDay = getFirstDayOfMonth(currentYear, currentMonth);
+            
+            const today = new Date();
+            const isCurrentMonth = today.getMonth() === currentMonth && today.getFullYear() === currentYear;
+            
+            // Empty cells before first day
+            for (let i = 0; i < firstDay; i++) {
+                const cell = document.createElement('div');
+                cell.className = 'day empty';
+                cell.innerHTML = '<div class="day-number"></div>';
+                grid.appendChild(cell);
+            }
+            
+            // Days of month
+            for (let day = 1; day <= daysInMonth; day++) {
+                const cell = document.createElement('div');
+                cell.className = 'day';
+                
+                if (isCurrentMonth && day === today.getDate()) {
+                    cell.className += ' today';
+                }
+                
+                const date = new Date(currentYear, currentMonth, day);
+                const dayEvents = getEventsForDate(date);
+                
+                cell.innerHTML = `<div class="day-number">${day}</div>`;
+                
+                dayEvents.forEach(e => {
+                    cell.innerHTML += `<div class="event ${e.type}" title="${e.desc}">${e.title}</div>`;
+                });
+                
+                grid.appendChild(cell);
+            }
+            
+            // Update event list
+            renderEventList();
+        }
+        
+        function renderEventList() {
+            const list = document.getElementById('eventList');
+            list.innerHTML = '';
+            
+            const today = new Date();
+            const endDate = new Date(currentYear, currentMonth + 2, 0);
+            
+            const upcomingEvents = events.filter(e => {
+                if (e.date.includes('-')) {
+                    const eventDate = new Date(e.date);
+                    return eventDate >= today && eventDate <= endDate;
+                }
+                return false;
+            }).sort((a, b) => new Date(a.date) - new Date(b.date));
+            
+            upcomingEvents.forEach(e => {
+                const date = new Date(e.date);
+                const typeLabels = {
+                    followup: 'Follow-up',
+                    new: 'New Customer',
+                    promo: 'Promotion',
+                    holiday: 'Holiday'
+                };
+                
+                list.innerHTML += `
+                    <div class="event-item">
+                        <div class="event-date">
+                            <span>${months[date.getMonth()].substring(0, 3)}</span>
+                            <strong>${date.getDate()}</strong>
+                        </div>
+                        <div class="event-info">
+                            <h4>${e.title}</h4>
+                            <p>${e.desc}</p>
+                        </div>
+                        <span class="event-type type-${e.type}">${typeLabels[e.type]}</span>
+                    </div>
+                `;
+            });
+        }
+        
+        function prevMonth() {
+            currentMonth--;
+            if (currentMonth < 0) {
+                currentMonth = 11;
+                currentYear--;
+            }
+            renderCalendar();
+        }
+        
+        function nextMonth() {
+            currentMonth++;
+            if (currentMonth > 11) {
+                currentMonth = 0;
+                currentYear++;
+            }
+            renderCalendar();
+        }
+        
+        function toggleMonth() {
+            // Quick jump to current month
+            currentMonth = new Date().getMonth();
+            currentYear = new Date().getFullYear();
+            renderCalendar();
+        }
+        
+        // Initial render
+        renderCalendar();
+    </script>
+</body>
+</html>

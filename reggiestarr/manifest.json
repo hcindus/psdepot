@@ -1,0 +1,8 @@
+{
+  "name": "ReggieStarr RS-79 POS",
+  "short_name": "ReggieStarr",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#1E3A8A",
+  "background_color": "#f1f5f9"
+}

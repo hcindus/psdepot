@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PSDepot Partner Leads Portal</title>
+    <meta name="description" content="Shared lead logging portal for Performance Supply Depot and Chipp">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, sans-serif;
+            background: linear-gradient(135deg, #0a0e14 0%, #1a1f29 50%, #0d1117 100%);
+            color: #e6edf3;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .top-bar {
+            width: 100%;
+            background: rgba(10, 14, 20, 0.95);
+            border-bottom: 2px solid;
+            border-image: linear-gradient(90deg, #bf0a30, #ffffff, #002868) 1;
+            padding: 14px 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            backdrop-filter: blur(20px);
+        }
+
+        .top-bar .brand {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #58a6ff;
+        }
+
+        .top-bar .partner {
+            font-size: 1.1rem;
+            color: #8b949e;
+        }
+
+        .top-bar .pipe {
+            color: #30363d;
+            font-size: 1.3rem;
+        }
+
+        .container {
+            max-width: 700px;
+            width: 100%;
+            padding: 30px 20px;
+            flex: 1;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 0 20px;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #58a6ff 0%, #3fb950 50%, #58a6ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            color: #8b949e;
+            font-size: 1.05rem;
+        }
+
+        /* Form Card */
+        .form-card {
+            background: linear-gradient(145deg, #161b22 0%, #1c2128 100%);
+            border: 1px solid #30363d;
+            border-radius: 20px;
+            padding: 35px 30px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 18px;
+        }
+
+        .form-row.full {
+            grid-template-columns: 1fr;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #c9d1d9;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .form-group label .required {
+            color: #f85149;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 11px 14px;
+            color: #e6edf3;
+            font-size: 0.95rem;
+            font-family: inherit;
+            transition: all 0.2s;
+            width: 100%;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #58a6ff;
+            box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.15);
+        }
+
+        .form-group select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%238b949e' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            padding-right: 35px;
+        }
+
+        .form-group select option {
+            background: #161b22;
+            color: #e6edf3;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        /* Source Toggle */
+        .source-toggle {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .source-btn {
+            flex: 1;
+            padding: 12px 20px;
+            border-radius: 10px;
+            border: 2px solid #30363d;
+            background: #0d1117;
+            color: #8b949e;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.25s;
+            text-align: center;
+            font-family: inherit;
+        }
+
+        .source-btn:hover {
+            border-color: #58a6ff;
+            color: #c9d1d9;
+        }
+
+        .source-btn.active-psd {
+            background: linear-gradient(135deg, #1a3a5c 0%, #0d2137 100%);
+            border-color: #58a6ff;
+            color: #58a6ff;
+            box-shadow: 0 0 20px rgba(88, 166, 255, 0.2);
+        }
+
+        .source-btn.active-chipp {
+            background: linear-gradient(135deg, #1a3a2c 0%, #0d2117 100%);
+            border-color: #3fb950;
+            color: #3fb950;
+            box-shadow: 0 0 20px rgba(63, 185, 80, 0.2);
+        }
+
+        .source-btn.active-witzend {
+            background: linear-gradient(135deg, #3a1a2e 0%, #210d1a 100%);
+            border-color: #f778ba;
+            color: #f778ba;
+            box-shadow: 0 0 20px rgba(247, 120, 186, 0.2);
+        }
+
+        /* Product Cards (alternative to dropdown) */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 10px;
+        }
+
+        .product-card {
+            background: #0d1117;
+            border: 2px solid #21262d;
+            border-radius: 10px;
+            padding: 14px 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #8b949e;
+        }
+
+        .product-card:hover {
+            border-color: #30363d;
+            color: #c9d1d9;
+        }
+
+        .product-card.selected {
+            border-color: #58a6ff;
+            color: #58a6ff;
+            background: rgba(88, 166, 255, 0.08);
+        }
+
+        .product-card .icon {
+            font-size: 1.6rem;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        /* Submit */
+        .submit-row {
+            margin-top: 28px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .btn-submit {
+            flex: 1;
+            padding: 14px 24px;
+            border-radius: 12px;
+            border: none;
+            background: linear-gradient(135deg, #238636 0%, #2ea043 100%);
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.05rem;
+            cursor: pointer;
+            transition: all 0.25s;
+            font-family: inherit;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(35, 134, 54, 0.4);
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn-export {
+            padding: 14px 20px;
+            border-radius: 12px;
+            border: 1px solid #30363d;
+            background: #21262d;
+            color: #8b949e;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+            white-space: nowrap;
+        }
+
+        .btn-export:hover {
+            border-color: #58a6ff;
+            color: #c9d1d9;
+        }
+
+        /* Success Message */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #238636;
+            color: #fff;
+            padding: 16px 22px;
+            border-radius: 12px;
+            font-weight: 600;
+            z-index: 9999;
+            transform: translateX(120%);
+            transition: transform 0.3s ease;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        .toast.error {
+            background: #da3633;
+        }
+
+        /* Recent Leads */
+        .recent-section {
+            margin-top: 30px;
+        }
+
+        .recent-section h3 {
+            color: #8b949e;
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .lead-item {
+            background: #161b22;
+            border: 1px solid #21262d;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+
+        .lead-item .lead-biz {
+            font-weight: 600;
+            color: #c9d1d9;
+        }
+
+        .lead-item .lead-product {
+            color: #58a6ff;
+        }
+
+        .lead-item .lead-source {
+            font-size: 0.75rem;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        .lead-source.psd {
+            background: rgba(88, 166, 255, 0.15);
+            color: #58a6ff;
+        }
+
+        .lead-source.chipp {
+            background: rgba(63, 185, 80, 0.15);
+            color: #3fb950;
+        }
+
+        .lead-source.witzend {
+            background: rgba(247, 120, 186, 0.15);
+            color: #f778ba;
+        }
+
+        .lead-item .lead-time {
+            color: #484f58;
+            font-size: 0.8rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #484f58;
+            font-size: 0.85rem;
+        }
+
+        footer a {
+            color: #58a6ff;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: #3fb950;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 16px 12px;
+            }
+            .form-card {
+                padding: 24px 16px;
+                border-radius: 14px;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            .top-bar {
+                flex-direction: column;
+                gap: 4px;
+                padding: 10px 14px;
+                text-align: center;
+            }
+            .top-bar .brand { font-size: 1.05rem; }
+            .top-bar .partner { font-size: 0.9rem; }
+            .top-bar .pipe { display: none; }
+            header { padding: 20px 0 12px; }
+            header h1 { font-size: 1.5rem; }
+            header p { font-size: 0.85rem; padding: 0 8px; }
+            .source-btn { padding: 10px 12px; font-size: 0.82rem; }
+            .product-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 6px;
+            }
+            .product-card {
+                padding: 10px 8px;
+                font-size: 0.78rem;
+            }
+            .product-card .icon { font-size: 1.3rem; margin-bottom: 4px; }
+            .submit-row {
+                flex-direction: column;
+                gap: 8px;
+            }
+            .btn-submit { padding: 14px; font-size: 1rem; }
+            .btn-export { padding: 12px; text-align: center; }
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                padding: 12px;
+                font-size: 16px; /* prevent iOS zoom */
+            }
+            .toast {
+                top: 0; right: 0; left: 0;
+                border-radius: 0 0 12px 12px;
+                justify-content: center;
+            }
+            footer { font-size: 0.75rem; padding: 16px 8px; }
+            footer a { display: inline-block; margin: 2px 4px; }
+            .lead-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px;
+                font-size: 0.82rem;
+            }
+            .lead-item > div:last-child {
+                flex-wrap: wrap;
+                gap: 4px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+            .source-toggle {
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <span class="brand">🏪 Performance Supply Depot</span>
+        <span class="pipe">×</span>
+        <span class="partner">🤖 Chipp</span>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>Lead Portal</h1>
+            <p>Chipp · WitzEnd · Capton · TST Impresso · CRS-USA · CAS · Heartland · MS Cashdrawer · Domtar · ACM | 20% both ways</p>
+        </header>
+
+        <div class="form-card">
+            <!-- Direction -->
+            <div class="form-group" style="margin-bottom:8px;">
+                <label>Who's This Lead For?</label>
+            </div>
+            <div class="source-toggle">
+                <button type="button" class="source-btn active-psd" id="destPsd" onclick="setDestination('psd')">
+                    🏪 Send to PSDepot<br><small>Restaurant/bar supply</small>
+                </button>
+                <button type="button" class="source-btn" id="destChipp" onclick="setDestination('chipp')">
+                    💳 Send to Chipp<br><small>Credit card processing</small>
+                </button>
+                <button type="button" class="source-btn" id="destWitzend" onclick="setDestination('witzend')">
+                    🍹 Send to WitzEnd<br><small>Mocktails / beverages</small>
+                </button>
+            </div>
+
+            <!-- Source Toggle -->
+            <div class="form-group" style="margin-bottom:8px;">
+                <label>Logged By</label>
+            </div>
+            <div class="source-toggle">
+                <button type="button" class="source-btn active-psd" id="srcPsd" onclick="setSource('psd')">
+                    🏪 PSDepot Team
+                </button>
+                <button type="button" class="source-btn" id="srcChipp" onclick="setSource('chipp')">
+                    🤖 Chipp Team
+                </button>
+                <button type="button" class="source-btn" id="srcWitzend" onclick="setSource('witzend')">
+                    🍹 WitzEnd Team
+                </button>
+            </div>
+
+            <!-- Customer Info -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label><span class="required">*</span> Business Name</label>
+                    <input type="text" id="businessName" placeholder="e.g. The Grand Hotel" required>
+                </div>
+                <div class="form-group">
+                    <label><span class="required">*</span> Contact Name</label>
+                    <input type="text" id="contactName" placeholder="e.g. Jane Smith" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label><span class="required">*</span> Email</label>
+                    <input type="email" id="email" placeholder="jane@grandhotel.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="tel" id="phone" placeholder="(555) 123-4567">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Street Address</label>
+                    <input type="text" id="address" placeholder="e.g. 3068 Claremont Ave">
+                </div>
+                <div class="form-group">
+                    <label>City</label>
+                    <input type="text" id="city" placeholder="e.g. Berkeley">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>State</label>
+                    <select id="state">
+                        <option value="">Select...</option>
+                        <option value="CA">California</option>
+                        <option value="NY">New York</option>
+                        <option value="TX">Texas</option>
+                        <option value="FL">Florida</option>
+                        <option value="NV">Nevada</option>
+                        <option value="AZ">Arizona</option>
+                        <option value="OR">Oregon</option>
+                        <option value="WA">Washington</option>
+                        <option value="IL">Illinois</option>
+                        <option value="GA">Georgia</option>
+                        <option value="CO">Colorado</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>ZIP</label>
+                    <input type="text" id="zip" placeholder="e.g. 94705">
+                </div>
+            </div>
+
+            <!-- Product Interest -->
+            <div class="form-group" style="margin-bottom:8px;">
+                <label><span class="required">*</span> Product / Service Interest</label>
+            </div>
+            <div class="product-grid" id="productGrid">
+                <!-- Filled dynamically by JS -->
+            </div>
+
+            <!-- Notes -->
+            <div class="form-row full" style="margin-top:18px;">
+                <div class="form-group">
+                    <label>Notes / Details</label>
+                    <textarea id="notes" placeholder="What's the customer's situation? Any specific needs or urgency?"></textarea>
+                </div>
+            </div>
+
+            <!-- Submit -->
+            <div class="submit-row">
+                <button type="button" class="btn-submit" onclick="submitLead()">
+                    📋 Log Lead
+                </button>
+                <button type="button" class="btn-export" onclick="exportLeads()" title="Download all leads as JSON">
+                    📥 Export
+                </button>
+            </div>
+        </div>
+
+        <!-- Recent Leads -->
+        <div class="recent-section" id="recentSection" style="display:none;">
+            <h3>📋 Recent Leads (<span id="leadCount">0</span>)</h3>
+            <div id="recentLeads"></div>
+        </div>
+    </div>
+
+    <footer>
+        <a href="/leads-dashboard/">📊 Dashboard</a> &nbsp;·&nbsp;
+        <a href="https://psdepot.com" target="_blank">psdepot.com</a> &nbsp;·&nbsp;
+        <a href="mailto:info@psdepot.com">info@psdepot.com</a> &nbsp;·&nbsp;
+        <a href="tel:888-881-6834">888-881-6834</a>
+    </footer>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        const LEAD_KEY = 'psdepot_chipp_leads';
+        const API_BASE = '/api/leads';
+        let allLeads = [];
+        let selectedProduct = null;
+        let leadSource = 'psd';
+        let leadDestination = 'psd';
+
+        const PRODUCTS = {
+            psd: [
+                { icon: '🥃', label: 'Capton Pour Control' },
+                { icon: '📄', label: 'TST Impresso (Paper)' },
+                { icon: '🖥️', label: 'NRS POS Systems' },
+                
+                { icon: '⚖️', label: 'Commercial Scales' },
+                { icon: '📦', label: 'Thermal Paper & Supplies' },
+                { icon: '🏷️', label: 'Heartland Labels' },
+                { icon: '🔥', label: 'Kitchen Equipment' },
+                { icon: '🏪', label: 'CRS-USA (Sam4s Registers)' },
+                { icon: '⚖️', label: 'CAS (Scales & Labels)' },
+                { icon: '💵', label: 'MS Cashdrawer' },
+                { icon: '📄', label: 'Domtar' },
+                { icon: '🎀', label: 'ACM Technologies (Ribbons & Toner)' },
+                { icon: '☁️', label: 'Cloud Reporting' },
+                { icon: '🔧', label: 'Repair & Support' },
+                { icon: '❓', label: 'Multiple / Not Sure' }
+            ],
+            chipp: [
+                { icon: '💳', label: 'Credit Card Processing' },
+                { icon: '🏧', label: 'POS Financing' },
+                { icon: '🔄', label: 'Payment Gateway Integration' },
+                { icon: '📊', label: 'Merchant Services' },
+                { icon: '🏦', label: 'Business Banking' },
+                { icon: '🔐', label: 'Fraud Protection' },
+                { icon: '📱', label: 'Mobile Payments' },
+                { icon: '❓', label: 'Multiple / Not Sure' }
+            ],
+            witzend: [
+                { icon: '🍹', label: 'Mocktails (Wholesale)' },
+                { icon: '🍊', label: 'Hugo Spritz' },
+                { icon: '🍍', label: 'The Maitai' },
+                { icon: '🫚', label: 'The Mule' },
+                { icon: '🌵', label: 'The Paloma' },
+                { icon: '💧', label: 'Ranch Water' },
+                { icon: '🌊', label: 'Sea Breeze' },
+                { icon: '📦', label: 'Variety 12-Pack' },
+                { icon: '👕', label: 'Merch / Apparel' },
+                { icon: '❓', label: 'Multiple / Not Sure' }
+            ]
+        };
+
+        function setDestination(dest) {
+            leadDestination = dest;
+            selectedProduct = null;
+            document.getElementById('destPsd').className = 'source-btn' + (dest === 'psd' ? ' active-psd' : '');
+            document.getElementById('destChipp').className = 'source-btn' + (dest === 'chipp' ? ' active-chipp' : '');
+            document.getElementById('destWitzend').className = 'source-btn' + (dest === 'witzend' ? ' active-witzend' : '');
+            renderProducts();
+        }
+
+        function setSource(src) {
+            leadSource = src;
+            document.getElementById('srcPsd').className = 'source-btn' + (src === 'psd' ? ' active-psd' : '');
+            document.getElementById('srcChipp').className = 'source-btn' + (src === 'chipp' ? ' active-chipp' : '');
+            document.getElementById('srcWitzend').className = 'source-btn' + (src === 'witzend' ? ' active-witzend' : '');
+        }
+
+        function renderProducts() {
+            const grid = document.getElementById('productGrid');
+            const items = PRODUCTS[leadDestination] || PRODUCTS['psd'];
+            grid.innerHTML = items.map(p =>
+                `<div class="product-card" data-product="${escAttr(p.label)}" onclick="selectProduct(this)">
+                    <span class="icon">${p.icon}</span>${p.label}
+                </div>`
+            ).join('');
+        }
+
+        function escAttr(s) { return s.replace(/"/g, '&quot;').replace(/</g, '&lt;'); }
+
+        function sourceLabel(s) {
+            if (s === 'chipp') return 'by Chipp';
+            if (s === 'witzend') return 'by WitzEnd';
+            return 'by PSD';
+        }
+        function destLabel(d) {
+            if (d === 'chipp') return 'Chipp';
+            if (d === 'witzend') return 'WitzEnd';
+            return 'PSD';
+        }
+
+        function selectProduct(el) {
+            document.querySelectorAll('.product-card').forEach(c => c.classList.remove('selected'));
+            el.classList.add('selected');
+            selectedProduct = el.dataset.product;
+        }
+
+        function showToast(msg, isError) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.className = 'toast ' + (isError ? 'error' : '') + ' show';
+            setTimeout(() => toast.classList.remove('show'), 3500);
+        }
+
+        async function getLeads() {
+            // Primary: fetch from server API (shared across devices)
+            try {
+                const res = await fetch(API_BASE);
+                if (res.ok) {
+                    const data = await res.json();
+                    allLeads = data;
+                    // Also sync to localStorage as backup
+                    localStorage.setItem(LEAD_KEY, JSON.stringify(data));
+                    return data;
+                }
+            } catch(e) {}
+            // Fallback: localStorage
+            try {
+                return JSON.parse(localStorage.getItem(LEAD_KEY) || '[]');
+            } catch(e) {
+                return [];
+            }
+        }
+
+        async function saveLeads(leads) {
+            allLeads = leads;
+            // Primary: sync to server
+            try {
+                await fetch(API_BASE + '/bulk', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(leads)
+                });
+            } catch(e) {}
+            // Backup: localStorage
+            localStorage.setItem(LEAD_KEY, JSON.stringify(leads));
+            renderRecent();
+        }
+
+        async function submitLead() {
+            const biz = document.getElementById('businessName').value.trim();
+            const contact = document.getElementById('contactName').value.trim();
+            const email = document.getElementById('email').value.trim();
+
+            if (!biz || !contact || !email) {
+                showToast('⚠️ Please fill in Business Name, Contact Name, and Email.', true);
+                return;
+            }
+
+            if (!selectedProduct) {
+                showToast('⚠️ Please select a product.', true);
+                return;
+            }
+
+            if (!email.includes('@') || !email.includes('.')) {
+                showToast('⚠️ Please enter a valid email address.', true);
+                return;
+            }
+
+            const lead = {
+                id: 'lead_' + Date.now(),
+                source: leadSource,
+                destination: leadDestination,
+                businessName: biz,
+                contactName: contact,
+                email: email,
+                phone: document.getElementById('phone').value.trim(),
+                city: document.getElementById('city').value.trim(),
+                state: document.getElementById('state').value,
+                address: document.getElementById('address').value.trim(),
+                zip: document.getElementById('zip').value.trim(),
+                product: selectedProduct,
+                notes: document.getElementById('notes').value.trim(),
+                createdAt: new Date().toISOString(),
+                status: 'open'
+            };
+
+            // Primary: POST to server API (shared across devices)
+            let savedToServer = false;
+            try {
+                const res = await fetch(API_BASE, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(lead)
+                });
+                if (res.ok) savedToServer = true;
+            } catch(e) {}
+
+            // Fallback: save to localStorage
+            if (!savedToServer) {
+                const leads = JSON.parse(localStorage.getItem(LEAD_KEY) || '[]');
+                leads.unshift(lead);
+                localStorage.setItem(LEAD_KEY, JSON.stringify(leads));
+            }
+
+            // Reload from server to get latest
+            loadLeads();
+
+            // Clear form
+            document.getElementById('businessName').value = '';
+            document.getElementById('contactName').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('phone').value = '';
+            document.getElementById('city').value = '';
+            document.getElementById('state').value = '';
+            document.getElementById('address').value = '';
+            document.getElementById('zip').value = '';
+            document.getElementById('notes').value = '';
+            document.querySelectorAll('.product-card').forEach(c => c.classList.remove('selected'));
+            selectedProduct = null;
+
+            const destLabel = leadDestination === 'psd' ? '→ PSDepot' : leadDestination === 'chipp' ? '→ Chipp' : '→ WitzEnd';
+            showToast('✅ Lead logged! ' + biz + ' — ' + lead.product + ' ' + destLabel);
+        }
+
+        async function exportLeads() {
+            const leads = await getLeads();
+            if (leads.length === 0) {
+                showToast('⚠️ No leads to export yet.', true);
+                return;
+            }
+
+            const blob = new Blob([JSON.stringify(leads, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'psdepot_chipp_leads_' + new Date().toISOString().slice(0,10) + '.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showToast('📥 Exported ' + leads.length + ' leads.');
+        }
+
+        async function renderRecent() {
+            const leads = await getLeads();
+            const section = document.getElementById('recentSection');
+            const container = document.getElementById('recentLeads');
+            const count = document.getElementById('leadCount');
+
+            if (leads.length === 0) {
+                section.style.display = 'none';
+                return;
+            }
+
+            section.style.display = 'block';
+            count.textContent = leads.length;
+
+            container.innerHTML = leads.slice(0, 10).map(l => {
+                const time = new Date(l.createdAt);
+                const timeStr = time.toLocaleDateString() + ' ' + time.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+                return `
+                    <div class="lead-item">
+                        <div>
+                            <span class="lead-biz">${esc(l.businessName)}</span>
+                            &nbsp;·&nbsp;
+                            <span class="lead-product">${esc(l.product)}</span>
+                        </div>
+                        <div style="display:flex;align-items:center;gap:10px;">
+                            <span class="lead-source ${l.source}">${sourceLabel(l.source)}</span>
+                            <span class="lead-source ${l.destination || 'psd'}" style="margin-left:-4px;">→ ${destLabel(l.destination || 'psd')}</span>
+                            <span class="lead-time">${timeStr}</span>
+                        </div>
+                    </div>`;
+            }).join('');
+
+            if (leads.length > 10) {
+                container.innerHTML += `<div style="color:#484f58;text-align:center;padding:8px;">+ ${leads.length - 10} more (export to see all)</div>`;
+            }
+        }
+
+        function esc(s) {
+            const d = document.createElement('div');
+            d.textContent = s;
+            return d.innerHTML;
+        }
+
+        // Init — load from server, fall back to localStorage
+        async function loadLeads() {
+            await getLeads();
+            renderRecent();
+        }
+        renderProducts();
+        loadLeads();
+    </script>
+</body>
+</html>

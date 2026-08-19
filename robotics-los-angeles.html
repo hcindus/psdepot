@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Robotics Los Angeles | AI Delivery Robots</title>
+    <meta name="description" content="AI delivery robots for Los Angeles restaurants. OrionStar Lucki autonomous serving robot. San Gabriel Valley, Koreatown, DTLA delivery. Same-day demo available.">
+    <link rel="canonical" href="https://psdepot.com/robotics-los-angeles.html">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    
+    <meta name="geo.region" content="US-CA">
+    <meta name="geo.placename" content="Los Angeles, California">
+    <meta name="geo.position" content="34.0522;-118.2437">
+    <meta name="ICBM" content="34.0522, -118.2437">
+    
+    <link rel="alternate" hreflang="en" href="https://psdepot.com/robotics-los-angeles.html">
+    <link rel="alternate" hreflang="zh" href="https://psdepot.com/robotics-los-angeles-chinese.html">
+    <link rel="alternate" hreflang="es" href="https://psdepot.com/robotics-los-angeles-spanish.html">
+    
+    <style>
+        :root {
+            --primary: #0A1A2F;
+            --primary-light: #1a365d;
+            --accent: #FF7A00;
+            --accent-hover: #e66e00;
+            --cyan: #00E0FF;
+            --bg: #f7fafc;
+            --card: #ffffff;
+            --text: #2d3748;
+            --text-muted: #718096;
+            --border: #e2e8f0;
+            --success: #48bb78;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo { 
+            font-size: 1.5rem; 
+            font-weight: 700; 
+            color: white;
+            text-decoration: none;
+        }
+        .logo span { color: var(--accent); }
+
+        .header-nav {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .header-nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: opacity 0.2s;
+        }
+
+        .header-nav a:hover { opacity: 0.8; }
+
+        .cart-icon {
+            background: var(--accent);
+            color: white !important;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255,122,0,0.2);
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .hero h1 span { color: var(--accent); }
+        
+        .hero p {
+            font-size: 1.25rem;
+            color: #a0aec0;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+            border: none;
+        }
+        
+        .btn-primary:hover {
+            background: #9b2c2c;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: white;
+        }
+        
+        .local-bar {
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+        }
+        
+        .local-bar-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .local-info {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .local-info-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        
+        .local-info-item strong {
+            color: var(--primary);
+        }
+        
+        .language-switcher {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .language-switcher a {
+            padding: 0.35rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            text-decoration: none;
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+            transition: all 0.2s;
+        }
+        
+        .language-switcher a:hover,
+        .language-switcher a.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+        
+        .main-content {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content { grid-template-columns: 1fr; }
+        }
+        
+        .product-card {
+            background: var(--card);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            border: 1px solid var(--border);
+        }
+        
+        .product-image {
+            height: 300px;
+            background: linear-gradient(135deg, #f7fafc 0%, #e2e8f0 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+        }
+        
+        .product-details {
+            padding: 2rem;
+        }
+        
+        .product-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, #e6fffa 0%, #b2f5ea 100%);
+            color: #234e52;
+            padding: 0.35rem 0.85rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+        
+        .product-details h2 {
+            font-size: 1.75rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .product-price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+        
+        .product-features {
+            list-style: none;
+            margin: 1rem 0;
+        }
+        
+        .product-features li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .product-features li::before {
+            content: "✓";
+            color: var(--success);
+            font-weight: bold;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .sidebar-card {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+        }
+        
+        .sidebar-card h3 {
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .sidebar-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+        
+        .neighborhood-list {
+            list-style: none;
+        }
+        
+        .neighborhood-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.9rem;
+        }
+        
+        .neighborhood-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .neighborhood-list li strong {
+            color: var(--primary);
+        }
+        
+        .neighborhoods {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+        
+        .neighborhoods h2 {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .neighborhoods > p {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+        
+        .neighborhoods-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .neighborhood-card {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid var(--border);
+            transition: all 0.2s;
+        }
+        
+        .neighborhood-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transform: translateY(-4px);
+        }
+        
+        .neighborhood-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .neighborhood-name {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.25rem;
+        }
+        
+        .neighborhood-desc {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        
+        .testimonials {
+            background: var(--primary);
+            color: white;
+            padding: 4rem 2rem;
+            margin: 4rem 0;
+        }
+        
+        .testimonials-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .testimonials h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .testimonials h2 span { color: var(--accent); }
+        
+        .testimonial {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .testimonial-text {
+            font-size: 1.25rem;
+            font-style: italic;
+            margin-bottom: 1rem;
+            color: #e2e8f0;
+        }
+        
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--accent);
+        }
+        
+        .testimonial-location {
+            font-size: 0.875rem;
+            color: #a0aec0;
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin: 4rem 0 0;
+        }
+        
+        .cta-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-section h2 span { color: var(--accent); }
+        
+        .cta-section p {
+            font-size: 1.25rem;
+            color: #a0aec0;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        footer {
+            background: #050d17;
+            color: white;
+            padding: 3rem 2rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-section h3 {
+            color: var(--accent);
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-section p, .footer-section a {
+            color: #a0aec0;
+            text-decoration: none;
+            line-height: 1.8;
+        }
+        
+        .footer-section a:hover { color: white; }
+        
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 2rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid #2d3748;
+            text-align: center;
+            color: #718096;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="logo">Performance<span>Supply</span>Depot</a>
+            <nav class="header-nav">
+                <a href="/robotics-automation.html">Robotics</a>
+                <a href="/contact.html">Contact</a>
+                <a href="/cart.html" class="cart-icon">🛒 Cart</a>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="hero-badge">📍 Greater Los Angeles Area</div>
+        <h1>AI Robots for <span>LA Restaurants</span></h1>
+        <p>Transform your service with OrionStar Lucki. Same-day demos available in San Gabriel Valley, Koreatown, DTLA, and West LA.</p>
+        
+        <div class="hero-buttons">
+            <a href="tel:888-881-6834" class="btn btn-primary">📞 (888) 881-6834</a>
+            <a href="/products/orionstar-lucki.html" class="btn btn-secondary">🤖 View Robot</a>
+        </div>
+    </section>
+    
+    <div class="local-bar">
+        <div class="local-bar-content">
+            <div class="local-info">
+                <div class="local-info-item">
+                    🚚 <strong>Same-Day Delivery:</strong> LA Metro Area
+                </div>
+                <div class="local-info-item">
+                    🏢 <strong>Local Demo:</strong> Available
+                </div>
+                <div class="local-info-item">
+                    💬 <strong>Support:</strong> English, 中文, Español, 한국어
+                </div>
+            </div>
+            <div class="language-switcher">
+                <a href="/robotics-los-angeles.html" class="active">English</a>
+                <a href="/robotics-los-angeles-chinese.html">中文</a>
+                <a href="/robotics-los-angeles-spanish.html">Español</a>
+            </div>
+        </div>
+    </div>
+    
+    <main class="main-content">
+        <div class="product-card">
+            <div class="product-image">🤖</div>
+            <div class="product-details">
+                <span class="product-tag">In Stock - 14 Units</span>
+                <h2>OrionStar Lucki AI Delivery Robot</h2>
+                <div class="product-price">$3,330.00</div>
+                <p>The perfect solution for LA's diverse restaurant scene. From bustling dim sum houses in Alhambra to trendy cafes in Silver Lake, Lucki delivers consistent, reliable service.</p>
+                
+                <ul class="product-features">
+                    <li>Navigates LA's crowded dining rooms and tight spaces</li>
+                    <li>31 languages including Cantonese, Mandarin, Spanish, Korean</li>
+                    <li>12-15 hour battery - covers lunch rush through late night</li>
+                    <li>4G LTE works even when WiFi is congested</li>
+                    <li>Free delivery within LA County</li>
+                </ul>
+                
+                <div class="cta-buttons">
+                    <a href="/products/orionstar-lucki.html" class="btn btn-primary">View Full Details</a>
+                    <a href="/contact.html?product=lucki&city=la" class="btn btn-secondary" style="color: var(--primary); border-color: var(--border);">Request LA Demo</a>
+                </div>
+            </div>
+        </div>
+        
+        <aside class="sidebar">
+            <div class="sidebar-card">
+                <h3>🚚 LA County Delivery</h3>
+                <p><strong>Free same-day delivery</strong> to Los Angeles, Pasadena, Glendale, Santa Monica, and surrounding areas.</p>
+                <p>Professional installation and training included.</p>
+            </div>
+            
+            <div class="sidebar-card">
+                <h3>🏢 Neighborhoods We Serve</h3>
+                <ul class="neighborhood-list">
+                    <li><strong>San Gabriel Valley</strong> - Asian cuisine hub</li>
+                    <li><strong>Koreatown</strong> - KBBQ restaurants</li>
+                    <li><strong>Downtown LA</strong> - Business district dining</li>
+                    <li><strong>West LA</strong> - Hotels & fine dining</li>
+                    <li><strong>Silver Lake</strong> - Trendy eateries</li>
+                    <li><strong>Hollywood</strong> - Tourist venues</li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-card">
+                <h3>📞 Contact Local Office</h3>
+                <p>Phone: (888) 881-6834</p>
+                <p>Email: la@psdepot.com</p>
+                <p>Hours: Mon-Fri 8AM-6PM PST</p>
+            </div>
+        </aside>
+    </main>
+    
+    <section class="neighborhoods">
+        <h2>Serving All LA Neighborhoods</h2>
+        <p>From the SGV to the Westside, we bring robotics to every corner of the city</p>
+        
+        <div class="neighborhoods-grid">
+            <div class="neighborhood-card">
+                <div class="neighborhood-icon">🥟</div>
+                <div class="neighborhood-name">San Gabriel Valley</div>
+                <div class="neighborhood-desc">Dim sum & Chinese cuisine</div>
+            </div>
+            <div class="neighborhood-card">
+                <div class="neighborhood-icon">🥩</div>
+                <div class="neighborhood-name">Koreatown</div>
+                <div class="neighborhood-desc">KBBQ & late night</div>
+            </div>
+            <div class="neighborhood-card">
+                <div class="neighborhood-icon">🏙️</div>
+                <div class="neighborhood-name">Downtown LA</div>
+                <div class="neighborhood-desc">Business district</div>
+            </div>
+            <div class="neighborhood-card">
+                <div class="neighborhood-icon">🌊</div>
+                <div class="neighborhood-name">Santa Monica</div>
+                <div class="neighborhood-desc">Beachside dining</div>
+            </div>
+            <div class="neighborhood-card">
+                <div class="neighborhood-icon">🎬</div>
+                <div class="neighborhood-name">Hollywood</div>
+                <div class="neighborhood-desc">Tourist venues</div>
+            </div>
+            <div class="neighborhood-card">
+                <div class="neighborhood-icon">🎨</div>
+                <div class="neighborhood-name">Silver Lake</div>
+                <div class="neighborhood-desc">Trendy cafes</div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="testimonials">
+        <div class="testimonials-content">
+            <h2>What LA Restaurants Say</h2>
+            
+            <div class="testimonial">
+                <p class="testimonial-text">"Lucki has transformed our dinner rush. Our customers love taking photos with the robot, and our servers can focus on hospitality instead of running plates."</p>
+                <p class="testimonial-author">— Restaurant Owner</p>
+                <p class="testimonial-location">Alhambra, CA</p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="cta-section">
+        <h2>Ready to <span>Innovate</span>?</h2>
+        <p>Schedule a demo at your LA location. We'll bring Lucki to you.</p>
+        <div class="hero-buttons">
+            <a href="tel:888-881-6834" class="btn btn-primary">📞 Call (888) 881-6834</a>
+            <a href="/contact.html?demo=la" class="btn btn-secondary">📅 Schedule Demo</a>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Los Angeles Office</h3>
+                <p>Serving LA County including Pasadena, Glendale, Santa Monica, and surrounding areas.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>📞 <a href="tel:888-881-6834">(888) 881-6834</a></p>
+                <p>✉️ <a href="mailto:la@psdepot.com">la@psdepot.com</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Languages</h3>
+                <p><a href="/robotics-los-angeles.html">🇺🇸 English</a></p>
+                <p><a href="/robotics-los-angeles-chinese.html">🇨🇳 中文</a></p>
+                <p><a href="/robotics-los-angeles-spanish.html">🇪🇸 Español</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Performance Supply Depot LLC. Serving Los Angeles since 2005.</p>
+        </div>
+    </footer>
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Performance Supply Depot - Los Angeles",
+      "image": "https://psdepot.com/favicon.svg",
+      "url": "https://psdepot.com/robotics-los-angeles.html",
+      "telephone": "+1-888-881-6834",
+      "email": "la@psdepot.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Los Angeles",
+        "addressRegion": "CA",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "34.0522",
+        "longitude": "-118.2437"
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "Los Angeles"
+      }
+    }
+    </script>
+
+<footer style="background:#0A1A2F;color:#fff;padding:1.2rem 2rem;margin-top:2rem;font-size:14px;">
+  <a href="/locations.html" style="color:#FF7A00;text-decoration:none;font-weight:600;">📍 View all service areas →</a>
+</footer>
+</body>
+</html>

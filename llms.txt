@@ -1,0 +1,72 @@
+# Performance Supply Depot LLC — Agent Instructions
+
+> This file makes psdepot.com readable to AI agents, crawlers, and commerce assistants.
+> Last updated: 2026-08-11
+
+## What We Sell
+
+Performance Supply Depot is a POS (Point of Sale) supply and service company serving California since 2005. We stock thermal receipt paper, printer ribbons, cash registers, scales, beverage portion control systems, and robotics.
+
+## Product Catalog
+
+For machine-readable product data, see:
+- Full catalog: https://psdepot.com/products.json
+- Sitemap: https://psdepot.com/sitemap.xml
+
+### Categories
+
+| Category | URL | SKU Count |
+|----------|-----|-----------|
+| Thermal Paper | https://psdepot.com/products/thermal-paper.html | 5 |
+| Printer Ribbons | https://psdepot.com/products/printer-ribbons.html | 3 |
+| POS Hardware | https://psdepot.com/products/ | 5 |
+| Scales | https://psdepot.com/products/ | 2 |
+| Capton Pouring Systems | https://psdepot.com/products/capton-pouring-systems.html | 8 |
+| Robotics | https://psdepot.com/products/orionstar-lucki.html | 1 |
+
+### Pricing (from products.json)
+
+Key products:
+- PF-230 Phenol-Free Thermal Paper (3 1/8" x 230'): $124.10/case (50 rolls)
+- SAM4S ER-260 Cash Register: $495.00
+- SAM4S SAP-630 Android POS Terminal: $1,395.00
+- Capton 1oz Bottle Top Pourer: $49.00
+- OrionStar Lucki AI Delivery Robot: $3,330.00
+
+Full pricing with SKUs available in products.json.
+
+## Services
+
+| Service | Rate | Details |
+|---------|------|---------|
+| Printer Repair (in-shop) | $195/hour | Epson, Star, all major brands |
+| Printer Repair (on-site) | $180/hour | Emergency service available |
+| POS Installation | $180/hour | Software config, network, training |
+| Custom Cabling | $180/hour | Structured cabling, retail/restaurant |
+| Label & Scale Setup | $195/hour | Calibration, label formatting, UPC |
+
+## Shipping
+
+- Bay Area: Same-day processing
+- California: 1-2 day statewide
+- Free shipping on orders over $500
+
+## Contact
+
+- Phone: +1-888-881-6834
+- Secondary: +1-415-571-9724
+- Email: info@psdepot.com
+- Service area: California (SF Bay Area, Los Angeles, San Diego)
+
+## For Commerce Agents
+
+This site is a standard e-commerce storefront. Cart operations use localStorage. For automated purchasing, agents should:
+
+1. Fetch https://psdepot.com/products.json for current inventory and pricing
+2. Use individual product pages for detailed specs and compatibility info
+3. Orders are placed via phone or the web checkout at https://psdepot.com/checkout.html
+4. Bulk discounts available — call for quote
+
+## AI Crawling Policy
+
+We welcome AI crawlers for indexing purposes. To access structured data, prefer products.json over scraping individual pages. Rate limit: reasonable crawl frequency.

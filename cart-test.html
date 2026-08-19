@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head><title>Cart Test</title></head>
+<body>
+    <h1>Cart Diagnostic</h1>
+    <div id="output"></div>
+    <script>
+        const output = document.getElementById('output');
+        
+        // Check what's in localStorage
+        const cartData = localStorage.getItem('psdepot_cart');
+        output.innerHTML += '<h2>Raw localStorage:</h2>';
+        output.innerHTML += '<pre>' + (cartData || 'EMPTY') + '</pre>';
+        
+        if (cartData) {
+            const cart = JSON.parse(cartData);
+            output.innerHTML += '<h2>Parsed cart items:</h2>';
+            cart.forEach((item, i) => {
+                output.innerHTML += `<p>${i+1}. SKU: ${item.sku}, Name: ${item.name}, Qty: ${item.quantity}, Price: $${item.price}</p>`;
+            });
+            output.innerHTML += '<h3>Total items: ' + cart.reduce((s, i) => s + i.quantity, 0) + '</h3>';
+        }
+        
+        // Test adding an item
+        output.innerHTML += '<hr><h2>Add Test Item:</h2>';
+        output.innerHTML += '<button onclick="testAdd()">Add Test Item</button>';
+        
+        function testAdd() {
+            let cart = JSON.parse(localStorage.getItem('psdepot_cart') || '[]');
+            cart.push({sku: 'TEST-001', name: 'Test Product', price: 9.99, quantity: 1});
+            localStorage.setItem('psdepot_cart', JSON.stringify(cart));
+            location.reload();
+        }
+    </script>
+</body>
+</html>

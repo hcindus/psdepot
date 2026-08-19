@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0A1A2F"/>
+      <stop offset="100%" style="stop-color:#1a3a5f"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="0" y="0" width="1200" height="6" fill="#FF7A00"/>
+  <text x="600" y="260" font-family="Inter Tight, Arial Black, sans-serif" font-size="72" font-weight="800" fill="white" text-anchor="middle">Performance<span fill="#00E0FF">Supply</span>Depot</text>
+  <text x="600" y="340" font-family="Inter, Arial, sans-serif" font-size="28" fill="#C7CCD1" text-anchor="middle">POS Supplies — Thermal Paper, Receipt Rolls, Cash Drawers &amp; More</text>
+  <rect x="440" y="390" width="320" height="4" fill="#FF7A00" rx="2"/>
+  <text x="600" y="450" font-family="Inter, Arial, sans-serif" font-size="26" fill="#00E0FF" text-anchor="middle">(888) 881-6834</text>
+  <text x="600" y="500" font-family="Inter, Arial, sans-serif" font-size="16" fill="#718096" text-anchor="middle">Serving California Since 2005  |  psdepot.com</text>
+</svg>

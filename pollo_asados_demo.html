@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RS-80 POS - Pollos Asados El Trebol</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
+            color: white;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            font-weight: 600;
+        }
+        
+        .header .subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-top: 4px;
+        }
+        
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        
+        .admin-controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .gear-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            position: relative;
+        }
+        
+        .gear-btn:hover {
+            background: rgba(255,255,255,0.25);
+            transform: rotate(30deg);
+        }
+        
+        .gear-menu {
+            position: absolute;
+            top: 50px;
+            right: 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            padding: 8px;
+            min-width: 220px;
+            display: none;
+            z-index: 100;
+        }
+        
+        .gear-menu.show {
+            display: block;
+        }
+        
+        .gear-menu-item {
+            padding: 12px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #333;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.15s;
+        }
+        
+        .gear-menu-item:hover {
+            background: #f5f5f5;
+        }
+        
+        .gear-menu-item .icon {
+            font-size: 18px;
+            width: 24px;
+            text-align: center;
+        }
+        
+        .sales-badge {
+            background: #4caf50;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .container {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            gap: 20px;
+            padding: 20px;
+        }
+        
+        .menu-section {
+            flex: 1;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        
+        .category-tabs {
+            display: flex;
+            background: #fafafa;
+            border-bottom: 1px solid #e0e0e0;
+            overflow-x: auto;
+        }
+        
+        .category-tab {
+            padding: 16px 24px;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            font-size: 14px;
+            font-weight: 500;
+            color: #666;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+        
+        .category-tab:hover {
+            color: #d32f2f;
+            background: rgba(211, 47, 47, 0.05);
+        }
+        
+        .category-tab.active {
+            color: #d32f2f;
+            border-bottom: 3px solid #d32f2f;
+            background: white;
+        }
+        
+        .menu-items {
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+        }
+        
+        .menu-item {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+        
+        .menu-item:hover {
+            border-color: #d32f2f;
+            box-shadow: 0 4px 12px rgba(211, 47, 47, 0.15);
+            transform: translateY(-2px);
+        }
+        
+        .menu-item .name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .menu-item .description {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+        
+        .menu-item .price {
+            font-size: 20px;
+            font-weight: 700;
+            color: #d32f2f;
+        }
+        
+        .menu-item .add-btn {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #d32f2f;
+            color: white;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        
+        .menu-item .add-btn:hover {
+            background: #b71c1c;
+            transform: scale(1.1);
+        }
+        
+        .cart-section {
+            width: 380px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            display: flex;
+            flex-direction: column;
+            max-height: calc(100vh - 140px);
+            position: sticky;
+            top: 20px;
+        }
+        
+        .cart-header {
+            padding: 20px;
+            border-bottom: 1px solid #e0e0e0;
+            background: #fafafa;
+            border-radius: 12px 12px 0 0;
+        }
+        
+        .cart-header h2 {
+            font-size: 18px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+        }
+        
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+        
+        .cart-item-info {
+            flex: 1;
+        }
+        
+        .cart-item-name {
+            font-weight: 500;
+            font-size: 14px;
+        }
+        
+        .cart-item-price {
+            font-size: 13px;
+            color: #666;
+        }
+        
+        .cart-item-qty {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .qty-btn {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 1px solid #ddd;
+            background: white;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .qty-btn:hover {
+            background: #f5f5f5;
+        }
+        
+        .qty-value {
+            font-weight: 600;
+            min-width: 24px;
+            text-align: center;
+        }
+        
+        .cart-footer {
+            padding: 20px;
+            border-top: 1px solid #e0e0e0;
+            background: #fafafa;
+            border-radius: 0 0 12px 12px;
+        }
+        
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        
+        .cart-total-label {
+            font-size: 16px;
+            font-weight: 500;
+        }
+        
+        .cart-total-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #d32f2f;
+        }
+        
+        .cart-breakdown {
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px dashed #ddd;
+        }
+        
+        .breakdown-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        .breakdown-row.subtotal {
+            color: #666;
+        }
+        
+        .breakdown-row.tax {
+            color: #666;
+            font-size: 13px;
+        }
+        
+        .breakdown-row.tax-rate {
+            font-size: 11px;
+            color: #999;
+            margin-top: -4px;
+            margin-bottom: 8px;
+        }
+        
+        .breakdown-row.total {
+            font-weight: 600;
+            font-size: 16px;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .checkout-btn {
+            width: 100%;
+            padding: 16px;
+            background: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .checkout-btn:hover {
+            background: #45a049;
+        }
+        
+        .checkout-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .empty-cart {
+            text-align: center;
+            padding: 40px 20px;
+            color: #999;
+        }
+        
+        .empty-cart-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            background: #ffebee;
+            color: #d32f2f;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .demo-banner {
+            background: #2196f3;
+            color: white;
+            text-align: center;
+            padding: 8px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        @media (max-width: 1024px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .cart-section {
+                width: 100%;
+                max-height: none;
+                position: static;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-banner">
+        RS-80 POS System Demo — Pollos Asados El Trebol
+    </div>
+    
+    <div class="header">
+        <div class="header-top">
+            <div>
+                <h1>🍗 Pollos Asados El Trebol</h1>
+                <div class="subtitle">1005 S White Rd, San Jose, CA 95127 | (669) 214-0760</div>
+            </div>
+            <div class="admin-controls">
+                <span class="sales-badge" id="header-sales-badge" style="display: none;">$0.00</span>
+                <button class="gear-btn" onclick="toggleGearMenu()" id="gear-btn">
+                    ⚙️
+                    <div class="gear-menu" id="gear-menu">
+                        <div class="gear-menu-item" onclick="showEODReport(); toggleGearMenu();">
+                            <span class="icon">📊</span>
+                            <span>End of Day Report</span>
+                        </div>
+                        <div class="gear-menu-item" onclick="showTransactionHistory(); toggleGearMenu();">
+                            <span class="icon">📜</span>
+                            <span>Transaction History</span>
+                        </div>
+                        <div class="gear-menu-item" onclick="showSettings(); toggleGearMenu();">
+                            <span class="icon">⚙️</span>
+                            <span>Settings</span>
+                        </div>
+                        <div class="gear-menu-item" onclick="showProFeatures(); toggleGearMenu();">
+                            <span class="icon">⭐</span>
+                            <span>RS-80 Pro Features</span>
+                        </div>
+                        <div class="gear-menu-item" style="color: #ff5722;" onclick="resetDay(); toggleGearMenu();">
+                            <span class="icon">🔄</span>
+                            <span>Close Day / Reset</span>
+                        </div>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="menu-section">
+            <div class="category-tabs">
+                <button class="category-tab active" onclick="showCategory('pollo')">Pollo Asado</button>
+                <button class="category-tab" onclick="showCategory('combos')">Combos</button>
+                <button class="category-tab" onclick="showCategory('sides')">Sides</button>
+                <button class="category-tab" onclick="showCategory('bebidas')">Bebidas</button>
+                <button class="category-tab" onclick="showCategory('extras')">Extras</button>
+            </div>
+            
+            <div class="menu-items" id="menu-items">
+                <!-- Items populated by JavaScript -->
+            </div>
+        </div>
+        
+        <div class="cart-section">
+            <div class="cart-header">
+                <h2>🛒 Order <span class="badge" id="item-count">0 items</span></h2>
+            </div>
+            
+            <div class="cart-items" id="cart-items">
+                <div class="empty-cart">
+                    <div class="empty-cart-icon">🛒</div>
+                    <p>Your cart is empty</p>
+                    <p style="font-size: 13px; margin-top: 8px;">Tap items to add them</p>
+                </div>
+            </div>
+            
+            <div class="cart-footer">
+                <div class="cart-breakdown" id="cart-breakdown">
+                    <div class="breakdown-row subtotal">
+                        <span>Subtotal</span>
+                        <span id="subtotal">$0.00</span>
+                    </div>
+                    <div class="breakdown-row tax">
+                        <span>Tax (9.125%)</span>
+                        <span id="tax">$0.00</span>
+                    </div>
+                    <div class="breakdown-row tax-rate">San Jose, CA Sales Tax</div>
+                </div>
+                <div class="cart-total">
+                    <span class="cart-total-label">Total</span>
+                    <span class="cart-total-value" id="cart-total">$0.00</span>
+                </div>
+                <button class="checkout-btn" id="checkout-btn" disabled onclick="checkout()">
+                    Proceed to Payment
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const menuData = {
+            pollo: [
+                { id: 1, name: "Pollo Entero Asado", description: "Whole roasted chicken, seasoned with our signature blend", price: 24.88 },
+                { id: 2, name: "Pollo Entero con Tortilla y Salsa", description: "Whole chicken with fresh tortillas and house salsa", price: 25.00 },
+                { id: 3, name: "Medio Pollo Asado", description: "Half chicken, perfect for smaller appetites", price: 14.50 },
+                { id: 4, name: "Pollo Desmenuzado (1 lb)", description: "Shredded chicken by the pound", price: 18.00 },
+                { id: 5, name: "Pechuga de Pollo Asada", description: "Grilled chicken breast", price: 12.00 },
+                { id: 6, name: "Pierna y Muslo", description: "Leg and thigh quarter", price: 9.50 }
+            ],
+            combos: [
+                { id: 10, name: "Combo #1", description: "Pollo Entero + 2 Sides (rice, beans, salad, or fries)", price: 32.00 },
+                { id: 11, name: "Combo #2", description: "Pollo Entero + 3 Sides", price: 36.00 },
+                { id: 12, name: "Combo Familiar", description: "2 Pollos Enteros + 4 Sides + 2L Soda", price: 65.00 },
+                { id: 13, name: "Combo Individual", description: "1/2 Pollo + 1 Side + Drink", price: 18.50 },
+                { id: 14, name: "Combo Pareja", description: "2 1/2 Pollos + 2 Sides + 2 Drinks", price: 34.00 }
+            ],
+            sides: [
+                { id: 20, name: "Arroz Mexicano", description: "Mexican rice with vegetables", price: 4.50 },
+                { id: 21, name: "Frijoles Refritos", description: "Refried beans with cheese", price: 4.50 },
+                { id: 22, name: "Ensalada Fresca", description: "Fresh salad with house dressing", price: 4.00 },
+                { id: 23, name: "Papas Fritas", description: "French fries", price: 4.50 },
+                { id: 24, name: "Tortillas (4)", description: "Fresh corn tortillas", price: 2.50 },
+                { id: 25, name: "Tortillas (12)", description: "Fresh corn tortillas", price: 5.00 },
+                { id: 26, name: "Chips & Salsa", description: "Tortilla chips with salsa", price: 4.50 },
+                { id: 27, name: "Guacamole", description: "Fresh made guacamole", price: 5.50 },
+                { id: 28, name: "Queso Fundido", description: "Melted cheese with peppers", price: 6.00 }
+            ],
+            bebidas: [
+                { id: 30, name: "Sidral Mundet", description: "Apple soda", price: 6.15 },
+                { id: 31, name: "Mineagua", description: "Flavored water", price: 6.15 },
+                { id: 32, name: "Coca Cola 500ml", description: "Bottle", price: 7.20 },
+                { id: 33, name: "Soda Lata", description: "Can soda", price: 5.10 },
+                { id: 34, name: "Soda Botella", description: "Bottle soda", price: 6.15 },
+                { id: 35, name: "Agua Fresca", description: "Horchata, Jamaica, or Melon", price: 5.50 },
+                { id: 36, name: "Agua Embotellada", description: "Bottled water", price: 3.00 },
+                { id: 37, name: "Jarrito", description: "Mexican soda", price: 4.50 }
+            ],
+            extras: [
+                { id: 40, name: "Salsa Verde (8oz)", description: "Green salsa", price: 3.50 },
+                { id: 41, name: "Salsa Roja (8oz)", description: "Red salsa", price: 3.50 },
+                { id: 42, name: "Crema", description: "Mexican sour cream", price: 2.00 },
+                { id: 43, name: "Queso", description: "Cheese topping", price: 2.00 },
+                { id: 44, name: "Cebolla Asada", description: "Grilled onions", price: 2.50 },
+                { id: 45, name: "Chiles Toreados", description: "Grilled jalapeños", price: 2.50 }
+            ]
+        };
+        
+        let cart = [];
+        let currentCategory = 'pollo';
+        
+        function showCategory(category) {
+            currentCategory = category;
+            
+            // Update tabs
+            document.querySelectorAll('.category-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Render items
+            renderMenuItems(category);
+        }
+        
+        function renderMenuItems(category) {
+            const container = document.getElementById('menu-items');
+            const items = menuData[category];
+            
+            container.innerHTML = items.map(item => `
+                <div class="menu-item" onclick="addToCart(${item.id}, '${category}')">
+                    <div class="name">${item.name}</div>
+                    <div class="description">${item.description}</div>
+                    <div class="price">$${item.price.toFixed(2)}</div>
+                    <button class="add-btn">+</button>
+                </div>
+            `).join('');
+        }
+        
+        function addToCart(itemId, category) {
+            const item = menuData[category].find(i => i.id === itemId);
+            const existingItem = cart.find(i => i.id === itemId);
+            
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({ ...item, quantity: 1 });
+            }
+            
+            renderCart();
+        }
+        
+        function updateQuantity(itemId, change) {
+            const item = cart.find(i => i.id === itemId);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    cart = cart.filter(i => i.id !== itemId);
+                }
+            }
+            renderCart();
+        }
+        
+        // San Jose, CA sales tax rate (9.125%)
+        const TAX_RATE = 0.09125;
+        
+        function renderCart() {
+            const cartItems = document.getElementById('cart-items');
+            const cartTotal = document.getElementById('cart-total');
+            const itemCount = document.getElementById('item-count');
+            const checkoutBtn = document.getElementById('checkout-btn');
+            const subtotalEl = document.getElementById('subtotal');
+            const taxEl = document.getElementById('tax');
+            const breakdownEl = document.getElementById('cart-breakdown');
+            
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const tax = subtotal * TAX_RATE;
+            const total = subtotal + tax;
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = `
+                    <div class="empty-cart">
+                        <div class="empty-cart-icon">🛒</div>
+                        <p>Your cart is empty</p>
+                        <p style="font-size: 13px; margin-top: 8px;">Tap items to add them</p>
+                    </div>
+                `;
+                breakdownEl.style.display = 'none';
+                checkoutBtn.disabled = true;
+            } else {
+                cartItems.innerHTML = cart.map(item => `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <div class="cart-item-name">${item.name}</div>
+                            <div class="cart-item-price">$${item.price.toFixed(2)}</div>
+                        </div>
+                        <div class="cart-item-qty">
+                            <button class="qty-btn" onclick="updateQuantity(${item.id}, -1)">−</button>
+                            <span class="qty-value">${item.quantity}</span>
+                            <button class="qty-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
+                        </div>
+                    </div>
+                `).join('');
+                breakdownEl.style.display = 'block';
+                checkoutBtn.disabled = false;
+            }
+            
+            subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
+            taxEl.textContent = `$${tax.toFixed(2)}`;
+            cartTotal.textContent = `$${total.toFixed(2)}`;
+            itemCount.textContent = `${totalItems} item${totalItems !== 1 ? 's' : ''}`;
+        }
+        
+        function checkout() {
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const tax = subtotal * TAX_RATE;
+            const total = subtotal + tax;
+            
+            // Create payment modal
+            const modal = document.createElement('div');
+            modal.id = 'payment-modal';
+            modal.innerHTML = `
+                <div class="modal-overlay" onclick="closePaymentModal()">
+                    <div class="modal-content" onclick="event.stopPropagation()">
+                        <div class="modal-header">
+                            <h2>Select Payment Method</h2>
+                            <button class="modal-close" onclick="closePaymentModal()">×</button>
+                        </div>
+                        
+                        <div class="modal-body">
+                            <div class="order-summary">
+                                <div class="summary-row">
+                                    <span>Subtotal</span>
+                                    <span>$${subtotal.toFixed(2)}</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span>Tax (9.125%)</span>
+                                    <span>$${tax.toFixed(2)}</span>
+                                </div>
+                                <div class="summary-row total">
+                                    <span>Total Due</span>
+                                    <span class="total-amount">$${total.toFixed(2)}</span>
+                                </div>
+                            </div>
+                            
+                            <div class="payment-options">
+                                <div class="payment-group">
+                                    <h3>💳 Card Payments</h3>
+                                    <button class="payment-btn card" onclick="processPayment('Credit Card')">
+                                        <span class="payment-icon">💳</span>
+                                        <span class="payment-name">Credit Card</span>
+                                        <span class="payment-desc">Visa, Mastercard, Amex</span>
+                                    </button>
+                                    <button class="payment-btn card" onclick="processPayment('Debit Card')">
+                                        <span class="payment-icon">💳</span>
+                                        <span class="payment-name">Debit Card</span>
+                                        <span class="payment-desc">PIN or signature</span>
+                                    </button>
+                                </div>
+                                
+                                <div class="payment-group">
+                                    <h3>💵 Cash & Other</h3>
+                                    <button class="payment-btn cash" onclick="processPayment('Cash')">
+                                        <span class="payment-icon">💵</span>
+                                        <span class="payment-name">Cash</span>
+                                        <span class="payment-desc">Exact change or enter amount</span>
+                                    </button>
+                                    <button class="payment-btn" onclick="processPayment('EBT')">
+                                        <span class="payment-icon">🎫</span>
+                                        <span class="payment-name">EBT</span>
+                                        <span class="payment-desc">SNAP/CalFresh benefits</span>
+                                    </button>
+                                </div>
+                                
+                                <div class="payment-group">
+                                    <h3>₿ Cryptocurrency</h3>
+                                    <button class="payment-btn crypto" onclick="processPayment('Bitcoin (BTC)')">
+                                        <span class="payment-icon">₿</span>
+                                        <span class="payment-name">Bitcoin</span>
+                                        <span class="payment-desc">BTC Lightning Network</span>
+                                    </button>
+                                    <button class="payment-btn crypto" onclick="processPayment('USDC')">
+                                        <span class="payment-icon">◈</span>
+                                        <span class="payment-name">USDC</span>
+                                        <span class="payment-desc">USD Coin (Ethereum/Polygon)</span>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="split-payment">
+                                <button class="split-btn" onclick="splitPayment()">💔 Split Payment</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Add modal styles
+            const style = document.createElement('style');
+            style.textContent = `
+                .modal-overlay {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0,0,0,0.6);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    z-index: 1000;
+                    animation: fadeIn 0.2s ease;
+                }
+                
+                @keyframes fadeIn {
+                    from { opacity: 0; }
+                    to { opacity: 1; }
+                }
+                
+                .modal-content {
+                    background: white;
+                    border-radius: 16px;
+                    width: 90%;
+                    max-width: 500px;
+                    max-height: 90vh;
+                    overflow: hidden;
+                    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+                    animation: slideUp 0.3s ease;
+                }
+                
+                @keyframes slideUp {
+                    from { transform: translateY(50px); opacity: 0; }
+                    to { transform: translateY(0); opacity: 1; }
+                }
+                
+                .modal-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 20px;
+                    border-bottom: 1px solid #e0e0e0;
+                    background: #f8f9fa;
+                }
+                
+                .modal-header h2 {
+                    font-size: 20px;
+                    font-weight: 600;
+                    color: #333;
+                }
+                
+                .modal-close {
+                    width: 36px;
+                    height: 36px;
+                    border: none;
+                    background: #e0e0e0;
+                    border-radius: 50%;
+                    font-size: 24px;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    transition: all 0.2s;
+                }
+                
+                .modal-close:hover {
+                    background: #d32f2f;
+                    color: white;
+                }
+                
+                .modal-body {
+                    padding: 20px;
+                    overflow-y: auto;
+                    max-height: calc(90vh - 80px);
+                }
+                
+                .order-summary {
+                    background: #f8f9fa;
+                    border-radius: 12px;
+                    padding: 16px;
+                    margin-bottom: 20px;
+                }
+                
+                .summary-row {
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 8px;
+                    font-size: 14px;
+                    color: #666;
+                }
+                
+                .summary-row.total {
+                    margin-top: 12px;
+                    padding-top: 12px;
+                    border-top: 2px solid #d32f2f;
+                    font-size: 18px;
+                    font-weight: 700;
+                    color: #333;
+                }
+                
+                .summary-row .total-amount {
+                    color: #d32f2f;
+                    font-size: 24px;
+                }
+                
+                .payment-group {
+                    margin-bottom: 24px;
+                }
+                
+                .payment-group h3 {
+                    font-size: 14px;
+                    font-weight: 600;
+                    color: #666;
+                    margin-bottom: 12px;
+                    text-transform: uppercase;
+                    letter-spacing: 0.5px;
+                }
+                
+                .payment-btn {
+                    width: 100%;
+                    padding: 16px;
+                    margin-bottom: 8px;
+                    border: 2px solid #e0e0e0;
+                    border-radius: 12px;
+                    background: white;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    gap: 12px;
+                    transition: all 0.2s;
+                    text-align: left;
+                }
+                
+                .payment-btn:hover {
+                    border-color: #d32f2f;
+                    background: #fff5f5;
+                    transform: translateY(-2px);
+                    box-shadow: 0 4px 12px rgba(211, 47, 47, 0.15);
+                }
+                
+                .payment-btn.card:hover {
+                    border-color: #1976d2;
+                    background: #e3f2fd;
+                }
+                
+                .payment-btn.cash:hover {
+                    border-color: #388e3c;
+                    background: #e8f5e9;
+                }
+                
+                .payment-btn.crypto:hover {
+                    border-color: #f57c00;
+                    background: #fff3e0;
+                }
+                
+                .payment-icon {
+                    font-size: 24px;
+                    width: 40px;
+                    text-align: center;
+                }
+                
+                .payment-name {
+                    font-weight: 600;
+                    font-size: 16px;
+                    color: #333;
+                    flex: 1;
+                }
+                
+                .payment-desc {
+                    font-size: 12px;
+                    color: #999;
+                }
+                
+                .split-payment {
+                    margin-top: 16px;
+                    padding-top: 16px;
+                    border-top: 1px dashed #ddd;
+                }
+                
+                .split-btn {
+                    width: 100%;
+                    padding: 14px;
+                    border: 2px dashed #999;
+                    border-radius: 12px;
+                    background: transparent;
+                    color: #666;
+                    font-size: 14px;
+                    font-weight: 600;
+                    cursor: pointer;
+                    transition: all 0.2s;
+                }
+                
+                .split-btn:hover {
+                    border-color: #d32f2f;
+                    color: #d32f2f;
+                    background: #fff5f5;
+                }
+            `;
+            
+            document.head.appendChild(style);
+            document.body.appendChild(modal);
+        }
+        
+        function closePaymentModal() {
+            const modal = document.getElementById('payment-modal');
+            if (modal) {
+                modal.remove();
+            }
+        }
+        
+        // Transaction storage for EOD report
+        let transactions = JSON.parse(localStorage.getItem('rs80_transactions') || '[]');
+        let dailySales = JSON.parse(localStorage.getItem('rs80_daily_sales') || '{}');
+        
+        // Initialize daily sales tracking
+        if (!dailySales.date) {
+            dailySales = { date: new Date().toISOString().split('T')[0], sales: 0, tax: 0, count: 0, methods: {} };
+        }
+        
+        // Check if it's a new day and show EOD report from yesterday
+        const today = new Date().toISOString().split('T')[0];
+        if (dailySales.date !== today && dailySales.count > 0) {
+            showEODReport(dailySales);
+        }
+        
+        function processPayment(method) {
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const tax = subtotal * TAX_RATE;
+            const total = subtotal + tax;
+            const txnId = Math.random().toString(36).substr(2, 9).toUpperCase();
+            
+            // Record transaction
+            const transaction = {
+                id: txnId,
+                timestamp: new Date().toISOString(),
+                items: [...cart],
+                subtotal: subtotal,
+                tax: tax,
+                total: total,
+                paymentMethod: method,
+                itemCount: cart.reduce((sum, item) => sum + item.quantity, 0)
+            };
+            
+            transactions.push(transaction);
+            
+            // Update daily totals
+            dailySales.sales += subtotal;
+            dailySales.tax += tax;
+            dailySales.count += 1;
+            dailySales.methods[method] = (dailySales.methods[method] || 0) + total;
+            
+            // Save to localStorage
+            localStorage.setItem('rs80_transactions', JSON.stringify(transactions));
+            localStorage.setItem('rs80_daily_sales', JSON.stringify(dailySales));
+            
+            // Simulate processing
+            const modalContent = document.querySelector('.modal-content');
+            modalContent.innerHTML = `
+                <div style="padding: 40px; text-align: center;">
+                    <div style="font-size: 48px; margin-bottom: 20px;">✅</div>
+                    <h2 style="color: #4caf50; margin-bottom: 16px;">Payment Successful!</h2>
+                    <p style="font-size: 18px; color: #333; margin-bottom: 8px;">$${total.toFixed(2)} paid via ${method}</p>
+                    <p style="font-size: 14px; color: #666; margin-bottom: 24px;">Transaction #${txnId}</p>
+                    <div style="background: #f5f5f5; border-radius: 8px; padding: 16px; margin-bottom: 20px; text-align: left;">
+                        <p style="margin-bottom: 8px;"><strong>Order sent to kitchen</strong></p>
+                        <p style="font-size: 12px; color: #666;">Receipt printing...</p>
+                    </div>
+                    <div style="display: flex; gap: 10px; justify-content: center;">
+                        <button onclick="closePaymentModal(); cart = []; renderCart();" style="padding: 14px 24px; background: #4caf50; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer;">
+                            Start New Order
+                        </button>
+                        <button onclick="showEODReport()" style="padding: 14px 24px; background: #2196f3; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer;">
+                            📊 Today's Sales
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function showEODReport(salesData = null) {
+            const data = salesData || dailySales;
+            const reportModal = document.createElement('div');
+            reportModal.id = 'eod-report-modal';
+            
+            // Calculate payment method breakdown
+            const methodBreakdown = Object.entries(data.methods || {})
+                .map(([method, amount]) => `<tr><td>${method}</td><td style="text-align: right; font-weight: 600;">$${amount.toFixed(2)}</td></tr>`)
+                .join('') || '<tr><td colspan="2" style="text-align: center; color: #999;">No payments yet</td></tr>';
+            
+            // Recent transactions
+            const recentTxns = transactions.slice(-5).reverse().map(t => `
+                <tr>
+                    <td>#${t.id}</td>
+                    <td>${t.paymentMethod}</td>
+                    <td style="text-align: right;">$${t.total.toFixed(2)}</td>
+                    <td style="text-align: right;">${new Date(t.timestamp).toLocaleTimeString()}</td>
+                </tr>
+            `).join('') || '<tr><td colspan="4" style="text-align: center; color: #999;">No transactions today</td></tr>';
+            
+            reportModal.innerHTML = `
+                <div class="modal-overlay" onclick="document.getElementById('eod-report-modal').remove()">
+                    <div class="modal-content" style="max-width: 600px;" onclick="event.stopPropagation()">
+                        <div class="modal-header" style="background: #1a237e; color: white;">
+                            <h2>📊 End of Day Report</h2>
+                            <button class="modal-close" style="background: rgba(255,255,255,0.2); color: white;" onclick="document.getElementById('eod-report-modal').remove()">×</button>
+                        </div>
+                        <div class="modal-body" style="max-height: 70vh;">
+                            <div style="background: #e3f2fd; border-radius: 12px; padding: 20px; margin-bottom: 20px;">
+                                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; text-align: center;">
+                                    <div>
+                                        <div style="font-size: 28px; font-weight: 700; color: #1a237e;">${data.count}</div>
+                                        <div style="font-size: 12px; color: #666; text-transform: uppercase;">Transactions</div>
+                                    </div>
+                                    <div>
+                                        <div style="font-size: 28px; font-weight: 700; color: #1a237e;">$${data.sales.toFixed(2)}</div>
+                                        <div style="font-size: 12px; color: #666; text-transform: uppercase;">Net Sales</div>
+                                    </div>
+                                    <div>
+                                        <div style="font-size: 28px; font-weight: 700; color: #1a237e;">$${(data.sales + data.tax).toFixed(2)}</div>
+                                        <div style="font-size: 12px; color: #666; text-transform: uppercase;">Gross Sales</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div style="margin-bottom: 20px;">
+                                <h3 style="font-size: 16px; margin-bottom: 12px; color: #333;">Sales Breakdown</h3>
+                                <table style="width: 100%; border-collapse: collapse;">
+                                    <tr style="border-bottom: 1px solid #e0e0e0;">
+                                        <td style="padding: 12px 0;">Net Sales</td>
+                                        <td style="text-align: right; font-weight: 600;">$${data.sales.toFixed(2)}</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid #e0e0e0;">
+                                        <td style="padding: 12px 0;">Tax Collected</td>
+                                        <td style="text-align: right; font-weight: 600;">$${data.tax.toFixed(2)}</td>
+                                    </tr>
+                                    <tr style="background: #f5f5f5;">
+                                        <td style="padding: 12px 0; font-weight: 700;">Total</td>
+                                        <td style="text-align: right; font-weight: 700; font-size: 18px; color: #1a237e;">$${(data.sales + data.tax).toFixed(2)}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            
+                            <div style="margin-bottom: 20px;">
+                                <h3 style="font-size: 16px; margin-bottom: 12px; color: #333;">Payment Methods</h3>
+                                <table style="width: 100%; border-collapse: collapse;">
+                                    ${methodBreakdown}
+                                </table>
+                            </div>
+                            
+                            <div>
+                                <h3 style="font-size: 16px; margin-bottom: 12px; color: #333;">Recent Transactions</h3>
+                                <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+                                    <thead>
+                                        <tr style="border-bottom: 2px solid #e0e0e0; color: #666; font-size: 12px; text-transform: uppercase;">
+                                            <th style="text-align: left; padding: 8px 0;">Txn #</th>
+                                            <th style="text-align: left; padding: 8px 0;">Method</th>
+                                            <th style="text-align: right; padding: 8px 0;">Amount</th>
+                                            <th style="text-align: right; padding: 8px 0;">Time</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        ${recentTxns}
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <div style="margin-top: 20px; padding-top: 20px; border-top: 1px dashed #ddd; text-align: center;">
+                                <button onclick="exportEODReport()" style="padding: 12px 24px; background: #1a237e; color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; margin-right: 10px;">
+                                    📥 Export Report
+                                </button>
+                                <button onclick="resetDay()" style="padding: 12px 24px; background: #ff5722; color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer;">
+                                    🔄 Close Day
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(reportModal);
+        }
+        
+        function exportEODReport() {
+            const reportData = {
+                date: dailySales.date,
+                transactions: dailySales.count,
+                netSales: dailySales.sales.toFixed(2),
+                tax: dailySales.tax.toFixed(2),
+                grossSales: (dailySales.sales + dailySales.tax).toFixed(2),
+                paymentMethods: dailySales.methods,
+                transactionList: transactions.filter(t => t.timestamp.startsWith(dailySales.date))
+            };
+            
+            const reportJSON = JSON.stringify(reportData, null, 2);
+            const blob = new Blob([reportJSON], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `EOD_Report_${dailySales.date}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+            
+            alert('EOD Report exported!\n\nIn production, this would:\n• Print Z-Report\n• Email to manager\n• Sync to accounting\n• Backup to cloud');
+        }
+        
+        function resetDay() {
+            if (confirm('Close day and reset sales?\n\nThis action cannot be undone.')) {
+                // Archive today's data
+                const archive = JSON.parse(localStorage.getItem('rs80_archive') || '[]');
+                archive.push({ ...dailySales, archivedAt: new Date().toISOString() });
+                localStorage.setItem('rs80_archive', JSON.stringify(archive));
+                
+                // Reset for new day
+                const newDate = new Date().toISOString().split('T')[0];
+                dailySales = { date: newDate, sales: 0, tax: 0, count: 0, methods: {} };
+                transactions = [];
+                localStorage.setItem('rs80_daily_sales', JSON.stringify(dailySales));
+                localStorage.setItem('rs80_transactions', JSON.stringify(transactions));
+                
+                document.getElementById('eod-report-modal').remove();
+                alert('Day closed successfully!\n\nNew day started: ' + newDate);
+            }
+        }
+        
+        function splitPayment() {
+            alert('Split payment feature:\n\n• Divide check by item\n• Split by number of people\n• Multiple payment methods\n\n(Available in RS-80 Pro)');
+        }
+        
+        // Admin menu functions
+        function toggleGearMenu() {
+            const menu = document.getElementById('gear-menu');
+            menu.classList.toggle('show');
+        }
+        
+        // Close gear menu when clicking outside
+        document.addEventListener('click', function(e) {
+            const gearBtn = document.getElementById('gear-btn');
+            const gearMenu = document.getElementById('gear-menu');
+            if (gearMenu && !gearBtn.contains(e.target)) {
+                gearMenu.classList.remove('show');
+            }
+        });
+        
+        function showTransactionHistory() {
+            const today = new Date().toISOString().split('T')[0];
+            const todayTxns = transactions.filter(t => t.timestamp.startsWith(today));
+            
+            if (todayTxns.length === 0) {
+                alert('No transactions today.');
+                return;
+            }
+            
+            const txnList = todayTxns.map(t => 
+                `Txn #${t.id}\n` +
+                `  ${t.paymentMethod}: $${t.total.toFixed(2)}\n` +
+                `  ${new Date(t.timestamp).toLocaleTimeString()}\n` +
+                `  Items: ${t.items.map(i => i.name).join(', ')}`
+            ).join('\n\n');
+            
+            alert(`Today's Transactions (${todayTxns.length}):\n\n${txnList}`);
+        }
+        
+        function showSettings() {
+            const currentTax = (TAX_RATE * 100).toFixed(3);
+            alert(`RS-80 Settings:\n\n` +
+                `Tax Rate: ${currentTax}%\n` +
+                `Location: San Jose, CA\n` +
+                `Currency: USD\n\n` +
+                `In production:\n` +
+                `• Connect receipt printer\n` +
+                `• Set up payment processors\n` +
+                `• Configure kitchen display\n` +
+                `• Add staff accounts\n` +
+                `• Customize menu`);
+        }
+        
+        function showProFeatures() {
+            alert('RS-80 Pro Features:\n\n' +
+                '⭐ Inventory Management\n' +
+                '   Track stock levels, auto-reorder\n\n' +
+                '⭐ Staff Time Clock\n' +
+                '   Clock in/out, payroll integration\n\n' +
+                '⭐ Kitchen Display System\n' +
+                '   Send orders directly to kitchen\n\n' +
+                '⭐ Customer Loyalty\n' +
+                '   Points, rewards, marketing\n\n' +
+                '⭐ Multi-location Support\n' +
+                '   Manage multiple stores\n\n' +
+                '⭐ Cloud Backup\n' +
+                '   Automatic data sync\n\n' +
+                'Contact us for pricing!');
+        }
+        
+        // Update sales badge
+        function updateSalesBadge() {
+            const badge = document.getElementById('header-sales-badge');
+            const total = dailySales.sales + dailySales.tax;
+            if (total > 0) {
+                badge.textContent = `$${total.toFixed(2)}`;
+                badge.style.display = 'inline-block';
+            } else {
+                badge.style.display = 'none';
+            }
+        }
+        
+        // Override processPayment to update badge
+        const originalProcessPayment = processPayment;
+        processPayment = function(method) {
+            originalProcessPayment(method);
+            updateSalesBadge();
+        };
+        
+        // Initialize
+        renderMenuItems('pollo');
+        updateSalesBadge();
+    </script>
+</body>
+</html>

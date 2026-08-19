@@ -1,0 +1,420 @@
+<!--
+  Product Tile Component for OrionStar Lucki
+  Usage: Include this in catalog grids or product listings
+  Standardized based on Product Page v1.0 Specification
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Tile - Lucki Robot</title>
+    <style>
+        :root {
+            --primary: #0A1A2F;
+            --accent: #FF7A00;
+            --accent-hover: #e66e00;
+            --bg: #F8F9FA;
+            --card: #ffffff;
+            --text: #111111;
+            --text-muted: #718096;
+            --border: #e2e8f0;
+            --success: #2ECC71;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            padding: 2rem;
+        }
+        
+        /* Product Tile - Standardized Component */
+        .product-tile {
+            background: var(--card);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            transition: all 0.2s ease;
+            max-width: 320px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .product-tile:hover {
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            transform: translateY(-4px);
+        }
+        
+        /* Image Container */
+        .tile-image-container {
+            position: relative;
+            aspect-ratio: 4/3;
+            background: linear-gradient(135deg, #f7fafc 0%, #e2e8f0 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .tile-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .product-tile:hover .tile-image {
+            transform: scale(1.05);
+        }
+        
+        .tile-image-placeholder {
+            font-size: 5rem;
+        }
+        
+        /* Stock Badge */
+        .stock-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: var(--success);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .stock-badge::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: white;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        .stock-badge.low {
+            background: #ed8936;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        /* Category Tag */
+        .category-tag {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(255,122,0,0.9);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Content */
+        .tile-content {
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+        
+        .tile-sku {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tile-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .tile-subtitle {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+        
+        .tile-features {
+            list-style: none;
+            margin: 0 0 1rem;
+            padding: 0;
+        }
+        
+        .tile-features li {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            padding: 2px 0;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .tile-features li::before {
+            content: '•';
+            color: var(--accent);
+            font-weight: bold;
+        }
+        
+        /* Price Section */
+        .tile-price-section {
+            margin-top: auto;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+        
+        .tile-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+        
+        .tile-price-note {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+        
+        /* CTA */
+        .tile-cta {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .tile-btn {
+            flex: 1;
+            padding: 0.75rem;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            text-align: center;
+            border: none;
+        }
+        
+        .tile-btn-primary {
+            background: var(--accent);
+            color: white;
+        }
+        
+        .tile-btn-primary:hover {
+            background: #9b2c2c;
+        }
+        
+        .tile-btn-secondary {
+            background: var(--bg);
+            color: var(--primary);
+            border: 1px solid var(--border);
+        }
+        
+        .tile-btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        
+        /* Demo Grid */
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 2rem auto;
+        }
+        
+        h1 {
+            text-align: center;
+            color: var(--primary);
+            margin-bottom: 2rem;
+        }
+    
+        .footer-cta {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 2rem;
+            background: var(--primary);
+            color: white;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .footer-cta h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .footer-cta p {
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+        .footer-cta .phone {
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-decoration: none;
+            display: inline-block;
+            animation: patrioticBlink 1.5s infinite;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        @keyframes patrioticBlink {
+            0%, 33% {
+                color: #ff0000;
+                text-shadow: 0 0 20px rgba(255,0,0,0.8), 2px 2px 4px rgba(0,0,0,0.3);
+            }
+            34%, 66% {
+                color: #ffffff;
+                text-shadow: 0 0 20px rgba(255,255,255,0.8), 2px 2px 4px rgba(0,0,0,0.3);
+            }
+            67%, 100% {
+                color: #0000ff;
+                text-shadow: 0 0 20px rgba(0,0,255,0.8), 2px 2px 4px rgba(0,0,0,0.3);
+            }
+        }
+
+        .footer-cta .phone:hover {
+            animation-duration: 0.5s;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Product Tile Component - Standardized v1.0</h1>
+    
+    <div class="demo-grid">
+        <!-- Lucki Robot Tile -->
+        <div class="product-tile">
+            <div class="tile-image-container">
+                <div class="tile-image-placeholder">🤖</div>
+                <span class="stock-badge">In Stock</span>
+                <span class="category-tag">Robotics</span>
+            </div>
+            <div class="tile-content">
+                <div class="tile-sku">SKU: OS-R-DR01</div>
+                <h3 class="tile-title">OrionStar Lucki AI Delivery Robot</h3>
+                <p class="tile-subtitle">Autonomous serving robot for restaurants & hospitality</p>
+                <ul class="tile-features">
+                    <li>LiDAR + SLAM navigation</li>
+                    <li>12-15 hour battery</li>
+                    <li>88 lb capacity</li>
+                </ul>
+                <div class="tile-price-section">
+                    <div class="tile-price">$3,330.00</div>
+                    <div class="tile-price-note">Free shipping • Net 30 available</div>
+                </div>
+                <div class="tile-cta">
+                    <a href="/products/orionstar-lucki.html" class="tile-btn tile-btn-primary">View</a>
+                    <a href="/contact.html?product=lucki" class="tile-btn tile-btn-secondary">Quote</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Spanish Version -->
+        <div class="product-tile">
+            <div class="tile-image-container">
+                <div class="tile-image-placeholder">🤖</div>
+                <span class="stock-badge">En Stock</span>
+                <span class="category-tag">Robótica</span>
+            </div>
+            <div class="tile-content">
+                <div class="tile-sku">SKU: OS-R-DR01</div>
+                <h3 class="tile-title">OrionStar Lucki Robot de Servicio AI</h3>
+                <p class="tile-subtitle">Robot autónomo para restaurantes y hospitalidad</p>
+                <ul class="tile-features">
+                    <li>Navegación LiDAR + SLAM</li>
+                    <li>Batería 12-15 horas</li>
+                    <li>Capacidad 40kg</li>
+                </ul>
+                <div class="tile-price-section">
+                    <div class="tile-price">$3,330.00</div>
+                    <div class="tile-price-note">Envío gratis • Net 30 disponible</div>
+                </div>
+                <div class="tile-cta">
+                    <a href="/products/orionstar-lucki.html" class="tile-btn tile-btn-primary">Ver</a>
+                    <a href="/contact.html?product=lucki" class="tile-btn tile-btn-secondary">Cotizar</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Chinese Version -->
+        <div class="product-tile">
+            <div class="tile-image-container">
+                <div class="tile-image-placeholder">🤖</div>
+                <span class="stock-badge">现货</span>
+                <span class="category-tag">机器人</span>
+            </div>
+            <div class="tile-content">
+                <div class="tile-sku">SKU: OS-R-DR01</div>
+                <h3 class="tile-title">OrionStar Lucki 智能送餐机器人</h3>
+                <p class="tile-subtitle">适用于餐厅和酒店业的自主服务机器人</p>
+                <ul class="tile-features">
+                    <li>激光雷达 + SLAM导航</li>
+                    <li>12-15小时续航</li>
+                    <li>40kg载重</li>
+                </ul>
+                <div class="tile-price-section">
+                    <div class="tile-price">$3,330.00</div>
+                    <div class="tile-price-note">免费送货 • 支持账期</div>
+                </div>
+                <div class="tile-cta">
+                    <a href="/products/orionstar-lucki.html" class="tile-btn tile-btn-primary">查看</a>
+                    <a href="/contact.html?product=lucki" class="tile-btn tile-btn-secondary">报价</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div style="max-width: 800px; margin: 4rem auto; padding: 2rem; background: white; border-radius: 12px; border: 1px solid var(--border);">
+        <h2 style="color: var(--primary); margin-bottom: 1rem;">Product Tile v1.0 Specification</h2>
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Standardized component structure for all product tiles across psdepot.com</p>
+        
+        <h3 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">Required Elements:</h3>
+        <ul style="color: var(--text); line-height: 1.8; margin-left: 1.5rem;">
+            <li><strong>Image container:</strong> 4:3 aspect ratio, gradient background fallback</li>
+            <li><strong>Stock badge:</strong> Green for in-stock, orange for low stock</li>
+            <li><strong>Category tag:</strong> Positioned top-right</li>
+            <li><strong>SKU:</strong> Small text, uppercase</li>
+            <li><strong>Title:</strong> 2-line max with ellipsis</li>
+            <li><strong>Price:</strong> Large, accent color</li>
+            <li><strong>CTA buttons:</strong> Primary (View) + Secondary (Quote)</li>
+        </ul>
+        
+        <h3 style="color: var(--primary); margin: 1.5rem 0 0.5rem;">Design Tokens:</h3>
+        <ul style="color: var(--text); line-height: 1.8; margin-left: 1.5rem;">
+            <li>Primary: #0A1A2F (AGI Deep Tech Blue)</li>
+            <li>Accent: #FF7A00 (Performance Orange)</li>
+            <li>Success: #48bb78 (In Stock)</li>
+            <li>Border radius: 12px</li>
+            <li>Shadow on hover: 0 8px 24px rgba(0,0,0,0.12)</li>
+            <li>Max width: 320px</li>
+        </ul>
+    </div>
+
+    <section class="footer-cta">
+        <h3>Questions About This Product?</h3>
+        <p>Our team can help you choose the right solution. Call for a free consultation.</p>
+        <a href="tel:8888816834" class="phone">(888) 881-6834</a>
+    </section>
+
+</body>
+</html>

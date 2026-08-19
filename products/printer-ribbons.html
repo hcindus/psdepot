@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Printer Ribbons & Ink Ribbons | Performance Supply Depot</title>
+    <meta name="description" content="High-quality printer ribbons for Epson, Star, Citizen, IBM, Okidata POS printers. Black/red ribbons for TM-U220, SP700, CD-S500 series. Compatible replacement ribbons.">
+    <meta name="keywords" content="printer ribbons, POS ribbons, Epson ribbons, Star SP700 ribbons, Citizen ribbons, TM-U220 ribbon, impact printer ribbons, black red ribbon">
+    <style>
+        :root {
+            --primary: #1a365d;
+            --primary-light: #2c5282;
+            --accent: #ed8936;
+            --accent-hover: #dd6b20;
+            --bg-light: #f7fafc;
+            --bg-dark: #edf2f7;
+            --text: #2d3748;
+            --text-light: #718096;
+            --white: #ffffff;
+            --shadow: 0 10px 25px rgba(0,0,0,0.1);
+            --radius: 12px;
+            --success: #48bb78;
+            --danger: #c53030;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            background: var(--bg-light);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--white);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            margin-left: 30px;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-cart {
+            position: relative;
+            margin-left: 20px;
+        }
+
+        .cart-btn {
+            background: var(--danger);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.3s;
+        }
+
+        .cart-btn:hover {
+            background: #9b2c2c;
+        }
+
+        .cart-count {
+            background: white;
+            color: var(--danger);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: var(--white);
+            padding: 140px 20px 80px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Brand Tabs */
+        .brand-tabs {
+            background: var(--white);
+            padding: 30px 0;
+            border-bottom: 2px solid var(--bg-dark);
+        }
+
+        .tabs-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: var(--bg-dark);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text);
+            transition: all 0.3s;
+            font-size: 16px;
+        }
+
+        .tab-btn:hover {
+            background: var(--primary-light);
+            color: white;
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 60px 0;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 40px;
+        }
+
+        /* Printer Selector Sidebar */
+        .printer-selector {
+            background: var(--white);
+            padding: 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .selector-title {
+            font-size: 20px;
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--bg-dark);
+        }
+
+        .brand-section {
+            margin-bottom: 25px;
+        }
+
+        .brand-name {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .brand-icon {
+            width: 24px;
+            height: 24px;
+            background: var(--primary);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+        }
+
+        .printer-list {
+            list-style: none;
+        }
+
+        .printer-list li {
+            padding: 8px 12px;
+            margin-bottom: 5px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+            border: 1px solid transparent;
+        }
+
+        .printer-list li:hover {
+            background: var(--bg-light);
+            border-color: var(--primary-light);
+        }
+
+        .printer-list li.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Products Area */
+        .products-area {
+            background: var(--white);
+            padding: 40px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .products-header {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--bg-dark);
+        }
+
+        .products-header h2 {
+            font-size: 28px;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .selected-printer {
+            font-size: 16px;
+            color: var(--text-light);
+        }
+
+        .selected-printer span {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: var(--bg-light);
+            border-radius: var(--radius);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            border-color: var(--accent);
+        }
+
+        .product-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-light) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+        }
+
+        .product-info {
+            padding: 25px;
+        }
+
+        .product-sku {
+            font-size: 12px;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .product-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .product-desc {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .product-features {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .product-features li {
+            padding: 5px 0;
+            font-size: 13px;
+            color: var(--text);
+        }
+
+        .product-features li::before {
+            content: '✓';
+            color: var(--success);
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .product-price {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--danger);
+            margin-bottom: 15px;
+        }
+
+        .product-price .unit {
+            font-size: 14px;
+            color: var(--text-light);
+            font-weight: 400;
+        }
+
+        .add-to-cart-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--danger) 0%, #9b2c2c 100%);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .add-to-cart-btn:hover {
+            background: linear-gradient(135deg, #e53e3e 0%, var(--danger) 100%);
+            transform: scale(1.02);
+        }
+
+        .add-to-cart-btn.added {
+            background: linear-gradient(135deg, var(--success) 0%, #38a169 100%);
+        }
+
+        /* Compatibility Notice */
+        .compatibility-notice {
+            background: linear-gradient(135deg, #ebf8ff 0%, #e6fffa 100%);
+            border-left: 4px solid #00d4ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .compatibility-notice h3 {
+            color: var(--primary);
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .compatibility-notice p {
+            color: var(--text);
+            font-size: 14px;
+        }
+
+        /* Brand Info Section */
+        .brand-info {
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 2px solid var(--bg-dark);
+        }
+
+        .brand-info h3 {
+            font-size: 20px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .brand-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .brand-card {
+            background: var(--bg-light);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .brand-card h4 {
+            color: var(--primary);
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .brand-card p {
+            font-size: 13px;
+            color: var(--text-light);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: var(--white);
+            padding: 60px 20px 30px;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            color: var(--accent);
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .footer-col p, .footer-col a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            line-height: 2;
+        }
+
+        .footer-col a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 30px;
+            text-align: center;
+            color: rgba(255,255,255,0.5);
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .printer-selector {
+                position: static;
+                margin-bottom: 30px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 120px 20px 60px;
+            }
+
+            .hero h1 {
+                font-size: 26px;
+            }
+
+            .tab-btn {
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+
+            .products-area {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <a href="/" class="logo">Performance<span>Supply</span>Depot</a>
+            <div class="nav-links">
+                <a href="/products">Products</a>
+                <a href="/#features">Why Us</a>
+                <a href="/contact">Contact</a>
+            </div>
+            <div class="nav-cart">
+                <a href="/checkout.html" class="cart-btn">
+                    🛒 Cart
+                    <span class="cart-count" id="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <h1>Printer Ribbons & Ink Ribbons</h1>
+            <p>Find the perfect ribbon for your POS printer. We stock high-quality black/red ribbons for all major brands including Epson, Star, Citizen, IBM, and Okidata.</p>
+        </div>
+    </section>
+
+    <!-- Brand Tabs -->
+    <section class="brand-tabs">
+        <div class="container">
+            <div class="tabs-container">
+                <button class="tab-btn active" data-brand="all">All Brands</button>
+                <button class="tab-btn" data-brand="epson">Epson</button>
+                <button class="tab-btn" data-brand="star">Star</button>
+                <button class="tab-btn" data-brand="citizen">Citizen</button>
+                <button class="tab-btn" data-brand="others">Others</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="main-content">
+        <div class="container">
+            <div class="content-grid">
+                <!-- Printer Selector Sidebar -->
+                <div class="printer-selector">
+                    <div class="selector-title">🔍 Find Your Printer</div>
+                    
+                    <!-- Epson -->
+                    <div class="brand-section" data-brand="epson">
+                        <div class="brand-name">
+                            <div class="brand-icon">E</div>
+                            Epson
+                        </div>
+                        <ul class="printer-list">
+                            <li data-printer="TM-U220" data-sku="62245">TM-U220</li>
+                            <li data-printer="TM-U200" data-sku="62245">TM-U200</li>
+                            <li data-printer="TM-U210" data-sku="62245">TM-U210</li>
+                            <li data-printer="TM-U230" data-sku="62245">TM-U230</li>
+                            <li data-printer="TM-U300" data-sku="62245">TM-U300</li>
+                        </ul>
+                    </div>
+
+                    <!-- Star -->
+                    <div class="brand-section" data-brand="star">
+                        <div class="brand-name">
+                            <div class="brand-icon">S</div>
+                            Star
+                        </div>
+                        
+                        <ul class="printer-list">
+                            <li data-printer="SP700" data-sku="67240">SP700</li>
+                            <li data-printer="SP500" data-sku="67240">SP500</li>
+                            <li data-printer="SP200" data-sku="67240">SP200</li>
+                            <li data-printer="SP300" data-sku="67240">SP300</li>
+                            <li data-printer="HSP7000" data-sku="67240">HSP7000</li>
+                        </ul>
+                    </div>
+
+                    <!-- Citizen -->
+                    <div class="brand-section" data-brand="citizen">
+                        <div class="brand-name">
+                            <div class="brand-icon">C</div>
+                            Citizen
+                        </div>
+                        
+                        <ul class="printer-list">
+                            <li data-printer="CD-S500" data-sku="citizen-ribbon">CD-S500</li>
+                            <li data-printer="iDP-3550" data-sku="citizen-ribbon">iDP-3550</li>
+                            <li data-printer="iDP-3551" data-sku="citizen-ribbon">iDP-3551</li>
+                            <li data-printer="iDP-3540" data-sku="citizen-ribbon">iDP-3540</li>
+                            <li data-printer="iDP-3541" data-sku="citizen-ribbon">iDP-3541</li>
+                        </ul>
+                    </div>
+
+                    <!-- Others -->
+                    <div class="brand-section" data-brand="others">
+                        <div class="brand-name">
+                            <div class="brand-icon">+</div>
+                            Others
+                        </div>
+                        
+                        <ul class="printer-list">
+                            <li data-printer="IBM" data-sku="ibm-ribbon">IBM</li>
+                            <li data-printer="Okidata" data-sku="oki-ribbon">Okidata</li>
+                            <li data-printer="TM-U series" data-sku="62245">TM-U series</li>
+                            <li data-printer="MP series" data-sku="mp-ribbon">MP series</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Products Area -->
+                <div class="products-area">
+                    <div class="products-header">
+                        <h2>Compatible Ribbons</h2>
+                        <p class="selected-printer">Selected Printer: <span id="selected-printer-name">All Models</span></p>
+                    </div>
+
+                    <!-- Compatibility Notice -->
+                    <div class="compatibility-notice">
+                        <h3>✓ Guaranteed Compatibility</h3>
+                        <p>All ribbons are tested and guaranteed to work with your specific printer model. Black/Red dual-color ribbons for impact printers.</p>
+                    </div>
+
+                    <!-- Product Grid -->
+                    <div class="product-grid" id="product-grid">
+                        <!-- Product 1: Epson TM-U220 Ribbon -->
+                        <div class="product-card" data-brands="epson">
+                            <div class="product-image">🖊️</div>
+                            <div class="product-info">
+                                <div class="product-sku">SKU: 62245</div>
+                                <div class="product-name">Epson Black/Red Ribbon</div>
+                                <div class="product-desc">Premium quality impact printer ribbon. Black/Red dual color for receipts and documents.</div>
+                                <ul class="product-features">
+                                    <li>Fits TM-U220, TM-U200, TM-U210</li>
+                                    <li>Black/Red dual color</li>
+                                    <li>Extended life - 1.5M characters</li>
+                                    <li>OEM quality</li>
+                                </ul>
+                                
+                                <div class="product-price">$42.00 <span class="unit">(per dozen)</span></div>
+                                
+                                <button class="add-to-cart-btn" onclick="addToCart('62245', 'Epson Black/Red Ribbon', 42.00, 'per dozen', 'TM-U220 series')">Add to Cart</button>
+                            </div>
+                        </div>
+
+                        <!-- Product 2: Star SP700 Ribbon -->
+                        <div class="product-card" data-brands="star">
+                            <div class="product-image">🖊️</div>
+                            <div class="product-info">
+                                <div class="product-sku">SKU: 67240</div>
+                                <div class="product-name">Star SP700 Series Ribbon</div>
+                                <div class="product-desc">High-quality replacement ribbon for Star impact printers. Perfect for kitchen and receipt printing.</div>
+                                
+                                <ul class="product-features">
+                                    <li>Fits SP700, SP500, SP200, SP300</li>
+                                    <li>Black/Red dual color</li>
+                                    <li>Long-lasting - 2M characters</li>
+                                    <li>Fade-resistant ink</li>
+                                </ul>
+                                
+                                <div class="product-price">$52.00 <span class="unit">(per dozen)</span></div>
+                                
+                                <button class="add-to-cart-btn" onclick="addToCart('67240', 'Star SP700 Series Ribbon', 52.00, 'per dozen', 'SP700 series')">Add to Cart</button>
+                            </div>
+                        </div>
+
+                        <!-- Product 3: Citizen Ribbon -->
+                        <div class="product-card" data-brands="citizen">
+                            <div class="product-image">🖊️</div>
+                            <div class="product-info">
+                                <div class="product-sku">SKU: citizen-ribbon</div>
+                                <div class="product-name">Citizen Impact Ribbon</div>
+                                <div class="product-desc">Compatible ribbon for Citizen CD-S500 and iDP series printers. Reliable performance.</div>
+                                
+                                <ul class="product-features">
+                                    <li>Fits CD-S500, iDP-3550, iDP-3551</li>
+                                    <li>Black/Red dual color</li>
+                                    <li>High-yield cartridge</li>
+                                    <li>Easy installation</li>
+                                </ul>
+                                
+                                <div class="product-price">$45.00 <span class="unit">(per dozen)</span></div>
+                                
+                                <button class="add-to-cart-btn" onclick="addToCart('citizen-ribbon', 'Citizen Impact Ribbon', 45.00, 'per dozen', 'CD-S500 series')">Add to Cart</button>
+                            </div>
+                        </div>
+
+                        <!-- Product 4: IBM Ribbon -->
+                        <div class="product-card" data-brands="others">
+                            <div class="product-image">🖊️</div>
+                            <div class="product-info">
+                                <div class="product-sku">SKU: ibm-ribbon</div>
+                                <div class="product-name">IBM Compatible Ribbon</div>
+                                <div class="product-desc">Compatible replacement ribbon for IBM impact printers used in POS systems.</div>
+                                
+                                <ul class="product-features">
+                                    <li>Universal IBM compatibility</li>
+                                    <li>Black/Red dual color</li>
+                                    <li>OEM equivalent</li>
+                                    <li>Bulk pricing available</li>
+                                </ul>
+                                
+                                <div class="product-price">$48.00 <span class="unit">(per dozen)</span></div>
+                                
+                                <button class="add-to-cart-btn" onclick="addToCart('ibm-ribbon', 'IBM Compatible Ribbon', 48.00, 'per dozen', 'IBM series')">Add to Cart</button>
+                            </div>
+                        </div>
+
+                        <!-- Product 5: Okidata Ribbon -->
+                        <div class="product-card" data-brands="others">
+                            <div class="product-image">🖊️</div>
+                            <div class="product-info">
+                                <div class="product-sku">SKU: oki-ribbon</div>
+                                <div class="product-name">Okidata Compatible Ribbon</div>
+                                <div class="product-desc">High-quality compatible ribbon for Okidata impact printers. Perfect for receipt and report printing.</div>
+                                
+                                <ul class="product-features">
+                                    <li>Universal Okidata compatibility</li>
+                                    <li>Black/Red dual color</li>
+                                    <li>Premium ink formula</li>
+                                    <li>Consistent print quality</li>
+                                </ul>
+                                
+                                <div class="product-price">$46.00 <span class="unit">(per dozen)</span></div>
+                                
+                                <button class="add-to-cart-btn" onclick="addToCart('oki-ribbon', 'Okidata Compatible Ribbon', 46.00, 'per dozen', 'Okidata series')">Add to Cart</button>
+                            </div>
+                        </div>
+
+                        <!-- Product 6: Universal Ribbon -->
+                        <div class="product-card" data-brands="epson star citizen others">
+                            <div class="product-image">🖊️</div>
+                            <div class="product-info">
+                                <div class="product-sku">SKU: univ-ribbon</div>
+                                <div class="product-name">Universal Impact Ribbon</div>
+                                <div class="product-desc">Multi-compatible ribbon for various impact printer models. Great for mixed printer environments.</div>
+                                
+                                <ul class="product-features">
+                                    <li>Multi-brand compatibility</li>
+                                    <li>Black/Red dual color</li>
+                                    <li>Extended yield</li>
+                                    <li>Cost-effective</li>
+                                </ul>
+                                
+                                <div class="product-price">$38.00 <span class="unit">(per dozen)</span></div>
+                                
+                                <button class="add-to-cart-btn" onclick="addToCart('univ-ribbon', 'Universal Impact Ribbon', 38.00, 'per dozen', 'Multi-brand')">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Brand Info -->
+                    <div class="brand-info">
+                        <h3>Printer Brands We Support</h3>
+                        <div class="brand-grid">
+                            <div class="brand-card">
+                                <h4>Epson</h4>
+                                <p>TM-U220, TM-U200, TM-U210, TM-U230, TM-U300</p>
+                            </div>
+                            <div class="brand-card">
+                                <h4>Star</h4>
+                                <p>SP700, SP500, SP200, SP300, HSP7000</p>
+                            </div>
+                            <div class="brand-card">
+                                <h4>Citizen</h4>
+                                <p>CD-S500, iDP-3550, iDP-3551, iDP-3540, iDP-3541</p>
+                            </div>
+                            <div class="brand-card">
+                                <h4>Others</h4>
+                                <p>IBM, Okidata, TM-U series, MP series</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h4>Performance Supply Depot</h4>
+                    <p>Your trusted source for POS supplies, printer ribbons, and receipt paper. Quality products, competitive prices.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <p><a href="tel:888-881-6834">📞 888-881-6834</a></p>
+                    <p><a href="mailto:info@psdepot.com">✉️ info@psdepot.com</a></p>
+                    <p>🕐 Mon-Fri: 8am-6pm EST</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <p><a href="/products/thermal-paper.html">Thermal Paper</a></p>
+                    <p><a href="/products/printer-ribbons.html">Printer Ribbons</a></p>
+                    <p><a href="/contact">Contact Us</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2015-2026 Performance Supply Depot LLC. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Cart functionality
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('psdepot_cart') || '[]');
+            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cart-count').textContent = count;
+        }
+
+        function addToCart(sku, name, price, unit, compatibility) {
+            let cart = JSON.parse(localStorage.getItem('psdepot_cart') || '[]');
+            
+            const existingItem = cart.find(item => item.sku === sku);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    sku: sku,
+                    name: name,
+                    price: price,
+                    unit: unit,
+                    compatibility: compatibility,
+                    quantity: 1
+                });
+            }
+            
+            localStorage.setItem('psdepot_cart', JSON.stringify(cart));
+            updateCartCount();
+            
+            // Show feedback
+            const btn = event.target;
+            btn.classList.add('added');
+            btn.textContent = '✓ Added to Cart!';
+            
+            setTimeout(() => {
+                btn.classList.remove('added');
+                btn.textContent = 'Add to Cart';
+            }, 1500);
+        }
+
+        // Tab functionality
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const brand = btn.dataset.brand;
+                filterProducts(brand);
+            });
+        });
+
+        function filterProducts(brand) {
+            const products = document.querySelectorAll('.product-card');
+            
+            products.forEach(product => {
+                if (brand === 'all' || product.dataset.brands?.includes(brand)) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+
+        // Printer selection
+        document.querySelectorAll('.printer-list li').forEach(item => {
+            item.addEventListener('click', () => {
+                // Remove active from all
+                document.querySelectorAll('.printer-list li').forEach(li => li.classList.remove('active'));
+                // Add active to clicked
+                item.classList.add('active');
+                
+                const printer = item.dataset.printer;
+                document.getElementById('selected-printer-name').textContent = printer;
+                
+                // Filter products by SKU compatibility
+                const sku = item.dataset.sku;
+                highlightCompatibleProducts(sku);
+            });
+        });
+
+        function highlightCompatibleProducts(sku) {
+            // Reset all products
+            document.querySelectorAll('.product-card').forEach(card => {
+                card.style.opacity = '0.5';
+            });
+            
+            // Highlight compatible (for demo, we'll highlight all since ribbons are often compatible)
+            // In a real implementation, you'd match by SKU
+            document.querySelectorAll('.product-card').forEach(card => {
+                card.style.opacity = '1';
+                card.style.borderColor = '#48bb78';
+            });
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCartCount();
+        });
+    </script>
+</body>
+</html>

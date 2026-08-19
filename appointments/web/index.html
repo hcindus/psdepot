@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PSD Appointments | Performance Supply Depot</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Auth Screen -->
+    <div id="auth-screen" class="screen auth-screen">
+        <div class="auth-container">
+            <div class="auth-header">
+                <div class="logo">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">PSD</span>
+                </div>
+                <h1>Appointments</h1>
+                <p>Schedule your consultation with our team</p>
+            </div>
+            <div class="auth-form">
+                <div class="input-group">
+                    <label for="auth-email">Email</label>
+                    <input type="email" id="auth-email" placeholder="Enter your email">
+                </div>
+                <div class="input-group">
+                    <label for="auth-password">Password</label>
+                    <input type="password" id="auth-password" placeholder="Enter your password">
+                </div>
+                <button id="login-btn" class="btn btn-primary">
+                    <span class="btn-text">Sign In</span>
+                    <span class="btn-loading">⌛</span>
+                </button>
+                <div id="auth-error" class="error-message"></div>
+            </div>
+            <div class="auth-footer">
+                <p>Protected by Sentinel-Dusty</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App Screen -->
+    <div id="app-screen" class="screen app-screen hidden">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-left">
+                <div class="logo">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">PSD Appointments</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="user-info">
+                    <span id="user-email"></span>
+                    <button id="logout-btn" class="btn btn-outline">Logout</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="app-main">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <nav class="nav-menu">
+                    <button class="nav-item active" data-view="calendar">
+                        <span class="nav-icon">📅</span>
+                        <span>Calendar</span>
+                    </button>
+                    <button class="nav-item" data-view="bookings">
+                        <span class="nav-icon">📋</span>
+                        <span>My Bookings</span>
+                    </button>
+                    <button class="nav-item" data-view="leads">
+                        <span class="nav-icon">🔍</span>
+                        <span>Search Leads</span>
+                    </button>
+                </nav>
+                <div class="sidebar-footer">
+                    <div class="quick-stats">
+                        <div class="stat">
+                            <span class="stat-label">Available Today</span>
+                            <span id="available-slots" class="stat-value">--</span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Content Area -->
+            <div class="content-area">
+                <!-- Calendar View -->
+                <div id="calendar-view" class="view active">
+                    <div class="view-header">
+                        <h2>Schedule Appointment</h2>
+                        <div class="calendar-controls">
+                            <button id="prev-month" class="btn btn-icon">◀</button>
+                            <h3 id="current-month-year"></h3>
+                            <button id="next-month" class="btn btn-icon">▶</button>
+                        </div>
+                        <div class="view-toggle">
+                            <button class="view-btn" data-calendar-view="month">Month</button>
+                            <button class="view-btn" data-calendar-view="week">Week</button>
+                            <button class="view-btn" data-calendar-view="day">Day</button>
+                        </div>
+                    </div>
+                    <div id="calendar-container" class="calendar-container">
+                        <div id="calendar-grid" class="calendar-grid"></div>
+                    </div>
+                </div>
+
+                <!-- Bookings View -->
+                <div id="bookings-view" class="view">
+                    <div class="view-header">
+                        <h2>My Bookings</h2>
+                    </div>
+                    <div id="bookings-list" class="bookings-list"></div>
+                </div>
+
+                <!-- Leads Search View -->
+                <div id="leads-view" class="view">
+                    <div class="view-header">
+                        <h2>Search Leads</h2>
+                    </div>
+                    <div class="search-container">
+                        <div class="search-input-group">
+                            <input type="text" id="leads-search-input" placeholder="Search by name, email, or company...">
+                            <button id="leads-search-btn" class="btn btn-primary">Search</button>
+                        </div>
+                        <div id="leads-results" class="leads-results"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Booking Modal -->
+    <div id="booking-modal" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Book Appointment</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="selected-datetime">
+                    <span id="selected-date-display"></span>
+                    <span id="selected-time-display"></span>
+                </div>
+                <form id="booking-form">
+                    <div class="form-group">
+                        <label for="booking-name">Full Name *</label>
+                        <input type="text" id="booking-name" required placeholder="Enter your full name">
+                    </div>
+                    <div class="form-group">
+                        <label for="booking-email">Email *</label>
+                        <input type="email" id="booking-email" required placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="booking-phone">Phone</label>
+                        <input type="tel" id="booking-phone" placeholder="Enter your phone number">
+                    </div>
+                    <div class="form-group">
+                        <label for="booking-notes">Notes</label>
+                        <textarea id="booking-notes" rows="3" placeholder="Any specific requirements or questions..."></textarea>
+                    </div>
+                    <div id="booking-slots" class="time-slots">
+                        <label>Available Time Slots</label>
+                        <div id="slots-container" class="slots-grid"></div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-outline modal-cancel">Cancel</button>
+                        <button type="submit" class="btn btn-primary">
+                            <span class="btn-text">Confirm Booking</span>
+                            <span class="btn-loading">⌛</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

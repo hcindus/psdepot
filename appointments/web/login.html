@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In - PSD Appointments</title>
+    <link rel="stylesheet" href="assets/auth.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="brand-header">
+                <div class="logo">
+                    <span class="logo-psd">PSD</span>
+                    <span class="logo-app">Appointments</span>
+                </div>
+                <p class="subtitle">Performance Supply Depot</p>
+            </div>
+
+            <form id="login-form" class="auth-form">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <div class="input-wrapper">
+                        <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                        <input type="email" id="email" name="email" required 
+                               autocomplete="email" placeholder="you@company.com"
+                               pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                    </div>
+                    <span class="field-error" id="email-error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-wrapper">
+                        <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                        </svg>
+                        <input type="password" id="password" name="password" required
+                               autocomplete="current-password" placeholder="Enter your password"
+                               minlength="8">
+                        <button type="button" class="toggle-password" data-target="password" aria-label="Toggle password visibility">
+                            <svg class="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                <path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <span class="field-error" id="password-error"></span>
+                </div>
+
+                <div class="form-options">
+                    <label class="checkbox-wrapper">
+                        <input type="checkbox" id="remember-me" name="rememberMe">
+                        <span class="checkmark"></span>
+                        <span class="checkbox-label">Remember me</span>
+                    </label>
+                    <a href="forgot-password.html" class="forgot-link">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="btn btn-primary" id="login-btn">
+                    <span class="btn-text">Sign In</span>
+                    <span class="btn-loading hidden">
+                        <svg class="spinner" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none" opacity="0.25"/>
+                            <path d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" fill="currentColor"/>
+                        </svg>
+                    </span>
+                </button>
+            </form>
+
+            <div id="error-banner" class="alert alert-error hidden">
+                <svg class="alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 8v4m0 4h.01"/>
+                </svg>
+                <span class="alert-message"></span>
+            </div>
+
+            <div class="auth-divider">
+                <span>New to PSD Appointments?</span>
+            </div>
+
+            <a href="register.html" class="btn btn-secondary">Create Account</a>
+
+            <div class="security-footer">
+                <p class="security-text">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                    </svg>
+                    Secured with Sentinel-Dusty Auth
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/auth.js?v=prod2"></script>
+    <script>
+        // Form validation and submission
+        const loginForm = document.getElementById('login-form');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const loginBtn = document.getElementById('login-btn');
+        const errorBanner = document.getElementById('error-banner');
+
+        // Validation functions
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        function showFieldError(fieldId, message) {
+            const errorEl = document.getElementById(fieldId + '-error');
+            const inputEl = document.getElementById(fieldId);
+            if (errorEl) {
+                errorEl.textContent = message;
+                errorEl.classList.add('visible');
+            }
+            if (inputEl) {
+                inputEl.classList.add('error');
+                inputEl.closest('.form-group').classList.add('has-error');
+            }
+        }
+
+        function clearFieldErrors() {
+            document.querySelectorAll('.field-error').forEach(el => {
+                el.textContent = '';
+                el.classList.remove('visible');
+            });
+            document.querySelectorAll('.form-group').forEach(el => {
+                el.classList.remove('has-error');
+            });
+            document.querySelectorAll('input').forEach(el => {
+                el.classList.remove('error');
+            });
+        }
+
+        function showError(message) {
+            errorBanner.querySelector('.alert-message').textContent = message;
+            errorBanner.classList.remove('hidden');
+            setTimeout(() => errorBanner.classList.add('hidden'), 5000);
+        }
+
+        // Real-time validation
+        emailInput.addEventListener('blur', () => {
+            if (emailInput.value && !validateEmail(emailInput.value)) {
+                showFieldError('email', 'Please enter a valid email address');
+            }
+        });
+
+        emailInput.addEventListener('input', () => {
+            document.getElementById('email-error').classList.remove('visible');
+            emailInput.classList.remove('error');
+        });
+
+        // Password toggle
+        document.querySelectorAll('.toggle-password').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const target = document.getElementById(btn.dataset.target);
+                const isPassword = target.type === 'password';
+                target.type = isPassword ? 'text' : 'password';
+                btn.classList.toggle('revealed', isPassword);
+            });
+        });
+
+        // Form submission
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            clearFieldErrors();
+            errorBanner.classList.add('hidden');
+
+            const email = emailInput.value.trim();
+            const password = passwordInput.value;
+            const rememberMe = document.getElementById('remember-me').checked;
+
+            // Validate
+            let hasErrors = false;
+            if (!email) {
+                showFieldError('email', 'Email is required');
+                hasErrors = true;
+            } else if (!validateEmail(email)) {
+                showFieldError('email', 'Please enter a valid email address');
+                hasErrors = true;
+            }
+            if (!password) {
+                showFieldError('password', 'Password is required');
+                hasErrors = true;
+            }
+            if (hasErrors) return;
+
+            // Show loading
+            loginBtn.disabled = true;
+            loginBtn.querySelector('.btn-text').classList.add('hidden');
+            loginBtn.querySelector('.btn-loading').classList.remove('hidden');
+
+            try {
+                const result = await AuthAPI.login({
+                    email,
+                    password,
+                    rememberMe
+                });
+
+                if (result.success) {
+                    // Store tokens
+                    const storage = rememberMe ? localStorage : sessionStorage;
+                    storage.setItem('psd_accessToken', result.accessToken);
+                    storage.setItem('psd_refreshToken', result.refreshToken);
+                    storage.setItem('psd_user', JSON.stringify(result.user));
+                    storage.setItem('psd_tokenExpiry', Date.now() + (result.expiresIn * 1000));
+
+                    // Redirect to dashboard
+                    window.location.href = '/appointments/web/dashboard.html';
+                } else if (result.requiresMFA) {
+                    // Store temp credentials for MFA
+                    sessionStorage.setItem('psd_mfa_email', email);
+                    sessionStorage.setItem('psd_mfa_password', password);
+                    window.location.href = 'mfa.html';
+                } else {
+                    throw new Error(result.error || 'Login failed');
+                }
+            } catch (err) {
+                showError(err.message || 'An error occurred. Please try again.');
+                passwordInput.value = '';
+                passwordInput.focus();
+            } finally {
+                loginBtn.disabled = false;
+                loginBtn.querySelector('.btn-text').classList.remove('hidden');
+                loginBtn.querySelector('.btn-loading').classList.add('hidden');
+            }
+        });
+
+        // Check if already logged in
+        document.addEventListener('DOMContentLoaded', () => {
+            const token = localStorage.getItem('psd_accessToken') || sessionStorage.getItem('psd_accessToken');
+            if (token) {
+                // Verify token is still valid
+                AuthAPI.verifyToken(token).then(valid => {
+                    if (valid) {
+                        window.location.replace('/appointments/web/dashboard.html');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

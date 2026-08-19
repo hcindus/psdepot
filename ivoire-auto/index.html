@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ivoire Auto | ICON4x4 Exclusive Distributor — Côte d'Ivoire</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* ICON4x4 Dark Luxury + Ivorian Colors */
+            --icon-black: #0a0a0a;
+            --icon-charcoal: #141414;
+            --icon-gray: #1a1a1a;
+            --ivoire-orange: #ff6b35;
+            --ivoire-white: #ffffff;
+            --ivoire-green: #009639;
+            --text-muted: #888888;
+            --text-light: #cccccc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--icon-black);
+            color: var(--ivoire-white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, rgba(10,10,10,0.95) 0%, transparent 100%);
+            transition: background 0.3s;
+        }
+
+        nav.scrolled {
+            background: rgba(10,10,10,0.98);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .logo span {
+            color: var(--ivoire-orange);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--ivoire-orange);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: var(--icon-black);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(135deg, rgba(10,10,10,0.4) 0%, rgba(10,10,10,0.2) 50%, rgba(10,10,10,0.4) 100%),
+                url('ivoire-flag-hero.jpg') center/cover no-repeat;
+            background-size: 100% 100%;
+            background-position: center;
+            opacity: 0.85;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at center, rgba(10,10,10,0.2) 0%, rgba(10,10,10,0.6) 100%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            max-width: 900px;
+            padding: 0 40px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            padding: 12px 25px;
+            border: 1px solid rgba(255,107,53,0.3);
+            background: rgba(255,107,53,0.05);
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .flag-icon {
+            width: 24px;
+            height: 16px;
+            background: linear-gradient(to bottom, 
+                var(--ivoire-orange) 33%, 
+                var(--ivoire-white) 33%, 
+                var(--ivoire-white) 66%, 
+                var(--ivoire-green) 66%);
+            border-radius: 2px;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 400;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            letter-spacing: -2px;
+        }
+
+        .hero h1 span {
+            color: var(--ivoire-orange);
+            font-style: italic;
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: var(--ivoire-white);
+            margin-bottom: 50px;
+            font-weight: 300;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.9), 0 4px 8px rgba(0,0,0,0.8), 0 8px 16px rgba(0,0,0,0.7);
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px 50px;
+            background: var(--ivoire-orange);
+            color: var(--icon-black);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+            border: 2px solid var(--ivoire-orange);
+        }
+
+        .hero-cta:hover {
+            background: transparent;
+            color: var(--ivoire-orange);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-muted);
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 60px;
+            background: linear-gradient(to bottom, var(--ivoire-orange), transparent);
+            animation: scrollPulse 2s infinite;
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        /* Section Styling */
+        section {
+            padding: 120px 40px;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-label {
+            display: inline-block;
+            color: var(--ivoire-orange);
+            font-size: 0.75rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .section-label::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 2px;
+            background: var(--ivoire-orange);
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 400;
+            line-height: 1.2;
+        }
+
+        /* About Section */
+        .about {
+            background: var(--icon-charcoal);
+        }
+
+        .about-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        .about-text p {
+            margin-bottom: 25px;
+        }
+
+        .about-image {
+            position: relative;
+            height: 500px;
+            background: var(--icon-gray);
+            overflow: hidden;
+        }
+
+        .about-image::before {
+            content: 'ICON4x4 Vehicle Workshop';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+        }
+
+        .about-image::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            bottom: 20px;
+            left: 20px;
+            border: 1px solid var(--ivoire-orange);
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        /* Features Grid */
+        .features {
+            background: var(--icon-black);
+        }
+
+        .features-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            background: var(--icon-gray);
+        }
+
+        .feature-card {
+            background: var(--icon-black);
+            padding: 60px 40px;
+            text-align: center;
+            transition: background 0.3s;
+        }
+
+        .feature-card:hover {
+            background: var(--icon-charcoal);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+        }
+
+        .feature-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 400;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* Vehicle Showcase */
+        .showcase {
+            background: var(--icon-charcoal);
+            padding: 0;
+        }
+
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .showcase-item {
+            position: relative;
+            height: 600px;
+            overflow: hidden;
+            background: var(--icon-gray);
+        }
+
+        .showcase-item::before {
+            display: none;
+        }
+
+        .showcase-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 40px;
+            background: linear-gradient(to top, rgba(10,10,10,0.95), transparent);
+            z-index: 2;
+        }
+
+        .showcase-overlay h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .showcase-overlay p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Stats Section */
+        .stats {
+            background: var(--icon-black);
+            border-top: 1px solid var(--icon-gray);
+            border-bottom: 1px solid var(--icon-gray);
+        }
+
+        .stats-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            text-align: center;
+        }
+
+        .stat-item h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 400;
+            color: var(--ivoire-orange);
+            margin-bottom: 10px;
+        }
+
+        .stat-item p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Partnership Section */
+        .partnership {
+            background: var(--icon-black);
+        }
+
+        .partnership-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .partnership-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 60px;
+            margin: 60px 0;
+            flex-wrap: wrap;
+        }
+
+        .partner-item {
+            text-align: center;
+        }
+
+        .partner-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 500;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+        }
+
+        .partner-location {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .partnership-arrow {
+            font-size: 2rem;
+            color: var(--ivoire-orange);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--icon-charcoal) 0%, var(--icon-black) 100%);
+            text-align: center;
+            padding: 150px 40px;
+        }
+
+        .cta-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 400;
+            margin-bottom: 30px;
+        }
+
+        .cta-section p {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 50px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            padding: 18px 45px;
+            background: var(--ivoire-orange);
+            color: var(--icon-black);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+            border: 2px solid var(--ivoire-orange);
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--ivoire-orange);
+        }
+
+        .btn-secondary {
+            padding: 18px 45px;
+            background: transparent;
+            color: var(--ivoire-white);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+            border: 1px solid var(--text-muted);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--ivoire-orange);
+            color: var(--ivoire-orange);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--icon-charcoal);
+            padding: 80px 40px 40px;
+        }
+
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .footer-brand .logo {
+            margin-bottom: 20px;
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .footer-column h4 {
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            color: var(--ivoire-white);
+        }
+
+        .footer-column a {
+            display: block;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+            transition: color 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: var(--ivoire-orange);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 40px;
+            border-top: 1px solid var(--icon-gray);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-bottom p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .footer-flags {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .footer-flag {
+            width: 40px;
+            height: 26px;
+            border-radius: 3px;
+        }
+
+        .flag-usa {
+            background: linear-gradient(to bottom, #b22234 7%, white 7%, white 14%, #b22234 14%, #b22234 21%, white 21%, white 28%, #b22234 28%, #b22234 35%, white 35%, white 42%, #b22234 42%, #b22234 49%, white 49%, white 56%, #b22234 56%, #b22234 63%, white 63%, white 70%, #b22234 70%, #b22234 77%, white 77%, white 84%, #b22234 84%, #b22234 91%, white 91%);
+            position: relative;
+        }
+
+        .flag-usa::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 40%;
+            height: 50%;
+            background: #3c3b6e;
+        }
+
+        .flag-ivoire {
+            background: linear-gradient(to right, var(--ivoire-orange) 33%, var(--ivoire-white) 33%, var(--ivoire-white) 66%, var(--ivoire-green) 66%);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 15px 20px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .showcase-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .partnership-logos {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            .partnership-arrow {
+                transform: rotate(90deg);
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        <div class="logo">Ivoire <span>Auto</span></div>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#vehicles">Vehicles</a></li>
+            <li><a href="#partnership">Partnership</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <div class="flag-icon"></div>
+                <span>Exclusive Distributor — Côte d'Ivoire</span>
+                <div class="flag-icon" style="background: linear-gradient(to bottom, #b22234 7%, white 7%, white 14%, #b22234 14%, #b22234 21%, white 21%, white 28%, #b22234 28%, #b22234 35%, white 35%, white 42%, #b22234 42%, #b22234 49%, white 49%, white 56%, #b22234 56%, #b22234 63%, white 63%, white 70%, #b22234 70%, #b22234 77%, white 77%, white 84%, #b22234 84%, #b22234 91%, white 91%);"></div>
+            </div>
+            <h1>ICON4x4 <span>Arrives</span><br>in West Africa</h1>
+            <div style="background: linear-gradient(90deg, rgba(255,107,53,0.2) 0%, rgba(10,10,10,0.6) 20%, rgba(10,10,10,0.6) 80%, rgba(0,150,57,0.2) 100%); padding: 20px 40px; border-radius: 8px; margin: 30px auto; display: inline-block; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 40px rgba(0,0,0,0.5);">
+                <p class="hero-subtitle" style="margin: 0; padding: 0; border: none; background: none;">Handcrafted American 4x4 vehicles. Made in Los Angeles. Delivered to Abidjan.</p>
+            </div>
+            <a href="#contact" class="hero-cta">Explore Partnership →</a>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="section-header">
+            <span class="section-label">The Craft</span>
+            <h2 class="section-title">Hand Made in Los Angeles</h2>
+        </div>
+        <div class="about-content">
+            <div class="about-text">
+                <p>Every ICON4x4 vehicle begins as a vision and ends as a masterpiece. Our team of artisans in Los Angeles spends over 1,000 hours hand-assembling each vehicle, combining vintage 4x4 aesthetics with modern performance.</p>
+                <p>From Toyota FJ40s to Ford Broncos, we source the finest materials—full-grain leather, marine-grade hardware, and aircraft-quality aluminum—to create vehicles that aren't just driven, but experienced.</p>
+                <p>Now, through our exclusive partnership with Ivoire Auto, these American-crafted icons are available in Côte d'Ivoire for the first time.</p>
+            </div>
+            <div class="about-image" style="background: linear-gradient(rgba(10,10,10,0.3), rgba(10,10,10,0.3)), url('images/vehicles/icon-fj43-detail.jpg') center/cover no-repeat; position: relative;">
+                <div style="position: absolute; bottom: 20px; left: 20px; right: 20px; padding: 20px; background: rgba(10,10,10,0.8); border-left: 3px solid var(--ivoire-orange);">
+                    <p style="color: var(--ivoire-orange); font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 5px;">ICON FJ43 Heritage</p>
+                    <p style="color: var(--text-light); font-size: 0.9rem;">Hand-assembled in Los Angeles</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Modern Performance</h3>
+                <p>Contemporary engines and suspensions power classic designs. The best of both eras, engineered for today's roads.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">✋</div>
+                <h3>Hand Assembled</h3>
+                <p>No assembly lines. Master craftsmen personally build every vehicle. Quality you can feel in every detail.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌍</div>
+                <h3>West Africa Ready</h3>
+                <p>Built tough for challenging terrain. Perfect for Côte d'Ivoire's diverse landscapes, from Abidjan streets to rural roads.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="showcase" id="vehicles">
+        <div class="section-header" style="padding: 80px 40px 40px; background: var(--icon-charcoal);">
+            <span class="section-label">The Collection</span>
+            <h2 class="section-title">ICON FJ43 Series</h2>
+        </div>
+        <div class="showcase-grid">
+            <div class="showcase-item" style="background: linear-gradient(rgba(10,10,10,0.2), rgba(10,10,10,0.2)), url('images/vehicles/icon-fj43-rear.jpg') center/cover no-repeat;">
+                <div class="showcase-overlay">
+                    <h3>ICON FJ43 Heritage Edition</h3>
+                    <p>1960s Toyota Land Cruiser reborn with modern performance. LS3 V8 power, hand-stitched leather, all-terrain capability. Matte grey finish with black soft top. Starting at $225,000.</p>
+                </div>
+            </div>
+            <div class="showcase-item" style="background: linear-gradient(rgba(10,10,10,0.2), rgba(10,10,10,0.2)), url('images/vehicles/icon-fj43-side.jpg') center/cover no-repeat;">
+                <div class="showcase-overlay">
+                    <h3>ICON FJ43 Trail Scout</h3>
+                    <p>Lifted suspension, oversized all-terrain tires, custom beadlock wheels. Built for the challenging terrain of Côte d'Ivoire. Military-grade olive drab paint. Starting at $235,000.</p>
+                </div>
+            </div>
+            <div class="showcase-item" style="background: linear-gradient(rgba(10,10,10,0.2), rgba(10,10,10,0.2)), url('images/vehicles/icon-fj43-action.jpg') center/cover no-repeat;">
+                <div class="showcase-overlay">
+                    <h3>ICON FJ43 Safari Runner</h3>
+                    <p>Lightweight configuration with canvas soft top. Perfect for warm climate adventures. Classic sage green with chrome accents. Speed, style, and reliability. Starting at $215,000.</p>
+                </div>
+            </div>
+            <div class="showcase-item" style="background: linear-gradient(rgba(10,10,10,0.2), rgba(10,10,10,0.2)), url('images/vehicles/icon-fj43-detail.jpg') center/cover no-repeat;">
+                <div class="showcase-overlay">
+                    <h3>ICON FJ43 Signature Detail</h3>
+                    <p>Every ICON vehicle receives 1,000+ hours of hand assembly. Aircraft-grade aluminum body panels, marine-grade hardware, and full-grain leather interiors. Built to last generations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <h4>1,000+</h4>
+                <p>Hours Per Build</p>
+            </div>
+            <div class="stat-item">
+                <h4>$200K+</h4>
+                <p>Starting Investment</p>
+            </div>
+            <div class="stat-item">
+                <h4>100%</h4>
+                <p>Hand Assembled</p>
+            </div>
+            <div class="stat-item">
+                <h4>🇨🇮</h4>
+                <p>Now in Côte d'Ivoire</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="partnership" id="partnership">
+        <div class="section-header">
+            <span class="section-label">The Partnership</span>
+            <h2 class="section-title">Bridging Two Continents</h2>
+        </div>
+        <div class="partnership-content">
+            <div class="partnership-logos">
+                <div class="partner-item">
+                    <div class="partner-logo">ICON4x4</div>
+                    <div class="partner-location">Los Angeles, USA</div>
+                </div>
+                <div class="partnership-arrow">→</div>
+                <div class="partner-item">
+                    <div class="partner-logo" style="color: #ff6b35;">Ivoire Auto</div>
+                    <div class="partner-location">Abidjan, Côte d'Ivoire</div>
+                </div>
+                <div class="partnership-arrow">→</div>
+                <div class="partner-item">
+                    <div class="partner-logo" style="font-size: 1.2rem;">You</div>
+                    <div class="partner-location">West Africa</div>
+                </div>
+            </div>
+            <p style="color: var(--text-muted); max-width: 700px; margin: 0 auto; line-height: 1.8; font-size: 1.1rem;">
+                Performance Supply Depot LLC facilitates this exclusive partnership, handling logistics, 
+                import compliance, and ongoing support. We bring American craftsmanship to African roads.
+            </p>
+        </div>
+    </section>
+
+    <section class="cta-section" id="contact">
+        <h2>Ready to Drive an ICON?</h2>
+        <p>Be among the first in Côte d'Ivoire to own a handcrafted ICON4x4. 
+        Join our exclusive waitlist for the initial delivery of showcase vehicles.</p>
+        <div class="cta-buttons">
+            <a href="mailto:miles@psdepot.com" class="btn-primary">Request Information</a>
+            <a href="tel:+18888816834" class="btn-secondary">Call +1 (888) 881-6834</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="logo">Ivoire <span style="color: #ff6b35;">Auto</span></div>
+                <p>Exclusive distributor of ICON4x4 vehicles in Côte d'Ivoire. 
+                Bringing American craftsmanship to West Africa since 2026.</p>
+            </div>
+            <div class="footer-column">
+                <h4>Explore</h4>
+                <a href="#about">About ICON4x4</a>
+                <a href="#vehicles">Our Vehicles</a>
+                <a href="#partnership">Partnership</a>
+            </div>
+            <div class="footer-column">
+                <h4>Contact</h4>
+                <a href="mailto:miles@psdepot.com">miles@psdepot.com</a>
+                <a href="tel:+18888816834">+1 (888) 881-6834</a>
+                <a href="tel:+14155719724">+1 (415) 571-9724</a>
+            </div>
+            <div class="footer-column">
+                <h4>Connect</h4>
+                <a href="https://icon4x4.com" target="_blank">ICON4x4 Official</a>
+                <a href="https://psdepot.com">Performance Supply Depot</a>
+                <a href="agreement.html">Buyer Agreement</a>
+                <a href="seller.html">Seller Portal</a>
+                <a href="privacy.html">Privacy Policy</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div>
+                <p style="margin-bottom: 10px;">© 2026 Ivoire Auto. A venture of Performance Supply Depot LLC. Miami, FL, USA | Licensed Vehicle Exporter</p>
+                <p style="font-size: 0.9rem;">🔒 SSL Secured &nbsp;&nbsp; 📜 Licensed Exporter &nbsp;&nbsp; 🌍 Global Shipping &nbsp;&nbsp; ✅ Verified Vehicles</p>
+            </div>
+            <div class="footer-flags">
+                <div class="footer-flag flag-usa"></div>
+                <span style="color: var(--text-muted);">×</span>
+                <div class="footer-flag flag-ivoire"></div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Performance Supply Depot - 4th of July Celebration</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #003366 0%, #1a1a2e 50%, #0a0a1a 100%);
+            min-height: 100vh;
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        /* Stars background */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle 2s infinite alternate;
+        }
+        
+        @keyframes twinkle {
+            0% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+        
+        /* Fireworks */
+        .firework {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        /* Container */
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Patriotic header */
+        .header {
+            background: linear-gradient(180deg, #003366 0%, #004080 50%, #0066cc 100%);
+            padding: 50px 40px;
+            text-align: center;
+            border-radius: 20px 20px 0 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        }
+        
+        .header::before {
+            content: "🎆";
+            position: absolute;
+            left: 5%;
+            top: 20%;
+            font-size: 40px;
+            opacity: 0.3;
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        .header::after {
+            content: "✨";
+            position: absolute;
+            right: 10%;
+            top: 30%;
+            font-size: 30px;
+            opacity: 0.4;
+            animation: float 5s ease-in-out infinite reverse;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        .logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 48px;
+            color: #fff;
+            letter-spacing: 4px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+            margin-bottom: 5px;
+        }
+        
+        .tagline {
+            color: #ff6600;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+        
+        /* Patriotic banner */
+        .patriotic-banner {
+            background: linear-gradient(90deg, #c41e3a 33.33%, #ffffff 33.33%, #ffffff 66.66%, #003366 66.66%);
+            height: 10px;
+        }
+        
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #003366 0%, #004080 100%);
+            padding: 60px 40px;
+            text-align: center;
+            color: white;
+        }
+        
+        .hero h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 72px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            text-shadow: 4px 4px 8px rgba(0,0,0,0.5);
+        }
+        
+        .hero h1 .red { color: #ff3333; text-shadow: 0 0 20px #ff3333; }
+        .hero h1 .white { color: #ffffff; text-shadow: 0 0 20px #ffffff; }
+        .hero h1 .blue { color: #66b3ff; text-shadow: 0 0 20px #66b3ff; }
+        
+        .hero-tagline {
+            font-size: 24px;
+            font-style: italic;
+            color: #ffd700;
+            margin-bottom: 30px;
+            font-weight: 600;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .hero-desc {
+            font-size: 18px;
+            color: rgba(255,255,255,0.9);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+        
+        /* Flag divider */
+        .flag-divider {
+            height: 20px;
+            background: repeating-linear-gradient(
+                90deg,
+                #c41e3a 0px, #c41e3a 40px,
+                #ffffff 40px, #ffffff 80px,
+                #003366 80px, #003366 120px
+            );
+        }
+        
+        /* Products section */
+        .products-section {
+            background: white;
+            padding: 60px 40px;
+        }
+        
+        .section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 36px;
+            color: #003366;
+            text-align: center;
+            margin-bottom: 10px;
+            letter-spacing: 3px;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 40px;
+        }
+        
+        .product-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .product {
+            background: linear-gradient(145deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 30px 35px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border-top: 4px solid #ff6600;
+            min-width: 160px;
+            cursor: pointer;
+        }
+        
+        .product:nth-child(2) { border-top-color: #003366; }
+        .product:nth-child(3) { border-top-color: #c41e3a; }
+        .product:nth-child(4) { border-top-color: #ffd700; }
+        
+        .product:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .product a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .product-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+        
+        .product-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: #003366;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* CTA Box */
+        .cta-box {
+            background: linear-gradient(135deg, #003366 0%, #004080 100%);
+            padding: 50px 40px;
+            text-align: center;
+            margin-top: 40px;
+            border-radius: 15px;
+        }
+        
+        .cta-text {
+            color: white;
+            font-size: 24px;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: #ff6600;
+            color: white;
+            padding: 18px 50px;
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(255,102,0,0.4);
+            transition: all 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            background: #e55a00;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255,102,0,0.5);
+        }
+        
+        /* Phone Banner - Patriotic Blinking */
+        .phone-banner {
+            background: linear-gradient(135deg, #c41e3a 0%, #9b2c2c 100%);
+            padding: 30px;
+            text-align: center;
+            border-top: 4px solid #ffd700;
+            border-bottom: 4px solid #ffd700;
+        }
+        
+        .phone-label {
+            font-size: 14px;
+            color: #ffd700;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .phone-number {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 48px;
+            font-weight: bold;
+            color: white;
+            text-shadow:
+                0 0 10px #ffd700,
+                0 0 20px #ffd700,
+                0 0 30px #ff6b6b,
+                2px 2px 0 #0a1628;
+            letter-spacing: 6px;
+            animation: patriotic-blink 1.5s ease-in-out infinite;
+        }
+        
+        .phone-firework {
+            display: inline-block;
+            margin: 0 15px;
+            font-size: 32px;
+        }
+        
+        @keyframes patriotic-blink {
+            0%, 100% {
+                color: white;
+                text-shadow:
+                    0 0 10px #ffd700,
+                    0 0 20px #ffd700,
+                    0 0 30px #ff6b6b;
+            }
+            25% {
+                color: #ffd700;
+                text-shadow:
+                    0 0 20px white,
+                    0 0 40px #ffd700,
+                    0 0 60px #ff6b6b;
+            }
+            50% {
+                color: #00d4ff;
+                text-shadow:
+                    0 0 15px white,
+                    0 0 30px #00d4ff,
+                    0 0 45px #ffd700;
+            }
+            75% {
+                color: #ff6b6b;
+                text-shadow:
+                    0 0 20px white,
+                    0 0 40px #ff6b6b,
+                    0 0 60px #ffd700;
+            }
+        }
+        
+        /* Features */
+        .features {
+            background: #f8f9fa;
+            padding: 60px 40px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+        
+        .feature {
+            text-align: center;
+            max-width: 200px;
+        }
+        
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+        
+        .feature-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #003366;
+            margin-bottom: 10px;
+        }
+        
+        .feature-desc {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #0a0a1a;
+            color: #999;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .footer-brand {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 24px;
+            color: white;
+            margin-bottom: 15px;
+            letter-spacing: 3px;
+        }
+        
+        .footer-links {
+            margin: 20px 0;
+        }
+        
+        .footer-links a {
+            color: #ff6600;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 14px;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        
+        .footer-text {
+            font-size: 12px;
+            color: #666;
+            margin-top: 20px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .logo { font-size: 32px; }
+            .hero h1 { font-size: 42px; }
+            .hero-tagline { font-size: 18px; }
+            .phone-number { font-size: 32px; letter-spacing: 3px; }
+            .product-grid { flex-direction: column; align-items: center; }
+            .product { width: 100%; max-width: 300px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Stars background -->
+    <div class="stars" id="stars"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">PERFORMANCE SUPPLY DEPOT</div>
+            <div class="tagline">Your Partner in Retail Solutions</div>
+        </div>
+        
+        <!-- Patriotic Banner -->
+        <div class="patriotic-banner"></div>
+        
+        <!-- Hero -->
+        <div class="hero">
+            <h1>
+                <span class="red">Happy</span> 
+                <span class="white">4th of</span> 
+                <span class="blue">July</span>
+            </h1>
+            <div class="hero-tagline">"Home of the Tree, Land of the Trade"</div>
+            <div class="hero-desc">
+                🇺🇸 Celebrating Independence, Innovation, and American Business 🇺🇸
+            </div>
+        </div>
+        
+        <!-- Flag Divider -->
+        <div class="flag-divider"></div>
+        
+        <!-- Products Section -->
+        <div class="products-section">
+            <h2 class="section-title">What We Supply</h2>
+            <p class="section-subtitle">Quality products for your business needs</p>
+            
+            <div class="product-grid">
+                <div class="product">
+                    <a href="https://psdepot.com" target="_blank">
+                        <div class="product-icon">🖨️</div>
+                        <div class="product-name">Thermal Rolls</div>
+                    </a>
+                </div>
+                
+                <div class="product">
+                    <a href="https://psdepot.com" target="_blank">
+                        <div class="product-icon">📦</div>
+                        <div class="product-name">Paper Supply</div>
+                    </a>
+                </div>
+                
+                <div class="product">
+                    <a href="https://psdepot.com" target="_blank">
+                        <div class="product-icon">🖊️</div>
+                        <div class="product-name">Toners & Ink</div>
+                    </a>
+                </div>
+                
+                <div class="product">
+                    <a href="https://psdepot.com" target="_blank">
+                        <div class="product-icon">⚖️</div>
+                        <div class="product-name">Scales</div>
+                    </a>
+                </div>
+                
+                <div class="product">
+                    <a href="https://psdepot.com" target="_blank">
+                        <div class="product-icon">💻</div>
+                        <div class="product-name">POS Systems</div>
+                    </a>
+                </div>
+                
+                <div class="product">
+                    <a href="https://psdepot.com" target="_blank">
+                        <div class="product-icon">💵</div>
+                        <div class="product-name">Cash Registers</div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="cta-box">
+                <div class="cta-text">Ready to Power Your Business?</div>
+                <a href="https://psdepot.com" class="cta-button">Shop Now</a>
+            </div>
+        </div>
+        
+        <!-- Flag Divider -->
+        <div class="flag-divider"></div>
+        
+        <!-- Phone Banner -->
+        <div class="phone-banner">
+            <div class="phone-label">📞 Call Us Today 📞</div>
+            <div class="phone-number">
+                <span class="phone-firework">🎆</span>
+                888-881-6834
+                <span class="phone-firework">🎇</span>
+            </div>
+        </div>
+        
+        <!-- Features -->
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">📦</div>
+                <div class="feature-title">Same Day Shipping</div>
+                <div class="feature-desc">On most orders before 2pm</div>
+            </div>
+            
+            <div class="feature">
+                <div class="feature-icon">💰</div>
+                <div class="feature-title">Best Pricing</div>
+                <div class="feature-desc">Competitive rates always</div>
+            </div>
+            
+            <div class="feature">
+                <div class="feature-icon">🤝</div>
+                <div class="feature-title">Expert Support</div>
+                <div class="feature-desc">Dedicated team ready</div>
+            </div>
+            
+            <div class="feature">
+                <div class="feature-icon">⭐</div>
+                <div class="feature-title">Quality Brands</div>
+                <div class="feature-desc">Top POS brands in stock</div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-brand">PERFORMANCE SUPPLY DEPOT LLC</div>
+            
+            <div class="footer-links">
+                <a href="https://psdepot.com">Website</a>
+                <a href="mailto:info@psdepot.com">Email Us</a>
+                <a href="tel:888-881-6834">Call Now</a>
+            </div>
+            
+            <p class="footer-text">
+                🇺🇸 Proudly Serving American Businesses 🇺🇸<br>
+                Mon-Fri: 7am-6pm PST | California | Nationwide
+            </p>
+            
+            <p class="footer-text">
+                &copy; 2026 Performance Supply Depot LLC. All rights reserved.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Generate stars
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 150; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 2 + 's';
+            star.style.opacity = Math.random();
+            starsContainer.appendChild(star);
+        }
+
+        // Fireworks effect
+        function createFirework() {
+            const colors = ['#ff6b6b', '#4ecdc4', '#ffd93d', '#ff6600', '#00d4ff', '#ff3333'];
+            const x = Math.random() * window.innerWidth;
+            const y = Math.random() * window.innerHeight * 0.6;
+            
+            for (let i = 0; i < 15; i++) {
+                const firework = document.createElement('div');
+                firework.className = 'firework';
+                firework.style.left = x + 'px';
+                firework.style.top = y + 'px';
+                firework.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                firework.style.boxShadow = `0 0 10px ${firework.style.backgroundColor}`;
+                
+                const angle = (i / 15) * Math.PI * 2;
+                const velocity = 100 + Math.random() * 50;
+                const dx = Math.cos(angle) * velocity;
+                const dy = Math.sin(angle) * velocity;
+                
+                firework.animate([
+                    { transform: 'translate(0, 0) scale(1)', opacity: 1 },
+                    { transform: `translate(${dx}px, ${dy}px) scale(0)`, opacity: 0 }
+                ], {
+                    duration: 2000 + Math.random() * 1000,
+                    easing: 'ease-out'
+                });
+                
+                document.body.appendChild(firework);
+                setTimeout(() => firework.remove(), 3000);
+            }
+        }
+
+        setInterval(createFirework, 3000);
+    </script>
+</body>
+</html>

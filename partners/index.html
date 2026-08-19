@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Partners & Vendors | Performance Supply Depot</title>
+    <meta name="description" content="Performance Supply Depot partners with industry-leading POS manufacturers including M-S Cash Drawer, Star Micronics, Epson, Pioneer Solutions, and more. Authorized dealer for 35+ brands.">
+    <meta name="keywords" content="POS vendors, M-S Cash Drawer, Star Micronics, Epson, Pioneer Solutions, authorized dealer, POS hardware partners">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Our Partners & Vendors | Performance Supply Depot">
+    <meta property="og:description" content="Performance Supply Depot partners with industry-leading POS manufacturers including M-S Cash Drawer, Star Micronics, Epson, Pioneer Solutions, and more.">
+    <meta property="og:url" content="https://psdepot.com/partners">
+    <meta property="og:type" content="website">
+
+    <!-- Organization Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Performance Supply Depot LLC",
+      "url": "https://psdepot.com",
+      "logo": "https://psdepot.com/assets/images/psdepot-logo.png",
+      "description": "Authorized dealer for M-S Cash Drawer and 35+ POS hardware vendors",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+1-888-881-6834",
+        "contactType": "sales"
+      },
+      "makesOffer": {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Product",
+          "name": "POS Hardware Solutions"
+        }
+      }
+    }
+    </script>
+
+    <style>
+        :root {
+            --primary: #003366;
+            --secondary: #ff6600;
+            --accent: #ffd700;
+            --success: #28a745;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --border: #dee2e6;
+            --ms-blue: #0066cc;
+            --ms-dark: #003366;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: var(--light);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 15px 0;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        .header-phone a {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 20px 0;
+            font-size: 14px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: 20px;
+        }
+
+        .breadcrumb a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumb span {
+            color: var(--gray);
+            margin: 0 8px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: bold;
+            color: var(--accent);
+        }
+
+        .stat-label {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+        }
+
+        /* Featured Partner */
+        .featured-partner {
+            background: white;
+            padding: 60px 20px;
+            margin: 40px auto;
+            max-width: 1200px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .featured-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--ms-blue), var(--ms-dark));
+            color: white;
+            padding: 8px 25px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .featured-content {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        /* Mobile optimizations */
+
+        .partner-logo-container {
+            background: var(--dark);
+            padding: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .partner-logo-container img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .partner-info h2 {
+            font-size: 32px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .partner-info h2 a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .partner-info h2 a:hover {
+            color: var(--secondary);
+        }
+
+        .awards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .award-badge {
+            background: linear-gradient(135deg, var(--accent), #ffaa00);
+            color: var(--dark);
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .partner-description {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 25px;
+        }
+
+        .partner-highlights {
+            list-style: none;
+        }
+
+        .partner-highlights li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .partner-highlights li:last-child {
+            border-bottom: none;
+        }
+
+        .partner-highlights li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        .partner-cta {
+            margin-top: 30px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #e55a00;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Vendor Categories */
+        .vendor-categories {
+            background: var(--light);
+            padding: 60px 20px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-size: 32px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            color: var(--gray);
+            font-size: 16px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .category-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .category-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .category-card h3 {
+            font-size: 20px;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .category-card p {
+            color: var(--gray);
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .vendor-list {
+            list-style: none;
+            font-size: 14px;
+        }
+
+        .vendor-list li {
+            padding: 5px 0;
+            border-bottom: 1px dashed var(--border);
+        }
+
+        .vendor-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* ISV Partners */
+        .isv-section {
+            background: white;
+            padding: 60px 20px;
+        }
+
+        .isv-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            max-width: 1000px;
+            margin: 40px auto 0;
+        }
+
+        .isv-badge {
+            background: var(--light);
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 500;
+            border: 2px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .isv-badge:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        } .cta-section h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        } .cta-section p {
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+
+        .cta-phone {
+            font-size: 42px;
+            font-weight: bold;
+            color: var(--accent);
+            margin: 30px 0;
+            display: inline-block;
+            animation: patrioticBlink 2s infinite;
+        }
+
+        .cta-phone a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        @keyframes patrioticBlink {
+            0%, 33% { color: #ff6b6b; }
+            34%, 66% { color: #ffffff; }
+            67%, 100% { color: #4ecdc4; }
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .footer h3 {
+            margin-bottom: 15px;
+        }
+
+        .footer p {
+            color: #aaa;
+            margin-bottom: 10px;
+        }
+
+        .footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        /* Backlink Section */
+        .backlink-section {
+            background: var(--light);
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 3px solid var(--border);
+        }
+
+        .backlink-section h3 {
+            font-size: 18px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .backlink-card {
+            display: inline-block;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            max-width: 400px;
+        }
+
+        .backlink-card img {
+            max-width: 200px;
+            height: auto;
+            margin-bottom: 15px;
+        }
+
+        .backlink-card a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .backlink-card a:hover {
+            text-decoration: underline;
+        }
+
+        /* SEO Text */
+        .seo-text {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+            font-size: 14px;
+            color: var(--gray);
+            line-height: 1.8;
+        }
+
+        .seo-text h2 {
+            font-size: 20px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">Performance<span>Supply</span>Depot</div>
+            <div class="header-phone"><a href="tel:888-881-6834">888-881-6834</a></div>
+        </div>
+    </header>
+
+    <nav class="breadcrumb">
+        <a href="/">Home</a>
+        <span>/</span>
+        <span>Partners & Vendors</span>
+    </nav>
+
+    <section class="hero">
+        <h1>Our Industry Partners</h1>
+        <p>Performance Supply Depot is an authorized dealer for M-S Cash Drawer and 35+ leading POS hardware manufacturers. We bring you the best equipment with expert support.</p>
+
+        <div class="hero-stats">
+            <div class="stat">
+                <div class="stat-number">35+</div>
+                <div class="stat-label">Vendor Partners</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">12x</div>
+                <div class="stat-label">Award Winner</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Authorized Dealer</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <section class="featured-partner">
+            <div class="featured-badge">★ Featured Partner</div>
+
+            <div class="featured-content">
+                <div class="partner-logo-container">
+                    <a href="https://mscashdrawer.com" target="_blank" rel="noopener noreferrer">
+                        <img src="/assets/images/vendors/ms-cashdrawer-logo.png" alt="M-S Cash Drawer - Industry-Leading Cash Drawer Manufacturer">
+                    </a>
+                </div>
+
+                <div class="partner-info">
+                    <h2><a href="https://mscashdrawer.com" target="_blank" rel="noopener noreferrer">M-S Cash Drawer</a></h2>
+
+                    <div class="awards">
+                        <span class="award-badge">🏆 12x RSPA Vendor Award Winner</span>
+                        <span class="award-badge">⭐ 35+ Vendor Network</span>
+                        <span class="award-badge">🏅 Technology Distributor Excellence</span>
+                    </div>
+
+                    <p class="partner-description">
+                        M-S Cash Drawer is a leading manufacturer of cash drawers and a premier distributor of POS solutions and peripherals. They ensure the success of VARs, ISVs, and ISO channel partners through comprehensive technical support, system integration, training, education, and marketing. As their authorized dealer, we bring you their full arsenal of products at competitive prices.
+                    </p>
+
+                    <ul class="partner-highlights">
+                        <li>Industry-leading cash drawers with Smart Cord technology</li>
+                        <li>mC-Connect: Control up to 4 drawers from a single device</li>
+                        <li>Distribution partner for 35+ top POS hardware brands</li>
+                        <li>12-time RSPA Vendor Award of Excellence winner (2025)</li>
+                        <li>Comprehensive training and technical support programs</li>
+                        <li>Strong ISV partnerships: Square, RPOWER, OrderCounter, and more</li>
+                    </ul>
+
+                    <div class="partner-cta">
+                        <a href="https://mscashdrawer.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Visit M-S Cash Drawer →</a>
+                        <a href="/categories/cash-drawers" class="btn btn-outline">View Products</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <section class="vendor-categories">
+        <div class="section-header">
+            <h2>Product Categories</h2>
+            <p>Through our partnership with M-S Cash Drawer, we offer products across these major categories</p>
+        </div>
+
+        <div class="categories-grid">
+            <div class="category-card">
+                <div class="category-icon">💰</div>
+                <h3>Cash Drawers</h3>
+                <p>Smart Cord series, Heavy Duty models, and multi-drawer controllers</p>
+                <ul class="vendor-list">
+                    <li>M-S Cash Drawer (Featured)</li>
+                    <li>APG Cash Drawer</li>
+                    <li>MMF POS</li>
+                </ul>
+            </div>
+
+            <div class="category-card">
+                <div class="category-icon">🖨️</div>
+                <h3>Receipt Printers</h3>
+                <p>High-speed thermal printers with USB, Ethernet, and wireless options</p>
+                <ul class="vendor-list">
+                    <li>Star Micronics</li>
+                    <li>Epson</li>
+                    <li>Bixolon</li>
+                </ul>
+            </div>
+
+            <div class="category-card">
+                <div class="category-icon">💻</div>
+                <h3>POS Systems</h3>
+                <p>All-in-one terminals, kiosks, and touchscreen solutions</p>
+                <ul class="vendor-list">
+                    <li>Pioneer Solutions</li>
+                    <li>Touch Dynamic</li>
+                    <li>SAM4S</li>
+                </ul>
+            </div>
+
+            <div class="category-card">
+                <div class="category-icon">🏷️</div>
+                <h3>Label Printers</h3>
+                <p>Desktop and industrial label printing solutions</p>
+                <ul class="vendor-list">
+                    <li>Bixolon</li>
+                    <li>Citizen</li>
+                    <li>Zebra</li>
+                </ul>
+            </div>
+
+            <div class="category-card">
+                <div class="category-icon">⚖️</div>
+                <h3>Retail Scales</h3>
+                <p>NTEP certified scales for grocery, deli, and specialty retail</p>
+                <ul class="vendor-list">
+                    <li>CAS</li>
+                    <li>A&D Weighing</li>
+                    <li>Detecto</li>
+                </ul>
+            </div>
+
+            <div class="category-card">
+                <div class="category-icon">📱</div>
+                <h3>Mobile & Peripherals</h3>
+                <p>Scanners, mobile printers, and POS accessories</p>
+                <ul class="vendor-list">
+                    <li>Datalogic</li>
+                    <li>Custom America</li>
+                    <li>nClose</li>
+                    <li>ACM Technologies</li>
+                </ul>
+            </div>
+
+            <div class="category-card">
+                <div class="category-icon">📄</div>
+                <h3>Paper & Supplies</h3>
+                <p>Thermal paper, ink ribbons, and POS consumables</p>
+                <ul class="vendor-list">
+                    <li>Domtar (Clarion Paper)</li>
+                    <li>Capton</li>
+                    <li>PMC</li>
+                </ul>
+            </div>
+
+            <div class="category-card">
+                <div class="category-icon">💳</div>
+                <h3>Payment Processing</h3>
+                <p>Integrated payment solutions and processing software</p>
+                <ul class="vendor-list">
+                    <li>Datacap</li>
+                    <li>PCI compliance tools</li>
+                    <li>EMV certification</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="isv-section">
+        <div class="section-header">
+            <h2>ISV Software Partners</h2>
+            <p>Our hardware integrates seamlessly with these leading POS software platforms</p>
+        </div>
+
+        <div class="isv-grid">
+            <div class="isv-badge">Square</div>
+            <div class="isv-badge">RPOWER</div>
+            <div class="isv-badge">OrderCounter</div>
+            <div class="isv-badge">Pecan POS</div>
+            <div class="isv-badge">Diner Daddy</div>
+            <div class="isv-badge">RMH</div>
+            <div class="isv-badge">CerTek</div>
+            <div class="isv-badge">Toast</div>
+            <div class="isv-badge">Clover</div>
+            <div class="isv-badge">Lightspeed</div>
+        </div>
+    </section>
+
+    <section class="backlink-section">
+        <div class="container">
+            <h3>Visit Our Featured Partner</h3>
+            <div class="backlink-card">
+                <a href="https://mscashdrawer.com" target="_blank" rel="noopener noreferrer">
+                    <img src="/assets/images/vendors/ms-cashdrawer-logo.png" alt="M-S Cash Drawer">
+                </a>
+                <p><a href="https://mscashdrawer.com" target="_blank" rel="noopener noreferrer">mscashdrawer.com</a></p>
+                <p style="font-size: 12px; color: var(--gray); margin-top: 10px;">Industry-leading cash drawer manufacturer and POS distributor</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2>Ready to Order?</h2>
+        <p>Contact Performance Supply Depot for dealer pricing on the complete M-S Cash Drawer product line and 35+ vendor partners.</p>
+        <div class="cta-phone"><a href="tel:888-881-6834">888-881-6834</a></div>
+        <a href="mailto:info@psdepot.com" class="btn btn-primary">Request a Quote</a>
+    </section>
+
+    <section class="seo-text">
+        <h2>About Our Vendor Partnerships</h2>
+        <p>
+            Performance Supply Depot LLC maintains strategic partnerships with the industry's leading POS hardware manufacturers. Our featured partnership with <strong>M-S Cash Drawer</strong>-a 12-time RSPA Vendor Award of Excellence winner-enables us to offer their complete product line including the revolutionary Smart Cord cash drawers, the mC-Connect multi-drawer controller, and distribution access to 35+ complementary brands including Star Micronics, Epson, Pioneer Solutions, Touch Dynamic, Bixolon, Citizen, CAS, and Datalogic.
+        </p>
+        <p>
+            As an authorized dealer, we provide competitive pricing, technical support, and integration assistance for businesses of all sizes. Whether you need a single cash drawer or a complete POS system overhaul, our vendor relationships ensure you receive genuine products with full manufacturer warranties and the backing of industry-leading support programs.
+        </p>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <h3>Performance Supply Depot LLC</h3>
+            <p>Authorized M-S Cash Drawer Dealer</p>
+            <p>California | Serving Nationwide</p>
+            <p><a href="tel:888-881-6834">888-881-6834</a> | <a href="mailto:info@psdepot.com">info@psdepot.com</a></p>
+            <p><a href="https://psdepot.com">psdepot.com</a></p>
+        </div>
+    </footer>
+</body>
+</html>dy>
+</html>

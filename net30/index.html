@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PSDEPOT Net 30 - Industrial Credit Accounts</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 0; background: #1a1a2e; color: #eee; }
+        .container { max-width: 900px; margin: 0 auto; }
+        
+        /* Header */
+        .header { background: #0f0f1a; padding: 40px; text-align: center; border-bottom: 3px solid #ffd700; }
+        .header h1 { margin: 0; font-size: 48px; color: #ffd700; letter-spacing: 2px; }
+        .header p { margin: 10px 0 0 0; font-size: 20px; color: #aaa; }
+        
+        /* Hero */
+        .hero { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); padding: 80px 40px; text-align: center; }
+        .hero h2 { margin: 0; font-size: 36px; color: #fff; }
+        .hero p { margin: 20px 0 0 0; font-size: 20px; color: #ccc; max-width: 700px; margin-left: auto; margin-right: auto; }
+        
+        /* Benefits */
+        .benefits { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; padding: 60px 40px; }
+        .benefit { background: #16213e; padding: 40px 30px; border-radius: 10px; text-align: center; border: 1px solid #333; }
+        .benefit h3 { margin: 0 0 15px 0; font-size: 24px; color: #ffd700; }
+        .benefit p { margin: 0; color: #ccc; line-height: 1.6; }
+        
+        /* Application Form */
+        .form-section { background: #0f0f1a; padding: 60px 40px; }
+        .form-section h2 { text-align: center; color: #ffd700; font-size: 32px; margin: 0 0 10px 0; }
+        .form-section > p { text-align: center; color: #aaa; margin: 0 0 40px 0; }
+        
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 800px; margin: 0 auto; }
+        .form-group { text-align: left; }
+        .form-group.full { grid-column: span 2; }
+        .form-group label { display: block; margin-bottom: 8px; color: #ffd700; font-weight: bold; font-size: 14px; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 15px; border: 2px solid #333; border-radius: 8px; background: #1a1a2e; color: #fff; font-size: 16px; box-sizing: border-box; }
+        .form-group input:focus, .form-group select:focus { border-color: #ffd700; outline: none; }
+        .form-group textarea { height: 100px; resize: vertical; }
+        
+        .submit-btn { background: #ffd700; color: #1a1a2e; padding: 20px 60px; border: none; font-size: 20px; font-weight: bold; cursor: pointer; width: 100%; max-width: 400px; margin: 30px auto 0 auto; display: block; border-radius: 8px; }
+        .submit-btn:hover { background: #ffed4a; }
+        
+        /* Terms */
+        .terms { background: #16213e; padding: 40px; margin: 40px; border-radius: 10px; border: 1px solid #333; }
+        .terms h3 { color: #ffd700; margin: 0 0 20px 0; text-align: center; }
+        .terms-list { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .term { display: flex; align-items: center; gap: 10px; }
+        .term span { color: #ffd700; font-size: 20px; }
+        .term p { margin: 0; color: #ccc; }
+        
+        /* Trust */
+        .trust { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; padding: 40px; text-align: center; }
+        .trust-item { background: #16213e; padding: 30px 20px; border-radius: 10px; }
+        .trust-item h2 { margin: 0; color: #ffd700; font-size: 36px; }
+        .trust-item p { margin: 10px 0 0 0; color: #aaa; font-size: 14px; }
+        
+        /* Contact */
+        .contact { background: #0f0f1a; padding: 60px 40px; text-align: center; border-top: 3px solid #ffd700; }
+        .contact h2 { color: #ffd700; margin: 0 0 30px 0; font-size: 32px; }
+        .contact-info { font-size: 24px; color: #fff; }
+        .contact-info a { color: #ffd700; text-decoration: none; }
+        .phone-blink { font-size: 32px; animation: blink 1.5s infinite; display: inline-block; padding: 10px 20px; background: #16213e; border-radius: 10px; }
+        .email-blink { font-size: 28px; animation: blink 1.5s infinite; display: inline-block; padding: 10px 20px; background: #16213e; border-radius: 10px; }
+        @keyframes blink { 0%, 100% { color: #ff0000; text-shadow: 0 0 15px #ff0000; } 33% { color: #ffffff; text-shadow: 0 0 15px #ffffff; } 66% { color: #0000ff; text-shadow: 0 0 15px #0000ff; } }
+        
+        /* Footer */
+        .footer { background: #0a0a15; padding: 30px; text-align: center; color: #666; font-size: 12px; }
+        
+        @media (max-width: 768px) {
+            .benefits, .trust, .form-grid, .terms-list { grid-template-columns: 1fr; }
+            .form-group.full { grid-column: span 1; }
+            .header h1 { font-size: 32px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>PSDEPOT NET 30</h1>
+            <p>Industrial Credit Accounts for Business</p>
+        </div>
+        
+        <div class="hero">
+            <h2>Open a Net 30 Credit Account Today</h2>
+            <p>Skip the credit card processing. Apply for a commercial credit account and enjoy Net 30 terms on all your industrial supply orders. Built for businesses, by businesses.</p>
+        </div>
+        
+        <div class="benefits">
+            <div class="benefit">
+                <h3>Net 30 Terms</h3>
+                <p>Pay in 30 days. No credit card fees, no processing delays. Simple, clean business transactions.</p>
+            </div>
+            <div class="benefit">
+                <h3>Higher Limits</h3>
+                <p>Credit limits up to $50,000+. Scale your purchasing as your business grows.</p>
+            </div>
+            <div class="benefit">
+                <h3>Dedicated Support</h3>
+                <p>Your own account manager. Real people who understand industrial supply chains.</p>
+            </div>
+        </div>
+        
+        <div class="trust">
+            <div class="trust-item">
+                <h2>10,000+</h2>
+                <p>Business Accounts</p>
+            </div>
+            <div class="trust-item">
+                <h2>$50K+</h2>
+                <p>Credit Available</p>
+            </div>
+            <div class="trust-item">
+                <h2>24hr</h2>
+                <p>Approval Time</p>
+            </div>
+            <div class="trust-item">
+                <h2>Net 30</h2>
+                <p>Payment Terms</p>
+            </div>
+        </div>
+        
+        <div class="form-section">
+            <h2>Credit Application</h2>
+            <p>Complete the form below. Most applications approved within 24 hours.</p>
+            
+            <form action="https://formspree.io/f/yourformid" method="POST">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Company Name *</label>
+                        <input type="text" name="company_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>DBA (Doing Business As)</label>
+                        <input type="text" name="dba">
+                    </div>
+                    <div class="form-group">
+                        <label>Federal Tax ID / EIN *</label>
+                        <input type="text" name="ein" placeholder="XX-XXXXXXX" required>
+                    </div>
+                    <div class="form-group">
+                        <label>D-U-N-S Number</label>
+                        <input type="text" name="duns" placeholder="XX-XXX-XXXX">
+                    </div>
+                    <div class="form-group">
+                        <label>Years in Business *</label>
+                        <select name="years_in_business" required>
+                            <option value="">Select...</option>
+                            <option value="0-1">Less than 1 year</option>
+                            <option value="1-3">1-3 years</option>
+                            <option value="3-5">3-5 years</option>
+                            <option value="5-10">5-10 years</option>
+                            <option value="10+">10+ years</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Annual Revenue *</label>
+                        <select name="annual_revenue" required>
+                            <option value="">Select...</option>
+                            <option value="0-100k">Under $100K</option>
+                            <option value="100k-500k">$100K - $500K</option>
+                            <option value="500k-1m">$500K - $1M</option>
+                            <option value="1m-5m">$1M - $5M</option>
+                            <option value="5m+">$5M+</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Estimated Monthly Orders *</label>
+                        <select name="monthly_orders" required>
+                            <option value="">Select...</option>
+                            <option value="0-1k">Under $1,000</option>
+                            <option value="1k-5k">$1,000 - $5,000</option>
+                            <option value="5k-10k">$5,000 - $10,000</option>
+                            <option value="10k-25k">$10,000 - $25,000</option>
+                            <option value="25k+">$25,000+</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Contact Name *</label>
+                        <input type="text" name="contact_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Title *</label>
+                        <input type="text" name="contact_title" placeholder="Owner, Manager, Procurement..." required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email *</label>
+                        <input type="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone *</label>
+                        <input type="tel" name="phone" required>
+                    </div>
+                    <div class="form-group full">
+                        <label>Billing Address *</label>
+                        <input type="text" name="billing_address" placeholder="123 Business Blvd, Suite 100" required>
+                    </div>
+                    <div class="form-group">
+                        <label>City *</label>
+                        <input type="text" name="city" required>
+                    </div>
+                    <div class="form-group">
+                        <label>State *</label>
+                        <select name="state" required>
+                            <option value="">Select State...</option>
+                            <option value="AL">Alabama</option>
+                            <option value="AK">Alaska</option>
+                            <option value="AZ">Arizona</option>
+                            <option value="AR">Arkansas</option>
+                            <option value="CA">California</option>
+                            <option value="CO">Colorado</option>
+                            <option value="CT">Connecticut</option>
+                            <option value="DE">Delaware</option>
+                            <option value="FL">Florida</option>
+                            <option value="GA">Georgia</option>
+                            <option value="HI">Hawaii</option>
+                            <option value="ID">Idaho</option>
+                            <option value="IL">Illinois</option>
+                            <option value="IN">Indiana</option>
+                            <option value="IA">Iowa</option>
+                            <option value="KS">Kansas</option>
+                            <option value="KY">Kentucky</option>
+                            <option value="LA">Louisiana</option>
+                            <option value="ME">Maine</option>
+                            <option value="MD">Maryland</option>
+                            <option value="MA">Massachusetts</option>
+                            <option value="MI">Michigan</option>
+                            <option value="MN">Minnesota</option>
+                            <option value="MS">Mississippi</option>
+                            <option value="MO">Missouri</option>
+                            <option value="MT">Montana</option>
+                            <option value="NE">Nebraska</option>
+                            <option value="NV">Nevada</option>
+                            <option value="NH">New Hampshire</option>
+                            <option value="NJ">New Jersey</option>
+                            <option value="NM">New Mexico</option>
+                            <option value="NY">New York</option>
+                            <option value="NC">North Carolina</option>
+                            <option value="ND">North Dakota</option>
+                            <option value="OH">Ohio</option>
+                            <option value="OK">Oklahoma</option>
+                            <option value="OR">Oregon</option>
+                            <option value="PA">Pennsylvania</option>
+                            <option value="RI">Rhode Island</option>
+                            <option value="SC">South Carolina</option>
+                            <option value="SD">South Dakota</option>
+                            <option value="TN">Tennessee</option>
+                            <option value="TX">Texas</option>
+                            <option value="UT">Utah</option>
+                            <option value="VT">Vermont</option>
+                            <option value="VA">Virginia</option>
+                            <option value="WA">Washington</option>
+                            <option value="WV">West Virginia</option>
+                            <option value="WI">Wisconsin</option>
+                            <option value="WY">Wyoming</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>ZIP *</label>
+                        <input type="text" name="zip" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Shipping Address (if different)</label>
+                        <input type="text" name="shipping_address">
+                    </div>
+                    <div class="form-group full">
+                        <label>Additional Notes</label>
+                        <textarea name="notes" placeholder="Account payee info, special requirements, references..."></textarea>
+                    </div>
+                </div>
+                <button type="submit" class="submit-btn">Submit Credit Application</button>
+            </form>
+        </div>
+        
+        <div class="terms">
+            <h3>Net 30 Account Benefits</h3>
+            <div class="terms-list">
+                <div class="term">
+                    <span>&#10003;</span>
+                    <p>Net 30 payment terms</p>
+                </div>
+                <div class="term">
+                    <span>&#10003;</span>
+                    <p>Credit limits $5,000 - $50,000+</p>
+                </div>
+                <div class="term">
+                    <span>&#10003;</span>
+                    <p>Dedicated account manager</p>
+                </div>
+                <div class="term">
+                    <span>&#10003;</span>
+                    <p>Priority order processing</p>
+                </div>
+                <div class="term">
+                    <span>&#10003;</span>
+                    <p>Volume pricing tiers</p>
+                </div>
+                <div class="term">
+                    <span>&#10003;</span>
+                    <p>Extended hours support</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="contact">
+            <h2>Questions? Apply by Phone</h2>
+            <div class="contact-info">
+                <p><span class="phone-blink">888-881-6834</span></p>
+                <p><a href="mailto:info@psdepot.com" style="color: #fff; font-size: 20px;">info@psdepot.com</a></p>
+                <p><a href="https://psdepot.com" style="color: #fff;">psdepot.com</a></p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Performance Supply Depot LLC | Industrial Credit Division</p>
+            <p>California | Arizona | Nevada | Oregon | Washington | Nationwide</p>
+            <p>2026 Performance Supply Depot LLC. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>

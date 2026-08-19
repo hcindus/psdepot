@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Printer Ribbons & Ink Cartridges | Performance Supply Depot</title>
+    <meta name="description" content="Printer ribbons for Epson, Star Micronics, and all major POS brands. ERC 30/34/38, SP700 compatible. Black and black/red options. Same-day shipping available.">
+    <meta name="keywords" content="printer ribbons, ERC ribbons, ink cartridges, POS ribbons, Epson ribbons, Star ribbons">
+    <link rel="canonical" href="https://psdepot.com/categories/printer-ribbons">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    
+    <style>
+        :root {
+            --primary: #1a365d;
+            --primary-dark: #0f2744;
+            --accent: #d69e2e;
+            --accent-hover: #b7791f;
+            --secondary: #ff6600;
+            --success: #28a745;
+            --bg: #f7fafc;
+            --card: #ffffff;
+            --text: #2d3748;
+            --text-muted: #718096;
+            --border: #e2e8f0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo { font-size: 1.5rem; font-weight: 700; text-decoration: none; color: white; }
+        .logo span { color: var(--accent); }
+
+        .contact-info {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: opacity 0.2s;
+        }
+
+        .contact-info a:hover { opacity: 0.8; }
+
+        .cart-icon {
+            background: #c53030;
+            color: white !important;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .cart-icon:hover {
+            background: #9b2c2c;
+            transform: translateY(-1px);
+        }
+        
+        .breadcrumb {
+            max-width: 1200px;
+            margin: 1rem auto;
+            padding: 0 2rem;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+        
+        .breadcrumb a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .breadcrumb a:hover { text-decoration: underline; }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 2.25rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .hero p {
+            font-size: 1.125rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .category-info {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .category-info h2 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .category-info p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            background: var(--bg);
+            border-radius: 8px;
+        }
+        
+        .feature-icon {
+            font-size: 1.25rem;
+        }
+        
+        .feature-text {
+            font-size: 0.95rem;
+            color: var(--text);
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .product-card {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border: 1px solid var(--border);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+        
+        .product-image {
+            background: var(--bg);
+            border-radius: 8px;
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+        
+        .product-placeholder {
+            font-size: 4rem;
+            opacity: 0.2;
+        }
+        
+        .product-sku {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+        
+        .product-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .product-title:hover {
+            color: var(--secondary);
+        }
+        
+        .product-description {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            flex: 1;
+        }
+        
+        .product-specs {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            background: var(--bg);
+            border-radius: 6px;
+        }
+        
+        .product-specs strong {
+            color: var(--text);
+        }
+        
+        .product-price-row {
+            display: flex;
+            align-items: baseline;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .price-current {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+        
+        .stock-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        
+        .stock-status.in-stock {
+            color: var(--success);
+        }
+        
+        .badge {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--primary-dark);
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .product-actions {
+            display: flex;
+            gap: 0.75rem;
+        }
+        
+        .btn {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.2s;
+        }
+        
+        .btn-primary {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #e55a00;
+        }
+        
+        .btn-secondary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--primary-dark);
+        }
+        
+        .footer {
+            background: var(--primary-dark);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+        
+        .footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="logo">Performance<span>Supply</span>Depot</a>
+            <div class="contact-info">
+                <a href="tel:888-881-6834">888-881-6834</a>
+                <a href="/checkout.html" class="cart-icon">🛒 Cart (<span id="cart-count">0</span>)</a>
+            </div>
+        </div>
+    </header>
+    
+    <nav class="breadcrumb">
+        <a href="/">Home</a> / 
+        <a href="/categories/">Categories</a> / 
+        <span>Printer Ribbons</span>
+    </nav>
+    
+    <section class="hero">
+        <h1>Printer Ribbons & Ink Cartridges</h1>
+        <p>High-quality printer ribbons for Epson, Star Micronics, and all major POS impact printers. Black and black/red options available.</p>
+    </section>
+    
+    <div class="container">
+        <div class="category-info">
+            <h2>About Our Printer Ribbons</h2>
+            <p>We stock genuine and compatible printer ribbons for all major POS impact printer brands. Our ribbons deliver crisp, dark printouts and long-lasting performance. Available in black and black/red dual-color options for businesses needing duplicate receipts or highlighting.</p>
+            
+            <div class="features-grid">
+                <div class="feature-item">
+                    <span class="feature-icon">🎨</span>
+                    <span class="feature-text">Black & Black/Red</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">✅</span>
+                    <span class="feature-text">Genuine & Compatible</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">📦</span>
+                    <span class="feature-text">Bulk Pricing</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🚚</span>
+                    <span class="feature-text">Free Shipping $99+</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🔄</span>
+                    <span class="feature-text">Easy Installation</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">💯</span>
+                    <span class="feature-text">Guaranteed Fit</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="badge">⭐ POPULAR</div>
+                <div class="product-image">
+                    <span class="product-placeholder">🎨</span>
+                </div>
+                <div class="product-sku">SKU: PSD-62245-B</div>
+                
+                <a href="/products/62245-erc-ribbons.html" class="product-title">ERC-30/34/38 Black Ribbon</a>
+                
+                <p class="product-description">Compatible ribbon for Epson ERC-30, ERC-34, and ERC-38 printer models. Premium black ink for crisp receipts.</p>
+                
+                <div class="product-specs">
+                    <strong>Compatible:</strong> ERC-30/34/38<br>
+                    <strong>Color:</strong> Black<br>
+                    <strong>Yield:</strong> 3M characters
+                </div>
+                
+                <div class="product-price-row">
+                    <span class="price-current">$5.99 each</span>
+                </div>
+                
+                <div class="stock-status in-stock">
+                    ● In Stock (500+ ribbons)
+                </div>
+                
+                <div class="product-actions">
+                    <a href="/products/62245-erc-ribbons.html" class="btn btn-secondary">View Details</a>
+                    <a href="/products/62245-erc-ribbons.html" class="btn btn-primary">Add to Cart</a>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="badge">🔴 BLACK/RED</div>
+                <div class="product-image">
+                    <span class="product-placeholder">🎨</span>
+                </div>
+                <div class="product-sku">SKU: PSD-62245-BR</div>
+                
+                <a href="/products/62245-erc-ribbons.html" class="product-title">ERC-30/34/38 Black/Red Ribbon</a>
+                
+                <p class="product-description">Dual-color ribbon for Epson impact printers. Black for regular text, red for highlighting and credits.</p>
+                
+                <div class="product-specs">
+                    <strong>Compatible:</strong> ERC-30/34/38<br>
+                    <strong>Color:</strong> Black/Red<br>
+                    <strong>Yield:</strong> 2.5M characters
+                </div>
+                
+                <div class="product-price-row">
+                    <span class="price-current">$6.49 each</span>
+                </div>
+                
+                <div class="stock-status in-stock">
+                    ● In Stock (350+ ribbons)
+                </div>
+                
+                <div class="product-actions">
+                    <a href="/products/62245-erc-ribbons.html" class="btn btn-secondary">View Details</a>
+                    <a href="/products/62245-erc-ribbons.html" class="btn btn-primary">Add to Cart</a>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="badge">⭐ STAR</div>
+                <div class="product-image">
+                    <span class="product-placeholder">🎨</span>
+                </div>
+                <div class="product-sku">SKU: PSD-67240-B</div>
+                
+                <a href="/products/67240-star-ribbons.html" class="product-title">Star SP700 Black Ribbon</a>
+                
+                <p class="product-description">Genuine quality ribbon for Star SP700 series impact receipt printers. Reliable performance for high-volume printing.</p>
+                
+                <div class="product-specs">
+                    <strong>Compatible:</strong> Star SP700<br>
+                    <strong>Color:</strong> Black<br>
+                    <strong>Yield:</strong> 3M characters
+                </div>
+                
+                <div class="product-price-row">
+                    <span class="price-current">$7.99 each</span>
+                </div>
+                
+                <div class="stock-status in-stock">
+                    ● In Stock (280+ ribbons)
+                </div>
+                
+                <div class="product-actions">
+                    <a href="/products/67240-star-ribbons.html" class="btn btn-secondary">View Details</a>
+                    <a href="/products/67240-star-ribbons.html" class="btn btn-primary">Add to Cart</a>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="badge">🔴 BLACK/RED</div>
+                <div class="product-image">
+                    <span class="product-placeholder">🎨</span>
+                </div>
+                <div class="product-sku">SKU: PSD-67240-BR</div>
+                
+                <a href="/products/67240-star-ribbons.html" class="product-title">Star SP700 Black/Red Ribbon</a>
+                
+                <p class="product-description">Dual-color ribbon for Star SP700 printers. Perfect for restaurants and retail needing highlighted text.</p>
+                
+                <div class="product-specs">
+                    <strong>Compatible:</strong> Star SP700<br>
+                    <strong>Color:</strong> Black/Red<br>
+                    <strong>Yield:</strong> 2.5M characters
+                </div>
+                
+                <div class="product-price-row">
+                    <span class="price-current">$8.49 each</span>
+                </div>
+                
+                <div class="stock-status in-stock">
+                    ● In Stock (200+ ribbons)
+                </div>
+                
+                <div class="product-actions">
+                    <a href="/products/67240-star-ribbons.html" class="btn btn-secondary">View Details</a>
+                    <a href="/products/67240-star-ribbons.html" class="btn btn-primary">Add to Cart</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <p><strong>Performance Supply Depot LLC</strong></p>
+        <p>Your Source for Quality POS Supplies</p>
+        <p><a href="tel:888-881-6834">888-881-6834</a> | <a href="mailto:info@psdepot.com">info@psdepot.com</a></p>
+        <p><a href="https://psdepot.com">psdepot.com</a></p>
+    </footer>
+    
+    <script>
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('psdepot_cart') || '[]');
+            const count = cart.reduce((sum, item) => sum + (parseInt(item.quantity) || 0), 0);
+            document.getElementById('cart-count').textContent = count;
+        }
+        document.addEventListener('DOMContentLoaded', updateCartCount);
+    </script>
+</body>
+</html>

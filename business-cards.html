@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Performance Supply Depot LLC - Business Card</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #1a1a2e;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+        
+        h1 {
+            color: #fff;
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+        
+        .card-container {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        /* Business Card Dimensions: 3.5" x 2" = 1050px x 600px at 300dpi */
+        .business-card {
+            width: 525px;
+            height: 300px;
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Patriotic accent stripes */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, 
+                #b22234 0%, #b22234 33%,
+                #fff 33%, #fff 66%,
+                #3c3b6e 66%, #3c3b6e 100%
+            );
+        }
+        
+        .card-content {
+            padding: 30px 35px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        /* Front side */
+        .card-front .header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .logo {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #b22234 0%, #3c3b6e 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: 800;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .company-info h2 {
+            color: #fff;
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+        
+        .company-info .tagline {
+            color: #778da9;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .middle {
+            flex: 1;
+            display: flex;
+            align-items: center;
+        }
+        
+        .services {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .service-tag {
+            background: rgba(178, 34, 52, 0.2);
+            border: 1px solid rgba(178, 34, 52, 0.4);
+            color: #fff;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+        }
+        
+        .footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #e0e1dd;
+            font-size: 13px;
+        }
+        
+        .contact-item span {
+            color: #b22234;
+            font-size: 14px;
+        }
+        
+        .website {
+            color: #778da9;
+            font-size: 12px;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Back side */
+        .card-back {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        .card-back .name {
+            color: #fff;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        .card-back .title {
+            color: #b22234;
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+        }
+        
+        .card-back .qr-placeholder {
+            width: 100px;
+            height: 100px;
+            background: #fff;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1b263b;
+            font-size: 10px;
+            text-align: center;
+            padding: 10px;
+        }
+        
+        /* Person-specific card */
+        .person-card .photo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3c3b6e 0%, #b22234 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: white;
+            border: 3px solid rgba(255,255,255,0.2);
+        }
+        
+        /* Print styles */
+        @media print {
+            body {
+                background: white;
+            }
+            .business-card {
+                box-shadow: none;
+                page-break-inside: avoid;
+            }
+            .no-print {
+                display: none;
+            }
+        }
+        
+        /* Controls */
+        .controls {
+            margin-top: 40px;
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #b22234 0%, #3c3b6e 100%);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .editable {
+            outline: none;
+            border-bottom: 1px dashed rgba(255,255,255,0.3);
+        }
+        
+        .editable:focus {
+            border-bottom: 1px solid #b22234;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="no-print">🎴 Performance Supply Depot LLC - Business Cards</h1>
+    
+    <div class="card-container">
+        <!-- Front of Card -->
+        <div class="business-card card card-front">
+            <div class="card-content">
+                <div class="header">
+                    <div class="logo">PSD</div>
+                    <div class="company-info">
+                        <h2>Performance Supply Depot</h2>
+                        <div class="tagline">POS Systems & Supplies</div>
+                    </div>
+                </div>
+                
+                <div class="middle">
+                    <div class="services">
+                        <span class="service-tag">📊 POS Systems</span>
+                        <span class="service-tag">🧾 Paper & Ribbon</span>
+                        <span class="service-tag">⚖️ Scales</span>
+                        <span class="service-tag">🔧 Service</span>
+                    </div>
+                </div>
+                
+                <div class="footer">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <span>📞</span> (888) 881-6834
+                        </div>
+                        <div class="contact-item">
+                            <span>✉️</span> info@psdepot.com
+                        </div>
+                    </div>
+                    <div class="website">www.psdepot.com</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Personal Card (Generic) -->
+        <div class="business-card card person-card">
+            <div class="card-content">
+                <div class="header">
+                    <div class="photo" contenteditable="true" class="editable">👤</div>
+                    <div class="company-info">
+                        <h2 contenteditable="true" class="editable">Your Name</h2>
+                        <div class="tagline" contenteditable="true" class="editable">Sales Consultant</div>
+                    </div>
+                </div>
+                
+                <div class="middle">
+                    <div class="services">
+                        <span class="service-tag">Performance Supply Depot</span>
+                        <span class="service-tag">POS Solutions Expert</span>
+                    </div>
+                </div>
+                
+                <div class="footer">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <span>📞</span> (888) 881-6834
+                        </div>
+                        <div class="contact-item">
+                            <span>✉️</span> <span contenteditable="true" class="editable">you@psdepot.com</span>
+                        </div>
+                    </div>
+                    <div class="website">www.psdepot.com</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="controls no-print">
+        <button class="btn btn-primary" onclick="window.print()">🖨️ Print Cards</button>
+        <button class="btn btn-secondary" onclick="downloadSVG()">💾 Download SVG</button>
+        <button class="btn btn-secondary" onclick="window.location.reload()">🔄 Reset</button>
+    </div>
+    
+    <script>
+        // Auto-save edits to localStorage
+        document.querySelectorAll('[contenteditable]').forEach(el => {
+            const key = 'card_' + el.className + '_' + el.parentElement.className;
+            const saved = localStorage.getItem(key);
+            if (saved) el.textContent = saved;
+            
+            el.addEventListener('blur', () => {
+                localStorage.setItem(key, el.textContent);
+            });
+        });
+        
+        function downloadSVG() {
+            // Get the personal card data
+            const personCard = document.querySelector('.person-card');
+            const name = personCard.querySelector('h2.editable')?.textContent?.trim() || 'Your Name';
+            const title = personCard.querySelector('.tagline.editable')?.textContent?.trim() || 'Sales Consultant';
+            const email = personCard.querySelector('.contact-item span[contenteditable]')?.textContent?.trim() || 'you@psdepot.com';
+            
+            // Create SVG with actual data
+            const safeName = name.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            const safeTitle = title.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            const safeEmail = email.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            
+            const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="525" height="300" viewBox="0 0 525 300">
+                <defs>
+                    <linearGradient id="cardBg" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#0d1b2a"/>
+                        <stop offset="100%" style="stop-color:#1b263b"/>
+                    </linearGradient>
+                    <linearGradient id="photoBg" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#3c3b6e"/>
+                        <stop offset="100%" style="stop-color:#b22234"/>
+                    </linearGradient>
+                    <linearGradient id="patriotic" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:#b22234"/>
+                        <stop offset="33%" style="stop-color:#b22234"/>
+                        <stop offset="33%" style="stop-color:#ffffff"/>
+                        <stop offset="66%" style="stop-color:#ffffff"/>
+                        <stop offset="66%" style="stop-color:#3c3b6e"/>
+                        <stop offset="100%" style="stop-color:#3c3b6e"/>
+                    </linearGradient>
+                </defs>
+                
+                <!-- Card background -->
+                <rect width="525" height="300" fill="url(#cardBg)" rx="12"/>
+                
+                <!-- Patriotic stripe -->
+                <rect width="525" height="8" fill="url(#patriotic)"/>
+                
+                <!-- Photo circle -->
+                <circle cx="70" cy="75" r="40" fill="url(#photoBg)" stroke="rgba(255,255,255,0.2)" stroke-width="3"/>
+                <text x="70" y="85" fill="#fff" font-size="24" font-weight="600" text-anchor="middle" font-family="Segoe UI, sans-serif">👤</text>
+                
+                <!-- Name -->
+                <text x="125" y="65" fill="#fff" font-size="22" font-weight="700" font-family="Segoe UI, sans-serif">${safeName}</text>
+                
+                <!-- Title -->
+                <text x="125" y="85" fill="#b22234" font-size="12" letter-spacing="2" font-family="Segoe UI, sans-serif" font-weight="600">${safeTitle.toUpperCase()}</text>
+                
+                <!-- Company tags -->
+                <rect x="35" y="140" width="180" height="24" fill="rgba(178,34,52,0.2)" stroke="rgba(178,34,52,0.4)" stroke-width="1" rx="12"/>
+                <text x="125" y="156" fill="#fff" font-size="10" font-family="Segoe UI, sans-serif" text-anchor="middle">Performance Supply Depot</text>
+                
+                <rect x="225" y="140" width="150" height="24" fill="rgba(178,34,52,0.2)" stroke="rgba(178,34,52,0.4)" stroke-width="1" rx="12"/>
+                <text x="300" y="156" fill="#fff" font-size="10" font-family="Segoe UI, sans-serif" text-anchor="middle">POS Solutions Expert</text>
+                
+                <!-- Divider line -->
+                <line x1="35" y1="220" x2="490" y2="220" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+                
+                <!-- Contact info -->
+                <text x="35" y="250" fill="#e0e1dd" font-size="13" font-family="Segoe UI, sans-serif">📞 (888) 881-6834</text>
+                <text x="35" y="270" fill="#e0e1dd" font-size="13" font-family="Segoe UI, sans-serif">✉️ ${safeEmail}</text>
+                
+                <!-- Website -->
+                <text x="420" y="270" fill="#778da9" font-size="12" font-family="Segoe UI, sans-serif">www.psdepot.com</text>
+            </svg>`;
+            
+            const blob = new Blob([svg], {type: 'image/svg+xml'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = '${safeName.replace(/\s+/g, '-').toLowerCase()}-business-card.svg';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>

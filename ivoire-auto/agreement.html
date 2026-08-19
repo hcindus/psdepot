@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ivoire Auto | Purchase Agreement</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --icon-black: #0a0a0a;
+            --icon-charcoal: #141414;
+            --ivoire-orange: #ff6b35;
+            --ivoire-white: #ffffff;
+            --text-muted: #888888;
+            --text-light: #cccccc;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--icon-black);
+            color: var(--ivoire-white);
+            line-height: 1.8;
+        }
+
+        .header {
+            background: rgba(10,10,10,0.95);
+            padding: 20px 40px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255,107,53,0.2);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            letter-spacing: 3px;
+        }
+
+        .logo span { color: var(--ivoire-orange); }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 120px 40px 80px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .page-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 400;
+            margin-bottom: 15px;
+        }
+
+        .page-header p {
+            color: var(--text-muted);
+        }
+
+        .agreement-content {
+            background: var(--icon-charcoal);
+            border-radius: 10px;
+            padding: 60px;
+            border: 1px solid rgba(255,107,53,0.1);
+        }
+
+        .agreement-content h2 {
+            color: var(--ivoire-orange);
+            font-size: 1.3rem;
+            margin: 40px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255,107,53,0.3);
+        }
+
+        .agreement-content h2:first-child {
+            margin-top: 0;
+        }
+
+        .agreement-content p {
+            color: var(--text-light);
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .agreement-content ul {
+            margin: 20px 0;
+            padding-left: 30px;
+        }
+
+        .agreement-content li {
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+
+        .highlight-box {
+            background: rgba(255,107,53,0.05);
+            border-left: 3px solid var(--ivoire-orange);
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .highlight-box p {
+            margin: 0;
+        }
+
+        footer {
+            background: var(--icon-charcoal);
+            padding: 40px;
+            text-align: center;
+            border-top: 1px solid rgba(255,107,53,0.1);
+        }
+
+        footer p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 100px 20px 60px; }
+            .agreement-content { padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">Ivoire <span>Auto</span></div>
+            <a href="index.html" style="color: var(--text-muted); text-decoration: none; font-size: 0.9rem;">← Back to Home</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Purchase Agreement</h1>
+            <p>Terms and conditions for ICON4x4 vehicle purchases</p>
+        </div>
+
+        <div class="agreement-content">
+            <h2>1. Parties</h2>
+            <p>This Agreement is entered into between Ivoire Auto, a division of Performance Supply Depot LLC ("Seller"), and the purchaser ("Buyer") of an ICON4x4 vehicle.</p>
+
+            <h2>2. Vehicle Description</h2>
+            <p>The vehicle shall be described by year, make, model, VIN, and build specifications as detailed in the order confirmation. All ICON4x4 vehicles are hand-built in Los Angeles, California, USA.</p>
+
+            <h2>3. Purchase Price and Payment</h2>
+            <ul>
+                <li>Total purchase price includes vehicle cost, export documentation, shipping to Abidjan, and estimated import duties.</li>
+                <li>Payment may be made via wire transfer, Bitcoin, or credit card (3% processing fee applies).</li>
+                <li>A 50% deposit is required to initiate the build or reserve an existing vehicle.</li>
+                <li>Balance is due prior to shipping from Los Angeles.</li>
+            </ul>
+
+            <h2>4. Delivery and Timeline</h2>
+            <ul>
+                <li>Custom builds: 12-18 months from order confirmation.</li>
+                <li>Existing inventory: 4-6 weeks for export processing and shipping.</li>
+                <li>Shipping time from Los Angeles to Abidjan: approximately 3-4 weeks via container.</li>
+                <li>Seller shall provide tracking information once vessel departs.</li>
+            </ul>
+
+            <h2>5. Côte d'Ivoire Compliance</h2>
+            <div class="highlight-box">
+                <p><strong>Decree 792/2017 Compliance:</strong> All vehicles exported to Côte d'Ivoire must comply with local import regulations regarding vehicle age, emissions, and safety standards. Ivoire Auto handles all export documentation to facilitate customs clearance.</p>
+            </div>
+            
+            <ul>
+                <li>Buyer is responsible for import duties, taxes, and customs fees upon arrival in Abidjan.</li>
+                <li>Estimated duties: approximately 25% of CIF value (included in initial quote).</li>
+                <li>Seller provides all necessary export documentation including title, bill of sale, and export certificate.</li>
+            </ul>
+
+            <h2>6. Warranty and Condition</h2>
+            <ul>
+                <li>ICON4x4 vehicles carry a 12-month limited warranty on craftsmanship and components.</li>
+                <li>Warranty covers defects in materials and workmanship under normal use.</li>
+                <li>Warranty is transferable within Côte d'Ivoire with proper documentation.</li>
+                <li>Vehicles are sold in "as-is" condition for collector/export purposes unless otherwise specified.</li>
+            </ul>
+
+            <h2>7. Risk and Title Transfer</h2>
+            <p>Risk of loss transfers to Buyer upon delivery to the shipping carrier in Los Angeles. Title transfers upon full payment clearance and completion of export documentation.</p>
+
+            <h2>8. Cancellation and Refunds</h2>
+            <ul>
+                <li>Custom builds: Deposits are non-refundable after build initiation.</li>
+                <li>Existing inventory: Orders may be cancelled within 48 hours for full refund.</li>
+                <li>After 48 hours, a 10% cancellation fee applies.</li>
+                <li>No refunds after vehicle departs Los Angeles.</li>
+            </ul>
+
+            <h2>9. Dispute Resolution</h2>
+            <p>Any disputes arising from this Agreement shall be resolved through binding arbitration under AAA rules in Miami-Dade County, Florida, USA. Each party bears its own costs. This Agreement is governed by Florida law.</p>
+
+            <h2>10. Limitation of Liability</h2>
+            <p>Seller's liability is limited to the purchase price of the vehicle. In no event shall Seller be liable for indirect, consequential, or punitive damages.</p>
+
+            <h2>11. Export Compliance</h2>
+            <p>Buyer acknowledges that export of vehicles is subject to U.S. Export Administration Regulations (EAR), Customs and Border Protection requirements, and OFAC sanctions. Buyer warrants that they are not on any restricted party list.</p>
+
+            <h2>12. Entire Agreement</h2>
+            <p>This Agreement constitutes the entire understanding between the parties and supersedes all prior agreements. Modifications must be in writing signed by both parties.</p>
+
+            <div class="highlight-box" style="margin-top: 50px;">
+                <p><strong>Last Updated:</strong> July 25, 2026<br>
+                <strong>Version:</strong> 1.0<br>
+                By completing a purchase, Buyer acknowledges receipt and understanding of this Agreement.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
+            <p style="margin-bottom: 10px;">© 2026 Ivoire Auto. A venture of Performance Supply Depot LLC. Miami, FL, USA | Licensed Vehicle Exporter</p>
+            <p style="font-size: 0.9rem; margin-bottom: 15px;">🔒 SSL Secured &nbsp; 📜 Licensed Exporter &nbsp; 🌍 Global Shipping &nbsp; ✅ Verified Vehicles</p>
+            <p><a href="agreement.html" style="color: var(--ivoire-orange);">Buyer Agreement</a> | <a href="seller.html" style="color: var(--ivoire-orange);">Seller Portal</a> | <a href="privacy.html" style="color: var(--ivoire-orange);">Privacy Policy</a></p>
+        </div>
+    </footer>
+</body>
+</html>
