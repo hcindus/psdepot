@@ -47,6 +47,11 @@
         .header-nav a:hover { color: white; }
         .cart-icon { background: #c53030; color: white; padding: 8px 16px; border-radius: 8px; font-weight: 600; text-decoration: none; }
         .cart-icon:hover { background: #9b2c2c; }
+        .main-nav { background: #06202B; border-bottom: 3px solid var(--accent); position: sticky; top: 72px; z-index: 99; }
+        .main-nav .container { display: flex; gap: 4px; flex-wrap: wrap; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .main-nav a { display: inline-block; color: rgba(0, 224, 255, 0.75); text-decoration: none; font-weight: 600; font-size: 15px; padding: 12px 18px; border-bottom: 2px solid transparent; transition: all 0.2s ease; }
+        .main-nav a:hover, .main-nav a:focus { color: #ffffff; background: rgba(255,255,255,0.08); border-bottom-color: var(--accent); }
+        .main-nav a[aria-current="page"] { color: #ffffff; border-bottom-color: var(--accent); }
         
         .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
         .hero { padding: 60px 0 40px; }
@@ -116,17 +121,29 @@
 <body>
     
     <header>
-        <div class="header-content">
+        <div class="container header-content">
             <a href="/" class="logo">Performance<span>Supply</span>Depot</a>
-            <nav class="header-nav">
-                <a href="/">Home</a>
-                <a href="/products/">Products</a>
-                <a href="/checkout.html">Cart</a>
-            </nav>
-            <a href="/checkout.html" class="cart-icon">🛒 <span id="cart-count">0</span></a>
+            <div class="contact-info" style="display:flex; gap:24px; flex-wrap:wrap; font-size:14px;">
+                <a href="tel:888-881-6834" style="color:rgba(0,224,255,0.7); text-decoration:none; font-weight:500;">📞 (888) 881-6834</a>
+                <a href="tel:415-571-9724" style="color:rgba(0,224,255,0.7); text-decoration:none; font-weight:500;">📞 (415) 571-9724</a>
+                <a href="mailto:info@psdepot.com" style="color:rgba(0,224,255,0.7); text-decoration:none; font-weight:500;">✉️ info@psdepot.com</a>
+            </div>
         </div>
-    
     </header>
+
+    <nav class="main-nav" aria-label="Primary">
+        <div class="container">
+            <a href="/">Home</a>
+            <a href="/products/index.html">Products</a>
+            <a href="/blog/index.html">Blog</a>
+            <a href="/services.html">Services</a>
+            <a href="/testimonials.html">Testimonials</a>
+            <a href="/about.html">About</a>
+            <a href="/resources/faq.html" aria-current="page">FAQ</a>
+            <a href="/contact.html">Contact</a>
+            <a href="/locations.html">Service Areas</a>
+        </div>
+    </nav>
     
     <section class="hero">
         <div class="container">
