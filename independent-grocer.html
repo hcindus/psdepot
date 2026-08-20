@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POS Technology for the Independent Grocer | Performance Supply Depot</title>
+    <meta name="description" content="TODO: Add 1-2 sentence meta description. POS technology, scales, and supplies purpose-built for the independent grocer.">
+    <link rel="canonical" href="https://psdepot.com/independent-grocer.html">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "POS Technology for the Independent Grocer",
+      "description": "TODO: Add description. POS technology, scales, and supplies for independent grocers."
+    }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <style>
+        :root {
+            --primary: #1a365d;
+            --primary-light: #2c5282;
+            --accent: #c53030;
+            --accent-hover: #9b2c2c;
+            --bg: #f7fafc;
+            --card: #ffffff;
+            --text: #2d3748;
+            --text-muted: #718096;
+            --border: #e2e8f0;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        header { background: var(--primary); color: white; padding: 16px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .header-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+        .logo { font-size: 24px; font-weight: 800; color: white; text-decoration: none; }
+        .logo span { color: #63b3ed; }
+        .contact-info { display: flex; gap: 24px; flex-wrap: wrap; font-size: 14px; }
+        .contact-info a { color: #bee3f8; text-decoration: none; font-weight: 500; }
+        .contact-info a:hover { color: white; text-decoration: underline; }
+        @keyframes patriotic-blink {
+            0%, 100% { color: #ff0000; text-shadow: 0 0 8px rgba(255, 0, 0, 0.5); }
+            33% { color: #ffffff; text-shadow: 0 0 8px rgba(255, 255, 255, 0.8); }
+            66% { color: #0066ff; text-shadow: 0 0 8px rgba(0, 102, 255, 0.5); }
+        }
+        .patriotic-phone { animation: patriotic-blink 2s infinite; font-weight: 700; }
+        .main-nav { background: #12283f; border-bottom: 3px solid var(--accent); }
+        .main-nav .container { display: flex; gap: 4px; flex-wrap: wrap; }
+        .main-nav a { display: inline-block; color: #bee3f8; text-decoration: none; font-weight: 600; font-size: 15px; padding: 12px 18px; border-bottom: 2px solid transparent; transition: all 0.2s ease; }
+        .main-nav a:hover, .main-nav a:focus { color: #ffffff; background: rgba(255,255,255,0.08); border-bottom-color: var(--accent); }
+        .hero { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 80px 0; text-align: center; }
+        .hero h1 { font-size: 48px; font-weight: 800; margin-bottom: 16px; line-height: 1.2; }
+        .hero p { font-size: 20px; color: #bee3f8; max-width: 620px; margin: 0 auto 32px; }
+        .cta-button { display: inline-block; background: var(--accent); color: white; padding: 16px 32px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 16px; transition: all 0.2s; }
+        .cta-button:hover { background: #9b2c2c; transform: translateY(-2px); }
+        section { padding: 64px 0; }
+        .section-title { font-size: 32px; font-weight: 700; margin-bottom: 8px; color: var(--primary); }
+        .section-subtitle { color: var(--text-muted); margin-bottom: 40px; font-size: 18px; }
+        .value-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        @media (max-width: 992px) { .value-grid { grid-template-columns: 1fr; } }
+        .value-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 32px; }
+        .value-icon { width: 64px; height: 64px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 28px; }
+        .value-card h3 { font-size: 22px; font-weight: 700; margin-bottom: 12px; color: var(--primary); }
+        .value-card p { color: var(--text-muted); line-height: 1.6; }
+        .product-links { max-width: 800px; margin: 0 auto; text-align: center; }
+        .product-links a { display: inline-block; margin: 8px; padding: 12px 24px; background: var(--card); border: 1px solid var(--border); border-radius: 8px; color: var(--primary); font-weight: 600; text-decoration: none; transition: all 0.2s; }
+        .product-links a:hover { border-color: var(--primary); transform: translateY(-2px); }
+        .todo { border: 2px dashed var(--accent); background: #fff5f5; border-radius: 8px; padding: 16px; margin-top: 24px; font-size: 14px; color: var(--accent-hover); }
+        footer { background: #1a202c; color: #a0aec0; padding: 40px 0; text-align: center; }
+        footer p { margin-bottom: 8px; }
+        footer a { color: #63b3ed; text-decoration: none; }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 32px; }
+            .hero p { font-size: 18px; }
+            .header-content { flex-direction: column; text-align: center; }
+            .contact-info { justify-content: center; }
+            section { padding: 48px 0; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">Performance<span>Supply</span>Depot</a>
+                <div class="contact-info">
+                    <a href="tel:888-881-6834" class="patriotic-phone" style="text-decoration: none;">📞 (888) 881-6834</a>
+                    <a href="tel:415-571-9724" style="text-decoration: none;">📞 (415) 571-9724</a>
+                    <a href="mailto:info@psdepot.com" style="text-decoration: none;">✉️ info@psdepot.com</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="main-nav" aria-label="Primary">
+        <div class="container">
+            <a href="/">Home</a>
+            <a href="/products/index.html">Products</a>
+            <a href="/blog/index.html">Blog</a>
+            <a href="/services.html">Services</a>
+            <a href="/testimonials.html">Testimonials</a>
+            <a href="/about.html">About</a>
+            <a href="/faq.html">FAQ</a>
+            <a href="/contact.html">Contact</a>
+            <a href="/locations.html">Service Areas</a>
+        </div>
+    </nav>
+
+    <!-- ===== VERTICAL LANDING: Independent Grocer ===== -->
+    <!-- TODO: Content module — final hero copy. Hero H1 target: "POS Technology for the
+         Independent Grocer". Brand voice: Precision, Performance, Clarity. -->
+    <section class="hero">
+        <div class="container">
+            <h1>POS Technology for the Independent Grocer</h1>
+            <p>TODO: One-line hero subhead. Value-benefit statement aimed at independent grocers.</p>
+            <a href="/contact.html" class="cta-button">Talk to a Grocery Specialist</a>
+        </div>
+    </section>
+
+    <!-- ===== VALUE PILLARS ===== -->
+    <!-- TODO: Content module — value pillars. Author final copy for each pillar below. -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">Built for Grocery, Not Generic Retail</h2>
+            <p class="section-subtitle">TODO: One-line description. Replace each pillar with final copy.</p>
+
+            <div class="value-grid">
+                <div class="value-card">
+                    <div class="value-icon">⚖️</div>
+                    <h3>Integrated Scales &amp; Weighing</h3>
+                    <p>TODO: Pillar #1 description — integrated scale + PLU accuracy for the deli and produce departments.</p>
+                    <div class="todo">
+                        <!-- TODO: Pillar #1 final copy. Include measurable specifics (scale
+                             model, PLU capacity, department coverage). -->
+                    </div>
+                </div>
+
+                <div class="value-card">
+                    <div class="value-icon">📈</div>
+                    <h3>High-Volume Checkout</h3>
+                    <p>TODO: Pillar #2 description — reliable hardware and supplies for 18+ hour operational days.</p>
+                    <div class="todo">
+                        <!-- TODO: Pillar #2 final copy. Reference throughput, uptime, and
+                             durable hardware designed for constant use. -->
+                    </div>
+                </div>
+
+                <div class="value-card">
+                    <div class="value-icon">🚚</div>
+                    <h3>Dependable Replenishment</h3>
+                    <p>TODO: Pillar #3 description — scheduled delivery so your shelves never run short.</p>
+                    <div class="todo">
+                        <!-- TODO: Pillar #3 final copy. Detail delivery schedules, volume
+                             pricing, auto-reorder options. -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PRODUCT LINKS ===== -->
+    <!-- TODO: Content module — product links section. Point to relevant product pages
+         (integrated scales, thermal paper, CAS scales, labels). -->
+    <section style="background: #edf2f7;">
+        <div class="container">
+            <h2 class="section-title">Products for Your Store</h2>
+            <p class="section-subtitle">TODO: One-line description. Wire up links to the relevant product pages.</p>
+            <div class="product-links">
+                <a href="/products/cas-lp-1000n.html">TODO: CAS Label Scale</a>
+                <a href="/products/30-150-integrated-scale.html">TODO: Integrated POS Scale</a>
+                <a href="/products/pf-230-phenol-free-thermal-paper.html">TODO: Receipt Paper</a>
+                <a href="#">TODO: Label Supplies</a>
+                <a href="#">TODO: Cash Drawers</a>
+            </div>
+            <div class="todo" style="max-width: 800px; margin: 32px auto 0; text-align: left;">
+                <!-- TODO: Verify each product link above opens the correct existing product page.
+                     Add any missing grocery-specific products. No product pages touched by scaffold. -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA BAND ===== -->
+    <!-- TODO: Content module — final CTA. -->
+    <section>
+        <div class="container" style="text-align: center;">
+            <h2 class="section-title">Let's Build Your Grocery Operation</h2>
+            <p class="section-subtitle">TODO: One-line CTA description. Lead to scheduling a consultation.</p>
+            <a href="/contact.html" class="cta-button">Schedule a Consultation</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p><strong>Performance Supply Depot LLC</strong></p>
+            <p>📞 <span class="patriotic-phone">(888) 881-6834</span> | 📞 (415) 571-9724</p>
+            <p>✉️ <a href="mailto:info@psdepot.com" style="text-decoration: none; color: inherit;">info@psdepot.com</a></p>
+            <p style="margin-top: 8px; font-size: 14px;"><a href="/contact.html" style="color: inherit; text-decoration: underline;">📞 Contact Us</a></p>
+            <p style="margin-top: 16px; font-size: 14px;">© 2026 Performance Supply Depot LLC. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
