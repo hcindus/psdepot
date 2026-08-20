@@ -400,5 +400,15 @@
     loadPublished();
 })();
 </script>
+<script>
+(function(){
+  try {
+    var cart = JSON.parse(localStorage.getItem('psdepot_cart') || '[]');
+    var count = cart.reduce(function(s,i){ return s + (i.quantity || 1); }, 0);
+    var el = document.getElementById('cart-count');
+    if (el) el.textContent = count;
+  } catch(e) {}
+})();
+</script>
 </body>
 </html>
