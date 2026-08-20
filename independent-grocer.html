@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>POS Technology for the Independent Grocer | Performance Supply Depot</title>
-    <meta name="description" content="TODO: Add 1-2 sentence meta description. POS technology, scales, and supplies purpose-built for the independent grocer.">
+    <title>Independent Grocer Technology Partner — POS, Scales & Full-Store Tech | Performance Supply Depot</title>
+    <meta name="description" content="Full-store technology partner for independent grocers: POS systems, integrated scales, self-checkout, ESL, security, and staff training. One partner from install to support. Call (888) 881-6834.">
     <link rel="canonical" href="https://psdepot.com/independent-grocer.html">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <meta name="robots" content="index, follow">
@@ -12,8 +12,8 @@
     {
       "@context": "https://schema.org",
       "@type": "WebPage",
-      "name": "POS Technology for the Independent Grocer",
-      "description": "TODO: Add description. POS technology, scales, and supplies for independent grocers."
+      "name": "Independent Grocer Technology Partner",
+      "description": "Full technology and services partner for independent grocers: POS, scales, self-checkout, ESL, security, and training."
     }
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -51,29 +51,36 @@
         .main-nav .container { display: flex; gap: 4px; flex-wrap: wrap; }
         .main-nav a { display: inline-block; color: #bee3f8; text-decoration: none; font-weight: 600; font-size: 15px; padding: 12px 18px; border-bottom: 2px solid transparent; transition: all 0.2s ease; }
         .main-nav a:hover, .main-nav a:focus { color: #ffffff; background: rgba(255,255,255,0.08); border-bottom-color: var(--accent); }
+        .main-nav a[aria-current="page"] { color: #ffffff; border-bottom-color: var(--accent); }
         .hero { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 80px 0; text-align: center; }
-        .hero h1 { font-size: 48px; font-weight: 800; margin-bottom: 16px; line-height: 1.2; }
-        .hero p { font-size: 20px; color: #bee3f8; max-width: 620px; margin: 0 auto 32px; }
+        .hero h1 { font-size: 44px; font-weight: 800; margin-bottom: 16px; line-height: 1.2; }
+        .hero p { font-size: 20px; color: #bee3f8; max-width: 680px; margin: 0 auto 32px; }
         .cta-button { display: inline-block; background: var(--accent); color: white; padding: 16px 32px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 16px; transition: all 0.2s; }
         .cta-button:hover { background: #9b2c2c; transform: translateY(-2px); }
+        .cta-button-alt { display: inline-block; background: transparent; color: white; border: 2px solid white; padding: 14px 30px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 16px; margin-left: 12px; transition: all 0.2s; }
+        .cta-button-alt:hover { background: rgba(255,255,255,0.1); }
         section { padding: 64px 0; }
         .section-title { font-size: 32px; font-weight: 700; margin-bottom: 8px; color: var(--primary); }
         .section-subtitle { color: var(--text-muted); margin-bottom: 40px; font-size: 18px; }
-        .value-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-        @media (max-width: 992px) { .value-grid { grid-template-columns: 1fr; } }
-        .value-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 32px; }
-        .value-icon { width: 64px; height: 64px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 28px; }
-        .value-card h3 { font-size: 22px; font-weight: 700; margin-bottom: 12px; color: var(--primary); }
-        .value-card p { color: var(--text-muted); line-height: 1.6; }
-        .product-links { max-width: 800px; margin: 0 auto; text-align: center; }
-        .product-links a { display: inline-block; margin: 8px; padding: 12px 24px; background: var(--card); border: 1px solid var(--border); border-radius: 8px; color: var(--primary); font-weight: 600; text-decoration: none; transition: all 0.2s; }
-        .product-links a:hover { border-color: var(--primary); transform: translateY(-2px); }
-        .todo { border: 2px dashed var(--accent); background: #fff5f5; border-radius: 8px; padding: 16px; margin-top: 24px; font-size: 14px; color: var(--accent-hover); }
+        .content-copy { max-width: 860px; margin: 0 auto; }
+        .content-copy p { margin-bottom: 20px; font-size: 17px; color: var(--text); }
+        .tech-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+        @media (max-width: 768px) { .tech-grid { grid-template-columns: 1fr; } }
+        .tech-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 28px; }
+        .tech-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 12px; color: var(--primary); }
+        .tech-card p { color: var(--text); margin-bottom: 10px; }
+        .tech-card ul { padding-left: 20px; color: var(--text-muted); margin-bottom: 8px; }
+        .tech-card li { margin-bottom: 6px; }
+        .tech-card a { color: var(--accent); text-decoration: none; font-weight: 600; }
+        .tech-card a:hover { text-decoration: underline; }
+        .cross-link { background: #edf2f7; border: 1px dashed var(--primary); border-radius: 12px; padding: 24px; max-width: 800px; margin: 0 auto; text-align: center; }
+        .cross-link a { color: var(--primary); font-weight: 700; }
+        .cta-band { text-align: center; background: #edf2f7; }
         footer { background: #1a202c; color: #a0aec0; padding: 40px 0; text-align: center; }
         footer p { margin-bottom: 8px; }
         footer a { color: #63b3ed; text-decoration: none; }
         @media (max-width: 768px) {
-            .hero h1 { font-size: 32px; }
+            .hero h1 { font-size: 30px; }
             .hero p { font-size: 18px; }
             .header-content { flex-direction: column; text-align: center; }
             .contact-info { justify-content: center; }
@@ -109,86 +116,109 @@
         </div>
     </nav>
 
-    <!-- ===== VERTICAL LANDING: Independent Grocer ===== -->
-    <!-- TODO: Content module — final hero copy. Hero H1 target: "POS Technology for the
-         Independent Grocer". Brand voice: Precision, Performance, Clarity. -->
     <section class="hero">
         <div class="container">
-            <h1>POS Technology for the Independent Grocer</h1>
-            <p>TODO: One-line hero subhead. Value-benefit statement aimed at independent grocers.</p>
+            <h1>Technology Partner for the Independent Grocer</h1>
+            <p>From the front door to the back office — POS, scales, self-checkout, electronic shelf labels, and the security to protect it all. Designed for the independent grocer who wants one accountable partner, not a patchwork of vendors.</p>
             <a href="/contact.html" class="cta-button">Talk to a Grocery Specialist</a>
+            <a href="/industries/grocery-stores.html" class="cta-button-alt">Shop Grocery Supplies</a>
         </div>
     </section>
 
-    <!-- ===== VALUE PILLARS ===== -->
-    <!-- TODO: Content module — value pillars. Author final copy for each pillar below. -->
     <section>
         <div class="container">
-            <h2 class="section-title">Built for Grocery, Not Generic Retail</h2>
-            <p class="section-subtitle">TODO: One-line description. Replace each pillar with final copy.</p>
+            <h2 class="section-title" style="text-align: center;">Built for Grocery, Not Generic Retail</h2>
+            <div class="content-copy">
+                <p>An independent grocer runs on perishable margins, department-level complexity, and high transaction volume. It needs technology built around those realities — not generic retail hardware repurposed for grocery.</p>
+                <p>We've spent two decades inside the California food trade. We understand the deli scale, the produce weigh-through, the 18-hour operational day, and the margin pressure that leaves no room for downtime. Your technology should make that operation easier to run — and help you compete with the big chains on the same street.</p>
+            </div>
+        </div>
+    </section>
 
-            <div class="value-grid">
-                <div class="value-card">
-                    <div class="value-icon">⚖️</div>
+    <section style="background: #f7fafc;">
+        <div class="container">
+            <h2 class="section-title" style="text-align: center;">Full-Store Technology, One Partner</h2>
+            <p class="section-subtitle" style="text-align: center;">Every system in your store should work as one. Here's the stack we design, supply, and support.</p>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <h3>Point-of-Sale &amp; Registers</h3>
+                    <p>High-volume registers with serious PLU and department capacity — built for the pace and variety of grocery checkout.</p>
+                    <ul>
+                        <li>Cash registers and touch POS with deep PLU support</li>
+                        <li>Receipt printers, cash drawers, and card terminals per lane</li>
+                        <li>Register and back-office workflow setup</li>
+                    </ul>
+                    <a href="/industries/grocery-stores.html">Browse grocery POS hardware →</a>
+                </div>
+                <div class="tech-card">
                     <h3>Integrated Scales &amp; Weighing</h3>
-                    <p>TODO: Pillar #1 description — integrated scale + PLU accuracy for the deli and produce departments.</p>
-                    <div class="todo">
-                        <!-- TODO: Pillar #1 final copy. Include measurable specifics (scale
-                             model, PLU capacity, department coverage). -->
-                    </div>
+                    <p>Accurate weight and PLU capture across deli, bakery, and produce — without slowing checkout.</p>
+                    <ul>
+                        <li>Label printing scales for deli &amp; bakery (e.g. CAS LP-1000N)</li>
+                        <li>Integrated POS scales for produce at the lane (CAS PDN Series)</li>
+                        <li>PLU accuracy that keeps pricing consistent</li>
+                    </ul>
+                    <a href="/products/cas-lp-1000n.html">View label scales →</a>
                 </div>
-
-                <div class="value-card">
-                    <div class="value-icon">📈</div>
-                    <h3>High-Volume Checkout</h3>
-                    <p>TODO: Pillar #2 description — reliable hardware and supplies for 18+ hour operational days.</p>
-                    <div class="todo">
-                        <!-- TODO: Pillar #2 final copy. Reference throughput, uptime, and
-                             durable hardware designed for constant use. -->
-                    </div>
+                <div class="tech-card">
+                    <h3>Self-Checkout</h3>
+                    <p>Move small-basket traffic off the staffed lanes and cut wait times store-wide.</p>
+                    <ul>
+                        <li>Full, assisted, and express-lane configurations</li>
+                        <li>Item-weight verification and age-verified prompts</li>
+                        <li>Attendant console monitoring multiple lanes</li>
+                    </ul>
+                    <a href="/self-checkout.html">Explore self-checkout →</a>
                 </div>
-
-                <div class="value-card">
-                    <div class="value-icon">🚚</div>
-                    <h3>Dependable Replenishment</h3>
-                    <p>TODO: Pillar #3 description — scheduled delivery so your shelves never run short.</p>
-                    <div class="todo">
-                        <!-- TODO: Pillar #3 final copy. Detail delivery schedules, volume
-                             pricing, auto-reorder options. -->
-                    </div>
+                <div class="tech-card">
+                    <h3>Electronic Shelf Labels</h3>
+                    <p>Match shelf price to register price in seconds — for markdowns, promotions, and daily pricing.</p>
+                    <ul>
+                        <li>Center-of-store pricing updates in under a minute</li>
+                        <li>Fewer tag-mismatch customer complaints</li>
+                        <li>Less paper tag consumables in your supply chain</li>
+                    </ul>
+                    <a href="/electronic-shelf-labels.html">Learn about ESL →</a>
+                </div>
+                <div class="tech-card">
+                    <h3>Security &amp; Compliance</h3>
+                    <p>Protect card data, meet PCI requirements, and stop shrink across your floor and checkout.</p>
+                    <ul>
+                        <li>Cybersecurity hardening for terminals and networks</li>
+                        <li>PCI compliance support and self-assessment</li>
+                        <li>Shrink prevention and cash-office controls</li>
+                    </ul>
+                    <a href="/security.html">Review your security →</a>
+                </div>
+                <div class="tech-card">
+                    <h3>Services &amp; Training</h3>
+                    <p>A partner that scopes, deploys, supports, and trains — so your staff and your systems run as one.</p>
+                    <ul>
+                        <li>Consulting &amp; implementation from floor assessment to go-live</li>
+                        <li>Preventive maintenance and fast repair</li>
+                        <li>Staff training at the register and back office</li>
+                    </ul>
+                    <a href="/services.html">See our services →</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ===== PRODUCT LINKS ===== -->
-    <!-- TODO: Content module — product links section. Point to relevant product pages
-         (integrated scales, thermal paper, CAS scales, labels). -->
-    <section style="background: #edf2f7;">
-        <div class="container">
-            <h2 class="section-title">Products for Your Store</h2>
-            <p class="section-subtitle">TODO: One-line description. Wire up links to the relevant product pages.</p>
-            <div class="product-links">
-                <a href="/products/cas-lp-1000n.html">TODO: CAS Label Scale</a>
-                <a href="/products/30-150-integrated-scale.html">TODO: Integrated POS Scale</a>
-                <a href="/products/pf-230-phenol-free-thermal-paper.html">TODO: Receipt Paper</a>
-                <a href="#">TODO: Label Supplies</a>
-                <a href="#">TODO: Cash Drawers</a>
-            </div>
-            <div class="todo" style="max-width: 800px; margin: 32px auto 0; text-align: left;">
-                <!-- TODO: Verify each product link above opens the correct existing product page.
-                     Add any missing grocery-specific products. No product pages touched by scaffold. -->
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== CTA BAND ===== -->
-    <!-- TODO: Content module — final CTA. -->
     <section>
-        <div class="container" style="text-align: center;">
+        <div class="container">
+            <div class="cross-link">
+                <h2 style="color: var(--primary); margin-bottom: 12px;">Looking for Grocery Supplies?</h2>
+                <p style="color: var(--text);">Thermal paper, label rolls, cash drawers, ribbons, and high-volume consumables for your lanes — see our dedicated <a href="/industries/grocery-stores.html">POS Supplies for Grocery Stores</a> page. This page is about the full technology and services story; that page is about keeping every lane stocked.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-band">
+        <div class="container">
             <h2 class="section-title">Let's Build Your Grocery Operation</h2>
-            <p class="section-subtitle">TODO: One-line CTA description. Lead to scheduling a consultation.</p>
+            <p class="section-subtitle" style="max-width: 640px; margin: 0 auto 32px;">Walk through your store's technology with a specialist who knows the food trade. You'll get an honest plan — not a sales pitch.</p>
             <a href="/contact.html" class="cta-button">Schedule a Consultation</a>
+            <p style="margin-top: 24px; color: var(--text-muted);">Or call <strong>(888) 881-6834</strong> — a real person answers.</p>
         </div>
     </section>
 
