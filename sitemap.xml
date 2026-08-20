@@ -541,6 +541,11 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://psdepot.com/electronic-shelf-labels.html</loc>
+    <lastmod>2026-08-20</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://psdepot.com/events/calendar.html</loc>
     <lastmod>2026-08-19</lastmod>
     <priority>0.5</priority>
@@ -709,6 +714,11 @@
     <loc>https://psdepot.com/indianapolis.html</loc>
     <lastmod>2026-08-19</lastmod>
     <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://psdepot.com/independent-grocer.html</loc>
+    <lastmod>2026-08-20</lastmod>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://psdepot.com/industries/auto-repair-shops.html</loc>
@@ -1881,9 +1891,19 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://psdepot.com/self-checkout.html</loc>
+    <lastmod>2026-08-20</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://psdepot.com/seattle.html</loc>
     <lastmod>2026-08-19</lastmod>
     <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://psdepot.com/security.html</loc>
+    <lastmod>2026-08-20</lastmod>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://psdepot.com/sentinel-shield/index.html</loc>
@@ -1894,6 +1914,11 @@
     <loc>https://psdepot.com/services/installation.html</loc>
     <lastmod>2026-08-19</lastmod>
     <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://psdepot.com/services.html</loc>
+    <lastmod>2026-08-20</lastmod>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://psdepot.com/sinaloa.html</loc>
@@ -1939,6 +1964,11 @@
     <loc>https://psdepot.com/teriyaki-madness-locations.html</loc>
     <lastmod>2026-08-19</lastmod>
     <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://psdepot.com/testimonials.html</loc>
+    <lastmod>2026-08-20</lastmod>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://psdepot.com/texas-spanish.html</loc>
