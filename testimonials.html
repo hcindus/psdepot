@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customer Testimonials — Trusted by California Businesses | Performance Supply Depot</title>
-    <meta name="description" content="TODO: Add 1-2 sentence meta description for the Testimonials page. See why restaurants, retailers, and grocers trust Performance Supply Depot for POS supplies and services.">
+    <meta name="description" content="See why California restaurants, retailers, and grocers trust Performance Supply Depot for POS supplies and services. Reliable supplies, honest advice, fast turnaround. Call (888) 881-6834.">
     <link rel="canonical" href="https://psdepot.com/testimonials.html">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <meta name="robots" content="index, follow">
@@ -13,7 +13,7 @@
       "@context": "https://schema.org",
       "@type": "WebPage",
       "name": "Customer Testimonials",
-      "description": "TODO: Add description. Customer testimonials for Performance Supply Depot POS supplies and services."
+      "description": "Customer testimonials for Performance Supply Depot POS supplies and services."
     }
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -51,9 +51,10 @@
         .main-nav .container { display: flex; gap: 4px; flex-wrap: wrap; }
         .main-nav a { display: inline-block; color: #bee3f8; text-decoration: none; font-weight: 600; font-size: 15px; padding: 12px 18px; border-bottom: 2px solid transparent; transition: all 0.2s ease; }
         .main-nav a:hover, .main-nav a:focus { color: #ffffff; background: rgba(255,255,255,0.08); border-bottom-color: var(--accent); }
+        .main-nav a[aria-current="page"] { color: #ffffff; border-bottom-color: var(--accent); }
         .hero { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 80px 0; text-align: center; }
         .hero h1 { font-size: 48px; font-weight: 800; margin-bottom: 16px; line-height: 1.2; }
-        .hero p { font-size: 20px; color: #bee3f8; max-width: 600px; margin: 0 auto 32px; }
+        .hero p { font-size: 20px; color: #bee3f8; max-width: 640px; margin: 0 auto 32px; }
         .cta-button { display: inline-block; background: var(--accent); color: white; padding: 16px 32px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 16px; transition: all 0.2s; }
         .cta-button:hover { background: #9b2c2c; transform: translateY(-2px); }
         section { padding: 64px 0; }
@@ -69,8 +70,8 @@
         .testimonial-author .name { font-weight: 700; color: var(--primary); }
         .testimonial-author .role { font-size: 13px; color: var(--text-muted); }
         .logo-wall { display: flex; flex-wrap: wrap; justify-content: center; gap: 24px; }
-        .logo-item { width: 180px; height: 80px; background: var(--card); border: 1px dashed var(--border); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: 14px; text-align: center; padding: 8px; }
-        .todo { border: 2px dashed var(--accent); background: #fff5f5; border-radius: 8px; padding: 16px; margin-top: 24px; font-size: 14px; color: var(--accent-hover); }
+        .logo-item { width: 180px; height: 80px; background: var(--card); border: 1px solid var(--border); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 14px; text-align: center; padding: 8px; font-weight: 600; }
+        .disclaimer { max-width: 780px; margin: 32px auto 0; font-size: 13px; color: var(--text-muted); text-align: center; border: 1px dashed var(--border); border-radius: 8px; padding: 16px; background: #fff; }
         footer { background: #1a202c; color: #a0aec0; padding: 40px 0; text-align: center; }
         footer p { margin-bottom: 8px; }
         footer a { color: #63b3ed; text-decoration: none; }
@@ -103,7 +104,7 @@
             <a href="/products/index.html">Products</a>
             <a href="/blog/index.html">Blog</a>
             <a href="/services.html">Services</a>
-            <a href="/testimonials.html">Testimonials</a>
+            <a href="/testimonials.html" aria-current="page">Testimonials</a>
             <a href="/about.html">About</a>
             <a href="/resources/faq.html">FAQ</a>
             <a href="/contact.html">Contact</a>
@@ -114,93 +115,101 @@
     <section class="hero">
         <div class="container">
             <h1>Customer Testimonials</h1>
-            <p>Over 2,000 California businesses run on our supplies. Here's what they say.</p>
+            <p>Thousands of California businesses run on our supplies and services. Here's what a few of them say.</p>
             <a href="/contact.html" class="cta-button">Become a Satisfied Customer</a>
         </div>
     </section>
 
     <section>
         <div class="container">
-            <!-- TODO: Content module — Testimonials grid.
-                 Replace the placeholder cards with real, permission-obtained testimonials.
-                 Brand voice: specific, measurable, confident. Use real names/roles with consent. -->
             <h2 class="section-title">What Our Customers Say</h2>
-            <p class="section-subtitle">TODO: One-line intro. Each card below is a placeholder for a named testimonial.</p>
+            <p class="section-subtitle">Restaurants, retailers, and grocers across California — on the supplies and support that keep checkout moving.</p>
 
             <div class="testimonials-grid">
+                <!-- PLACEHOLDER: replace with real quote + attribution (with permission) -->
                 <div class="testimonial-card">
                     <div class="stars">★★★★★</div>
-                    <!-- TODO: Replace with a real testimonial quote. -->
-                    <p class="testimonial-quote">TODO: Testimonial quote #1 — drop in a specific, permission-obtained customer quote.</p>
+                    <p class="testimonial-quote">"We go through a case of thermal paper a week across six lanes. Performance Supply Depot delivers before we ever run low, and the ordering takes five minutes. I don't think about paper anymore, and that's exactly what I want."</p>
                     <div class="testimonial-author">
-                        <div class="name">TODO: Customer Name</div>
-                        <div class="role">TODO: Business Name / Role</div>
+                        <div class="name">Maria Gonzalez</div>
+                        <div class="role">Store Manager, Independent Grocery — Oakland, CA</div>
                     </div>
                 </div>
 
+                <!-- PLACEHOLDER: replace with real quote + attribution (with permission) -->
                 <div class="testimonial-card">
                     <div class="stars">★★★★★</div>
-                    <p class="testimonial-quote">TODO: Testimonial quote #2 — drop in a specific, permission-obtained customer quote.</p>
+                    <p class="testimonial-quote">"When a printer went down mid-shift, they walked us through a fast fix on the phone and had a replacement en route the same day. That kind of service keeps a kitchen moving. Nobody else even came close."</p>
                     <div class="testimonial-author">
-                        <div class="name">TODO: Customer Name</div>
-                        <div class="role">TODO: Business Name / Role</div>
+                        <div class="name">David Chen</div>
+                        <div class="role">Owner, Family Restaurant — San Francisco, CA</div>
                     </div>
                 </div>
 
+                <!-- PLACEHOLDER: replace with real quote + attribution (with permission) -->
                 <div class="testimonial-card">
                     <div class="stars">★★★★★</div>
-                    <p class="testimonial-quote">TODO: Testimonial quote #3 — drop in a specific, permission-obtained customer quote.</p>
+                    <p class="testimonial-quote">"They matched my existing rolls exactly and explained the difference between thermal and bond paper in plain terms. No upsell, no friction. Just the right supply at the right price."</p>
                     <div class="testimonial-author">
-                        <div class="name">TODO: Customer Name</div>
-                        <div class="role">TODO: Business Name / Role</div>
+                        <div class="name">Amanda Rodriguez</div>
+                        <div class="role">Operations Lead, Coffee Shop Chain — Sacramento, CA</div>
                     </div>
                 </div>
 
+                <!-- PLACEHOLDER: replace with real quote + attribution (with permission) -->
                 <div class="testimonial-card">
                     <div class="stars">★★★★★</div>
-                    <p class="testimonial-quote">TODO: Testimonial quote #4 — drop in a specific, permission-obtained customer quote.</p>
+                    <p class="testimonial-quote">"We outfit every register and PIN pad through one order. Having a single supplier with reliable stock and honest advice saves us real time every month."</p>
                     <div class="testimonial-author">
-                        <div class="name">TODO: Customer Name</div>
-                        <div class="role">TODO: Business Name / Role</div>
+                        <div class="name">James Whitfield</div>
+                        <div class="role">IT &amp; Operations Manager, Retail Chain — Los Angeles, CA</div>
                     </div>
                 </div>
 
+                <!-- PLACEHOLDER: replace with real quote + attribution (with permission) -->
                 <div class="testimonial-card">
                     <div class="stars">★★★★★</div>
-                    <p class="testimonial-quote">TODO: Testimonial quote #5 — drop in a specific, permission-obtained customer quote.</p>
+                    <p class="testimonial-quote">"Their scale setup saved us from costly deli-counter errors. They scoped what we needed, installed it, and trained our staff the same week. That's a one-and-done partner."</p>
                     <div class="testimonial-author">
-                        <div class="name">TODO: Customer Name</div>
-                        <div class="role">TODO: Business Name / Role</div>
+                        <div class="name">Priya Patel</div>
+                        <div class="role">Co-Owner, Specialty Market — San Jose, CA</div>
                     </div>
                 </div>
 
+                <!-- PLACEHOLDER: replace with real quote + attribution (with permission) -->
                 <div class="testimonial-card">
                     <div class="stars">★★★★★</div>
-                    <p class="testimonial-quote">TODO: Testimonial quote #6 — drop in a specific, permission-obtained customer quote.</p>
+                    <p class="testimonial-quote">"Orders placed early in the day always show up fast from their California warehouse. For a busy bakeshop that can't risk running out of labels, that reliability is everything."</p>
                     <div class="testimonial-author">
-                        <div class="name">TODO: Customer Name</div>
-                        <div class="role">TODO: Business Name / Role</div>
+                        <div class="name">Karen O'Sullivan</div>
+                        <div class="role">Owner, Bakery — Fresno, CA</div>
                     </div>
                 </div>
+            </div>
+
+            <div class="disclaimer">
+                <strong>Note to site editors:</strong> The quotes above are illustrative placeholders written to reflect the types of businesses we serve. Each is marked with an HTML comment
+                <code>&lt;!-- PLACEHOLDER: replace with real quote --&gt;</code>. Replace them with genuine, permission-obtained customer testimonials before final launch.
             </div>
         </div>
     </section>
 
     <section style="background: #edf2f7;">
         <div class="container">
-            <!-- TODO: Content module — Satisfied Customers logo wall.
-                 Add client / partner logos (with written permission) in the .logo-item
-                 slots below. Represent industries served: restaurants, retail, grocery. -->
-            <h2 class="section-title">Satisfied Customers</h2>
-            <p class="section-subtitle">TODO: One-line description of the logo wall. Replace each placeholder with an approved client logo.</p>
+            <h2 class="section-title">Satisfied Customers by Industry</h2>
+            <p class="section-subtitle">We equip operations across California — here are the industries we serve most.</p>
 
             <div class="logo-wall">
-                <div class="logo-item">TODO: Client Logo</div>
-                <div class="logo-item">TODO: Client Logo</div>
-                <div class="logo-item">TODO: Client Logo</div>
-                <div class="logo-item">TODO: Client Logo</div>
-                <div class="logo-item">TODO: Client Logo</div>
-                <div class="logo-item">TODO: Client Logo</div>
+                <div class="logo-item">🍽️ Restaurants</div>
+                <div class="logo-item">🛒 Grocery &amp; Markets</div>
+                <div class="logo-item">☕ Coffee &amp; Cafés</div>
+                <div class="logo-item">👕 Retail Stores</div>
+                <div class="logo-item">🥐 Bakeries</div>
+                <div class="logo-item">🏪 Convenience</div>
+            </div>
+
+            <div class="disclaimer">
+                <strong>Note to site editors:</strong> Replace these industry labels with approved, permission-obtained client logos when available.
             </div>
         </div>
     </section>
