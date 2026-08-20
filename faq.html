@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ — Frequently Asked Questions | Performance Supply Depot</title>
+    <meta name="description" content="TODO: Add 1-2 sentence meta description for the FAQ page. Answers to common questions about POS supplies, printers, services, and support.">
+    <link rel="canonical" href="https://psdepot.com/faq.html">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": []
+    }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <style>
+        :root {
+            --primary: #1a365d;
+            --primary-light: #2c5282;
+            --accent: #c53030;
+            --accent-hover: #9b2c2c;
+            --bg: #f7fafc;
+            --card: #ffffff;
+            --text: #2d3748;
+            --text-muted: #718096;
+            --border: #e2e8f0;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        header { background: var(--primary); color: white; padding: 16px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .header-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+        .logo { font-size: 24px; font-weight: 800; color: white; text-decoration: none; }
+        .logo span { color: #63b3ed; }
+        .contact-info { display: flex; gap: 24px; flex-wrap: wrap; font-size: 14px; }
+        .contact-info a { color: #bee3f8; text-decoration: none; font-weight: 500; }
+        .contact-info a:hover { color: white; text-decoration: underline; }
+        @keyframes patriotic-blink {
+            0%, 100% { color: #ff0000; text-shadow: 0 0 8px rgba(255, 0, 0, 0.5); }
+            33% { color: #ffffff; text-shadow: 0 0 8px rgba(255, 255, 255, 0.8); }
+            66% { color: #0066ff; text-shadow: 0 0 8px rgba(0, 102, 255, 0.5); }
+        }
+        .patriotic-phone { animation: patriotic-blink 2s infinite; font-weight: 700; }
+        .main-nav { background: #12283f; border-bottom: 3px solid var(--accent); }
+        .main-nav .container { display: flex; gap: 4px; flex-wrap: wrap; }
+        .main-nav a { display: inline-block; color: #bee3f8; text-decoration: none; font-weight: 600; font-size: 15px; padding: 12px 18px; border-bottom: 2px solid transparent; transition: all 0.2s ease; }
+        .main-nav a:hover, .main-nav a:focus { color: #ffffff; background: rgba(255,255,255,0.08); border-bottom-color: var(--accent); }
+        .hero { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 80px 0; text-align: center; }
+        .hero h1 { font-size: 48px; font-weight: 800; margin-bottom: 16px; line-height: 1.2; }
+        .hero p { font-size: 20px; color: #bee3f8; max-width: 600px; margin: 0 auto 32px; }
+        .cta-button { display: inline-block; background: var(--accent); color: white; padding: 16px 32px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 16px; transition: all 0.2s; }
+        .cta-button:hover { background: #9b2c2c; transform: translateY(-2px); }
+        section { padding: 64px 0; }
+        .section-title { font-size: 32px; font-weight: 700; margin-bottom: 8px; color: var(--primary); }
+        .section-subtitle { color: var(--text-muted); margin-bottom: 40px; font-size: 18px; }
+        .faq-grid { max-width: 900px; margin: 0 auto; }
+        /* Accordion */
+        .faq-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 16px; overflow: hidden; }
+        .faq-question { width: 100%; text-align: left; background: none; border: none; padding: 20px 24px; font-size: 18px; font-weight: 600; color: var(--primary); cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .faq-question:hover { background: var(--bg); }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+        .faq-answer p { padding: 0 24px 20px; color: var(--text-muted); line-height: 1.6; }
+        .faq-item.open .faq-answer { max-height: 600px; }
+        .faq-icon { font-size: 22px; color: var(--accent); transition: transform 0.2s; }
+        .faq-item.open .faq-icon { transform: rotate(45deg); }
+        .todo { border: 2px dashed var(--accent); background: #fff5f5; border-radius: 8px; padding: 16px; font-size: 14px; color: var(--accent-hover); }
+        footer { background: #1a202c; color: #a0aec0; padding: 40px 0; text-align: center; }
+        footer p { margin-bottom: 8px; }
+        footer a { color: #63b3ed; text-decoration: none; }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 32px; }
+            .hero p { font-size: 18px; }
+            .header-content { flex-direction: column; text-align: center; }
+            .contact-info { justify-content: center; }
+            section { padding: 48px 0; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">Performance<span>Supply</span>Depot</a>
+                <div class="contact-info">
+                    <a href="tel:888-881-6834" class="patriotic-phone" style="text-decoration: none;">📞 (888) 881-6834</a>
+                    <a href="tel:415-571-9724" style="text-decoration: none;">📞 (415) 571-9724</a>
+                    <a href="mailto:info@psdepot.com" style="text-decoration: none;">✉️ info@psdepot.com</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="main-nav" aria-label="Primary">
+        <div class="container">
+            <a href="/">Home</a>
+            <a href="/products/index.html">Products</a>
+            <a href="/blog/index.html">Blog</a>
+            <a href="/services.html">Services</a>
+            <a href="/testimonials.html">Testimonials</a>
+            <a href="/about.html">About</a>
+            <a href="/faq.html">FAQ</a>
+            <a href="/contact.html">Contact</a>
+            <a href="/locations.html">Service Areas</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Frequently Asked Questions</h1>
+            <p>Straight answers about supplies, hardware, services, and support.</p>
+            <a href="/contact.html" class="cta-button">Have a Different Question?</a>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <!-- TODO: Content module — FAQ answers.
+                 NOTE: The JSON-LD FAQPage schema above has an empty mainEntity array.
+                 As you author each Q&A, add a matching Question/Answer object to the
+                 schema so structured data stays in sync with the visible accordion. -->
+            <h2 class="section-title">Common Questions</h2>
+            <p class="section-subtitle">TODO: One-line intro. Expand each accordion with final Q&amp;A copy when ready.</p>
+
+            <div class="faq-grid">
+                <!-- ===== Q&A placeholder 1 ===== -->
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        TODO: Write question #1 here
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <!-- TODO: Answer #1 — write the clear, correct answer.
+                             Keep it specific; if a measurable fact applies (turnaround,
+                             pricing, specs), include it. -->
+                        <p>TODO: Write the answer here. Placeholder paragraph — no final copy yet.</p>
+                    </div>
+                </div>
+
+                <!-- ===== Q&A placeholder 2 ===== -->
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        TODO: Write question #2 here
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>TODO: Write the answer here. Placeholder paragraph — no final copy yet.</p>
+                    </div>
+                </div>
+
+                <!-- ===== Q&A placeholder 3 ===== -->
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        TODO: Write question #3 here
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>TODO: Write the answer here. Placeholder paragraph — no final copy yet.</p>
+                    </div>
+                </div>
+
+                <!-- ===== Q&A placeholder 4 ===== -->
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        TODO: Write question #4 here
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>TODO: Write the answer here. Placeholder paragraph — no final copy yet.</p>
+                    </div>
+                </div>
+
+                <!-- ===== Q&A placeholder 5 ===== -->
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        TODO: Write question #5 here
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>TODO: Write the answer here. Placeholder paragraph — no final copy yet.</p>
+                    </div>
+                </div>
+
+                <!-- ===== Q&A placeholder 6 ===== -->
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        TODO: Write question #6 here
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>TODO: Write the answer here. Placeholder paragraph — no final copy yet.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="todo" style="margin-top: 32px;">
+                <!-- TODO: Suggestion — seed Q&As from the existing homepage FAQ (phenol-free
+                     paper, paper size, printer repair, POS hardware) plus common service and
+                     shipping questions. Author final copy, then fill the JSON-LD schema. -->
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p><strong>Performance Supply Depot LLC</strong></p>
+            <p>📞 <span class="patriotic-phone">(888) 881-6834</span> | 📞 (415) 571-9724</p>
+            <p>✉️ <a href="mailto:info@psdepot.com" style="text-decoration: none; color: inherit;">info@psdepot.com</a></p>
+            <p style="margin-top: 8px; font-size: 14px;"><a href="/contact.html" style="color: inherit; text-decoration: underline;">📞 Contact Us</a></p>
+            <p style="margin-top: 16px; font-size: 14px;">© 2026 Performance Supply Depot LLC. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleFaq(btn) {
+            btn.parentElement.classList.toggle('open');
+        }
+    </script>
+</body>
+</html>
