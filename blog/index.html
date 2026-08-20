@@ -9,6 +9,12 @@
     <link rel="canonical" href="https://psdepot.com/blog/">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+
+        /* Standard header (normalized) */
+        .contact-info { display: flex; gap: 24px; flex-wrap: wrap; font-size: 14px; }
+        .contact-info a { color: #bee3f8; text-decoration: none; font-weight: 500; }
+        .contact-info a:hover { color: white; text-decoration: underline; }
+
 @keyframes patriotic-blink {
     0%, 100% { color: #ff0000; text-shadow: 0 0 8px rgba(255, 0, 0, 0.6); }
     33% { color: #ffffff; text-shadow: 0 0 8px rgba(255, 255, 255, 0.9); }
@@ -291,18 +297,21 @@
     </style>
 </head>
 <body>
-    <header>
-        <div class="header-content">
-            <a href="/" class="logo">Performance<span>Supply</span>Depot</a>
-            <nav class="header-nav">
-                <a href="/">Home</a>
-                <a href="/">Products</a>
-                <a href="/blog/">Blog</a>
-                <a href="/contact.html">Contact</a>
-                <a href="/checkout.html" class="cart-icon">🛒 Cart (<span id="cart-count">0</span>)</a>
-            </nav>
+        <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">Performance<span>Supply</span>Depot</a>
+                <div class="contact-info">
+                    <a href="tel:888-881-6834" class="patriotic-phone" style="text-decoration: none;">📞 (888) 881-6834</a>
+                    <a href="tel:415-571-9724" style="text-decoration: none;">📞 (415) 571-9724</a>
+                    <a href="mailto:info@psdepot.com" style="text-decoration: none;">✉️ info@psdepot.com</a>
+                    <a href="/checkout.html" class="cart-icon">
+                        🛒 Cart (<span id="cart-count">0</span>)
+                    </a>
+                </div>
+            </div>
         </div>
-    <div style="text-align:center;padding:6px 0;"><a href="tel:888-881-6834" class="patriotic-phone" style="text-decoration:none;">📞 (888) 881-6834</a> <a href="tel:415-571-9724" style="text-decoration:none;">📞 (415) 571-9724</a> <a href="mailto:info@psdepot.com" style="text-decoration:none;">✉️ info@psdepot.com</a></div></header>
+    </header>
     
     <nav class="main-nav" aria-label="Primary">
         <div class="container">

@@ -39,6 +39,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+
+        /* Standard header (normalized) */
+        .cart-icon { background: var(--accent, #FF7A00); color: white !important; padding: 8px 16px; border-radius: 20px; font-weight: 600; }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --primary: #1a365d;
@@ -278,19 +282,21 @@
 </style>
 </head>
 <body>
-    <header>
+        <header>
         <div class="container">
             <div class="header-content">
                 <a href="/" class="logo">Performance<span>Supply</span>Depot</a>
-                <nav class="nav-links">
-                    <a href="/">Home</a>
-                    <a href="/#products">Products</a>
-                    <a href="/#services">Services</a>
-                    <a href="/contact.html">Contact</a>
-                </nav>
+                <div class="contact-info">
+                    <a href="tel:888-881-6834" class="patriotic-phone" style="text-decoration: none;">📞 (888) 881-6834</a>
+                    <a href="tel:415-571-9724" style="text-decoration: none;">📞 (415) 571-9724</a>
+                    <a href="mailto:info@psdepot.com" style="text-decoration: none;">✉️ info@psdepot.com</a>
+                    <a href="/checkout.html" class="cart-icon">
+                        🛒 Cart (<span id="cart-count">0</span>)
+                    </a>
+                </div>
             </div>
         </div>
-    <div style="text-align:center;padding:6px 0;"><a href="tel:888-881-6834" class="patriotic-phone" style="text-decoration:none;">📞 (888) 881-6834</a> <a href="tel:415-571-9724" style="text-decoration:none;">📞 (415) 571-9724</a> <a href="mailto:info@psdepot.com" style="text-decoration:none;">✉️ info@psdepot.com</a></div></header><nav class="main-nav" aria-label="Primary">
+    </header><nav class="main-nav" aria-label="Primary">
     <div class="container">
         <a href="/">Home</a>
         <a href="/products/index.html">Products</a>
