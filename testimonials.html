@@ -194,6 +194,58 @@
         </div>
     </section>
 
+    <section id="leave-review" style="background: #edf2f7; padding: 56px 0;">
+        <div class="container" style="max-width: 720px;">
+            <h2 class="section-title">Share Your Experience</h2>
+            <p class="section-subtitle" style="font-size: 16px;">How did we do? Your feedback helps us serve California businesses better.</p>
+
+            <form id="review-form" style="background: var(--card, #fff); border: 1px solid var(--border, #e2e8f0); border-radius: 12px; padding: 32px; margin-top: 24px;">
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; font-weight: 600; margin-bottom: 8px; color: var(--primary, #0A1A2F);">Your Rating</label>
+                    <div id="star-rating" style="display: flex; gap: 6px; font-size: 30px; cursor: pointer; user-select: none;">
+                        <span data-value="1" style="color: #cbd5e1;">★</span>
+                        <span data-value="2" style="color: #cbd5e1;">★</span>
+                        <span data-value="3" style="color: #cbd5e1;">★</span>
+                        <span data-value="4" style="color: #cbd5e1;">★</span>
+                        <span data-value="5" style="color: #cbd5e1;">★</span>
+                    </div>
+                    <input type="hidden" id="rating-value" name="rating" value="0">
+                    <div id="rating-label" style="font-size: 13px; color: var(--text-muted, #64748b); margin-top: 6px;">Tap a star to rate</div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                    <div>
+                        <label style="display: block; font-weight: 600; margin-bottom: 6px; color: var(--primary, #0A1A2F);">Your Name <span style="color:#b91c1c;">*</span></label>
+                        <input type="text" id="review-name" name="name" required style="width: 100%; padding: 12px; border: 1px solid var(--border, #e2e8f0); border-radius: 8px; font-size: 15px; box-sizing: border-box;">
+                    </div>
+                    <div>
+                        <label style="display: block; font-weight: 600; margin-bottom: 6px; color: var(--primary, #0A1A2F);">Business Name <span style="color:#94a3b8;">(optional)</span></label>
+                        <input type="text" id="review-business" name="business" style="width: 100%; padding: 12px; border: 1px solid var(--border, #e2e8f0); border-radius: 8px; font-size: 15px; box-sizing: border-box;">
+                    </div>
+                </div>
+
+                <div style="margin-top: 16px;">
+                    <label style="display: block; font-weight: 600; margin-bottom: 6px; color: var(--primary, #0A1A2F);">Your Review <span style="color:#b91c1c;">*</span></label>
+                    <textarea id="review-text" name="text" required rows="4" style="width: 100%; padding: 12px; border: 1px solid var(--border, #e2e8f0); border-radius: 8px; font-size: 15px; box-sizing: border-box; font-family: inherit;" placeholder="Tell us about your experience with our supplies, service, or support..."></textarea>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px;">
+                    <div>
+                        <label style="display: block; font-weight: 600; margin-bottom: 6px; color: var(--primary, #0A1A2F);">Email <span style="color:#94a3b8;">(optional)</span></label>
+                        <input type="email" id="review-email" name="email" style="width: 100%; padding: 12px; border: 1px solid var(--border, #e2e8f0); border-radius: 8px; font-size: 15px; box-sizing: border-box;">
+                    </div>
+                    <div>
+                        <label style="display: block; font-weight: 600; margin-bottom: 6px; color: var(--primary, #0A1A2F);">Phone <span style="color:#94a3b8;">(optional)</span></label>
+                        <input type="tel" id="review-phone" name="phone" style="width: 100%; padding: 12px; border: 1px solid var(--border, #e2e8f0); border-radius: 8px; font-size: 15px; box-sizing: border-box;">
+                    </div>
+                </div>
+
+                <button type="submit" class="cta-button" style="width: 100%; margin-top: 24px; border: none; cursor: pointer; font-size: 16px;">Submit Review</button>
+                <div id="review-status" style="margin-top: 16px; text-align: center; font-size: 15px; min-height: 20px;"></div>
+            </form>
+        </div>
+    </section>
+
     <section style="background: #edf2f7;">
         <div class="container">
             <h2 class="section-title">Satisfied Customers by Industry</h2>
@@ -237,5 +289,135 @@
             <p style="margin-top: 16px; font-size: 14px;">© 2026 Performance Supply Depot LLC. All rights reserved.</p>
         </div>
     </footer>
+
+<script>
+(function () {
+    // ── Star rating widget ──────────────────────────────
+    var stars = document.querySelectorAll('#star-rating span');
+    var ratingInput = document.getElementById('rating-value');
+    var ratingLabel = document.getElementById('rating-label');
+    var ratingLabels = {1: 'Poor', 2: 'Fair', 3: 'Good', 4: 'Very Good', 5: 'Excellent'};
+
+    function paintStars(v) {
+        stars.forEach(function (s) {
+            var val = parseInt(s.getAttribute('data-value'), 10);
+            s.style.color = val <= v ? '#f59e0b' : '#cbd5e1';
+        });
+    }
+
+    stars.forEach(function (s) {
+        s.addEventListener('mouseenter', function () {
+            paintStars(parseInt(s.getAttribute('data-value'), 10));
+        });
+        s.addEventListener('click', function () {
+            var v = parseInt(s.getAttribute('data-value'), 10);
+            ratingInput.value = v;
+            paintStars(v);
+            ratingLabel.textContent = ratingLabels[v] + ' (' + v + '/5)';
+        });
+    });
+    document.getElementById('star-rating').addEventListener('mouseleave', function () {
+        paintStars(parseInt(ratingInput.value, 10) || 0);
+    });
+
+    // ── Submit review ───────────────────────────────────
+    var form = document.getElementById('review-form');
+    var statusEl = document.getElementById('review-status');
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var rating = parseInt(ratingInput.value, 10);
+        if (!rating) {
+            statusEl.innerHTML = '<span style="color:#b91c1c;">Please select a star rating.</span>';
+            return;
+        }
+        var payload = {
+            name: document.getElementById('review-name').value.trim(),
+            business: document.getElementById('review-business').value.trim(),
+            email: document.getElementById('review-email').value.trim(),
+            phone: document.getElementById('review-phone').value.trim(),
+            rating: rating,
+            text: document.getElementById('review-text').value.trim()
+        };
+        if (!payload.name || !payload.text) {
+            statusEl.innerHTML = '<span style="color:#b91c1c;">Please enter your name and review.</span>';
+            return;
+        }
+
+        var btn = form.querySelector('button[type=submit]');
+        btn.disabled = true;
+        btn.textContent = 'Submitting…';
+        statusEl.innerHTML = '';
+
+        fetch('/api/testimonials', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        })
+        .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, data: d }; }); })
+        .then(function (res) {
+            btn.disabled = false;
+            btn.textContent = 'Submit Review';
+            if (res.ok && res.data.status === 'published') {
+                statusEl.innerHTML = '<span style="color:#16a34a;">Thank you! Your review is live below.</span>';
+                form.reset();
+                paintStars(0);
+                ratingInput.value = '0';
+                ratingLabel.textContent = 'Tap a star to rate';
+                loadPublished();
+            } else if (res.ok && res.data.status === 'flagged') {
+                statusEl.innerHTML = '<span style="color:#b45309;">Thank you for your feedback. Our team has been notified and will follow up with you.</span>';
+                form.reset();
+                paintStars(0);
+                ratingInput.value = '0';
+                ratingLabel.textContent = 'Tap a star to rate';
+            } else {
+                statusEl.innerHTML = '<span style="color:#b91c1c;">Something went wrong: ' + (res.data.error || res.data.detail || 'please try again') + '</span>';
+            }
+        })
+        .catch(function () {
+            btn.disabled = false;
+            btn.textContent = 'Submit Review';
+            statusEl.innerHTML = '<span style="color:#b91c1c;">Network error — please try again.</span>';
+        });
+    });
+
+    // ── Load published testimonials dynamically ─────────
+    function loadPublished() {
+        fetch('/api/testimonials')
+        .then(function (r) { return r.json(); })
+        .then(function (list) {
+            if (!Array.isArray(list) || list.length === 0) return;
+            var grid = document.querySelector('.testimonials-grid');
+            if (!grid) return;
+            // Remove previously injected dynamic cards (avoid duplicates on re-fetch)
+            grid.querySelectorAll('.dynamic-testimonial').forEach(function (el) { el.remove(); });
+
+            list.forEach(function (t) {
+                var card = document.createElement('div');
+                card.className = 'testimonial-card dynamic-testimonial';
+                var starStr = '';
+                for (var i = 0; i < 5; i++) starStr += (i < t.rating) ? '★' : '☆';
+                var role = t.business ? t.business : 'Verified Customer';
+                card.innerHTML =
+                    '<div class="stars">' + starStr + '</div>' +
+                    '<p class="testimonial-quote">"' + escapeHtml(t.text) + '"</p>' +
+                    '<div class="testimonial-author"><div class="name">' + escapeHtml(t.name) + '</div>' +
+                    '<div class="role">' + escapeHtml(role) + '</div></div>';
+                grid.prepend(card);
+            });
+        })
+        .catch(function () { /* silent — dynamic testimonials are progressive enhancement */ });
+    }
+
+    function escapeHtml(s) {
+        return String(s).replace(/[&<>"']/g, function (c) {
+            return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+        });
+    }
+
+    // Load existing published testimonials on page load.
+    loadPublished();
+})();
+</script>
 </body>
 </html>
