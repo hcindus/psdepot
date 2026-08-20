@@ -253,6 +253,34 @@
         .footer-contact a {
             margin: 0 16px;
         }
+
+        /* Primary navigation */
+        .main-nav {
+            background: #12283f;
+            border-bottom: 3px solid var(--accent);
+        }
+        .main-nav .container {
+            display: flex;
+            gap: 4px;
+            flex-wrap: wrap;
+            padding: 0 24px;
+        }
+        .main-nav a {
+            display: inline-block;
+            color: #bee3f8;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            padding: 12px 18px;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+        .main-nav a:hover,
+        .main-nav a:focus {
+            color: #ffffff;
+            background: rgba(255,255,255,0.08);
+            border-bottom-color: var(--accent);
+        }
     </style>
 </head>
 <body>
@@ -268,6 +296,20 @@
             </nav>
         </div>
     </header>
+    
+    <nav class="main-nav" aria-label="Primary">
+        <div class="container">
+            <a href="/">Home</a>
+            <a href="/products/index.html">Products</a>
+            <a href="/blog/index.html">Blog</a>
+            <a href="/services.html">Services</a>
+            <a href="/testimonials.html">Testimonials</a>
+            <a href="/about.html">About</a>
+            <a href="/faq.html">FAQ</a>
+            <a href="/contact.html">Contact</a>
+            <a href="/locations.html">Service Areas</a>
+        </div>
+    </nav>
     
     <section class="hero">
         <h1>POS Solutions Blog</h1>
@@ -340,6 +382,35 @@
                     </div>
                 </div>
             </a>
+            <div class="blog-card">
+                <div class="blog-card-image" style="background: #fff5f5; color: var(--accent); font-size: 28px; text-align: center; padding: 0 16px;">COMING SOON</div>
+                <div class="blog-card-content">
+                    <div class="blog-category">Scheduled</div>
+                    <h3>TODO: Upcoming Post Title</h3>
+                    <!-- TODO: Replace this card with a linked post once the article is
+                         written and published. Follow the .blog-card / .blog-card-image
+                         pattern used by the posts above. -->
+                    <p>TODO: One-line summary of the upcoming article.</p>
+                </div>
+            </div>
+
+            <div class="blog-card">
+                <div class="blog-card-image" style="background: #fff5f5; color: var(--accent); font-size: 28px; text-align: center; padding: 0 16px;">COMING SOON</div>
+                <div class="blog-card-content">
+                    <div class="blog-category">Scheduled</div>
+                    <h3>TODO: Upcoming Post Title</h3>
+                    <p>TODO: One-line summary of the upcoming article.</p>
+                </div>
+            </div>
+
+            <div class="blog-card">
+                <div class="blog-card-image" style="background: #fff5f5; color: var(--accent); font-size: 28px; text-align: center; padding: 0 16px;">COMING SOON</div>
+                <div class="blog-card-content">
+                    <div class="blog-category">Scheduled</div>
+                    <h3>TODO: Upcoming Post Title</h3>
+                    <p>TODO: One-line summary of the upcoming article.</p>
+                </div>
+            </div>
         </div>
         
         <div class="newsletter">
@@ -355,9 +426,11 @@
     <footer>
         <p class="footer-contact">
             📞 <a href="tel:888-881-6834">(888) 881-6834</a> | 
-            ✉️ <a href="mailto:info@psdepot.com">info@psdepot.com</a>
+            📞 <a href="tel:415-571-9724">(415) 571-9724</a> | 
+            ✉️ <a href="mailto:info@psdepot.com">info@psdepot.com</a> |
+            📞 <a href="/contact.html">Contact</a>
         </p>
-        <p>© 2024 Performance Supply Depot LLC. All rights reserved.</p>
+        <p>© 2026 Performance Supply Depot LLC. All rights reserved.</p>
     </footer>
     
     <script>
