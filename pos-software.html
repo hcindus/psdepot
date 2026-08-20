@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAM4POS Cloud POS Software | Performance Supply Depot LLC</title>
+    <meta name="description" content="SAM4POS is SAM4S's Android-based point-of-sale software platform for restaurants and retail. Touchscreen sales, kitchen printing, barcode scanning, reporting, and more. Call (888) 881-6834.">
+    <link rel="canonical" href="https://psdepot.com/pos-software.html">
+    <meta property="og:image" content="https://psdepot.com/assets/images/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://psdepot.com/assets/images/og-image.png">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "SAM4POS",
+      "operatingSystem": "Android",
+      "applicationCategory": "PointOfSaleApplication",
+      "description": "SAM4POS is SAM4S's Android-based point-of-sale software platform for restaurants, bars, and retail businesses.",
+      "offers": {
+        "@type": "Offer",
+        "url": "https://psdepot.com/pos-software.html",
+        "price": "0",
+        "priceCurrency": "USD",
+        "description": "Contact for a quote"
+      }
+    }
+    </script>
+
+    <style>
+        :root {
+            --primary: #0A1A2F;
+            --primary-dark: #0f2744;
+            --accent: #d69e2e;
+            --accent-hover: #b7791f;
+            --bg: #F8F9FA;
+            --card: #ffffff;
+            --text: #111111;
+            --text-muted: #718096;
+            --border: #e2e8f0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo { font-size: 1.5rem; font-weight: 700; }
+        .logo span { color: var(--accent); }
+
+        .contact-info {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: opacity 0.2s;
+        }
+
+        .contact-info a:hover { opacity: 0.8; }
+
+        .cart-icon {
+            background: #c53030;
+            color: white !important;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .cart-icon:hover {
+            background: #9b2c2c;
+            transform: translateY(-1px);
+        }
+
+        /* Primary navigation */
+        .main-nav {
+            background: #12283f;
+            border-bottom: 3px solid var(--accent);
+        }
+        .main-nav .container {
+            display: flex;
+            gap: 4px;
+            flex-wrap: wrap;
+        }
+        .main-nav a {
+            display: inline-block;
+            color: #bee3f8;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            padding: 12px 18px;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+        .main-nav a:hover,
+        .main-nav a:focus {
+            color: #ffffff;
+            background: rgba(255,255,255,0.08);
+            border-bottom-color: var(--accent);
+        }
+        .main-nav a[aria-current="page"] {
+            color: #ffffff;
+            border-bottom-color: var(--accent);
+        }
+
+        .breadcrumb {
+            max-width: 1200px;
+            margin: 1rem auto;
+            padding: 0 2rem;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+        .breadcrumb a { color: var(--primary); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        .hero h1 { font-size: 2.6rem; font-weight: 800; margin-bottom: 1rem; line-height: 1.2; }
+        .hero p { font-size: 1.2rem; color: #bee3f8; max-width: 780px; margin: 0 auto 2rem; }
+        .hero .btn-primary {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+        .hero .btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+        section { padding: 3.5rem 0; }
+        .section-title { font-size: 2rem; font-weight: 700; color: var(--primary); margin-bottom: 1rem; text-align: center; }
+        .section-subtitle { text-align: center; color: var(--text-muted); max-width: 760px; margin: 0 auto 2.5rem; font-size: 1.05rem; }
+
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; }
+        @media (max-width: 850px) { .two-col { grid-template-columns: 1fr; } }
+        .content-block h3 { color: var(--primary); font-size: 1.35rem; margin-bottom: 0.75rem; }
+        .content-block p { margin-bottom: 1rem; color: var(--text); }
+        .content-block ul { margin-left: 1.5rem; margin-bottom: 1rem; }
+        .content-block li { margin-bottom: 0.5rem; }
+
+        .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+        @media (max-width: 900px) { .features-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 600px) { .features-grid { grid-template-columns: 1fr; } }
+        .feature-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .feature-card .feature-icon {
+            width: 44px; height: 44px; border-radius: 50%;
+            background: var(--accent); color: white;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; margin-bottom: 0.75rem;
+        }
+        .feature-card h4 { color: var(--primary); font-size: 1.05rem; margin-bottom: 0.4rem; }
+        .feature-card p { color: var(--text-muted); font-size: 0.925rem; }
+
+        .hardware-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+        @media (max-width: 700px) { .hardware-grid { grid-template-columns: 1fr; } }
+        .hardware-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .hardware-card h4 { color: var(--primary); font-size: 1.1rem; }
+        .hardware-card p { color: var(--text-muted); font-size: 0.925rem; flex: 1; }
+        .hardware-card a { color: var(--accent-hover); font-weight: 600; text-decoration: none; }
+        .hardware-card a:hover { text-decoration: underline; }
+
+        .cta-band { text-align: center; background: var(--primary); color: white; }
+        .cta-band h3 { font-size: 1.6rem; margin-bottom: 0.5rem; }
+        .cta-band p { opacity: 0.9; margin-bottom: 1.5rem; }
+        .cta-band .phone {
+            font-size: 2.2rem;
+            font-weight: 800;
+            text-decoration: none;
+            color: white;
+            display: inline-block;
+        }
+        .cta-band .btn-primary {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.9rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            transition: all 0.2s;
+        }
+        .cta-band .btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); }
+
+        .footer {
+            background: var(--primary-dark);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            font-size: 0.875rem;
+            opacity: 0.9;
+        }
+        .footer p { margin-bottom: 8px; }
+        .footer a { color: #bee3f8; text-decoration: none; }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .hero p { font-size: 1.05rem; }
+            .header-content { flex-direction: column; gap: 0.75rem; text-align: center; }
+            .contact-info { justify-content: center; flex-wrap: wrap; gap: 1rem; }
+            .section-title { font-size: 1.6rem; }
+            section { padding: 2.5rem 0; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">Performance<span>Supply</span>Depot</div>
+            <div class="contact-info">
+                <a href="tel:888-881-6834">📞 (888) 881-6834</a>
+                <a href="mailto:info@psdepot.com">✉️ info@psdepot.com</a>
+                <a href="/checkout.html" class="cart-icon">🛒 Cart (<span id="cart-count">0</span>)</a>
+            </div>
+        </div>
+    </header>
+    <nav class="main-nav" aria-label="Primary">
+        <div class="container">
+            <a href="/">Home</a>
+            <a href="/products/index.html">Products</a>
+            <a href="/blog/index.html">Blog</a>
+            <a href="/services.html">Services</a>
+            <a href="/testimonials.html">Testimonials</a>
+            <a href="/about.html">About</a>
+            <a href="/resources/faq.html">FAQ</a>
+            <a href="/contact.html">Contact</a>
+            <a href="/locations.html">Service Areas</a>
+        </div>
+    </nav>
+
+    <div class="breadcrumb">
+        <a href="/">Home</a> / <a href="/services.html">Services</a> / POS Software
+    </div>
+
+    <section class="hero">
+        <div class="container">
+            <h1>SAM4POS Cloud POS Software</h1>
+            <p>SAM4S's Android-based point-of-sale software platform — built for restaurants, bars, and retail stores that need more than a basic cash register. Touchscreen sales, kitchen printing, barcode scanning, integrated payments, and detailed reporting in one system.</p>
+            <a href="/sam4pos.html" class="btn-primary">Explore SAM4POS Features</a>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2 class="section-title">What is SAM4POS?</h2>
+            <p class="section-subtitle">A full point-of-sale software platform from SAM4S — the hardware maker trusted by businesses in 100+ countries — engineered to turn capable SAM4S terminals into complete checkout and operations systems.</p>
+            <div class="two-col">
+                <div class="content-block">
+                    <h3>More than a cash register</h3>
+                    <p>SAM4POS is point-of-sale software used on supported SAM4S terminals and compatible setups. It gives merchants touchscreen sales, programming tools, reporting, device setup, and payment-related features that go beyond a standard electronic cash register.</p>
+                    <p>You stay in the SAM4S family — the hardware brand behind your registers and terminals — while gaining the flexibility of a modern, screen-driven POS system.</p>
+                </div>
+                <div class="content-block">
+                    <h3>Built for real operations</h3>
+                    <p>Because it's configurable by an authorized SAM4S dealer, SAM4POS is tailored to how your business actually rings sales — from a quick-serve counter to a full restaurant floor to a scan-heavy retail aisle.</p>
+                    <ul>
+                        <li>Restaurants, bars &amp; quick-service</li>
+                        <li>Convenience, liquor &amp; grocery stores</li>
+                        <li>Retail, deli &amp; specialty shops</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section style="background: #edf2f7;">
+        <div class="container">
+            <h2 class="section-title">Key Features</h2>
+            <p class="section-subtitle">Verified capabilities you can build your operation around — every one supported by SAM4POS configuration.</p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🖥️</div>
+                    <h4>Touchscreen Checkout</h4>
+                    <p>Screen-based sales with editable menu screens, button layouts, item groups, and quick keys organized around how your team rings sales.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🍔</div>
+                    <h4>Restaurant Kitchen Routing</h4>
+                    <p>Menu screens, modifiers, and gratuity for food service — plus kitchen printer routing and kitchen video (kitchen display) for order preparation areas.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📦</div>
+                    <h4>PLU, Inventory &amp; Labels</h4>
+                    <p>Price look-ups (PLUs), item groups, inventory-style functions, price levels, and shelf/barcode label printing for retail, grocery, and deli applications.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔔</div>
+                    <h4>Barcode Scanning &amp; Scales</h4>
+                    <p>UPC scanner support for scan-based businesses and scale integration for grocery, deli, produce, and weighed-item sales.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💳</div>
+                    <h4>Integrated Payments</h4>
+                    <p>Electronic payment and gift card processing ready — cash, credit, debit, gift card, and more through tender keys and optional integrated payment devices.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h4>Reporting &amp; Back-Office</h4>
+                    <p>Sales, item, employee, tender, tax, and group reports — plus end-of-day closing procedures and options for remote report access depending on setup.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h4>Employees &amp; Security</h4>
+                    <p>Employees, job roles, authority levels, and access controls so discounts, voids, refunds, reports, and manager functions stay controlled.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🧮</div>
+                    <h4>Tax Handling</h4>
+                    <p>Flexible tax rates and tax groups for restaurants, retail, grocery, liquor, and mixed-product businesses — including taxable and non-taxable item rules.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🖨️</div>
+                    <h4>Receipts &amp; Devices</h4>
+                    <p>Customer receipts with messages and logos, plus receipt printers, customer displays, cash drawers, coin dispensers, and other supported peripherals.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2 class="section-title">Hardware It Runs On</h2>
+            <p class="section-subtitle">SAM4POS runs on supported SAM4S POS terminals. The full touchscreen SAM4POS experience is on the Android-based SAP-series terminals and compatible setups we sell and service.</p>
+            <div class="hardware-grid">
+                <div class="hardware-card">
+                    <h4>SAM4S SAP-630 Android POS Terminal</h4>
+                    <p>Our flagship Android touchscreen terminal — 10" capacitive display with a raised programmable keyboard, built-in receipt printer, and cloud-ready WiFi/Ethernet. The natural home for SAM4POS.</p>
+                    <a href="/products/sam4s-sap-630.html">View the SAP-630 →</a>
+                </div>
+                <div class="hardware-card">
+                    <h4>SAM4S ER-Series Cash Registers</h4>
+                    <p>The dependable ER line for traditional counter checkout. Ideal for businesses that want today's flexible registers, or as a SAM4S-family step when you're ready to upgrade to a full POS.</p>
+                    <a href="/products/sam4s-er-260.html">View ER Series Registers →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section style="background: #edf2f7;">
+        <div class="container">
+            <h2 class="section-title">Cloud &amp; Back-Office Benefits</h2>
+            <p class="section-subtitle">SAM4POS brings your checkout data and operations together — with the reliability of dedicated SAM4S hardware.</p>
+            <div class="two-col">
+                <div class="content-block">
+                    <h3>Smarter data, fewer blind spots</h3>
+                    <ul>
+                        <li><strong>Detailed reporting:</strong> sales, items, employees, tenders, taxes, and groups — not just a closing total.</li>
+                        <li><strong>Remote access options:</strong> depending on installed configuration and licensing, reports can be reviewed away from the terminal.</li>
+                        <li><strong>Multi-terminal operation:</strong> plan stations, terminal roles, device mapping, and printer/cash-drawer assignment across a network.</li>
+                    </ul>
+                </div>
+                <div class="content-block">
+                    <h3>Engineered to keep checkout moving</h3>
+                    <ul>
+                        <li><strong>Cloud-ready hardware:</strong> the SAP-630 ships with WiFi/Ethernet so real-time data sync and cloud-connected workflows are ready from day one.</li>
+                        <li><strong>Dealer-programmed:</strong> your authorized SAM4S dealer configures menus, taxes, users, and device routing so setup matches your store.</li>
+                        <li><strong>Backed by our team:</strong> setup, training, and ongoing support from the people who've serviced SAM4S equipment since 2005.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-band">
+        <div class="container">
+            <h3>Ready to see SAM4POS on SAM4S Hardware?</h3>
+            <p>Talk to a specialist about the right software and terminal combo for your restaurant or store. No pressure, no jargon — just a clear recommendation.</p>
+            <a href="/contact.html" class="btn-primary">Request a Quote / Consultation</a><br>
+            <a href="tel:8888816834" class="phone">(888) 881-6834</a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p><strong>Performance Supply Depot LLC</strong></p>
+        <p>📞 (888) 881-6834 | 📞 (415) 571-9724 | ✉️ <a href="mailto:info@psdepot.com">info@psdepot.com</a></p>
+        <p style="margin-top: 8px;">© 2026 Performance Supply Depot LLC. Serving California since 2005.</p>
+    </footer>
+
+    <script>
+        function getCart() {
+            return JSON.parse(localStorage.getItem('psdepot_cart') || '[]');
+        }
+        function updateCartCount() {
+            const cart = getCart();
+            const count = cart.reduce((sum, item) => sum + (parseInt(item.quantity) || 0), 0);
+            const el = document.getElementById('cart-count');
+            if (el) el.textContent = count;
+        }
+        updateCartCount();
+    </script>
+</body>
+</html>

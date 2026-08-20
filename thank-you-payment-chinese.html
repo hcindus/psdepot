@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>感谢您的付款 | Performance Supply Depot</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(135deg, #1a365d 0%, #2d5a87 50%, #1a365d 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: linear-gradient(180deg, #f7fafc 0%, #edf2f7 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Floating Hearts/Stars Animation */
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        .float-item {
+            position: absolute;
+            font-size: 20px;
+            opacity: 0.6;
+            animation: float-up 8s ease-in-out infinite;
+        }
+        
+        @keyframes float-up {
+            0% {
+                transform: translateY(100%) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .f1 { left: 10%; animation-delay: 0s; font-size: 16px; }
+        .f2 { left: 25%; animation-delay: 1.5s; font-size: 24px; }
+        .f3 { left: 40%; animation-delay: 3s; font-size: 18px; }
+        .f4 { left: 55%; animation-delay: 0.5s; font-size: 22px; }
+        .f5 { left: 70%; animation-delay: 2s; font-size: 16px; }
+        .f6 { left: 85%; animation-delay: 4s; font-size: 20px; }
+        .f7 { left: 15%; animation-delay: 5s; font-size: 14px; }
+        .f8 { left: 60%; animation-delay: 6s; font-size: 26px; }
+        .f9 { left: 80%; animation-delay: 1s; font-size: 18px; }
+        .f10 { left: 35%; animation-delay: 7s; font-size: 16px; }
+        
+        /* Header */
+        .header {
+            position: relative;
+            z-index: 2;
+            background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%);
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        .checkmark-circle {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            border-radius: 50%;
+            margin: 0 auto 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 40px rgba(72, 187, 120, 0.4);
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 10px 40px rgba(72, 187, 120, 0.4);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 15px 50px rgba(72, 187, 120, 0.6);
+            }
+        }
+        
+        .checkmark {
+            font-size: 50px;
+            color: white;
+            animation: check-bounce 0.6s ease-out;
+        }
+        
+        @keyframes check-bounce {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+        
+        .greeting {
+            font-size: 12px;
+            letter-spacing: 4px;
+            color: #00d4ff;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+        
+        .title {
+            font-size: 36px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 18px;
+            color: #bee3f8;
+            font-style: italic;
+        }
+        
+        /* Success Badge */
+        .success-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: badge-shine 3s ease-in-out infinite;
+        }
+        
+        @keyframes badge-shine {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(72, 187, 120, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(72, 187, 120, 0.8), 0 0 60px rgba(72, 187, 120, 0.4);
+            }
+        }
+        
+        /* Main Content */
+        .content {
+            position: relative;
+            z-index: 2;
+            padding: 40px 30px;
+            background: linear-gradient(180deg, #f7fafc 0%, #edf2f7 100%);
+        }
+        
+        .gratitude-box {
+            background: linear-gradient(135deg, #ebf8ff 0%, #e6fffa 100%);
+            border: 2px solid #00d4ff;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .gratitude-box::before {
+            content: '✨';
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-size: 24px;
+            animation: sparkle 1.5s ease-in-out infinite;
+        }
+        
+        .gratitude-box::after {
+            content: '✨';
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 24px;
+            animation: sparkle 1.5s ease-in-out infinite 0.75s;
+        }
+        
+        @keyframes sparkle {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        
+        .gratitude-title {
+            font-size: 24px;
+            color: #2d5a87;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .gratitude-text {
+            font-size: 16px;
+            color: #4a5568;
+            line-height: 1.8;
+        }
+        
+        .gratitude-text strong {
+            color: #2d5a87;
+        }
+        
+        /* Transaction Details */
+        .transaction-box {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .transaction-title {
+            font-size: 16px;
+            color: #2d5a87;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 2px solid #edf2f7;
+            padding-bottom: 15px;
+        }
+        
+        .transaction-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #edf2f7;
+        }
+        
+        .transaction-row:last-child {
+            border-bottom: none;
+        }
+        
+        .transaction-label {
+            color: #718096;
+            font-size: 14px;
+        }
+        
+        .transaction-value {
+            color: #2d3748;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .transaction-value.success {
+            color: #38a169;
+        }
+        
+        /* Services Section */
+        .services-title {
+            font-size: 18px;
+            color: #2d5a87;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .services {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .service {
+            background: white;
+            border-radius: 10px;
+            padding: 20px 10px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        
+        .service:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .service:hover .service-name {
+            color: #00d4ff;
+        }
+        
+        .service-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .service-image {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .service-name {
+            font-size: 12px;
+            color: #2d5a87;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+        
+        .service-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .service-link:hover .service {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .service-link:hover .service-name {
+            color: #00d4ff;
+        }
+        
+        /* CTA */
+        .cta-box {
+            background: linear-gradient(135deg, #2d5a87 0%, #1a365d 100%);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .cta-title {
+            font-size: 20px;
+            color: white;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .cta-text {
+            font-size: 14px;
+            color: #bee3f8;
+            line-height: 1.6;
+        }
+        
+        .cta-text a {
+            color: #00d4ff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .cta-text a:hover {
+            color: #48bb78;
+        }
+        
+        /* Footer */
+        .footer {
+            position: relative;
+            z-index: 2;
+            background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%);
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .footer-divider {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #00d4ff, #48bb78);
+            margin: 0 auto 20px;
+            border-radius: 2px;
+        }
+        
+        .company-name {
+            font-size: 18px;
+            color: white;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .website {
+            color: #00d4ff;
+            font-size: 16px;
+            text-decoration: none;
+            margin-bottom: 15px;
+            display: block;
+            transition: color 0.3s;
+        }
+        
+        .website:hover {
+            color: #48bb78;
+        }
+        
+        .contact {
+            color: #a0c4e8;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+        
+        .contact a {
+            color: #00d4ff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .contact a:hover {
+            color: #48bb78;
+        }
+        
+        .tagline {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #bee3f8;
+            font-style: italic;
+        }
+        
+        /* Patriotic Phone Banner */
+        .phone-banner {
+            background: linear-gradient(135deg, #c53030 0%, #9b2c2c 100%);
+            padding: 15px;
+            text-align: center;
+            border-top: 3px solid #ffd700;
+            border-bottom: 3px solid #ffd700;
+        }
+        
+        .phone-label {
+            font-size: 12px;
+            color: #ffd700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 8px;
+        }
+        
+        .phone-number {
+            font-size: 32px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            text-shadow: 
+                0 0 10px #ffd700,
+                0 0 20px #ffd700,
+                0 0 30px #ff6b6b,
+                2px 2px 0 #0a1628;
+            letter-spacing: 4px;
+            animation: patriotic-blink 1.5s ease-in-out infinite;
+            display: inline-block;
+        }
+        
+        .phone-firework {
+            display: inline-block;
+            margin: 0 10px;
+        }
+        
+        @keyframes patriotic-blink {
+            0%, 100% {
+                color: white;
+                text-shadow: 
+                    0 0 10px #ffd700,
+                    0 0 20px #ffd700,
+                    0 0 30px #ff6b6b;
+            }
+            25% {
+                color: #ffd700;
+                text-shadow: 
+                    0 0 20px white,
+                    0 0 40px #ffd700,
+                    0 0 60px #ff6b6b;
+            }
+            50% {
+                color: #00d4ff;
+                text-shadow: 
+                    0 0 15px white,
+                    0 0 30px #00d4ff,
+                    0 0 45px #ffd700;
+            }
+            75% {
+                color: #ff6b6b;
+                text-shadow: 
+                    0 0 20px white,
+                    0 0 40px #ff6b6b,
+                    0 0 60px #ffd700;
+            }
+        }
+        
+        /* Animated border */
+        .animated-border {
+            height: 5px;
+            background: linear-gradient(90deg, 
+                #00d4ff 0%, 
+                #48bb78 25%, 
+                #00d4ff 50%, 
+                #48bb78 75%, 
+                #00d4ff 100%);
+            background-size: 200% 100%;
+            animation: gradient-flow 3s linear infinite;
+        }
+        
+        @keyframes gradient-flow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+        
+        /* Shimmer effect on header */
+        .header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: shimmer 4s ease-in-out infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { left: -100%; }
+            50%, 100% { left: 150%; }
+        }
+        
+        /* Responsive */
+        @media (max-width: 480px) {
+            .title { font-size: 28px; }
+            .subtitle { font-size: 14px; }
+            .services { grid-template-columns: repeat(1, 1fr); }
+            .content { padding: 30px 20px; }
+            .phone-number { font-size: 24px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Floating Elements -->
+        <div class="floating-elements">
+            <div class="float-item f1">💫</div>
+            <div class="float-item f2">⭐</div>
+            <div class="float-item f3">✨</div>
+            <div class="float-item f4">🌟</div>
+            <div class="float-item f5">💫</div>
+            <div class="float-item f6">⭐</div>
+            <div class="float-item f7">✨</div>
+            <div class="float-item f8">🌟</div>
+            <div class="float-item f9">💫</div>
+            <div class="float-item f10">⭐</div>
+        </div>
+        
+        <!-- Animated Border -->
+        <div class="animated-border"></div>
+        
+        <!-- Header -->
+        <div class="header">
+            <div class="checkmark-circle">
+                <span class="checkmark">✓</span>
+            </div>
+            
+            <div class="greeting">已收到付款</div>
+            <div class="title">谢谢！</div>
+            <div class="subtitle">您的付款已成功处理</div>
+            
+            <div class="success-badge">✓ 付款已确认</div>
+        </div>
+        
+        <!-- Content -->
+        <div class="content">
+            <div class="gratitude-box">
+                <div class="gratitude-title">🌟 我们衷心感谢您的惠顾！ 🌟</div>
+                <p class="gratitude-text">
+                    <span id="customer-greeting">尊敬的客户，</span><br><br>
+                    谨代表 <strong>Performance Supply Depot</strong>，我们对您近期的付款表示诚挚的感谢。您的信任与合作对我们意义重大。<br><br>
+                    <strong>让我们携手共创美好未来。</strong>
+                </p>
+            </div>
+            
+            <!-- Transaction Details -->
+            <div class="transaction-box">
+                <div class="transaction-title">📋 交易摘要</div>
+                
+                <div class="transaction-row">
+                    <span class="transaction-label">付款日期：</span>
+                    <span class="transaction-value" id="payment-date">[DATE]</span>
+                </div>
+                <div class="transaction-row">
+                    <span class="transaction-label">参考编号：</span>
+                    <span class="transaction-value" id="ref-number">[REF-XXXXX]</span>
+                </div>
+                <div class="transaction-row">
+                    <span class="transaction-label">已付金额：</span>
+                    <span class="transaction-value success" id="amount-paid">[$$$]</span>
+                </div>
+                <div class="transaction-row">
+                    <span class="transaction-label">付款方式：</span>
+                    <span class="transaction-value" id="payment-method">[METHOD]</span>
+                </div>
+                <div class="transaction-row">
+                    <span class="transaction-label">账户状态：</span>
+                    <span class="transaction-value success">✓ 正常</span>
+                </div>
+            </div>
+            
+            <div class="services-title">我们为您的企业提供什么</div>
+            
+            <div class="services">
+                <!-- 热敏纸 -->
+                <a href="https://psdepot.com/#products" target="_blank" class="service-link">
+                    <div class="service">
+                        <div class="service-icon">🖨️</div>
+                        <div class="service-name">热敏纸</div>
+                    </div>
+                </a>
+                
+                <!-- 票据纸 -->
+                <a href="https://psdepot.com/#products" target="_blank" class="service-link">
+                    <div class="service">
+                        <div class="service-icon">📦</div>
+                        <div class="service-name">票据纸</div>
+                    </div>
+                </a>
+                
+                <!-- 打印机色带 -->
+                <a href="https://psdepot.com/#products" target="_blank" class="service-link">
+                    <div class="service">
+                        <div class="service-icon">🖊️</div>
+                        <div class="service-name">打印机色带</div>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="cta-box">
+                <div class="cta-title">有问题？我们随时为您服务！</div>
+                <div class="cta-text">
+                    我们的团队随时准备协助您解决有关账户或产品的任何问题。<br><br>
+                    <a href="mailto:info@psdepot.com">📧 info@psdepot.com</a><br>
+                    <a href="https://psdepot.com" target="_blank">🌐 psdepot.com</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Patriotic Phone Banner -->
+        <div class="phone-banner">
+            <div class="phone-label">📞 立即致电我们 📞</div>
+            <a href="tel:888-881-6834" class="phone-number">
+                <span class="phone-firework">🇺🇸</span>
+                888-881-6834
+                <span class="phone-firework">🇺🇸</span>
+            </a>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-divider"></div>
+            
+            <div class="company-name">🏢 Performance Supply Depot LLC</div>
+            <a href="https://psdepot.com" target="_blank" class="website">🌐 psdepot.com</a>
+            
+            <div class="contact">
+                <a href="mailto:info@psdepot.com">📧 info@psdepot.com</a><br>
+                <a href="tel:888-881-6834">📞 888-881-6834</a><br>
+                <br>
+                赋能美国企业
+            </div>
+            
+            <div class="tagline">
+                "您的成功是我们的首要任务"
+            </div>
+        </div>
+        
+        <!-- Animated Border Bottom -->
+        <div class="animated-border"></div>
+    </div>
+    
+    <script>
+    // Populate invoice data from URL parameters
+    function populateInvoiceData() {
+        const params = new URLSearchParams(window.location.search);
+        
+        // Get values from URL
+        const date = params.get('date');
+        const ref = params.get('ref');
+        const amount = params.get('amount');
+        const method = params.get('method');
+        const name = params.get('name');
+        
+        // Update fields if values exist
+        if (date) {
+            const dateObj = new Date(date);
+            const formattedDate = dateObj.toLocaleDateString('zh-CN', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+            const dateEl = document.getElementById('payment-date');
+            if (dateEl) dateEl.textContent = formattedDate;
+        }
+        
+        if (ref) {
+            const refEl = document.getElementById('ref-number');
+            if (refEl) refEl.textContent = ref;
+        }
+        
+        if (amount) {
+            const amountEl = document.getElementById('amount-paid');
+            if (amountEl) {
+                const formattedAmount = parseFloat(amount).toLocaleString('zh-CN', {
+                    style: 'currency',
+                    currency: 'USD'
+                });
+                amountEl.textContent = formattedAmount;
+            }
+        }
+        
+        if (method) {
+            const methodEl = document.getElementById('payment-method');
+            if (methodEl) methodEl.textContent = decodeURIComponent(method).replace(/\+/g, ' ');
+        }
+        
+        if (name) {
+            const greetingEl = document.getElementById('customer-greeting');
+            if (greetingEl) {
+                greetingEl.innerHTML = '尊敬的<strong>' + decodeURIComponent(name).replace(/\+/g, ' ') + '</strong>,';
+            }
+        }
+    }
+    
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', populateInvoiceData);
+    </script>
+
+<footer style="background:#0A1A2F;color:#fff;padding:1.2rem 2rem;margin-top:2rem;font-size:14px;">
+  <a href="/locations.html" style="color:#FF7A00;text-decoration:none;font-weight:600;">📍 View all service areas →</a>
+</footer>
+</body>
+</html>
