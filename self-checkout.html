@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Self-Checkout Solutions — Speed Up Your Floor | Performance Supply Depot</title>
-    <meta name="description" content="TODO: Add 1-2 sentence meta description. Self-checkout terminals, hardware, and support for retail and grocery operations.">
+    <title>Self-Checkout Solutions — Speed Up Your Store Floor | Performance Supply Depot</title>
+    <meta name="description" content="Self-checkout terminals, hardware, and support that keep lines moving and free your staff for real customer service. Grocery and retail. Call (888) 881-6834.">
     <link rel="canonical" href="https://psdepot.com/self-checkout.html">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <meta name="robots" content="index, follow">
@@ -13,7 +13,7 @@
       "@context": "https://schema.org",
       "@type": "WebPage",
       "name": "Self-Checkout Solutions",
-      "description": "TODO: Add description. Self-checkout terminals, hardware, and support."
+      "description": "Self-checkout terminals, hardware, and support for retail and grocery operations."
     }
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -51,10 +51,22 @@
         .main-nav .container { display: flex; gap: 4px; flex-wrap: wrap; }
         .main-nav a { display: inline-block; color: #bee3f8; text-decoration: none; font-weight: 600; font-size: 15px; padding: 12px 18px; border-bottom: 2px solid transparent; transition: all 0.2s ease; }
         .main-nav a:hover, .main-nav a:focus { color: #ffffff; background: rgba(255,255,255,0.08); border-bottom-color: var(--accent); }
+        .main-nav a[aria-current="page"] { color: #ffffff; border-bottom-color: var(--accent); }
+        .cta-button { display: inline-block; background: var(--accent); color: white; padding: 16px 32px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 16px; transition: all 0.2s; }
+        .cta-button:hover { background: #9b2c2c; transform: translateY(-2px); }
         section { padding: 64px 0; }
         .section-title { font-size: 32px; font-weight: 700; margin-bottom: 8px; color: var(--primary); }
         .section-subtitle { color: var(--text-muted); margin-bottom: 40px; font-size: 18px; }
-        .todo { border: 2px dashed var(--accent); background: #fff5f5; border-radius: 8px; padding: 16px; margin-top: 24px; font-size: 14px; color: var(--accent-hover); }
+        .content-copy { max-width: 860px; margin: 0 auto; }
+        .content-copy p { margin-bottom: 20px; font-size: 17px; color: var(--text); }
+        .f-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+        @media (max-width: 768px) { .f-grid { grid-template-columns: 1fr; } }
+        .f-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 28px; }
+        .f-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 12px; color: var(--primary); }
+        .f-card p { color: var(--text); margin-bottom: 10px; }
+        .f-card ul { padding-left: 20px; color: var(--text-muted); }
+        .f-card li { margin-bottom: 6px; }
+        .cta-band { text-align: center; background: #edf2f7; }
         footer { background: #1a202c; color: #a0aec0; padding: 40px 0; text-align: center; }
         footer p { margin-bottom: 8px; }
         footer a { color: #63b3ed; text-decoration: none; }
@@ -62,6 +74,7 @@
             .header-content { flex-direction: column; text-align: center; }
             .contact-info { justify-content: center; }
             section { padding: 48px 0; }
+            .section-title { font-size: 26px; }
         }
     </style>
 </head>
@@ -93,51 +106,85 @@
         </div>
     </nav>
 
-    <!-- ===== VERTICAL LANDING: Self-Checkout ===== -->
-    <!-- TODO: Content module — self-checkout hero copy. Brand voice: Precision, Performance, Clarity. -->
     <section style="background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 80px 0; text-align: center;">
         <div class="container">
-            <h1 class="section-title" style="color: white; font-size: 48px;">Self-Checkout That Keeps Lines Moving</h1>
-            <p style="font-size: 20px; color: #bee3f8; max-width: 620px; margin: 16px auto 32px;">TODO: One-line hero subhead — the value of self-checkout for throughput and staffing.</p>
-            <a href="/contact.html" class="cta-button" style="display: inline-block; background: var(--accent); color: white; padding: 16px 32px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 16px;">Get a Self-Checkout Quote</a>
+            <h1 style="font-size: 48px; font-weight: 800; margin-bottom: 16px; line-height: 1.2;">Self-Checkout That Keeps Lines Moving</h1>
+            <p style="font-size: 20px; color: #bee3f8; max-width: 640px; margin: 16px auto 32px;">Give shoppers a fast lane for small orders — and give your staff the time to serve where it matters. Self-checkout engineered for throughput, not just checkout.</p>
+            <a href="/contact.html" class="cta-button">Get a Self-Checkout Quote</a>
         </div>
     </section>
 
-    <!-- ===== INTRO ===== -->
-    <!-- TODO: Content module — self-checkout intro. -->
     <section>
         <div class="container">
-            <h2 class="section-title">Self-Checkout, Done Right</h2>
-            <p class="section-subtitle">TODO: One-line intro description.</p>
-            <div class="todo">
-                <!-- TODO: Intro paragraph(s). Explain self-checkout hardware, integration
-                     with your existing POS, and attendant-monitoring models. -->
+            <h2 class="section-title" style="text-align: center;">Self-Checkout, Done Right</h2>
+            <div class="content-copy">
+                <p>Self-checkout is about more than scanners and screens. When it's done right, it moves small, quick transactions out of the staffed lanes — cutting wait times on both sides. When it's done poorly, it's a source of frustration, maintenance calls, and loss.</p>
+                <p>We build self-checkout around your existing POS and your real floor traffic. We configure hardware, tune the attend-express model to your store, apply loss-prevention controls, and keep it all running with the same support you trust for every other lane.</p>
             </div>
         </div>
     </section>
 
-    <!-- ===== SECTIONS TO DEVELOP ===== -->
-    <!-- TODO: Content modules — develop the following self-checkout sections.
-         1. Features & hardware (scanners, scales, payment terminals, security).
-         2. Configurations (full, assisted, express lane).
-         3. Shrink / loss-prevention controls.
-         4. Integration with existing POS.
-         5. ROI / throughput benefits.
-         6. Final CTA band.
-         Add each as a <section> below. Placeholder only — no final copy yet. -->
-    <section style="background: #edf2f7;">
+    <section style="background: #f7fafc;">
         <div class="container">
-            <h2 class="section-title">Planned Sections</h2>
-            <p class="section-subtitle">TODO: Build out the self-checkout content modules listed below.</p>
-            <div class="todo">
-                <!-- 1. Features & hardware — TODO: catalog self-checkout terminals, scanners,
-                        integrated scales, payment acceptance.
-                    2. Configurations — TODO: full, assisted, and express-lane options.
-                    3. Loss prevention — TODO: item-weight verification, exception workflows.
-                    4. POS integration — TODO: compatibility with leading POS platforms.
-                    5. ROI / throughput — TODO: measurable lanes-per-hour and staffing impact.
-                    6. CTA — TODO: scheduling a demo or consultation. -->
+            <h2 class="section-title" style="text-align: center;">Features &amp; Hardware</h2>
+            <p class="section-subtitle" style="text-align: center;">Durable, high-throughput components built for non-stop use.</p>
+            <div class="f-grid">
+                <div class="f-card">
+                    <h3>Hardware You Can Rely On</h3>
+                    <ul>
+                        <li>Barcode scanners sized for high scan rates</li>
+                        <li>Integrated scales for weigh-items at the lane</li>
+                        <li>Contactless, chip, and PIN payment terminals</li>
+                        <li>Receipt printers matched to your paper stock</li>
+                    </ul>
+                </div>
+                <div class="f-card">
+                    <h3>Configurations That Fit</h3>
+                    <ul>
+                        <li><strong>Full self-checkout</strong> — fully unattended lanes with attendant oversight</li>
+                        <li><strong>Assisted</strong> — staffed support for higher-touch categories</li>
+                        <li><strong>Express lane</strong> — fast-track for small, quick orders</li>
+                    </ul>
+                </div>
+                <div class="f-card">
+                    <h3>Loss-Prevention Controls</h3>
+                    <ul>
+                        <li>Item-weight verification at the lane</li>
+                        <li>Exception workflows that flag and route issues to staff</li>
+                        <li>Age-verified item prompts (alcohol, age-restricted goods)</li>
+                        <li>Audit trails for every processed transaction</li>
+                    </ul>
+                </div>
+                <div class="f-card">
+                    <h3>POS Integration</h3>
+                    <ul>
+                        <li>Works with your existing POS — not a locked island</li>
+                        <li>Single source of truth for pricing and inventory</li>
+                        <li>Attendant console to monitor multiple lanes at once</li>
+                        <li>On-going support and supply replenishment</li>
+                    </ul>
+                </div>
             </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2 class="section-title" style="text-align: center;">Throughput &amp; ROI</h2>
+            <div class="content-copy" style="text-align: center;">
+                <p>The goal is simple: <strong>shorter lines and a staff that's where customers need them.</strong> Self-checkout shines on small orders — a hand basket, a couple of items — where a full staffed transaction is overkill.</p>
+                <p>Your return comes from moving those transactions off the staffed lanes, freeing cashiers for service, department help, or stocking. Combined with the low cost of self-checkout consumables and reliable hardware, the model works best for stores with steady small-basket volume.</p>
+                <p>We'll assess your traffic mix and lane demands, then give you an honest read on whether (and where) self-checkout earns its place on your floor.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-band">
+        <div class="container">
+            <h2 class="section-title">Is Self-Checkout Right for Your Floor?</h2>
+            <p class="section-subtitle" style="max-width: 620px; margin: 0 auto 32px;">Get a lane-by-lane assessment and a clear plan — hardware, configuration, loss prevention, and support — before you commit.</p>
+            <a href="/contact.html" class="cta-button">Schedule a Floor Assessment</a>
+            <p style="margin-top: 24px; color: var(--text-muted);">Or call <strong>(888) 881-6834</strong> — a real person answers.</p>
         </div>
     </section>
 
