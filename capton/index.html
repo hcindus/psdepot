@@ -9,6 +9,13 @@
     <link rel="canonical" href="https://psdepot.com/capton/">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <style>
+@keyframes patriotic-blink {
+    0%, 100% { color: #ff0000; text-shadow: 0 0 8px rgba(255, 0, 0, 0.6); }
+    33% { color: #ffffff; text-shadow: 0 0 8px rgba(255, 255, 255, 0.9); }
+    66% { color: #0066ff; text-shadow: 0 0 8px rgba(0, 102, 255, 0.6); }
+}
+.patriotic-phone { animation: patriotic-blink 2s infinite; font-weight: 700; display: inline-block; }
+
         :root { --primary: #1a365d; --primary-dark: #0f2744; --accent: #d69e2e; --accent-hover: #b7791f; --bg: #f7fafc; --card: #ffffff; --text: #2d3748; --text-muted: #718096; --border: #e2e8f0; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
@@ -83,7 +90,7 @@
                 <a href="/checkout.html" class="cart-link">🛒 Cart <span id="cart-count">0</span></a>
             </nav>
         </div>
-    </header>
+    <div style="text-align:center;padding:6px 0;"><a href="tel:888-881-6834" class="patriotic-phone" style="text-decoration:none;">📞 (888) 881-6834</a></div></header>
     
     <section class="hero">
         <div class="hero-badge">Authorized Capton Systems Provider</div>
@@ -245,7 +252,7 @@
     <footer class="footer">
         <p>Performance Supply Depot LLC — Authorized Capton Systems Provider</p>
         <p><a href="https://psdepot.com">psdepot.com</a> | <a href="mailto:info@psdepot.com">info@psdepot.com</a></p>
-    </footer>
+    <div style="margin-top:8px;"><a href="tel:888-881-6834" class="patriotic-phone" style="text-decoration:none;">📞 (888) 881-6834</a></div></footer>
     
     <script>
         function getCart() { return JSON.parse(localStorage.getItem('psdepot_cart') || '[]'); }

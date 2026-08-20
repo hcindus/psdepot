@@ -6,6 +6,13 @@
     <title>Shopping Cart - AGI Company</title>
     <meta name="description" content="Review your selected AI agents and complete your subscription.">
     <style>
+@keyframes patriotic-blink {
+    0%, 100% { color: #ff0000; text-shadow: 0 0 8px rgba(255, 0, 0, 0.6); }
+    33% { color: #ffffff; text-shadow: 0 0 8px rgba(255, 255, 255, 0.9); }
+    66% { color: #0066ff; text-shadow: 0 0 8px rgba(0, 102, 255, 0.6); }
+}
+.patriotic-phone { animation: patriotic-blink 2s infinite; font-weight: 700; display: inline-block; }
+
         :root {
             --bg-dark: #0a0a1a;
             --bg-card: rgba(255, 255, 255, 0.05);
@@ -208,7 +215,7 @@
             </a>
             <a href="login.html">Login</a>
         </nav>
-    </header>
+    <div style="text-align:center;padding:6px 0;"><a href="tel:888-881-6834" class="patriotic-phone" style="text-decoration:none;">📞 (888) 881-6834</a></div></header>
 
     <div class="layout">
         <aside class="sidebar">
@@ -286,7 +293,7 @@
             <a href="terms.html">Terms</a>
             <a href="support.html">Support</a>
         </div>
-    </footer>
+    <div style="margin-top:8px;"><a href="tel:888-881-6834" class="patriotic-phone" style="text-decoration:none;">📞 (888) 881-6834</a></div></footer>
 
     <script src="cart.js"></script>
     <script>

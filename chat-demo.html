@@ -6,6 +6,13 @@
     <title>Chat Widget Demo - Performance Supply Depot</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <style>
+@keyframes patriotic-blink {
+    0%, 100% { color: #ff0000; text-shadow: 0 0 8px rgba(255, 0, 0, 0.6); }
+    33% { color: #ffffff; text-shadow: 0 0 8px rgba(255, 255, 255, 0.9); }
+    66% { color: #0066ff; text-shadow: 0 0 8px rgba(0, 102, 255, 0.6); }
+}
+.patriotic-phone { animation: patriotic-blink 2s infinite; font-weight: 700; display: inline-block; }
+
         * {
             margin: 0;
             padding: 0;
@@ -172,7 +179,7 @@
             <h1>🚀 PSDepot AI Chat Widget</h1>
             <p>Live demo of the AI-powered chat assistant</p>
             <div class="status-indicator" id="status">Checking API connection...</div>
-        </header>
+        <div style="text-align:center;padding:6px 0;"><a href="tel:888-881-6834" class="patriotic-phone" style="text-decoration:none;">📞 (888) 881-6834</a></div></header>
         
         <div class="demo-section">
             <h2>💬 Try It Now</h2>

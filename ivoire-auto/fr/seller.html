@@ -6,6 +6,13 @@
     <title>Ivoire Auto | Portail Vendeur — ICON4x4</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
+@keyframes patriotic-blink {
+    0%, 100% { color: #ff0000; text-shadow: 0 0 8px rgba(255, 0, 0, 0.6); }
+    33% { color: #ffffff; text-shadow: 0 0 8px rgba(255, 255, 255, 0.9); }
+    66% { color: #0066ff; text-shadow: 0 0 8px rgba(0, 102, 255, 0.6); }
+}
+.patriotic-phone { animation: patriotic-blink 2s infinite; font-weight: 700; display: inline-block; }
+
         :root {
             --icon-black: #0a0a0a;
             --icon-charcoal: #141414;
@@ -311,7 +318,7 @@
             <div class="logo">Ivoire <span>Auto</span></div>
             <a href="index.html" style="color: var(--text-muted); text-decoration: none; font-size: 0.9rem;">← Retour à l'Accueil</a>
         </div>
-    </header>
+    <div style="text-align:center;padding:6px 0;"><a href="tel:888-881-6834" class="patriotic-phone" style="text-decoration:none;">📞 (888) 881-6834</a></div></header>
 
     <div class="container">
         <div class="page-header">
@@ -507,7 +514,7 @@
     <footer>
         <p>© 2026 Ivoire Auto. Distributeur exclusif ICON4x4 en Côte d'Ivoire.</p>
         <p style="margin-top: 10px;"><a href="agreement.html">Accord d'Achat</a> | <a href="privacy.html">Politique de Confidentialité</a></p>
-    </footer>
+    <div style="margin-top:8px;"><a href="tel:888-881-6834" class="patriotic-phone" style="text-decoration:none;">📞 (888) 881-6834</a></div></footer>
 
     <script>
         function handleSubmit(e) {

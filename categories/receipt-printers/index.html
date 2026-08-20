@@ -10,6 +10,13 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     
     <style>
+@keyframes patriotic-blink {
+    0%, 100% { color: #ff0000; text-shadow: 0 0 8px rgba(255, 0, 0, 0.6); }
+    33% { color: #ffffff; text-shadow: 0 0 8px rgba(255, 255, 255, 0.9); }
+    66% { color: #0066ff; text-shadow: 0 0 8px rgba(0, 102, 255, 0.6); }
+}
+.patriotic-phone { animation: patriotic-blink 2s infinite; font-weight: 700; display: inline-block; }
+
         :root {
             --primary: #1a365d;
             --primary-dark: #0f2744;
@@ -336,7 +343,7 @@
         <div class="header-content">
             <a href="/" class="logo">Performance<span>Supply</span>Depot</a>
             <div class="contact-info">
-                <a href="tel:888-881-6834">888-881-6834</a>
+                <a href="tel:888-881-6834" class="patriotic-phone" style="text-decoration:none;">📞 (888) 881-6834</a>
                 <a href="/checkout.html" class="cart-icon">🛒 Cart (<span id="cart-count">0</span>)</a>
             </div>
         </div>

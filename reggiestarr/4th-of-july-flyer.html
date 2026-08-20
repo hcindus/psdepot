@@ -6,6 +6,13 @@
     <title>4th of July Celebration | ReggieStarr</title>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
+@keyframes patriotic-blink {
+    0%, 100% { color: #ff0000; text-shadow: 0 0 8px rgba(255, 0, 0, 0.6); }
+    33% { color: #ffffff; text-shadow: 0 0 8px rgba(255, 255, 255, 0.9); }
+    66% { color: #0066ff; text-shadow: 0 0 8px rgba(0, 102, 255, 0.6); }
+}
+.patriotic-phone { animation: patriotic-blink 2s infinite; font-weight: 700; display: inline-block; }
+
         * {
             margin: 0;
             padding: 0;
@@ -367,7 +374,7 @@
             <div class="subtitle">🇺🇸 Independence Day 🇺🇸</div>
             <h1 class="main-title">4th of JULY</h1>
             <div class="year">2026</div>
-        </header>
+        <div style="text-align:center;padding:6px 0;"><a href="tel:888-881-6834" class="patriotic-phone" style="text-decoration:none;">📞 (888) 881-6834</a></div></header>
 
         <!-- Main Flyer -->
         <div class="flyer">
@@ -436,7 +443,7 @@
         <footer class="footer">
             <p class="footer-text">Wishing you a safe and spectacular Independence Day!</p>
             <div class="footer-brand">ReggieStarr</div>
-        </footer>
+        <div style="margin-top:8px;"><a href="tel:888-881-6834" class="patriotic-phone" style="text-decoration:none;">📞 (888) 881-6834</a></div></footer>
     </div>
 
     <script>

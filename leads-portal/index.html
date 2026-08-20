@@ -6,6 +6,13 @@
     <title>PSDepot Partner Leads Portal</title>
     <meta name="description" content="Shared lead logging portal for Performance Supply Depot and Chipp">
     <style>
+@keyframes patriotic-blink {
+    0%, 100% { color: #ff0000; text-shadow: 0 0 8px rgba(255, 0, 0, 0.6); }
+    33% { color: #ffffff; text-shadow: 0 0 8px rgba(255, 255, 255, 0.9); }
+    66% { color: #0066ff; text-shadow: 0 0 8px rgba(0, 102, 255, 0.6); }
+}
+.patriotic-phone { animation: patriotic-blink 2s infinite; font-weight: 700; display: inline-block; }
+
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
         body {
@@ -480,7 +487,7 @@
         <header>
             <h1>Lead Portal</h1>
             <p>Chipp · WitzEnd · Capton · TST Impresso · CRS-USA · CAS · Heartland · MS Cashdrawer · Domtar · ACM | 20% both ways</p>
-        </header>
+        <div style="text-align:center;padding:6px 0;"><a href="tel:888-881-6834" class="patriotic-phone" style="text-decoration:none;">📞 (888) 881-6834</a></div></header>
 
         <div class="form-card">
             <!-- Direction -->

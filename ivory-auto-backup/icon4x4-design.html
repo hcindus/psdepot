@@ -7,6 +7,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
+@keyframes patriotic-blink {
+    0%, 100% { color: #ff0000; text-shadow: 0 0 8px rgba(255, 0, 0, 0.6); }
+    33% { color: #ffffff; text-shadow: 0 0 8px rgba(255, 255, 255, 0.9); }
+    66% { color: #0066ff; text-shadow: 0 0 8px rgba(0, 102, 255, 0.6); }
+}
+.patriotic-phone { animation: patriotic-blink 2s infinite; font-weight: 700; display: inline-block; }
+
         :root {
             /* ICON4x4 Dark Luxury + Ivorian Colors */
             --icon-black: #0a0a0a;
@@ -694,6 +701,8 @@
     </style>
 </head>
 <body>
+<header style="background:#0A1A2F;color:#fff;padding:10px 20px;text-align:center;"><a href="tel:888-881-6834" class="patriotic-phone" style="text-decoration:none;">📞 (888) 881-6834</a></header>
+
     <nav id="navbar">
         <div class="logo">Ivoire <span>Auto</span></div>
         <ul class="nav-links">
@@ -861,7 +870,7 @@
             <div class="footer-column">
                 <h4>Contact</h4>
                 <a href="mailto:miles@psdepot.com">miles@psdepot.com</a>
-                <a href="tel:+18888816834">+1 (888) 881-6834</a>
+                <a href="tel:+18888816834">+1 <span class="patriotic-phone">(888) 881-6834</span></a>
                 <a href="tel:+14155719724">+1 (415) 571-9724</a>
             </div>
             <div class="footer-column">

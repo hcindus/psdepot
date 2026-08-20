@@ -18,6 +18,13 @@
   <link rel="alternate" hreflang="es" href="https://psdepot.com/california-spanish.html">
   <link rel="alternate" hreflang="vi" href="https://psdepot.com/california-vietnamese.html">
   <style>
+@keyframes patriotic-blink {
+    0%, 100% { color: #ff0000; text-shadow: 0 0 8px rgba(255, 0, 0, 0.6); }
+    33% { color: #ffffff; text-shadow: 0 0 8px rgba(255, 255, 255, 0.9); }
+    66% { color: #0066ff; text-shadow: 0 0 8px rgba(0, 102, 255, 0.6); }
+}
+.patriotic-phone { animation: patriotic-blink 2s infinite; font-weight: 700; display: inline-block; }
+
     :root{--primary: #0A1A2F;--accent: #FF7A00;--bg: #F8F9FA;--text:#2d3748}
     *{margin:0;padding:0;box-sizing:border-box}
     body{font-family:Inter,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
@@ -60,7 +67,7 @@
   <header class="header">
     <div class="header-content">
       <a href="/" class="logo">Performance<span>Supply</span>Depot</a>
-      <div><a href="tel:888-881-6834" style="color:white;text-decoration:none">📞 (888) 881-6834</a></div>
+      <div><a href="tel:888-881-6834" class="patriotic-phone" style="text-decoration:none;">📞 (888) 881-6834</a></div>
     </div>
   </header>
 
@@ -101,7 +108,7 @@
   <footer>
     <p><strong>Performance Supply Depot LLC</strong></p>
     <p>Phục vụ California</p>
-    <p>📞 (888) 881-6834</p>
+    <p>📞 <span class="patriotic-phone">(888) 881-6834</span></p>
     <p style="margin-top:16px">
       <a href="/california.html" style="color: rgba(0, 224, 255, 0.7);text-decoration:none">English</a> | 
       <a href="/california-spanish.html" style="color: rgba(0, 224, 255, 0.7);text-decoration:none">Español</a> | 
