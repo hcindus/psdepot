@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Security &amp; Compliance — POS Cybersecurity, PCI, Shrink Prevention | Performance Supply Depot</title>
-    <meta name="description" content="TODO: Add 1-2 sentence meta description for the Security & Compliance page. Cybersecurity, PCI compliance, and shrink prevention solutions for California POS environments.">
+    <title>POS Security & Compliance — Cybersecurity, PCI, Shrink Prevention | Performance Supply Depot</title>
+    <meta name="description" content="POS security engineered to protect what you've built: cybersecurity hardening, PCI compliance support, and shrink prevention for California stores. Call (888) 881-6834.">
     <link rel="canonical" href="https://psdepot.com/security.html">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <meta name="robots" content="index, follow">
@@ -13,7 +13,7 @@
       "@context": "https://schema.org",
       "@type": "WebPage",
       "name": "Security & Compliance",
-      "description": "TODO: Add description. Cybersecurity, PCI compliance, and shrink prevention for POS environments."
+      "description": "Cybersecurity, PCI compliance, and shrink prevention for POS environments."
     }
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -51,9 +51,10 @@
         .main-nav .container { display: flex; gap: 4px; flex-wrap: wrap; }
         .main-nav a { display: inline-block; color: #bee3f8; text-decoration: none; font-weight: 600; font-size: 15px; padding: 12px 18px; border-bottom: 2px solid transparent; transition: all 0.2s ease; }
         .main-nav a:hover, .main-nav a:focus { color: #ffffff; background: rgba(255,255,255,0.08); border-bottom-color: var(--accent); }
+        .main-nav a[aria-current="page"] { color: #ffffff; border-bottom-color: var(--accent); }
         .hero { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 80px 0; text-align: center; }
         .hero h1 { font-size: 48px; font-weight: 800; margin-bottom: 16px; line-height: 1.2; }
-        .hero p { font-size: 20px; color: #bee3f8; max-width: 600px; margin: 0 auto 32px; }
+        .hero p { font-size: 20px; color: #bee3f8; max-width: 640px; margin: 0 auto 32px; }
         .cta-button { display: inline-block; background: var(--accent); color: white; padding: 16px 32px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 16px; transition: all 0.2s; }
         .cta-button:hover { background: #9b2c2c; transform: translateY(-2px); }
         section { padding: 64px 0; }
@@ -64,8 +65,15 @@
         .pillar-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 32px; }
         .pillar-icon { width: 64px; height: 64px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 28px; }
         .pillar-card h3 { font-size: 22px; font-weight: 700; margin-bottom: 12px; color: var(--primary); }
-        .pillar-card p { color: var(--text-muted); line-height: 1.6; }
-        .todo { border: 2px dashed var(--accent); background: #fff5f5; border-radius: 8px; padding: 16px; margin-top: 24px; font-size: 14px; color: var(--accent-hover); }
+        .pillar-card p { color: var(--text); line-height: 1.6; margin-bottom: 12px; }
+        .pillar-card ul { padding-left: 20px; margin-bottom: 8px; color: var(--text-muted); }
+        .pillar-card li { margin-bottom: 6px; }
+        .pillar-card .cta-text { color: var(--accent); font-weight: 600; }
+        .checklist-strip { background: #edf2f7; }
+        .checklist { max-width: 800px; margin: 0 auto; }
+        .checklist li { margin-bottom: 10px; color: var(--text); }
+        .checklist strong { color: var(--primary); }
+        .cta-band { text-align: center; }
         footer { background: #1a202c; color: #a0aec0; padding: 40px 0; text-align: center; }
         footer p { margin-bottom: 8px; }
         footer a { color: #63b3ed; text-decoration: none; }
@@ -109,62 +117,82 @@
     <section class="hero">
         <div class="container">
             <h1>Security &amp; Compliance</h1>
-            <p>Protect your operation. Stay compliant. Prevent shrink before it starts.</p>
+            <p>Protect your operation. Stay compliant. Prevent shrink before it starts. Security isn't a feature here — it's the foundation.</p>
             <a href="/contact.html" class="cta-button">Review My Setup</a>
         </div>
     </section>
 
     <section>
         <div class="container">
-            <!-- TODO: Content module — Security &amp; Compliance overview intro.
-                 Brand voice: Precision, Performance, Clarity. Confident, never fear-based. -->
             <h2 class="section-title">Secure, Resilient, Compliant</h2>
-            <p class="section-subtitle">TODO: One-line overview description. Final long-form copy to be dropped in later.</p>
+            <p class="section-subtitle">Your POS handles cards, cash, and inventory every single day. We help you lock down each one — without turning your store into a fortress that's hard to run.</p>
 
             <div class="pillars-grid">
-                <!-- ==================== PILLAR 1 ==================== -->
                 <div class="pillar-card">
                     <div class="pillar-icon">🛡️</div>
                     <h3>Cybersecurity</h3>
-                    <p>TODO: One-line description. Hardening, monitoring, and response for modern POS environments.</p>
-                    <div class="todo">
-                        <!-- TODO: Content module — Cybersecurity.
-                             Drop in: network segmentation, endpoint protection, credential
-                             policies, incident response. Avoid fear-based language; lead with
-                             resilience. -->
-                    </div>
+                    <p>Hardening and monitoring that keeps card data and credentials protected at the edge — where POS terminals actually live.</p>
+                    <ul>
+                        <li>Network segmentation that isolates cardholder data</li>
+                        <li>Endpoint protection and credential policies for staff</li>
+                        <li>Firmware and software patching on a defined schedule</li>
+                        <li>Incident-response guidance so you know the next step</li>
+                    </ul>
+                    <p class="cta-text">Resilient by design — protected, monitored, and ready to respond.</p>
                 </div>
 
-                <!-- ==================== PILLAR 2 ==================== -->
                 <div class="pillar-card">
                     <div class="pillar-icon">✔️</div>
                     <h3>PCI Compliance</h3>
-                    <p>TODO: One-line description. Meet and maintain Payment Card Industry requirements without guesswork.</p>
-                    <div class="todo">
-                        <!-- TODO: Content module — PCI Compliance.
-                             Drop in: scope of PCI DSS, controlled cardholder-data environments,
-                             validation / attestation support, annual cycles. Be specific. -->
-                    </div>
+                    <p>Meet and maintain Payment Card Industry requirements without guesswork. We align your store with the PCI DSS controls that apply to your environment.</p>
+                    <ul>
+                        <li>PCI DSS scope definition for your specific setup</li>
+                        <li>Controlled cardholder-data environment guidance</li>
+                        <li>Validation and self-assessment questionnaire support</li>
+                        <li>Annual review cycle so compliance never lapses</li>
+                    </ul>
+                    <p class="cta-text">Specific, auditable steps to stay current through your certification cycle.</p>
                 </div>
 
-                <!-- ==================== PILLAR 3 ==================== -->
                 <div class="pillar-card">
                     <div class="pillar-icon">📉</div>
                     <h3>Shrink Prevention</h3>
-                    <p>TODO: One-line description. Detect and reduce inventory loss across your floor and checkout.</p>
-                    <div class="todo">
-                        <!-- TODO: Content module — Shrink Prevention.
-                             Drop in: exception reporting, cash-office controls, CCTV / audit
-                             integrations, inventory reconciliation. Frame around measurable
-                             loss reduction. -->
-                    </div>
+                    <p>Inventory loss quietly eats margin every month. Detect it, trace it, and reduce it across your floor and your checkout.</p>
+                    <ul>
+                        <li>Exception reporting that flags unusual transactions</li>
+                        <li>Cash-office controls and drawer reconciliation</li>
+                        <li>CCTV and audit-log integration points</li>
+                        <li>Inventory reconciliation to pinpoint where loss happens</li>
+                    </ul>
+                    <p class="cta-text">Measurable loss reduction — because every recovered dollar lands on your bottom line.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- TODO: Content module — Optional add-on: a compliance checklist strip and a final
-         CTA band. Placeholder only; no final copy. -->
+    <section class="checklist-strip">
+        <div class="container">
+            <h2 class="section-title" style="text-align: center;">A Pragmatic Security Checklist</h2>
+            <p class="section-subtitle" style="text-align: center; max-width: 680px; margin-left: auto; margin-right: auto;">Start here. These are the controls we check first — and the ones that move the needle most.</p>
+            <ul class="checklist" style="list-style: none;">
+                <li>✅ <strong>Change every default credential</strong> on terminals, routers, and scales — default passwords are the #1 entry point.</li>
+                <li>✅ <strong>Segment your network</strong> so card terminals sit on a separate broadcast domain from browsing and back-office devices.</li>
+                <li>✅ <strong>Padlock your PIN pads</strong> and secure physical access to terminals, network ports, and the server room.</li>
+                <li>✅ <strong>Keep a firmware patching schedule</strong> for terminals and printers — don't wait for a breach to update.</li>
+                <li>✅ <strong>Reconcile registers daily</strong> and monitor exception reports for voids, overrings, and unusual refunds.</li>
+                <li>✅ <strong>Confirm your card environment</strong> is in scope for PCI and that questionnaires are current.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="cta-band">
+        <div class="container">
+            <h2 class="section-title">Don't Find Out the Hard Way</h2>
+            <p class="section-subtitle" style="max-width: 640px; margin-left: auto; margin-right: auto;">Let a specialist review your setup and give you a prioritized, honest checklist. You'll know exactly where you stand — and what to fix first.</p>
+            <a href="/contact.html" class="cta-button">Request a Security Review</a>
+            <p style="margin-top: 24px; color: var(--text-muted);">Or call <strong>(888) 881-6834</strong> — a real person answers.</p>
+        </div>
+    </section>
 
     <footer>
         <div class="container">
