@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Electronic Shelf Labels (ESL) — Modernize Your Pricing | Performance Supply Depot</title>
-    <meta name="description" content="TODO: Add 1-2 sentence meta description. Electronic shelf label (ESL) systems — pricing automation, real-time updates, and ROI for retail.">
+    <title>Electronic Shelf Labels (ESL) — Modernize Store Pricing | Performance Supply Depot</title>
+    <meta name="description" content="Electronic shelf label (ESL) systems that update store pricing in seconds — fewer shelf-tag errors, less paper waste, and faster price changes. Call (888) 881-6834.">
     <link rel="canonical" href="https://psdepot.com/electronic-shelf-labels.html">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <meta name="robots" content="index, follow">
@@ -13,7 +13,7 @@
       "@context": "https://schema.org",
       "@type": "WebPage",
       "name": "Electronic Shelf Labels (ESL)",
-      "description": "TODO: Add description. Electronic shelf label systems for retail pricing automation."
+      "description": "Electronic shelf label systems for retail pricing automation, real-time updates, and fewer pricing errors."
     }
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -51,9 +51,10 @@
         .main-nav .container { display: flex; gap: 4px; flex-wrap: wrap; }
         .main-nav a { display: inline-block; color: #bee3f8; text-decoration: none; font-weight: 600; font-size: 15px; padding: 12px 18px; border-bottom: 2px solid transparent; transition: all 0.2s ease; }
         .main-nav a:hover, .main-nav a:focus { color: #ffffff; background: rgba(255,255,255,0.08); border-bottom-color: var(--accent); }
+        .main-nav a[aria-current="page"] { color: #ffffff; border-bottom-color: var(--accent); }
         .hero { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 80px 0; text-align: center; }
         .hero h1 { font-size: 48px; font-weight: 800; margin-bottom: 16px; line-height: 1.2; }
-        .hero p { font-size: 20px; color: #bee3f8; max-width: 620px; margin: 0 auto 32px; }
+        .hero p { font-size: 20px; color: #bee3f8; max-width: 640px; margin: 0 auto 32px; }
         .cta-button { display: inline-block; background: var(--accent); color: white; padding: 16px 32px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 16px; transition: all 0.2s; }
         .cta-button:hover { background: #9b2c2c; transform: translateY(-2px); }
         .cta-button-alt { display: inline-block; background: transparent; color: white; border: 2px solid white; padding: 14px 30px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 16px; margin-left: 12px; transition: all 0.2s; }
@@ -61,20 +62,21 @@
         section { padding: 64px 0; }
         .section-title { font-size: 32px; font-weight: 700; margin-bottom: 8px; color: var(--primary); }
         .section-subtitle { color: var(--text-muted); margin-bottom: 40px; font-size: 18px; }
+        .content-copy { max-width: 820px; margin: 0 auto; }
+        .content-copy p { margin-bottom: 20px; font-size: 17px; }
         .benefits-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
         @media (max-width: 992px) { .benefits-grid { grid-template-columns: 1fr; } }
         .benefit-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 32px; }
         .benefit-icon { width: 64px; height: 64px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 28px; }
         .benefit-card h3 { font-size: 22px; font-weight: 700; margin-bottom: 12px; color: var(--primary); }
-        .benefit-card p { color: var(--text-muted); line-height: 1.6; }
+        .benefit-card p { color: var(--text); line-height: 1.6; }
         .roi-strip { background: var(--primary); color: white; text-align: center; padding: 64px 0; }
         .roi-strip h2 { font-size: 32px; font-weight: 700; margin-bottom: 16px; }
-        .roi-strip p { color: #bee3f8; max-width: 700px; margin: 0 auto; font-size: 18px; }
-        .roi-metrics { display: flex; justify-content: center; gap: 48px; flex-wrap: wrap; margin-top: 32px; }
-        .roi-metric { text-align: center; }
-        .roi-metric .num { font-size: 40px; font-weight: 800; color: #fff; }
-        .roi-metric .label { font-size: 14px; color: #bee3f8; }
-        .todo { border: 2px dashed var(--accent); background: #fff5f5; border-radius: 8px; padding: 16px; margin-top: 24px; font-size: 14px; color: var(--accent-hover); }
+        .roi-strip p { color: #bee3f8; max-width: 760px; margin: 0 auto 20px; font-size: 18px; }
+        .roi-strip ul { list-style: none; max-width: 640px; margin: 24px auto 0; text-align: left; }
+        .roi-strip li { margin-bottom: 12px; font-size: 17px; color: #fff; }
+        .roi-strip li strong { color: #63b3ed; }
+        .cta-band { text-align: center; }
         footer { background: #1a202c; color: #a0aec0; padding: 40px 0; text-align: center; }
         footer p { margin-bottom: 8px; }
         footer a { color: #63b3ed; text-decoration: none; }
@@ -115,82 +117,70 @@
         </div>
     </nav>
 
-    <!-- ===== VERTICAL LANDING: Electronic Shelf Labels ===== -->
-    <!-- TODO: Content module — ESL hero copy. Brand voice: Precision, Performance, Clarity. -->
     <section class="hero">
         <div class="container">
             <h1>Electronic Shelf Labels</h1>
-            <p>TODO: One-line hero subhead — the value of ESL for pricing automation and store efficiency.</p>
+            <p>Update prices across every aisle in seconds — without a single paper tag swap. ESL systems that keep your shelf price and your register price in lockstep.</p>
             <a href="/contact.html" class="cta-button">Get an ESL Quote</a>
             <a href="/resources/faq.html" class="cta-button-alt">ESL FAQ</a>
         </div>
     </section>
 
-    <!-- ===== ESL INTRO ===== -->
-    <!-- TODO: Content module — ESL intro. What ESL is, how it works, why it matters. -->
     <section>
         <div class="container">
-            <h2 class="section-title">Pricing That Updates Itself</h2>
-            <p class="section-subtitle">TODO: One-line intro description.</p>
-            <div class="todo">
-                <!-- TODO: ESL intro paragraph(s). Explain digital shelf labels, centralized
-                     pricing control, and real-time updates. Keep it clear — not jargon-heavy. -->
+            <h2 class="section-title" style="text-align: center;">Pricing That Updates Itself</h2>
+            <div class="content-copy">
+                <p>Electronic shelf labels replace paper price tags with small digital displays, each driven wirelessly from one central system. When a price changes — for a promotion, a clearance, a supplier cost update — it pushes to every shelf tag in the store at once.</p>
+                <p>The result is simple and powerful: <strong>what the shopper sees on the shelf is exactly what rings at the register.</strong> No more hunting down mismatched tags during a markdown, no more overnight tag-change crews, no more reams of disposable paper labels flowing through your operation.</p>
+                <p>We scope, supply, and support ESL deployments sized to your store — from a single department pilot to a full-floor rollout across every aisle.</p>
             </div>
         </div>
     </section>
 
-    <!-- ===== BENEFITS GRID ===== -->
-    <!-- TODO: Content module — benefits grid. Author final copy per card below. -->
     <section style="background: #edf2f7;">
         <div class="container">
-            <h2 class="section-title">Why Retailers Choose ESL</h2>
-            <p class="section-subtitle">TODO: One-line description. Replace each benefit with final copy.</p>
+            <h2 class="section-title" style="text-align: center;">Why Retailers Choose ESL</h2>
+            <p class="section-subtitle" style="text-align: center;">Three compounding benefits that show up immediately and grow over time.</p>
             <div class="benefits-grid">
                 <div class="benefit-card">
                     <div class="benefit-icon">⚡</div>
                     <h3>Instant Price Changes</h3>
-                    <p>TODO: Benefit #1 — update prices across every aisle in seconds, not overnight.</p>
+                    <p>React to market moves, competitor pricing, and promotions in under a minute — not overnight. Change a price once, and it's correct across every aisle immediately.</p>
                 </div>
                 <div class="benefit-card">
                     <div class="benefit-icon">🎯</div>
                     <h3>Fewer Pricing Errors</h3>
-                    <p>TODO: Benefit #2 — eliminate mismatch between shelf tags and register prices.</p>
+                    <p>Eliminate the mismatch between shelf tags and register prices that triggers customer complaints and costly price-override corrections. The shelf and the system always agree.</p>
                 </div>
                 <div class="benefit-card">
                     <div class="benefit-icon">♻️</div>
                     <h3>Less Paper Waste</h3>
-                    <p>TODO: Benefit #3 — remove thousands of disposable paper tags from your operation.</p>
+                    <p>Remove the steady stream of disposable paper tags from your supply chain and your landfill. One ESL display replaces countless printed tags over its life.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ===== ROI SECTION ===== -->
-    <!-- TODO: Content module — ROI section. Add measured ROI figures once available.
-         Use real numbers where possible (labor hours saved, error reduction %). -->
     <section class="roi-strip">
         <div class="container">
-            <h2>Return on Investment</h2>
-            <p>TODO: One-line ROI description. Author final copy here — replace "X%" placeholders with verified figures.</p>
-            <div class="roi-metrics">
-                <div class="roi-metric"><div class="num">X%</div><div class="label">TODO: Labor Saved</div></div>
-                <div class="roi-metric"><div class="num">X%</div><div class="label">TODO: Fewer Pricing Errors</div></div>
-                <div class="roi-metric"><div class="num">X mo</div><div class="label">TODO: Payback Period</div></div>
-            </div>
-            <div class="todo" style="background: #fff0f0; border-color: #c53030; max-width: 700px; margin: 32px auto 0;">
-                <!-- TODO: Verify and replace the ROI metric values above with real data.
-                     Do not publish unverified percentages. -->
-            </div>
+            <h2>Where ESL Earns Its Return</h2>
+            <p>ESL repays its investment through labor and accuracy — not magic. The math comes from hours you stop spending and errors you stop making.</p>
+            <ul>
+                <li>🔹 <strong>Labor reclaimed</strong> — your team stops walking each aisle to change paper tags; that time goes back to customers and selling floor.</li>
+                <li>🔹 <strong>Fewer markdown corrections</strong> — shelf and register prices match, so price checks and overrides drop sharply.</li>
+                <li>🔹 <strong>Faster promotional turnaround</strong> — react to demand swings the same hour, not the next business day.</li>
+                <li>🔹 <strong>Lower consumables spend</strong> — no recurring orders for tag paper, labels, and printing supplies.</li>
+            </ul>
+            <p style="margin-top: 24px;">Your payback depends on your store size, aisle count, and how often you change prices. We'll model your specific scenario honestly before you spend a dollar.</p>
         </div>
     </section>
 
-    <!-- ===== CTA ===== -->
-    <!-- TODO: Content module — final CTA. -->
-    <section>
-        <div class="container" style="text-align: center;">
+    <section class="cta-band">
+        <div class="container">
             <h2 class="section-title">Ready to Modernize Your Shelves?</h2>
-            <p class="section-subtitle">TODO: One-line CTA description.</p>
+            <p class="section-subtitle" style="max-width: 640px; margin-left: auto; margin-right: auto;">Get a straight assessment of whether ESL fits your operation — and a realistic ROI picture based on your store, not a generic pitch.</p>
             <a href="/contact.html" class="cta-button">Talk to an ESL Specialist</a>
+            <p style="margin-top: 24px; color: var(--text-muted);">Or call <strong>(888) 881-6834</strong> — a real person answers.</p>
         </div>
     </section>
 
