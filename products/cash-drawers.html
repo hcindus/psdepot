@@ -462,7 +462,34 @@
                 padding: 0.75rem 0.5rem;
             }
         
-    </style>
+            /* Primary navigation */
+        .main-nav {
+            background: #12283f;
+            border-bottom: 3px solid var(--accent);
+        }
+        .main-nav .container {
+            display: flex;
+            gap: 4px;
+            flex-wrap: wrap;
+        }
+        .main-nav a {
+            display: inline-block;
+            color: #bee3f8;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            padding: 12px 18px;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+        .main-nav a:hover,
+        .main-nav a:focus {
+            color: #ffffff;
+            background: rgba(255,255,255,0.08);
+            border-bottom-color: var(--accent);
+        }
+
+</style>
 </head>
 <body>
     <header class="header">
@@ -473,7 +500,15 @@
                 <a href="/checkout.html" class="cart-icon">🛒 Cart (<span id="cart-count">0</span>)</a>
             </div>
         </div>
-    </header>
+    </header><nav class="main-nav" aria-label="Primary">
+    <div class="container">
+        <a href="/">Home</a>
+        <a href="/products/index.html">Products</a>
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
+        <a href="/locations.html">Service Areas</a>
+    </div>
+</nav>
     
     <nav class="breadcrumb">
         <a href="/">Home</a> / 

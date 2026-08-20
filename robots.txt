@@ -8,6 +8,10 @@ Disallow: /kb-admin.html
 Disallow: /service-log.html
 Disallow: /chat-demo.html
 Disallow: /brain-dashboard.html
+Disallow: /psd_customer.html
+Disallow: /psd_dashboard.html
+Disallow: /psd_performance.html
+Disallow: /psd_api.py
 Disallow: /.backups/
 
 Sitemap: https://psdepot.com/sitemap.xml

@@ -77,7 +77,34 @@ footer{background:var(--primary);color:white;padding:2rem;text-align:center;marg
             animation-duration: 0.5s;
         }
 
-    </style>
+            /* Primary navigation */
+        .main-nav {
+            background: #12283f;
+            border-bottom: 3px solid #c53030;
+        }
+        .main-nav .container {
+            display: flex;
+            gap: 4px;
+            flex-wrap: wrap;
+        }
+        .main-nav a {
+            display: inline-block;
+            color: #bee3f8;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            padding: 12px 18px;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+        .main-nav a:hover,
+        .main-nav a:focus {
+            color: #ffffff;
+            background: rgba(255,255,255,0.08);
+            border-bottom-color: #c53030;
+        }
+
+</style>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -123,8 +150,33 @@ footer{background:var(--primary);color:white;padding:2rem;text-align:center;marg
   ]
 }
 </script>
+
+<!-- Product Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "3\" 2-Ply Carbonless Paper x 90' (TMU-220)",
+  "image": "https://psdepot.com/assets/images/products/cc-235-carbonless-2ply.png",
+  "sku": "CC-235",
+  "offers": {
+    "@type": "Offer",
+    "price": "76.00",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock"
+  }
+}
+</script>
 </head>
-<body>
+<body><nav class="main-nav" aria-label="Primary">
+    <div class="container">
+        <a href="/">Home</a>
+        <a href="/products/index.html">Products</a>
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
+        <a href="/locations.html">Service Areas</a>
+    </div>
+</nav>
 <div class="header"><div style="max-width:1200px;margin:0 auto"><a href="/" style="color:white;font-size:1.5rem;font-weight:700;text-decoration:none">PerformanceSupplyDepot</a></div></div>
 <div class="container">
 <div class="image-section">

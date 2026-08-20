@@ -78,7 +78,34 @@
         }
 
         .footer-cta .phone:hover { animation-duration: 0.5s; }
-    </style>
+            /* Primary navigation */
+        .main-nav {
+            background: #12283f;
+            border-bottom: 3px solid #c53030;
+        }
+        .main-nav .container {
+            display: flex;
+            gap: 4px;
+            flex-wrap: wrap;
+        }
+        .main-nav a {
+            display: inline-block;
+            color: #bee3f8;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            padding: 12px 18px;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+        .main-nav a:hover,
+        .main-nav a:focus {
+            color: #ffffff;
+            background: rgba(255,255,255,0.08);
+            border-bottom-color: #c53030;
+        }
+
+</style>
 
 <script type="application/ld+json">
 {
@@ -88,7 +115,7 @@
     {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://psdepot.com/"},
     {"@type": "ListItem", "position": 2, "name": "Products", "item": "https://psdepot.com/products/"},
     {"@type": "ListItem", "position": 3, "name": "Thermal Paper", "item": "https://psdepot.com/products/thermal-paper/"},
-    {"@type": "ListItem", "position": 4, "name": "2 1/4" x 74' Thermal Receipt Paper — Credit Card Terminals", "item": "https://psdepot.com/products/15-741-credit-card-paper.html"}
+    {"@type": "ListItem", "position": 4, "name": "2 1/4\" x 74' Thermal Receipt Paper — Credit Card Terminals", "item": "https://psdepot.com/products/15-741-credit-card-paper.html"}
   ]
 }
 </script>
@@ -125,6 +152,23 @@
   ]
 }
 </script>
+
+<!-- Product Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "2 1/4\" x 74' Thermal Receipt Paper — Credit Card Terminals",
+  "image": "https://psdepot.com/assets/images/products/15-741-credit-card-paper.webp",
+  "sku": "15-741",
+  "offers": {
+    "@type": "Offer",
+    "price": "39.00",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock"
+  }
+}
+</script>
 </head>
 <body>
     <header class="header">
@@ -135,7 +179,15 @@
                 <a href="/checkout.html" class="cart-icon">🛒 Cart</a>
             </div>
         </div>
-    </header>
+    </header><nav class="main-nav" aria-label="Primary">
+    <div class="container">
+        <a href="/">Home</a>
+        <a href="/products/index.html">Products</a>
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
+        <a href="/locations.html">Service Areas</a>
+    </div>
+</nav>
 
     <nav class="breadcrumb">
         <a href="/">Home</a> › <span>Credit Card Paper</span>

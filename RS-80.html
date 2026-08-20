@@ -113,7 +113,34 @@
         .cart-checkout { width: 100%; padding: 1rem; background: var(--accent); color: white; border: none; border-radius: 8px; font-size: 1.1rem; font-weight: 600; cursor: pointer; }
         .cart-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999; opacity: 0; visibility: hidden; transition: all 0.3s; }
         .cart-overlay.open { opacity: 1; visibility: visible; }
-    </style>
+            /* Primary navigation */
+        .main-nav {
+            background: #12283f;
+            border-bottom: 3px solid var(--accent);
+        }
+        .main-nav .container {
+            display: flex;
+            gap: 4px;
+            flex-wrap: wrap;
+        }
+        .main-nav a {
+            display: inline-block;
+            color: #bee3f8;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            padding: 12px 18px;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+        .main-nav a:hover,
+        .main-nav a:focus {
+            color: #ffffff;
+            background: rgba(255,255,255,0.08);
+            border-bottom-color: var(--accent);
+        }
+
+</style>
 
     <script type="application/ld+json">
     {
@@ -181,7 +208,15 @@
                 <a href="/checkout.html" class="cart-icon">🛒 Cart (<span id="cart-count">0</span>)</a>
             </div>
         </div>
-    </header>
+    </header><nav class="main-nav" aria-label="Primary">
+    <div class="container">
+        <a href="/">Home</a>
+        <a href="/products/index.html">Products</a>
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
+        <a href="/locations.html">Service Areas</a>
+    </div>
+</nav>
 
     <div class="breadcrumb">
         <a href="/">Home</a> / <a href="/products/">POS Systems</a> / Reggie Starr RS-80
